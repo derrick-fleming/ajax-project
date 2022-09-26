@@ -10,15 +10,31 @@
   flex-basis: calc(100%/7);
 }
 
-.column-one-fourth {
+.column-seven-twelfth {
+  flex-basis: calc(700%/12);
+}
+
+.column-one-twelfth {
+  flex-basis: calc(100%/12);
+}
+
+.column-five-twelfth {
+  flex-basis: calc(500%/12);
+}
+
+.column-one-quarter {
   flex-basis: calc(100%/4);
 }
 
-.column-three-fourths {
+.column-three-quarters {
   flex-basis: calc(300%/4);
 }
 
 .align-items {
   display: flex;
   align-items: center;
+}
+
+.space-between {
+  justify-content: space-around;
 }
