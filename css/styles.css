@@ -7,13 +7,16 @@ header {
 }
 
 nav {
-  background-color: white;
   font-family: Arvo, sans-serif;
   color: #4dc3b9;
   padding: 1rem;
   height: 64px;
   top: 1px;
   box-shadow: 0 1px 2px 0 #00000040;
+}
+
+.page-container {
+  margin: 2rem;
 }
 
 .leaf-icon {
@@ -52,7 +55,8 @@ nav {
   width: 80px;
 }
 
-.pop-text {
+.pop-text,
+.top-link {
   color: #575757;
   font-family: "Varela Round", sans-serif;
   font-size: 1.125rem;
@@ -62,6 +66,8 @@ nav {
   justify-content: flex-end;
 }
 
-.page-container {
-  margin: 2rem;
+.species-header {
+  font-family: "Varela Round", sans-serif;
+  font-size: 1.75rem;
+  color: #575757;
 }

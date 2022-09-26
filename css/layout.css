@@ -38,3 +38,7 @@
 .space-between {
   justify-content: space-around;
 }
+
+.top-link {
+  text-align: right;
+}
