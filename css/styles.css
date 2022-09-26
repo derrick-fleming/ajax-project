@@ -41,7 +41,7 @@ nav {
 
 .pop-up-container {
   text-align: center;
-  margin: 0 auto;
+  margin: 6rem auto 0;
   height: 97px;
   width: 292px;
   left: 42px;
@@ -102,6 +102,10 @@ nav {
 
 .top-link {
   padding-top: 1.75rem;
+}
+
+.villager-section {
+  border-bottom: 1px solid #c7c7c7;
 }
 
 @media screen and (min-width: 523px) {
