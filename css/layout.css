@@ -23,7 +23,7 @@
   flex-basis: calc(500%/12);
 }
 
-.column-one-quarter {
+.column-quarter {
   flex-basis: calc(100%/4);
 }
 
@@ -42,4 +42,22 @@
 
 .space-between {
   justify-content: space-around;
+}
+
+.container {
+  margin: 6rem auto;
+  padding: 0 2rem;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.space-end {
+  justify-content: space-between;
 }

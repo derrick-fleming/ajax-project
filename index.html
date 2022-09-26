@@ -20,57 +20,79 @@
 </head>
 <body>
   <header>
-    <nav class="align-items">
-      <div class="column-one-seventh align-items">
+    <nav class="align-items nav-container space-end">
+      <div class="column-half align-items">
         <img src="images/leafIcon.PNG" alt="Leaf Icon" class="leaf-icon">
-      </div>
-      <div class="column-three-quarters align-items">
         <h3 class="nav-header">MyVillagers</h3>
       </div>
-      <a>
-        <i class="fa-solid fa-house nav-icon"></i>
-      </a>
+      <div class="column-quarter end">
+        <a href="#villager-view">
+          <i class="fa-solid fa-house nav-icon"></i>
+        </a>
+      </div>
     </nav>
   </header>
   <main>
-    <div class="page-container">
-      <div data-view="villager-view" class="animal-container">
-        <div class="pop-up-container row space-between">
+    <div class="container">
+      <div data-view="villager-view" class="animal-container" id="villager-view">
+        <div class="pop-up-container pop-vertical row space-between">
           <a class="column-one-twelfth">
             <i class="fa-solid fa-xmark pop-x"></i>
           </a>
-          <div class="column-quarter align-items pop-margin">
+          <div class="column-quarter">
             <img src="images/NH-Icon-Nook_Phone-Map.webp" alt="Map icon" class="pop-icon">
           </div>
-          <div class="column-half align-items">
+          <div class="column-half">
             <h2 class="pop-text">Scroll to find <br>villagers</h2>
           </div>
         </div>
         <div class="species-header row">
-          <div class="column-half">
+          <div class="column-full">
             <h1 class="species-header">
               Alligator
             </h1>
           </div>
-          <div class="column-half align-items">
+          <div class="align-items">
             <a class="top-link hidden">
               Back to top
             </a>
           </div>
         </div>
         <div class="species-header row">
-          <div class="column-half">
+          <div class="header-container">
             <h1 class="species-header">
               Anteater
             </h1>
           </div>
-          <div class="column-half align-items">
-            <a class="top-link">
-              Back to top
-            </a>
-          </div>
+          <a href="#villager-view" class="top-link">
+            Back to top
+          </a>
         </div>
         <div class="species-list row">
+          <div class="column-one-third center">
+            <img src="https://acnhapi.com/v1/icons/villagers/1" alt="Cyrano" class="villager-icon">
+            <h2 class="villager-name">Cyrano</h2>
+          </div>
+          <div class="column-one-third center">
+            <img src="https://acnhapi.com/v1/icons/villagers/1" alt="Antonio" class="villager-icon">
+            <h2 class="villager-name">Antonio</h2>
+          </div>
+          <div class="column-one-third center">
+            <img src="https://acnhapi.com/v1/icons/villagers/1" alt="Pango" class="villager-icon">
+            <h2 class="villager-name">Pango</h2>
+          </div>
+          <div class="column-one-third center">
+            <img src="https://acnhapi.com/v1/icons/villagers/1" alt="Cyrano" class="villager-icon">
+            <h2 class="villager-name">Cyrano</h2>
+          </div>
+          <div class="column-one-third center">
+            <img src="https://acnhapi.com/v1/icons/villagers/1" alt="Antonio" class="villager-icon">
+            <h2 class="villager-name">Antonio</h2>
+          </div>
+          <div class="column-one-third center">
+            <img src="https://acnhapi.com/v1/icons/villagers/1" alt="Pango" class="villager-icon">
+            <h2 class="villager-name">Pango</h2>
+          </div>
           <div class="column-one-third center">
             <img src="https://acnhapi.com/v1/icons/villagers/1" alt="Cyrano" class="villager-icon">
             <h2 class="villager-name">Cyrano</h2>
