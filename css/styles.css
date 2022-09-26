@@ -15,12 +15,17 @@ nav {
   box-shadow: 0 1px 2px 0 #00000040;
 }
 
+.hidden {
+  display: none;
+}
+
 .page-container {
-  margin: 2rem;
+  margin: 2rem auto;
+  padding: 0 2rem;
 }
 
 .leaf-icon {
-  width: 100%;
+  width: 50px;
 }
 
 .nav-header {
@@ -59,6 +64,7 @@ nav {
 .top-link {
   color: #575757;
   font-family: "Varela Round", sans-serif;
+  font-weight: 400;
   font-size: 1.125rem;
 }
 
@@ -68,6 +74,22 @@ nav {
 
 .species-header {
   font-family: "Varela Round", sans-serif;
+  font-weight: 400;
   font-size: 1.75rem;
   color: #575757;
+}
+
+.villager-icon {
+  width: 90px;
+}
+
+.center {
+  text-align: center;
+}
+
+.villager-name {
+  font-family: Montserrat, sans-serif;
+  font-weight: 300;
+  margin-top: 0;
+  font-size: 1.125rem;
 }

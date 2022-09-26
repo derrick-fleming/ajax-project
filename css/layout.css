@@ -1,5 +1,6 @@
 .row {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .column-half {
@@ -30,6 +31,10 @@
   flex-basis: calc(300%/4);
 }
 
+.column-one-third {
+  flex-basis: calc(100%/3);
+}
+
 .align-items {
   display: flex;
   align-items: center;
@@ -37,8 +42,4 @@
 
 .space-between {
   justify-content: space-around;
-}
-
-.top-link {
-  text-align: right;
 }
