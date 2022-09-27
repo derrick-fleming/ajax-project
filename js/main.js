@@ -1,9 +1,8 @@
 var $villagerView = document.querySelector('#villager-view');
 var speciesList = [];
 var villagerList = null;
-/*
+
 var speciesNumber = 0;
-*/
 
 function generateLink() {
   var $topLink = document.createElement('a');
@@ -23,18 +22,17 @@ xhr.responseType = 'json';
 
 function generateList(event) {
   villagerList = xhr.response;
-  generateDomHeaders();
+  generateDomVillagersList();
   return villagerList;
 }
 
-function generateDomHeaders() {
+function generateDomVillagersList() {
 
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < speciesNumber + 50; i++) {
     var villagerSpecies = villagerList[i].species;
     var villagerIcon = villagerList[i].icon_uri;
     var villagerName = villagerList[i].name['name-USen'];
     if (!speciesList.includes(villagerSpecies)) {
-      // speciesNumber++;
       speciesList.push(villagerSpecies);
 
       var $villagerSection = document.createElement('div');
@@ -81,11 +79,12 @@ function generateDomHeaders() {
     $villagerColumn.appendChild($anchorVillager);
     $villagerContainerSpeciesList.appendChild($villagerColumn);
 
-    if (villagerSpecies !== villagerList[i + 1].species) {
+    if (villagerSpecies !== villagerList[i + 1].species || i === speciesNumber + 49) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
     }
 
   }
+  speciesNumber += 50;
 }
 
 xhr.addEventListener('load', generateList);

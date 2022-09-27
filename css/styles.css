@@ -106,6 +106,8 @@ nav {
 
 .villager-section {
   border-bottom: 1px solid #c7c7c7;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 523px) {
