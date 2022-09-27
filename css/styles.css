@@ -17,6 +17,10 @@ nav {
   height: 64px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .nav-container {
   margin: 0 auto;
 }
@@ -34,9 +38,16 @@ nav {
   margin: 0.5rem;
 }
 
+.nav-home {
+  font-size: 1rem;
+  padding-left: 0.75rem;
+  color: #4dc3b9ad;
+}
+
 .nav-icon {
   font-size: 1.75rem;
   color: #4dc3b9ad;
+  margin-top: 0.5rem;
 }
 
 .pop-up-container {
@@ -60,6 +71,10 @@ nav {
 .pop-icon {
   width: 80px;
   margin: 0.5rem;
+}
+
+.margin-top {
+  margin-top: 6rem;
 }
 
 .pop-text,
@@ -141,6 +156,10 @@ nav {
 
   .nav-container {
     max-width: 900px;
+  }
+
+  .nav-home {
+    display: relative;
   }
 
   .pop-up-container {

@@ -1,26 +1,23 @@
 var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
+var $scrollPopUp = document.querySelector('#scroll-info');
+
+$scrollPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $scrollPopUp.className = 'hidden';
+  }
+});
 
 var speciesList = [];
 var villagerList = null;
-
 var speciesNumber = 0;
-
-function generateLink() {
-  var $topLink = document.createElement('a');
-  $topLink.textContent = 'Back to top';
-  $topLink.className = 'top-link';
-  $topLink.setAttribute('href', '#villager-view');
-  return $topLink;
-}
-
-$villagerView.addEventListener('click', function (event) {
-  return event.target;
-});
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
 xhr.responseType = 'json';
+
+xhr.addEventListener('load', generateList);
+xhr.send();
 
 function generateList(event) {
   villagerList = xhr.response;
@@ -29,10 +26,17 @@ function generateList(event) {
   return villagerList;
 }
 
+$loadMoreLink.addEventListener('click', function () {
+  generateDomVillagersList();
+  if (speciesNumber > 300) {
+    $loadMoreLink.className = 'load-link hidden';
+  }
+});
+
 function generateDomVillagersList() {
 
   for (var i = speciesNumber; i < speciesNumber + 100; i++) {
-    if (i === 144) {
+    if (i === 143) {
       generateEagle();
     }
 
@@ -114,9 +118,6 @@ function generateDomVillagersList() {
   return speciesNumber;
 }
 
-xhr.addEventListener('load', generateList);
-xhr.send();
-
 function generateAlligator() {
   for (var i = 93; i < 100; i++) {
     var villagerSpecies = villagerList[i].species;
@@ -175,13 +176,6 @@ function generateAlligator() {
 
 }
 
-$loadMoreLink.addEventListener('click', function () {
-  generateDomVillagersList();
-  if (speciesNumber > 300) {
-    $loadMoreLink.className = 'load-link hidden';
-  }
-});
-
 function generateEagle() {
   for (var i = 279; i < 288; i++) {
     var villagerSpecies = villagerList[i].species;
@@ -237,4 +231,12 @@ function generateEagle() {
       $villagerSection.appendChild($villagerContainerSpeciesList);
     }
   }
+}
+
+function generateLink() {
+  var $topLink = document.createElement('a');
+  $topLink.textContent = 'Back to top';
+  $topLink.className = 'top-link';
+  $topLink.setAttribute('href', '#villager-view');
+  return $topLink;
 }
