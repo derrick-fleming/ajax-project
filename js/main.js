@@ -9,7 +9,12 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
 xhr.responseType = 'json';
 
-function generateHeaders(event) {
+function generateList(event) {
+  var villagerList = xhr.response;
+  return villagerList;
+}
+
+function generateDomHeaders() {
   for (var i = 0; i < 25; i++) {
     var villagerSpecies = xhr.response[i].species;
     if (!speciesList.includes(villagerSpecies)) {
@@ -36,7 +41,6 @@ function generateHeaders(event) {
     }
   }
 }
-
-xhr.addEventListener('load', generateHeaders);
-
+generateDomHeaders();
+xhr.addEventListener('load', generateList);
 xhr.send();
