@@ -63,6 +63,7 @@ function generateDomHeaders() {
 
     var $villagerColumn = document.createElement('div');
     $villagerColumn.className = 'column-one-third center';
+    $villagerColumn.setAttribute('id', villagerName);
 
     /*
     var $anchorVillager = document.createElement('a');
@@ -72,6 +73,10 @@ function generateDomHeaders() {
     $villagerIcon.setAttribute('src', villagerIcon);
     $villagerIcon.className = 'villager-icon';
     $villagerIcon.setAttribute('alt', villagerName);
+
+    var $villagerName = document.createElement('h2');
+    $villagerName.className = 'villager-name';
+    $villagerName.textContent = villagerName;
   }
 }
 
