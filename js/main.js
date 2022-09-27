@@ -1,5 +1,6 @@
 var $villagerView = document.querySelector('#villager-view');
 var speciesList = [];
+var villagerList = null;
 
 $villagerView.addEventListener('click', function (event) {
   return event.target;
@@ -10,13 +11,14 @@ xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
 xhr.responseType = 'json';
 
 function generateList(event) {
-  var villagerList = xhr.response;
+  villagerList = xhr.response;
+  generateDomHeaders();
   return villagerList;
 }
 
 function generateDomHeaders() {
   for (var i = 0; i < 25; i++) {
-    var villagerSpecies = xhr.response[i].species;
+    var villagerSpecies = villagerList[i].species;
     if (!speciesList.includes(villagerSpecies)) {
 
       speciesList.push(villagerSpecies);
@@ -41,6 +43,5 @@ function generateDomHeaders() {
     }
   }
 }
-generateDomHeaders();
 xhr.addEventListener('load', generateList);
 xhr.send();
