@@ -5,5 +5,13 @@ $villagerView.addEventListener('click', function (event) {
 });
 
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://acnhapi.com/v1/');
+xhr.open('GET', 'https://acnhapi.com/v1/villagers');
 xhr.responseType = 'json';
+
+function generateList(event) {
+
+}
+
+xhr.addEventListener('load', generateList);
+
+xhr.send();
