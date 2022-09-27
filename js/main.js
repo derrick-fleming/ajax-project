@@ -2,6 +2,14 @@ var $villagerView = document.querySelector('#villager-view');
 var speciesList = [];
 var villagerList = null;
 
+function generateLink() {
+  var $topLink = document.createElement('a');
+  $topLink.textContent = 'Back to top';
+  $topLink.className = 'top-link';
+  $topLink.setAttribute('href', '#villager-view');
+  return $topLink;
+}
+
 $villagerView.addEventListener('click', function (event) {
   return event.target;
 });
@@ -17,7 +25,7 @@ function generateList(event) {
 }
 
 function generateDomHeaders() {
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < 30; i++) {
     var villagerSpecies = villagerList[i].species;
     if (!speciesList.includes(villagerSpecies)) {
 
@@ -29,15 +37,16 @@ function generateDomHeaders() {
       var $villagerContainer = document.createElement('div');
       $villagerContainer.className = 'container species-header row';
 
-      var $columnFull = document.createElement('div');
-      $columnFull.className = 'column-full';
+      var $headerContainer = document.createElement('div');
+      $headerContainer.className = 'header-container';
 
       var $h1 = document.createElement('h1');
       $h1.textContent = villagerSpecies;
       $h1.className = 'species-header';
 
-      $columnFull.appendChild($h1);
-      $villagerContainer.appendChild($columnFull);
+      $headerContainer.appendChild($h1);
+      $villagerContainer.appendChild($headerContainer);
+      $villagerContainer.appendChild(generateLink());
       $villagerSection.appendChild($villagerContainer);
       $villagerView.appendChild($villagerSection);
     }
