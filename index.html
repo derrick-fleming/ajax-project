@@ -8,11 +8,52 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Montserrat:wght@300;400;700&family=Varela+Round&display=swap"
+    rel="stylesheet">
 </head>
 <body>
   <header>
+    <nav class="align-items nav-container space-end">
+      <div class="column-half align-items">
+        <img src="images/leafIcon.PNG" alt="Leaf Icon" class="leaf-icon">
+        <h3 class="nav-header">MyVillagers</h3>
+      </div>
+      <div class="column-quarter end">
+        <a href="#villager-view">
+          <i class="fa-solid fa-house nav-icon"></i>
+        </a>
+        <a href="#villager-view">
+          <h3 class="nav-home"> Home </h3>
+        </a>
+      </div>
+    </nav>
   </header>
   <main>
+    <div class="margin-top">
+      <div data-view="villager-view" id="villager-view">
+        <div class="pop-up-container pop-vertical row space-between" id="scroll-info">
+          <a class="column-one-twelfth">
+            <i class="fa-solid fa-xmark pop-x"></i>
+          </a>
+          <div class="column-quarter">
+            <img src="images/NH-Icon-Nook_Phone-Map.webp" alt="Map icon" class="pop-icon">
+          </div>
+          <div class="column-half">
+            <h2 class="pop-text">Scroll to find <br>villagers</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <a class="load-link"> Load More </a>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
