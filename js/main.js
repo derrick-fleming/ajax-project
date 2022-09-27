@@ -31,7 +31,7 @@ function generateDomHeaders() {
   for (var i = 0; i < 30; i++) {
     var villagerSpecies = villagerList[i].species;
     var villagerIcon = villagerList[i].icon_uri;
-    var villagerName = villagerList[i].name.USen;
+    var villagerName = villagerList[i].name['name-USen'];
     if (!speciesList.includes(villagerSpecies)) {
       // speciesNumber++;
       speciesList.push(villagerSpecies);
@@ -65,9 +65,7 @@ function generateDomHeaders() {
     $villagerColumn.className = 'column-one-third center';
     $villagerColumn.setAttribute('id', villagerName);
 
-    /*
     var $anchorVillager = document.createElement('a');
-*/
 
     var $villagerIcon = document.createElement('img');
     $villagerIcon.setAttribute('src', villagerIcon);
@@ -77,6 +75,12 @@ function generateDomHeaders() {
     var $villagerName = document.createElement('h2');
     $villagerName.className = 'villager-name';
     $villagerName.textContent = villagerName;
+
+    $anchorVillager.appendChild($villagerIcon);
+    $anchorVillager.appendChild($villagerName);
+    $villagerColumn.appendChild($anchorVillager);
+    $villagerContainerList.appendChild($villagerColumn);
+    $villagerSection.appendChild($villagerContainerList);
   }
 }
 
