@@ -1,8 +1,10 @@
 var $villagerView = document.querySelector('#villager-view');
+var $loadMoreLink = document.querySelector('.load-link');
+
 var speciesList = [];
 var villagerList = null;
 
-var speciesNumber = 50;
+var speciesNumber = 0;
 
 function generateLink() {
   var $topLink = document.createElement('a');
@@ -29,8 +31,9 @@ function generateList(event) {
 
 function generateDomVillagersList() {
 
-  for (var i = 0; i < speciesNumber + 50; i++) {
+  for (var i = speciesNumber; i < speciesNumber + 100; i++) {
     var villagerSpecies = villagerList[i].species;
+
     if (villagerSpecies === 'Alligator') {
       continue;
     }
@@ -83,12 +86,13 @@ function generateDomVillagersList() {
     $villagerColumn.appendChild($anchorVillager);
     $villagerContainerSpeciesList.appendChild($villagerColumn);
 
-    if (villagerSpecies !== villagerList[i + 1].species || i === speciesNumber + 49) {
+    if (villagerSpecies !== villagerList[i + 1].species || i === speciesNumber + 99) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
     }
 
   }
-  speciesNumber += 50;
+  speciesNumber += 100;
+  return speciesNumber;
 }
 
 xhr.addEventListener('load', generateList);
@@ -118,7 +122,6 @@ function generateAlligator() {
 
       $headerContainer.appendChild($h1);
       $villagerContainerHeader.appendChild($headerContainer);
-      $villagerContainerHeader.appendChild(generateLink());
       $villagerSection.appendChild($villagerContainerHeader);
       $villagerView.appendChild($villagerSection);
 
@@ -152,3 +155,7 @@ function generateAlligator() {
   }
 
 }
+
+$loadMoreLink.addEventListener('click', function () {
+  generateDomVillagersList();
+});
