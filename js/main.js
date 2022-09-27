@@ -21,7 +21,6 @@ xhr.send();
 
 function generateList(event) {
   villagerList = xhr.response;
-  generateAlligator();
   generateDomVillagersList();
   return villagerList;
 }
@@ -36,6 +35,10 @@ $loadMoreLink.addEventListener('click', function () {
 function generateDomVillagersList() {
 
   for (var i = speciesNumber; i < speciesNumber + 100; i++) {
+    if (i === 0) {
+      generateAlligator();
+    }
+
     if (i === 143) {
       generateEagle();
     }
