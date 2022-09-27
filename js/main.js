@@ -1,6 +1,8 @@
 var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
 var $scrollPopUp = document.querySelector('#scroll-info');
+var $viewInfoPopUp = document.querySelector('#view-info');
+
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
@@ -8,6 +10,12 @@ var speciesNumber = 0;
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $scrollPopUp.className = 'hidden';
+  }
+});
+
+$viewInfoPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $viewInfoPopUp.className = 'hidden';
   }
 });
 
