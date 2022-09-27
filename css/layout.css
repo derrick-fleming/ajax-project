@@ -49,10 +49,6 @@
   padding: 0 2rem;
 }
 
-.align-right {
-  text-align: right;
-}
-
 .end {
   display: flex;
   justify-content: flex-end;
