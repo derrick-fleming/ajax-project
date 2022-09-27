@@ -28,7 +28,8 @@ function generateList(event) {
 }
 
 function generateDomHeaders() {
-  for (var i = 0; i < 30; i++) {
+
+  for (var i = 0; i < 50; i++) {
     var villagerSpecies = villagerList[i].species;
     var villagerIcon = villagerList[i].icon_uri;
     var villagerName = villagerList[i].name['name-USen'];
@@ -56,10 +57,9 @@ function generateDomHeaders() {
       $villagerSection.appendChild($villagerContainerHeader);
       $villagerView.appendChild($villagerSection);
 
+      var $villagerContainerSpeciesList = document.createElement('div');
+      $villagerContainerSpeciesList.className = 'container species-list row';
     }
-
-    var $villagerContainerList = document.createElement('div');
-    $villagerContainerList.className = 'container species-list row';
 
     var $villagerColumn = document.createElement('div');
     $villagerColumn.className = 'column-one-third center';
@@ -79,8 +79,12 @@ function generateDomHeaders() {
     $anchorVillager.appendChild($villagerIcon);
     $anchorVillager.appendChild($villagerName);
     $villagerColumn.appendChild($anchorVillager);
-    $villagerContainerList.appendChild($villagerColumn);
-    $villagerSection.appendChild($villagerContainerList);
+    $villagerContainerSpeciesList.appendChild($villagerColumn);
+
+    if (villagerSpecies !== villagerList[i + 1].species) {
+      $villagerSection.appendChild($villagerContainerSpeciesList);
+    }
+
   }
 }
 
