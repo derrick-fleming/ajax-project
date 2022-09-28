@@ -15,6 +15,7 @@ var $catchphraseHeading = document.querySelector('#catchphrase');
 var $sayingHeading = document.querySelector('#saying');
 var $leftArrow = document.querySelector('#left-arrow');
 var $rightArrow = document.querySelector('#right-arrow');
+// var $emptyHeartIcon = document.querySelector('fa-regular.fa-heart.empty-heart');
 
 var speciesList = [];
 var villagerList = null;
@@ -236,6 +237,10 @@ $modalInformation.addEventListener('click', function () {
 
   if (modalId === 'right-arrow') {
     resetLeftArrowTextContainer();
+  }
+
+  if (modalId === 'favorite-icon') {
+    // console.log('success!');
   }
 });
 
