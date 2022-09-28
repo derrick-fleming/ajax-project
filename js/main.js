@@ -199,6 +199,7 @@ $modalInformation.addEventListener('click', function () {
     $overlay.className = 'hidden overlay';
     $modalInformation.className = 'hidden villager-info';
     var $imageDelete = document.querySelector('.villager-info-photo');
+    resetTextContainer();
     $imageDelete.remove();
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
@@ -206,17 +207,7 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if (modalId === 'left-arrow') {
-    $leftArrow.className = 'hidden';
-    $rightArrow.className = 'fa-solid fa-chevron-right arrow';
-
-    $speciesHeading.className = 'less-margin';
-    $genderHeading.className = 'less-margin';
-    $personalityHeading.className = 'less-margin';
-    $birthdayHeading.className = 'less-margin';
-
-    $hobbyHeading.className = 'less-margin hidden';
-    $catchphraseHeading.className = 'less-margin hidden';
-    $sayingHeading.className = 'less-margin hidden';
+    resetTextContainer();
   }
 
   if (modalId === 'right-arrow') {
@@ -233,3 +224,17 @@ $modalInformation.addEventListener('click', function () {
     $sayingHeading.className = 'less-margin';
   }
 });
+
+function resetTextContainer() {
+  $leftArrow.className = 'hidden';
+  $rightArrow.className = 'fa-solid fa-chevron-right arrow';
+
+  $speciesHeading.className = 'less-margin';
+  $genderHeading.className = 'less-margin';
+  $personalityHeading.className = 'less-margin';
+  $birthdayHeading.className = 'less-margin';
+
+  $hobbyHeading.className = 'less-margin hidden';
+  $catchphraseHeading.className = 'less-margin hidden';
+  $sayingHeading.className = 'less-margin hidden';
+}
