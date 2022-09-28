@@ -168,7 +168,7 @@ h2 {
 .villager-info {
   top: 129px;
   position: fixed;
-  width: 328px;
+  width: 350px;
   height: 555px;
   background-color: #fafafa;
   border: 1px solid #afafaf;
@@ -188,6 +188,7 @@ h2 {
 .villager-info-text-box {
   background-color: #f8f2dd;
   border-radius: 0 0 15px 15px;
+  height: 200px;
 }
 
 .image-card-container {
@@ -289,6 +290,10 @@ h2 {
     height: 598px;
   }
 
+  .villager-info-text-box {
+    height: 239px;
+  }
+
   .less-margin {
     text-align: left;
     line-height: 2.3rem;
@@ -296,5 +301,10 @@ h2 {
 
   .column-fifty {
     flex-basis: 50%;
+  }
+
+  #left-arrow,
+  #right-arrow {
+    display: none;
   }
 }
