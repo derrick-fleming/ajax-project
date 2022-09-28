@@ -112,6 +112,11 @@ a {
 
 .villager-icon {
   width: 90px;
+  transition: transform 0.3s ease-in;
+}
+
+.villager-icon:hover {
+  transform: scale3d(1.2, 1.2, 1.2);
 }
 
 .center {
