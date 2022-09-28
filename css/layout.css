@@ -57,3 +57,7 @@
 .space-end {
   justify-content: space-between;
 }
+
+.extra-padding {
+  padding-right: 0.5rem;
+}

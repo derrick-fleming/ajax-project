@@ -95,6 +95,10 @@ a {
   margin-top: 1.5rem;
 }
 
+.extra-margin {
+  margin-top: 2rem;
+}
+
 .species-header {
   font-family: "Varela Round", sans-serif;
   font-weight: 400;
