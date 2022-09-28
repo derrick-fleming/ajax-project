@@ -20,6 +20,17 @@ var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
 
+/*
+var favoriteVillagerInformation = {
+  villagerId: null,
+  villagerPicture: null,
+  villagerName: null,
+  islandStatus: null,
+  photoCollected: null,
+  notes: null
+};
+*/
+
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $scrollPopUp.className = 'hidden';
