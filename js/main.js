@@ -168,4 +168,7 @@ function createInfoCard(info) {
   var birthday = info.birthday.split('/');
   var birthdayReverse = birthday.reverse();
   $birthdayInfo.textContent = birthdayReverse.join('/');
+
+  var $hobbyInfo = document.querySelector('#hobby-card');
+  $hobbyInfo.textContent = info.hobby;
 }
