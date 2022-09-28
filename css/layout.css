@@ -19,10 +19,6 @@
   flex-basis: calc(100%/7);
 }
 
-.column-forty-five {
-  flex-basis: 45%;
-}
-
 .column-ten-twelfths {
   flex-basis: calc(1000%/12);
 }

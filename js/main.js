@@ -18,6 +18,7 @@ var $rightArrow = document.querySelector('#right-arrow');
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
+var rightVisible = true;
 
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
@@ -203,7 +204,7 @@ $modalInformation.addEventListener('click', function () {
     $overlay.className = 'hidden overlay';
     $modalInformation.className = 'hidden villager-info';
     var $imageDelete = document.querySelector('.villager-info-photo');
-    resetTextContainer();
+    resetRightArrowTextContainer();
     $imageDelete.remove();
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
@@ -211,25 +212,16 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if (modalId === 'left-arrow') {
-    resetTextContainer();
+    resetRightArrowTextContainer();
   }
 
   if (modalId === 'right-arrow') {
-
-    $rightArrow.className = 'hidden';
-    $leftArrow.className = 'fa-solid fa-chevron-left arrow';
-    $speciesHeading.className = 'less-margin hidden';
-    $genderHeading.className = 'less-margin hidden';
-    $personalityHeading.className = 'less-margin hidden';
-    $birthdayHeading.className = 'less-margin hidden';
-
-    $hobbyHeading.className = 'less-margin';
-    $catchphraseHeading.className = 'less-margin';
-    $sayingHeading.className = 'less-margin';
+    resetLeftArrowTextContainer();
   }
 });
 
-function resetTextContainer() {
+function resetRightArrowTextContainer() {
+  rightVisible = true;
   $leftArrow.className = 'hidden';
   $rightArrow.className = 'fa-solid fa-chevron-right arrow';
 
@@ -243,13 +235,29 @@ function resetTextContainer() {
   $sayingHeading.className = 'less-margin hidden';
 }
 
+function resetLeftArrowTextContainer() {
+  rightVisible = false;
+  $rightArrow.className = 'hidden';
+  $leftArrow.className = 'fa-solid fa-chevron-left arrow';
+  $speciesHeading.className = 'less-margin hidden';
+  $genderHeading.className = 'less-margin hidden';
+  $personalityHeading.className = 'less-margin hidden';
+  $birthdayHeading.className = 'less-margin hidden';
+
+  $hobbyHeading.className = 'less-margin';
+  $catchphraseHeading.className = 'less-margin';
+  $sayingHeading.className = 'less-margin';
+}
+
 window.addEventListener('resize', revealAllHeadings);
 
 function revealAllHeadings(event) {
   if (window.innerWidth > 768) {
     showAllHeadings();
+  } else if (rightVisible === false) {
+    resetLeftArrowTextContainer();
   } else {
-    resetTextContainer();
+    resetRightArrowTextContainer();
   }
 }
 
