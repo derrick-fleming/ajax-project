@@ -2,6 +2,8 @@ var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
 var $scrollPopUp = document.querySelector('#scroll-info');
 var $viewInfoPopUp = document.querySelector('#view-info');
+var $modalInformation = document.querySelector('.hidden.villager-info');
+var $overlay = document.querySelector('.hidden.overlay');
 
 var speciesList = [];
 var villagerList = null;
@@ -129,10 +131,39 @@ function generateLink() {
 $villagerView.addEventListener('click', openModalWindow);
 
 function openModalWindow(event) {
-  if (event.target.className === 'villager-icon' || event.target.className === 'villager-name') {
+  if (event.target.className !== 'villager-icon' || event.target.className !== 'villager-name') {
     var $modalPopUp = event.target.closest('div');
     var villagerNumber = $modalPopUp.getAttribute('data-id');
     var villagerInfo = villagerList[villagerNumber];
-    return villagerInfo;
+    createInfoCard(villagerInfo);
+
+    $overlay.className = 'overlay';
+    $modalInformation.className = 'villager-info';
+    event.target.className = 'hidden';
   }
+}
+
+function createInfoCard(info) {
+  var $villagerInfoPhoto = document.createElement('img');
+  $villagerInfoPhoto.setAttribute('src', info.image_uri);
+  $villagerInfoPhoto.setAttribute('alt', 'Image of ' + info.name['name-USen']);
+  $villagerInfoPhoto.className = 'villager-info-photo';
+
+  var $infoPhotoContainer = document.querySelector('#info-photo-container');
+  $infoPhotoContainer.appendChild($villagerInfoPhoto);
+
+  var $villagerInfoTitle = document.createElement('h1');
+  $villagerInfoTitle.className = 'villager-info-title';
+  $villagerInfoTitle.textContent = info.name['name-USen'];
+
+  var $infoTitleContainer = document.querySelector('#info-title-container');
+  $infoTitleContainer.appendChild($villagerInfoTitle);
+
+  var $villagerInfoSpecies = document.createElement('span');
+  $villagerInfoSpecies.className = 'blue';
+  $villagerInfoSpecies.textContnet = info.species;
+
+  var $speciesInfo = document.querySelector('#species-card');
+  $speciesInfo.appendChild($villagerInfoSpecies);
+
 }
