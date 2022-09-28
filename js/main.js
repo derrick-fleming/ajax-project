@@ -23,12 +23,16 @@ var rightVisible = true;
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $scrollPopUp.className = 'hidden';
+    var $hideScrollDiv = $scrollPopUp.closest('.column-quarter');
+    $hideScrollDiv.className = 'hidden';
   }
 });
 
 $viewInfoPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $viewInfoPopUp.className = 'hidden';
+    var $hideViewInfoDiv = $viewInfoPopUp.closest('.column-quarter');
+    $hideViewInfoDiv.className = 'hidden';
   }
 });
 
