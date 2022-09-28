@@ -201,7 +201,7 @@ h2 {
 }
 
 .less-margin {
-  margin: 0.4rem;
+  margin: 0.4rem 0;
 }
 
 .box {
@@ -287,5 +287,14 @@ h2 {
     float: left;
     padding-left: 0.5rem;
   }
-  .
+
+  .villager-info {
+    width: 629px;
+    height: 598px;
+  }
+
+  .less-margin {
+    text-align: left;
+    line-height: 2.3rem;
+  }
 }
