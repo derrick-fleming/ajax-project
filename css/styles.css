@@ -172,6 +172,19 @@ h2 {
   padding: 0.5rem 0 0 1rem;
 }
 
+#favorite-icon {
+  font-size: 1.75rem;
+  padding: 0.5rem 1rem 0 0;
+}
+
+.empty-heart {
+  color: #b0b0b0;
+}
+
+.filled-heart {
+  color: #2ab5cf;
+}
+
 .villager-info {
   top: 129px;
   position: fixed;
@@ -234,6 +247,10 @@ h2 {
 #cancel:hover,
 .pop-x:hover {
   color: #816f59;
+}
+
+#favorite-icon:hover {
+  color: #2ab5cf;
 }
 
 .nav-home:hover,
