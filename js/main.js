@@ -166,4 +166,8 @@ function createInfoCard(info) {
   var $speciesInfo = document.querySelector('#species-card');
   $speciesInfo.appendChild($villagerInfoSpecies);
 
+  var $villagerInfoGender = document.createElement('span');
+  $villagerInfoGender.className = 'brown';
+  $villagerInfoGender.textContent = info.gender;
+
 }
