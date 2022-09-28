@@ -152,25 +152,15 @@ function createInfoCard(info) {
   var $infoPhotoContainer = document.querySelector('#info-photo-container');
   $infoPhotoContainer.appendChild($villagerInfoPhoto);
 
-  var $villagerInfoTitle = document.createElement('h1');
-  $villagerInfoTitle.className = 'villager-info-title';
-  $villagerInfoTitle.textContent = info.name['name-USen'];
-
-  var $infoTitleContainer = document.querySelector('#info-title-container');
-  $infoTitleContainer.appendChild($villagerInfoTitle);
-
-  var $villagerInfoSpecies = document.createElement('span');
-  $villagerInfoSpecies.className = 'blue';
-  $villagerInfoSpecies.textContent = info.species;
+  var $titleInfo = document.querySelector('.villager-info-title');
+  $titleInfo.textContent = info.name['name-USen'];
 
   var $speciesInfo = document.querySelector('#species-card');
-  $speciesInfo.appendChild($villagerInfoSpecies);
-
-  var $villagerInfoGender = document.createElement('span');
-  $villagerInfoGender.className = 'brown';
-  $villagerInfoGender.textContent = info.gender;
+  $speciesInfo.textContent = info.species;
 
   var $genderInfo = document.querySelector('#gender-card');
   $genderInfo.textContent = info.gender;
 
+  var $personalityInfo = document.querySelector('#personality-card');
+  $personalityInfo.textContent = info.personality;
 }
