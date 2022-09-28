@@ -149,6 +149,15 @@ a {
   cursor: pointer;
 }
 
+.overlay {
+  background-color: rgba(49, 49, 49, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
