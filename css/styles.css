@@ -64,7 +64,7 @@ h2 {
 
 .pop-up-container {
   text-align: center;
-  margin: 0 auto 1rem;
+  margin: 0 1rem 1rem;
   height: 97px;
   width: 292px;
   left: 42px;
@@ -232,7 +232,8 @@ h2 {
 
 #left-arrow:hover,
 #right-arrow:hover,
-#cancel:hover {
+#cancel:hover,
+.pop-x:hover {
   color: #816f59;
 }
 
@@ -253,27 +254,7 @@ h2 {
   }
 }
 
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 900px;
-  }
-
-  .column-one-third {
-    flex-basis: calc(100%/4);
-  }
-
-  .villager-icon {
-    width: 120px;
-  }
-
-  .nav-container {
-    max-width: 900px;
-  }
-
-  .nav-home {
-    display: relative;
-  }
-
+@media screen and (min-width: 720px) {
   .pop-up-container {
     width: 216px;
     height: 186px;
@@ -296,6 +277,29 @@ h2 {
   .pop-x {
     float: left;
     padding-left: 0.5rem;
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .column-one-third {
+    flex-basis: calc(100%/4);
+  }
+
+  .villager-icon {
+    width: 120px;
+  }
+
+  .nav-container {
+    max-width: 900px;
+  }
+
+  .nav-home {
+    display: relative;
   }
 
   .villager-info {
