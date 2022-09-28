@@ -15,7 +15,7 @@ var $catchphraseHeading = document.querySelector('#catchphrase');
 var $sayingHeading = document.querySelector('#saying');
 var $leftArrow = document.querySelector('#left-arrow');
 var $rightArrow = document.querySelector('#right-arrow');
-// var $emptyHeartIcon = document.querySelector('fa-regular.fa-heart.empty-heart');
+var $emptyHeartIcon = document.querySelector('#favorite-icon');
 
 var speciesList = [];
 var villagerList = null;
@@ -240,7 +240,7 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if (modalId === 'favorite-icon') {
-    // console.log('success!');
+    $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
   }
 });
 
