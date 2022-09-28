@@ -2,6 +2,7 @@ var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
 var $scrollPopUp = document.querySelector('#scroll-info');
 var $viewInfoPopUp = document.querySelector('#view-info');
+var $favoritesPopUp = document.querySelector('#favorite-info');
 var $modalInformation = document.querySelector('.hidden.villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
 var $infoPhotoContainer = document.querySelector('#info-photo-container');
@@ -32,6 +33,14 @@ $viewInfoPopUp.addEventListener('click', function () {
     $viewInfoPopUp.className = 'hidden';
     var $hideViewInfoDiv = $viewInfoPopUp.closest('.column-quarter');
     $hideViewInfoDiv.className = 'hidden';
+  }
+});
+
+$favoritesPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favoritesPopUp.className = 'hidden';
+    var $hideFavoritesDiv = $favoritesPopUp.closest('.column-quarter');
+    $hideFavoritesDiv.className = 'hidden';
   }
 });
 
