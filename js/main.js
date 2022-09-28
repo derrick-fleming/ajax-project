@@ -4,6 +4,7 @@ var $scrollPopUp = document.querySelector('#scroll-info');
 var $viewInfoPopUp = document.querySelector('#view-info');
 var $modalInformation = document.querySelector('.hidden.villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
+var $infoPhotoContainer = document.querySelector('#info-photo-container');
 
 var speciesList = [];
 var villagerList = null;
@@ -131,7 +132,7 @@ function generateLink() {
 $villagerView.addEventListener('click', openModalWindow);
 
 function openModalWindow(event) {
-  if (event.target.className !== 'villager-icon' || event.target.className !== 'villager-name') {
+  if (event.target.className === 'villager-icon' || event.target.className === 'villager-name') {
     var $modalPopUp = event.target.closest('div');
     var villagerNumber = $modalPopUp.getAttribute('data-id');
     var villagerInfo = villagerList[villagerNumber];
@@ -140,12 +141,8 @@ function openModalWindow(event) {
     $overlay.className = 'overlay';
     $modalInformation.className = 'villager-info';
     if (event.target.className === 'villager-icon') {
-      event.target.className = 'hidden';
+      event.target.className = 'hidden villager-icon';
     }
-
-    var unveilIcon = setInterval(makeVisible, 1000);
-    clearInterval(unveilIcon);
-    event.target.className = 'villager-icon';
   }
 }
 
@@ -155,7 +152,6 @@ function createInfoCard(info) {
   $villagerInfoPhoto.setAttribute('alt', 'Image of ' + info.name['name-USen']);
   $villagerInfoPhoto.className = 'villager-info-photo';
 
-  var $infoPhotoContainer = document.querySelector('#info-photo-container');
   $infoPhotoContainer.appendChild($villagerInfoPhoto);
 
   var $titleInfo = document.querySelector('.villager-info-title');
@@ -193,9 +189,10 @@ $modalInformation.addEventListener('click', function () {
   if (cancelId === 'cancel') {
     $overlay.className = 'hidden overlay';
     $modalInformation.className = 'hidden villager-info';
+    var $imageDelete = document.querySelector('.villager-info-photo');
+    $imageDelete.remove();
+
+    var $unhidePhoto = document.querySelector('.villager-icon.hidden');
+    $unhidePhoto.className = 'villager-icon';
   }
 });
-
-function makeVisible(event) {
-  event.target.className = 'villager-icon';
-}
