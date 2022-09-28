@@ -169,6 +169,10 @@ a {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.villager-info-text-box {
+  background-color: #f8f2dd;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
