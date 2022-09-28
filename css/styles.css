@@ -236,6 +236,11 @@ h2 {
   color: #816f59;
 }
 
+.nav-home:hover,
+.nav-icon:hover {
+  color: #4dc3b9;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
@@ -295,10 +300,6 @@ h2 {
 
   .nav-container {
     max-width: 900px;
-  }
-
-  .nav-home {
-    display: relative;
   }
 
   .villager-info {
