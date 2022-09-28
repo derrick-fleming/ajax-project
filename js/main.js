@@ -163,4 +163,9 @@ function createInfoCard(info) {
 
   var $personalityInfo = document.querySelector('#personality-card');
   $personalityInfo.textContent = info.personality;
+
+  var $birthdayInfo = document.querySelector('#birthday-card');
+  var birthday = info.birthday.split('/');
+  var birthdayReverse = birthday.reverse();
+  $birthdayInfo.textContent = birthdayReverse.join('/');
 }
