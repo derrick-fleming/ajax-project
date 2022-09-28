@@ -147,6 +147,10 @@ function openModalWindow(event) {
     var villagerInfo = villagerList[villagerNumber];
     createInfoCard(villagerInfo);
 
+    if (window.innerWidth >= 768) {
+      showAllHeadings();
+    }
+
     $overlay.className = 'overlay';
     $modalInformation.className = 'villager-info';
     if (event.target.className === 'villager-icon') {
@@ -237,4 +241,25 @@ function resetTextContainer() {
   $hobbyHeading.className = 'less-margin hidden';
   $catchphraseHeading.className = 'less-margin hidden';
   $sayingHeading.className = 'less-margin hidden';
+}
+
+window.addEventListener('resize', revealAllHeadings);
+
+function revealAllHeadings(event) {
+  if (window.innerWidth > 768) {
+    showAllHeadings();
+  } else {
+    resetTextContainer();
+  }
+}
+
+function showAllHeadings() {
+  $speciesHeading.className = 'less-margin';
+  $genderHeading.className = 'less-margin';
+  $personalityHeading.className = 'less-margin';
+  $birthdayHeading.className = 'less-margin';
+
+  $hobbyHeading.className = 'less-margin';
+  $catchphraseHeading.className = 'less-margin';
+  $sayingHeading.className = 'less-margin';
 }
