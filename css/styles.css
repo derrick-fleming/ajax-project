@@ -185,6 +185,15 @@ h2 {
   color: #2ab5cf;
 }
 
+.added-favorites {
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #f6f6f6;
+  position: fixed;
+  top: 4rem;
+}
+
 .villager-info {
   top: 129px;
   position: fixed;
