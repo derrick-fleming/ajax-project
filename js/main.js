@@ -139,7 +139,13 @@ function openModalWindow(event) {
 
     $overlay.className = 'overlay';
     $modalInformation.className = 'villager-info';
-    event.target.className = 'hidden';
+    if (event.target.className === 'villager-icon') {
+      event.target.className = 'hidden';
+    }
+
+    var unveilIcon = setInterval(makeVisible, 1000);
+    clearInterval(unveilIcon);
+    event.target.className = 'villager-icon';
   }
 }
 
@@ -183,5 +189,13 @@ function createInfoCard(info) {
 }
 
 $modalInformation.addEventListener('click', function () {
-
+  var cancelId = event.target.getAttribute('id');
+  if (cancelId === 'cancel') {
+    $overlay.className = 'hidden overlay';
+    $modalInformation.className = 'hidden villager-info';
+  }
 });
+
+function makeVisible(event) {
+  event.target.className = 'villager-icon';
+}
