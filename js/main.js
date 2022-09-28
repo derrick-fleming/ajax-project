@@ -171,4 +171,13 @@ function createInfoCard(info) {
 
   var $hobbyInfo = document.querySelector('#hobby-card');
   $hobbyInfo.textContent = info.hobby;
+
+  var $catchphraseInfo = document.querySelector('#catchphrase-card');
+  var capitalizeCatch = info['catch-phrase'];
+  var firstLetter = capitalizeCatch[0].toUpperCase();
+  var wordOutput = firstLetter + capitalizeCatch.slice(1);
+  $catchphraseInfo.textContent = '"' + wordOutput + '"';
+
+  var $sayingInfo = document.querySelector('#saying-card');
+  $sayingInfo.textContent = '"' + info.saying + '"';
 }
