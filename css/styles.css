@@ -22,6 +22,13 @@ a {
   cursor: pointer;
 }
 
+h2 {
+  font-family: "Varela Round", sans-serif;
+  font-size: 1.375rem;
+  color: #816f59;
+  font-weight: 400;
+}
+
 .nav-container {
   margin: 0 auto;
 }
@@ -51,9 +58,14 @@ a {
   margin-top: 0.5rem;
 }
 
+.pop-section {
+  margin-top: 5rem;
+  padding-top: 1rem;
+}
+
 .pop-up-container {
   text-align: center;
-  margin: 6rem auto 0;
+  margin: 0 1rem 1rem;
   height: 97px;
   width: 292px;
   left: 42px;
@@ -91,6 +103,10 @@ a {
   margin-top: 1.5rem;
 }
 
+.extra-margin {
+  margin-top: 2rem;
+}
+
 .species-header {
   font-family: "Varela Round", sans-serif;
   font-weight: 400;
@@ -104,6 +120,11 @@ a {
 
 .villager-icon {
   width: 90px;
+  transition: transform 0.3s ease-in;
+}
+
+.villager-icon:hover {
+  transform: scale3d(1.2, 1.2, 1.2);
 }
 
 .center {
@@ -136,10 +157,103 @@ a {
   cursor: pointer;
 }
 
+.overlay {
+  background-color: rgba(49, 49, 49, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#cancel {
+  font-size: 1.75rem;
+  color: #b0b0b0;
+  padding: 0.5rem 0 0 1rem;
+}
+
+.villager-info {
+  top: 129px;
+  position: fixed;
+  width: 350px;
+  height: 555px;
+  background-color: #fafafa;
+  border: 1px solid #afafaf;
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.villager-info-title {
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  color: #816f59;
+  font-size: 2.375rem;
+  margin: 0.5rem 0;
+}
+
+.villager-info-text-box {
+  background-color: #f8f2dd;
+  border-radius: 0 0 15px 15px;
+  height: 200px;
+}
+
+.villager-info-photo {
+  border-radius: 5px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.less-margin {
+  margin: 0.4rem 0;
+}
+
+.box {
+  margin: 1.2rem 0;
+}
+
+.arrow {
+  font-size: 1.75rem;
+  color: #816f59a6;
+}
+
+#left-arrow {
+  padding-left: 0.5rem;
+}
+
+.blue,
+.brown {
+  font-size: 1.375rem;
+  font-family: "Varela Round", sans-serif;
+}
+
+.blue {
+  color: #2ab5cf;
+}
+
+#left-arrow:hover,
+#right-arrow:hover,
+#cancel:hover,
+.pop-x:hover {
+  color: #816f59;
+}
+
+.nav-home:hover,
+.nav-icon:hover {
+  color: #4dc3b9;
+}
+
+.hidden-text-box {
+  display: none;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
   }
+}
+
+.column-fifty,
+.column-forty-five {
+  flex-basis: 100%;
 }
 
 @media screen and (min-width: 523px) {
@@ -148,27 +262,7 @@ a {
   }
 }
 
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 900px;
-  }
-
-  .column-one-third {
-    flex-basis: calc(100%/4);
-  }
-
-  .villager-icon {
-    width: 120px;
-  }
-
-  .nav-container {
-    max-width: 900px;
-  }
-
-  .nav-home {
-    display: relative;
-  }
-
+@media screen and (min-width: 720px) {
   .pop-up-container {
     width: 216px;
     height: 186px;
@@ -191,5 +285,59 @@ a {
   .pop-x {
     float: left;
     padding-left: 0.5rem;
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .column-one-third {
+    flex-basis: calc(100%/4);
+  }
+
+  .villager-icon {
+    width: 120px;
+  }
+
+  .nav-container {
+    max-width: 900px;
+  }
+
+  .villager-info {
+    width: 650px;
+    height: 598px;
+  }
+
+  .villager-info-text-box {
+    height: 239px;
+  }
+
+  .less-margin {
+    text-align: left;
+    line-height: 2.1rem;
+  }
+
+  .column-fifty {
+    flex-basis: 55%;
+  }
+
+  .column-forty-five {
+    flex-basis: 45%;
+  }
+
+  .column-ten-twelfths {
+    flex-basis: 85%;
+  }
+
+  #left-arrow,
+  #right-arrow {
+    display: none;
+  }
+
+  .hidden-text-box {
+    display: block;
   }
 }

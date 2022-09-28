@@ -36,17 +36,98 @@
     </nav>
   </header>
   <main>
+    <div class="hidden overlay"></div>
+    <div class="container align-items justify-center">
+      <div class="hidden villager-info">
+        <div class="row">
+          <a>
+            <i id="cancel" class="fa-solid fa-xmark"></i>
+          </a>
+        </div>
+        <div class="row image-card-container">
+          <div class="column-full">
+            <div id="info-photo-container" class="row justify-center">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div id="info-title-container" class="column-full center">
+            <h1 class="villager-info-title"></h1>
+          </div>
+        </div>
+        <div class="row space-evenly villager-info-text-box">
+          <div class="column-one-twelfth align-items">
+            <a>
+              <i id="left-arrow" class="hidden"></i>
+            </a>
+          </div>
+          <div class="box column-ten-twelfths center">
+            <div class="row">
+              <div class="column-forty-five">
+                <h2 id="species" class="less-margin">Species: <span id="species-card" class="blue"></span></h2>
+              </div>
+              <div class="column-fifty">
+                <h2 id="gender" class="less-margin">Gender: <span id="gender-card" class="brown"></span></h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-forty-five">
+                <h2 id="personality" class="less-margin">Personality: <span id="personality-card" class="blue">  </span> </h2>
+              </div>
+              <div class="column-fifty">
+                <h2 id="birthday" class="less-margin">Birthday: <span id="birthday-card" class="brown"></span></h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-forty-five">
+                <h2 id="hobby" class="less-margin hidden-text-box">Hobby: <span id="hobby-card" class="brown"></span></h2>
+              </div>
+              <div class="column-fifty">
+                <h2 id="catchphrase" class="less-margin hidden-text-box">Catchphrase: <span id="catchphrase-card" class="blue"></span></h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-full">
+                <h2 id="saying" class="less-margin hidden-text-box">Saying: <span id="saying-card" class="brown"></span> </h2>
+              </div>
+            </div>
+          </div>
+          <div class="column-one-twelfth align-items">
+            <a>
+              <i id="right-arrow" class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="margin-top">
       <div data-view="villager-view" id="villager-view">
-        <div class="pop-up-container pop-vertical row space-between" id="scroll-info">
-          <a class="column-one-twelfth">
-            <i class="fa-solid fa-xmark pop-x"></i>
-          </a>
+        <div class="container pop-section row justify-center">
           <div class="column-quarter">
-            <img src="images/NH-Icon-Nook_Phone-Map.webp" alt="Map icon" class="pop-icon">
+            <div class="pop-up-container pop-vertical row" id="scroll-info">
+              <a class="column-one-twelfth">
+                <i class="fa-solid fa-xmark pop-x"></i>
+              </a>
+              <div class="column-quarter">
+                <img src="images/NH-Icon-Nook_Phone-Map.webp" alt="Map icon" class="pop-icon">
+              </div>
+              <div class="column-half">
+                <h2 class="pop-text extra-margin">Scroll to find <br>villagers</h2>
+              </div>
+            </div>
           </div>
-          <div class="column-half">
-            <h2 class="pop-text">Scroll to find <br>villagers</h2>
+          <div class="column-quarter">
+            <div class="pop-up-container pop-vertical row" id="view-info">
+              <a class="column-one-twelfth">
+                <i class="fa-solid fa-xmark pop-x"></i>
+              </a>
+              <div class="column-quarter">
+                <img src="images/NH-Icon-Nook_Phone-Passport.webp" alt="Information icon" class="pop-icon">
+              </div>
+              <div class="column-half">
+                <h2 class="pop-text">Click a villager to view their information</h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,20 @@
 var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
 var $scrollPopUp = document.querySelector('#scroll-info');
+var $viewInfoPopUp = document.querySelector('#view-info');
+var $modalInformation = document.querySelector('.hidden.villager-info');
+var $overlay = document.querySelector('.hidden.overlay');
+var $infoPhotoContainer = document.querySelector('#info-photo-container');
+var $speciesHeading = document.querySelector('#species');
+var $genderHeading = document.querySelector('#gender');
+var $personalityHeading = document.querySelector('#personality');
+var $birthdayHeading = document.querySelector('#birthday');
+var $hobbyHeading = document.querySelector('#hobby');
+var $catchphraseHeading = document.querySelector('#catchphrase');
+var $sayingHeading = document.querySelector('#saying');
+var $leftArrow = document.querySelector('#left-arrow');
+var $rightArrow = document.querySelector('#right-arrow');
+
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
@@ -8,6 +22,16 @@ var speciesNumber = 0;
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $scrollPopUp.className = 'hidden';
+    var $hideScrollDiv = $scrollPopUp.closest('.column-quarter');
+    $hideScrollDiv.className = 'hidden';
+  }
+});
+
+$viewInfoPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $viewInfoPopUp.className = 'hidden';
+    var $hideViewInfoDiv = $viewInfoPopUp.closest('.column-quarter');
+    $hideViewInfoDiv.className = 'hidden';
   }
 });
 
@@ -69,6 +93,7 @@ function generateDomVillagersList() {
     }
 
     var $villagerColumn = document.createElement('div');
+    $villagerColumn.setAttribute('data-id', i);
     $villagerColumn.className = 'column-one-third center';
 
     var $anchorVillager = document.createElement('a');
@@ -115,4 +140,108 @@ function generateLink() {
   $topLink.className = 'top-link';
   $topLink.setAttribute('href', '#villager-view');
   return $topLink;
+}
+
+$villagerView.addEventListener('click', openModalWindow);
+
+function openModalWindow(event) {
+  if (event.target.className === 'villager-icon' || event.target.className === 'villager-name') {
+    var $modalPopUp = event.target.closest('div');
+    var villagerNumber = $modalPopUp.getAttribute('data-id');
+    var villagerInfo = villagerList[villagerNumber];
+    createInfoCard(villagerInfo);
+
+    $overlay.className = 'overlay';
+    $modalInformation.className = 'villager-info';
+    if (event.target.className === 'villager-icon') {
+      event.target.className = 'hidden villager-icon';
+    }
+  }
+}
+
+function createInfoCard(info) {
+  var $villagerInfoPhoto = document.createElement('img');
+  $villagerInfoPhoto.setAttribute('src', info.image_uri);
+  $villagerInfoPhoto.setAttribute('alt', 'Image of ' + info.name['name-USen']);
+  $villagerInfoPhoto.className = 'villager-info-photo';
+
+  $infoPhotoContainer.appendChild($villagerInfoPhoto);
+
+  var $titleInfo = document.querySelector('.villager-info-title');
+  $titleInfo.textContent = info.name['name-USen'];
+
+  var $speciesInfo = document.querySelector('#species-card');
+  $speciesInfo.textContent = info.species;
+
+  var $genderInfo = document.querySelector('#gender-card');
+  $genderInfo.textContent = info.gender;
+
+  var $personalityInfo = document.querySelector('#personality-card');
+  $personalityInfo.textContent = info.personality;
+
+  var $birthdayInfo = document.querySelector('#birthday-card');
+  var birthday = info.birthday.split('/');
+  var birthdayReverse = birthday.reverse();
+  $birthdayInfo.textContent = birthdayReverse.join('/');
+
+  var $hobbyInfo = document.querySelector('#hobby-card');
+  $hobbyInfo.textContent = info.hobby;
+
+  var $catchphraseInfo = document.querySelector('#catchphrase-card');
+  var capitalizeCatch = info['catch-phrase'];
+  var firstLetter = capitalizeCatch[0].toUpperCase();
+  var wordOutput = firstLetter + capitalizeCatch.slice(1);
+  $catchphraseInfo.textContent = '"' + wordOutput + '"';
+
+  var $sayingInfo = document.querySelector('#saying-card');
+  $sayingInfo.textContent = '"' + info.saying + '"';
+}
+
+$modalInformation.addEventListener('click', function () {
+  var modalId = event.target.getAttribute('id');
+  if (modalId === 'cancel') {
+    $overlay.className = 'hidden overlay';
+    $modalInformation.className = 'hidden villager-info';
+    var $imageDelete = document.querySelector('.villager-info-photo');
+    resetRightArrowTextContainer();
+    $imageDelete.remove();
+
+    var $unhidePhoto = document.querySelector('.villager-icon.hidden');
+    $unhidePhoto.className = 'villager-icon';
+  }
+
+  if (modalId === 'left-arrow') {
+    resetRightArrowTextContainer();
+  }
+
+  if (modalId === 'right-arrow') {
+    resetLeftArrowTextContainer();
+  }
+});
+
+function resetRightArrowTextContainer() {
+  $leftArrow.className = 'hidden';
+  $rightArrow.className = 'fa-solid fa-chevron-right arrow';
+
+  $speciesHeading.className = 'less-margin';
+  $genderHeading.className = 'less-margin';
+  $personalityHeading.className = 'less-margin';
+  $birthdayHeading.className = 'less-margin';
+
+  $hobbyHeading.className = 'less-margin hidden-text-box';
+  $catchphraseHeading.className = 'less-margin hidden-text-box';
+  $sayingHeading.className = 'less-margin hidden-text-box';
+}
+
+function resetLeftArrowTextContainer() {
+  $rightArrow.className = 'hidden';
+  $leftArrow.className = 'fa-solid fa-chevron-left arrow';
+  $speciesHeading.className = 'less-margin hidden-text-box';
+  $genderHeading.className = 'less-margin hidden-text-box';
+  $personalityHeading.className = 'less-margin hidden-text-box';
+  $birthdayHeading.className = 'less-margin hidden-text-box';
+
+  $hobbyHeading.className = 'less-margin';
+  $catchphraseHeading.className = 'less-margin';
+  $sayingHeading.className = 'less-margin';
 }
