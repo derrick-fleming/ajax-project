@@ -77,6 +77,7 @@ function generateDomVillagersList() {
     }
 
     var $villagerColumn = document.createElement('div');
+    $villagerColumn.setAttribute('data-id', i);
     $villagerColumn.className = 'column-one-third center';
 
     var $anchorVillager = document.createElement('a');
@@ -123,4 +124,15 @@ function generateLink() {
   $topLink.className = 'top-link';
   $topLink.setAttribute('href', '#villager-view');
   return $topLink;
+}
+
+$villagerView.addEventListener('click', openModalWindow);
+
+function openModalWindow(event) {
+  if (event.target.className === 'villager-icon' || event.target.className === 'villager-name') {
+    var $modalPopUp = event.target.closest('div');
+    var villagerNumber = $modalPopUp.getAttribute('data-id');
+    var villagerInfo = villagerList[villagerNumber];
+    return villagerInfo;
+  }
 }

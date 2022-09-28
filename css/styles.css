@@ -237,10 +237,6 @@ h2 {
   .villager-icon {
     width: 120px;
   }
-
-  .column-fifty {
-    flex-basis: 50%;
-  }
 }
 
 @media screen and (min-width: 768px) {
@@ -296,5 +292,9 @@ h2 {
   .less-margin {
     text-align: left;
     line-height: 2.3rem;
+  }
+
+  .column-fifty {
+    flex-basis: 50%;
   }
 }
