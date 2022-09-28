@@ -5,6 +5,13 @@ var $viewInfoPopUp = document.querySelector('#view-info');
 var $modalInformation = document.querySelector('.hidden.villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
 var $infoPhotoContainer = document.querySelector('#info-photo-container');
+var $speciesHeading = document.querySelector('#species');
+var $genderHeading = document.querySelector('#gender');
+var $personalityHeading = document.querySelector('#personality');
+var $birthdayHeading = document.querySelector('#birthday');
+var $hobbyHeading = document.querySelector('#hobby');
+var $catchphraseHeading = document.querySelector('#catchphrase');
+var $sayingHeading = document.querySelector('#saying');
 
 var speciesList = [];
 var villagerList = null;
@@ -185,8 +192,8 @@ function createInfoCard(info) {
 }
 
 $modalInformation.addEventListener('click', function () {
-  var cancelId = event.target.getAttribute('id');
-  if (cancelId === 'cancel') {
+  var modalId = event.target.getAttribute('id');
+  if (modalId === 'cancel') {
     $overlay.className = 'hidden overlay';
     $modalInformation.className = 'hidden villager-info';
     var $imageDelete = document.querySelector('.villager-info-photo');
@@ -194,5 +201,27 @@ $modalInformation.addEventListener('click', function () {
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
     $unhidePhoto.className = 'villager-icon';
+  }
+
+  if (modalId === 'left-arrow') {
+    $speciesHeading.className = 'less-margin';
+    $genderHeading.className = 'less-margin';
+    $personalityHeading.className = 'less-margin';
+    $birthdayHeading.className = 'less-margin';
+
+    $hobbyHeading.className = 'less-margin hidden';
+    $catchphraseHeading.className = 'less-margin hidden';
+    $sayingHeading.className = 'less-margin hidden';
+  }
+
+  if (modalId === 'right-arrow') {
+    $speciesHeading.className = 'less-margin hidden';
+    $genderHeading.className = 'less-margin hidden';
+    $personalityHeading.className = 'less-margin hidden';
+    $birthdayHeading.className = 'less-margin hidden';
+
+    $hobbyHeading.className = 'less-margin';
+    $catchphraseHeading.className = 'less-margin';
+    $sayingHeading.className = 'less-margin';
   }
 });
