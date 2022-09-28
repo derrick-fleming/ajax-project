@@ -161,7 +161,7 @@ function createInfoCard(info) {
 
   var $villagerInfoSpecies = document.createElement('span');
   $villagerInfoSpecies.className = 'blue';
-  $villagerInfoSpecies.textContnet = info.species;
+  $villagerInfoSpecies.textContent = info.species;
 
   var $speciesInfo = document.querySelector('#species-card');
   $speciesInfo.appendChild($villagerInfoSpecies);
