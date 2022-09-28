@@ -181,3 +181,7 @@ function createInfoCard(info) {
   var $sayingInfo = document.querySelector('#saying-card');
   $sayingInfo.textContent = '"' + info.saying + '"';
 }
+
+$modalInformation.addEventListener('click', function () {
+
+});
