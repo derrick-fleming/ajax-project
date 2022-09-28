@@ -7,6 +7,14 @@
   flex-basis: 50%;
 }
 
+.column-fifty {
+  flex-basis: 50%;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
 .column-one-seventh {
   flex-basis: calc(100%/7);
 }
@@ -56,6 +64,10 @@
 
 .space-end {
   justify-content: space-between;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
 }
 
 .justify-center {

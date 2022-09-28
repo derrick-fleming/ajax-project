@@ -22,6 +22,13 @@ a {
   cursor: pointer;
 }
 
+h2 {
+  font-family: "Varela Round", sans-serif;
+  font-size: 1.375rem;
+  color: #816f59;
+  font-weight: 400;
+}
+
 .nav-container {
   margin: 0 auto;
 }
@@ -169,8 +176,51 @@ a {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.villager-info-title {
+  text-align: center;
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  color: #816f59;
+  font-size: 2.375rem;
+  margin: 0.5rem 0;
+}
+
 .villager-info-text-box {
   background-color: #f8f2dd;
+  border-radius: 0 0 15px 15px;
+}
+
+.image-card-container {
+  margin-top: 1rem;
+}
+
+.villager-info-photo {
+  text-align: center;
+  border-radius: 5px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.less-margin {
+  margin: 0.4rem;
+}
+
+.box {
+  margin: 1.2rem 0;
+}
+
+.arrow {
+  font-size: 1.75rem;
+  color: #816f59a6;
+}
+
+.blue,
+.brown {
+  font-size: 1.375rem;
+  font-family: "Varela Round", sans-serif;
+}
+
+.blue {
+  color: #2ab5cf;
 }
 
 @media screen and (max-width: 523px) {
@@ -179,9 +229,17 @@ a {
   }
 }
 
+.column-fifty {
+  flex-basis: 100%;
+}
+
 @media screen and (min-width: 523px) {
   .villager-icon {
     width: 120px;
+  }
+
+  .column-fifty {
+    flex-basis: 50%;
   }
 }
 
@@ -229,4 +287,5 @@ a {
     float: left;
     padding-left: 0.5rem;
   }
+  .
 }
