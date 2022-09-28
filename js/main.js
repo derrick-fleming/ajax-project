@@ -12,6 +12,8 @@ var $birthdayHeading = document.querySelector('#birthday');
 var $hobbyHeading = document.querySelector('#hobby');
 var $catchphraseHeading = document.querySelector('#catchphrase');
 var $sayingHeading = document.querySelector('#saying');
+var $leftArrow = document.querySelector('#left-arrow');
+var $rightArrow = document.querySelector('#right-arrow');
 
 var speciesList = [];
 var villagerList = null;
@@ -204,6 +206,9 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if (modalId === 'left-arrow') {
+    $leftArrow.className = 'hidden';
+    $rightArrow.className = 'fa-solid fa-chevron-right arrow';
+
     $speciesHeading.className = 'less-margin';
     $genderHeading.className = 'less-margin';
     $personalityHeading.className = 'less-margin';
@@ -215,6 +220,9 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if (modalId === 'right-arrow') {
+
+    $rightArrow.className = 'hidden';
+    $leftArrow.className = 'fa-solid fa-chevron-left arrow';
     $speciesHeading.className = 'less-margin hidden';
     $genderHeading.className = 'less-margin hidden';
     $personalityHeading.className = 'less-margin hidden';
