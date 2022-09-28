@@ -170,4 +170,7 @@ function createInfoCard(info) {
   $villagerInfoGender.className = 'brown';
   $villagerInfoGender.textContent = info.gender;
 
+  var $genderInfo = document.querySelector('#gender-card');
+  $genderInfo.textContent = info.gender;
+
 }
