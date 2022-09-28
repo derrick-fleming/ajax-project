@@ -241,6 +241,10 @@ h2 {
   color: #4dc3b9;
 }
 
+.hidden-text-box {
+  display: none;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
@@ -331,5 +335,9 @@ h2 {
   #left-arrow,
   #right-arrow {
     display: none;
+  }
+
+  .hidden-text-box {
+    display: block;
   }
 }

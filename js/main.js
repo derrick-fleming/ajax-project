@@ -18,7 +18,6 @@ var $rightArrow = document.querySelector('#right-arrow');
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
-var rightVisible = true;
 
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
@@ -152,10 +151,6 @@ function openModalWindow(event) {
     var villagerInfo = villagerList[villagerNumber];
     createInfoCard(villagerInfo);
 
-    if (window.innerWidth >= 768) {
-      showAllHeadings();
-    }
-
     $overlay.className = 'overlay';
     $modalInformation.className = 'villager-info';
     if (event.target.className === 'villager-icon') {
@@ -225,7 +220,6 @@ $modalInformation.addEventListener('click', function () {
 });
 
 function resetRightArrowTextContainer() {
-  rightVisible = true;
   $leftArrow.className = 'hidden';
   $rightArrow.className = 'fa-solid fa-chevron-right arrow';
 
@@ -234,42 +228,18 @@ function resetRightArrowTextContainer() {
   $personalityHeading.className = 'less-margin';
   $birthdayHeading.className = 'less-margin';
 
-  $hobbyHeading.className = 'less-margin hidden';
-  $catchphraseHeading.className = 'less-margin hidden';
-  $sayingHeading.className = 'less-margin hidden';
+  $hobbyHeading.className = 'less-margin hidden-text-box';
+  $catchphraseHeading.className = 'less-margin hidden-text-box';
+  $sayingHeading.className = 'less-margin hidden-text-box';
 }
 
 function resetLeftArrowTextContainer() {
-  rightVisible = false;
   $rightArrow.className = 'hidden';
   $leftArrow.className = 'fa-solid fa-chevron-left arrow';
-  $speciesHeading.className = 'less-margin hidden';
-  $genderHeading.className = 'less-margin hidden';
-  $personalityHeading.className = 'less-margin hidden';
-  $birthdayHeading.className = 'less-margin hidden';
-
-  $hobbyHeading.className = 'less-margin';
-  $catchphraseHeading.className = 'less-margin';
-  $sayingHeading.className = 'less-margin';
-}
-
-window.addEventListener('resize', revealAllHeadings);
-
-function revealAllHeadings(event) {
-  if (window.innerWidth > 768) {
-    showAllHeadings();
-  } else if (rightVisible === false) {
-    resetLeftArrowTextContainer();
-  } else {
-    resetRightArrowTextContainer();
-  }
-}
-
-function showAllHeadings() {
-  $speciesHeading.className = 'less-margin';
-  $genderHeading.className = 'less-margin';
-  $personalityHeading.className = 'less-margin';
-  $birthdayHeading.className = 'less-margin';
+  $speciesHeading.className = 'less-margin hidden-text-box';
+  $genderHeading.className = 'less-margin hidden-text-box';
+  $personalityHeading.className = 'less-margin hidden-text-box';
+  $birthdayHeading.className = 'less-margin hidden-text-box';
 
   $hobbyHeading.className = 'less-margin';
   $catchphraseHeading.className = 'less-margin';
