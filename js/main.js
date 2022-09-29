@@ -55,7 +55,7 @@ $favoritesPopUp.addEventListener('click', function () {
 $homePopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $homePopUp.className = 'hidden';
-    var $hideHomeDiv = $homePopUp.closest('.column-half');
+    var $hideHomeDiv = $homePopUp.closest('.column-half.end');
     $hideHomeDiv.className = 'hidden';
   }
 });
@@ -71,7 +71,7 @@ $favScrollPopUp.addEventListener('click', function () {
 $favViewInfoPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $favViewInfoPopUp.className = 'hidden';
-    var $hidefavViewDiv = $favViewInfoPopUp.closest('.column-half');
+    var $hidefavViewDiv = $favViewInfoPopUp.closest('.column-half.end');
     $hidefavViewDiv.className = 'hidden';
   }
 });

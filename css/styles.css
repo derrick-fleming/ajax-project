@@ -29,6 +29,15 @@ h2 {
   font-weight: 400;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 2rem;
+}
+
 .nav-container {
   margin: 0 auto;
 }
@@ -269,6 +278,14 @@ h2 {
   margin: 2.5rem;
 }
 
+.favorite-image {
+  width: 256px;
+  height: 238px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin: 0 1.5rem 0 1rem;
+}
+
 #left-arrow:hover,
 #right-arrow:hover,
 #cancel:hover,
@@ -296,7 +313,8 @@ h2 {
 }
 
 .column-fifty,
-.column-forty-five {
+.column-forty-five,
+.column-one-third {
   flex-basis: 100%;
 }
 
@@ -344,10 +362,6 @@ h2 {
     max-width: 900px;
   }
 
-  .column-one-third {
-    flex-basis: calc(100%/4);
-  }
-
   .villager-icon {
     width: 120px;
   }
@@ -393,5 +407,17 @@ h2 {
 
   .padding-left {
     padding-left: 2rem;
+  }
+
+  .column-one-third {
+    flex-basis: 33%;
+  }
+
+  .favorite-image {
+    height: 256px;
+  }
+
+  .no-top-margin {
+    margin: 0 0 1rem;
   }
 }
