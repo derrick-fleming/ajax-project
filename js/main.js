@@ -427,6 +427,31 @@ function createFavoritesList(favorite) {
   $textContainer.appendChild($header);
   $li.appendChild($textContainer);
 
+  var $addEditContainer = document.createElement('div');
+  $addEditContainer.className = 'add-edit';
+
+  var $anchorElement = document.createElement('a');
+  $anchorElement.className = 'align-items';
+
+  var $pencilIconContainer = document.createElement('div');
+  $pencilIconContainer.className = 'pencil-icon-container align-items justify-center';
+
+  var $pencilImage = document.createElement('img');
+  $pencilImage.setAttribute('src', 'images/Pencil_NH_Icon.png');
+  $pencilImage.setAttribute('alt', 'Edit Icon');
+  $pencilImage.className = 'edit-icon';
+
+  var $addText = document.createElement('p');
+  $addText.className = 'light-weight no-margin';
+  $addText.textContent = 'Add/Edit Information';
+
+  $pencilIconContainer.appendChild($pencilImage);
+  $anchorElement.appendChild($pencilIconContainer);
+  $anchorElement.appendChild($addText);
+  $addEditContainer.appendChild($anchorElement);
+
+  $textContainer.appendChild($addEditContainer);
+
   $ul.appendChild($li);
 }
 
