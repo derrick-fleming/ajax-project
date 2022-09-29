@@ -174,6 +174,7 @@ function openModalWindow(event) {
       event.target.className = 'hidden villager-icon';
     }
   }
+  checkFavoriteVillager(villagerInfo);
 }
 
 function createInfoCard(info) {
@@ -303,4 +304,14 @@ function saveFavoriteVillager() {
 
   data.nextFavorite++;
   data.favoritesList.push(favoriteVillagerInformation);
+}
+
+function checkFavoriteVillager(info) {
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var checkFavorite = data.favoritesList[i];
+    if (info.name['name-USen'] === checkFavorite.villagerName) {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+      return;
+    }
+  }
 }
