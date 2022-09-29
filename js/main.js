@@ -323,12 +323,13 @@ var $navBar = document.querySelector('nav');
 $navBar.addEventListener('click', changeNavIconAndPage);
 
 function changeNavIconAndPage(event) {
-  if (event.target.className === 'fa-regular fa-heart nav-icon') {
+  var navCheck = event.target.className;
+  if (navCheck === 'fa-regular fa-heart nav-icon' || navCheck === 'nav-home favorites-page-link') {
     $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon';
     $homePageIcon.className = 'fa-solid fa-house nav-icon house-outline';
   }
 
-  if (event.target.className === 'fa-solid fa-house nav-icon house-outline') {
+  if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link') {
     $favoritesPageIcon.className = 'fa-regular fa-heart nav-icon';
     $homePageIcon.className = 'fa solid fa-house nav-icon';
   }
