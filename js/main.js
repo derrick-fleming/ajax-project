@@ -3,6 +3,9 @@ var $loadMoreLink = document.querySelector('.load-link');
 var $scrollPopUp = document.querySelector('#scroll-info');
 var $viewInfoPopUp = document.querySelector('#view-info');
 var $homePopUp = document.querySelector('#home-info');
+var $favScrollPopUp = document.querySelector('#scroll-fav-info');
+var $favViewInfoPopUp = document.querySelector('#view-fav-info');
+var $favFavoritesPopUp = document.querySelector('#favorite-fav-info');
 var $favoritesPopUp = document.querySelector('#favorite-info');
 var $modalInformation = document.querySelector('.hidden.villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
@@ -52,8 +55,32 @@ $favoritesPopUp.addEventListener('click', function () {
 $homePopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $homePopUp.className = 'hidden';
-    var $hideHomeDiv = $scrollPopUp.closest('.column-quarter');
+    var $hideHomeDiv = $homePopUp.closest('.column-half');
     $hideHomeDiv.className = 'hidden';
+  }
+});
+
+$favScrollPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favScrollPopUp.className = 'hidden';
+    var $hidefavScrollDiv = $favScrollPopUp.closest('.column-half');
+    $hidefavScrollDiv.className = 'hidden';
+  }
+});
+
+$favViewInfoPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favViewInfoPopUp.className = 'hidden';
+    var $hidefavViewDiv = $favViewInfoPopUp.closest('.column-half');
+    $hidefavViewDiv.className = 'hidden';
+  }
+});
+
+$favFavoritesPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favFavoritesPopUp.className = 'hidden';
+    var $hidefavFavoritesDiv = $favFavoritesPopUp.closest('.column-half');
+    $hidefavFavoritesDiv.className = 'hidden';
   }
 });
 
