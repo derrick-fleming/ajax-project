@@ -306,6 +306,10 @@ li {
   display: none;
 }
 
+.column-one-half {
+  flex-basis: 100%;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
@@ -361,6 +365,10 @@ li {
 }
 
 @media screen and (min-width: 768px) {
+  .column-one-half {
+    flex-basis: 50%;
+  }
+
   .container {
     max-width: 900px;
   }

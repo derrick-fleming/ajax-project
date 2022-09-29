@@ -417,7 +417,7 @@ function createFavoritesList(favorite) {
   $li.appendChild($imageContainer);
 
   var $textContainer = document.createElement('div');
-  $textContainer.className = 'column-half';
+  $textContainer.className = 'column-one-half';
   $textContainer.setAttribute('id', favorite.villagerName);
 
   var $header = document.createElement('h1');
