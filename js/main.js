@@ -25,6 +25,7 @@ var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon')
 var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
+var $defaultContainer = document.querySelector('.default-container');
 
 var $timeInterval = null;
 var countdown = 300;
@@ -356,6 +357,8 @@ function saveFavoriteVillager() {
   data.favoritesList.push(favoriteVillagerInformation);
 
   createFavoritesList(favoriteVillagerInformation);
+  $defaultContainer.className = 'hidden';
+
 }
 
 $navBar.addEventListener('click', changeNavIconAndPage);
@@ -404,10 +407,13 @@ function createFavoritesList(favorite) {
 }
 
 document.addEventListener('DOMContentLoaded', appendFavorites);
-
 function appendFavorites(event) {
   for (var i = 0; i < data.favoritesList.length; i++) {
     var favorite = data.favoritesList[i];
     createFavoritesList(favorite);
+  }
+
+  if (data.favoritesList.length > 0) {
+    $defaultContainer.className = 'hidden';
   }
 }
