@@ -25,14 +25,7 @@ var villagerList = null;
 var speciesNumber = 0;
 
 /*
-var favoriteVillagerInformation = {
-  villagerId: null,
-  villagerPicture: null,
-  villagerName: null,
-  islandStatus: null,
-  photoCollected: null,
-  notes: null
-};
+
 */
 
 $scrollPopUp.addEventListener('click', function () {
@@ -219,6 +212,7 @@ function createInfoCard(info) {
 
   var $sayingInfo = document.querySelector('#saying-card');
   $sayingInfo.textContent = '"' + info.saying + '"';
+
 }
 
 $modalInformation.addEventListener('click', function () {
@@ -245,6 +239,7 @@ $modalInformation.addEventListener('click', function () {
   if (modalId === 'favorite-icon') {
     $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
     $timeInterval = setInterval(displayText, 0);
+    saveFavoriteVillager();
   }
 });
 
@@ -284,4 +279,23 @@ function resetLeftArrowTextContainer() {
   $hobbyHeading.className = 'less-margin';
   $catchphraseHeading.className = 'less-margin';
   $sayingHeading.className = 'less-margin';
+}
+
+function saveFavoriteVillager() {
+  var $hiddenIcon = document.querySelector('.hidden.villager-icon');
+  var $saveFavoriteContainer = $hiddenIcon.closest('div');
+  var getDataInfo = $saveFavoriteContainer.getAttribute('data-id');
+  var villagerData = villagerList[getDataInfo];
+  var favoriteVillagerInformation = {
+    favoriteOrder: data.nextFavorite,
+    villagerId: getDataInfo,
+    villagerPicture: villagerData.image_uri,
+    villagerName: villagerData.name['name-USen'],
+    islandStatus: null,
+    photoCollected: null,
+    notes: null
+  };
+
+  data.nextFavorite++;
+  data.favoritesList.push(favoriteVillagerInformation);
 }
