@@ -237,7 +237,8 @@ h2 {
   color: #816f59a6;
 }
 
-#left-arrow {
+#left-arrow,
+.padding-left {
   padding-left: 0.5rem;
 }
 
@@ -365,5 +366,9 @@ h2 {
 
   .hidden-text-box {
     display: block;
+  }
+
+  .padding-left {
+    padding-left: 2rem;
   }
 }
