@@ -35,7 +35,8 @@ ul {
 }
 
 li {
-  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+  margin-bottom: 3rem;
 }
 
 .nav-container {
@@ -306,7 +307,8 @@ li {
   display: none;
 }
 
-.column-one-half {
+.column-one-half,
+.column-third {
   flex-basis: 100%;
 }
 
@@ -321,10 +323,6 @@ li {
   flex-basis: 100%;
 }
 
-.column-third {
-  flex-basis: 100%;
-}
-
 @media screen and (min-width: 523px) {
   .villager-icon {
     width: 120px;
@@ -332,6 +330,14 @@ li {
 }
 
 @media screen and (min-width: 720px) {
+  .column-third {
+    flex-basis: 33%;
+  }
+
+  .column-one-half {
+    flex-basis: 50%;
+  }
+
   .pop-up-container {
     width: 216px;
     height: 186px;
@@ -365,10 +371,6 @@ li {
 }
 
 @media screen and (min-width: 768px) {
-  .column-one-half {
-    flex-basis: 50%;
-  }
-
   .container {
     max-width: 900px;
   }
@@ -397,10 +399,6 @@ li {
 
   .column-one-third {
     flex-basis: 25%;
-  }
-
-  li > .column-one-third {
-    flex-basis: 33%;
   }
 
   .column-fifty {
