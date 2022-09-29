@@ -313,8 +313,7 @@ li {
 }
 
 .column-fifty,
-.column-forty-five,
-.column-one-third {
+.column-forty-five, {
   flex-basis: 100%;
 }
 
@@ -384,6 +383,10 @@ li {
     line-height: 2.1rem;
   }
 
+  .column-one-third {
+    flex-basis: 25%;
+  }
+
   .column-fifty {
     flex-basis: 55%;
   }
@@ -407,10 +410,6 @@ li {
 
   .padding-left {
     padding-left: 2rem;
-  }
-
-  .column-one-third {
-    flex-basis: 33%;
   }
 
   .favorite-image {

@@ -21,6 +21,11 @@ var $leftArrow = document.querySelector('#left-arrow');
 var $rightArrow = document.querySelector('#right-arrow');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
+var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon');
+var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
+var $navBar = document.querySelector('nav');
+var $ul = document.querySelector('ul');
+
 var $timeInterval = null;
 var countdown = 300;
 
@@ -83,6 +88,16 @@ $favFavoritesPopUp.addEventListener('click', function () {
     $hidefavFavoritesDiv.className = 'hidden';
   }
 });
+
+function checkFavoriteVillager(info) {
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var checkFavorite = data.favoritesList[i];
+    if (info.name['name-USen'] === checkFavorite.villagerName) {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+      return;
+    }
+  }
+}
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -192,7 +207,6 @@ function generateLink() {
 }
 
 $villagerView.addEventListener('click', openModalWindow);
-
 function openModalWindow(event) {
   if (event.target.className !== 'villager-icon') {
     return;
@@ -340,21 +354,9 @@ function saveFavoriteVillager() {
 
   data.nextFavorite++;
   data.favoritesList.push(favoriteVillagerInformation);
-}
 
-function checkFavoriteVillager(info) {
-  for (var i = 0; i < data.favoritesList.length; i++) {
-    var checkFavorite = data.favoritesList[i];
-    if (info.name['name-USen'] === checkFavorite.villagerName) {
-      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      return;
-    }
-  }
+  createFavoritesList(favoriteVillagerInformation);
 }
-
-var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon');
-var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
-var $navBar = document.querySelector('nav');
 
 $navBar.addEventListener('click', changeNavIconAndPage);
 
@@ -368,5 +370,44 @@ function changeNavIconAndPage(event) {
   if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link') {
     $favoritesPageIcon.className = 'fa-regular fa-heart nav-icon';
     $homePageIcon.className = 'fa solid fa-house nav-icon';
+  }
+}
+
+function createFavoritesList(favorite) {
+  var $li = document.createElement('li');
+  $li.className = 'row wrap';
+  $li.setAttribute('id', favorite.favoriteOrder);
+
+  var $imageContainer = document.createElement('div');
+  $imageContainer.className = 'column-one-third';
+
+  var $favoriteVillagerImage = document.createElement('img');
+  $favoriteVillagerImage.className = 'favorite-image';
+  $favoriteVillagerImage.setAttribute('alt', favorite.villagerName + ' Photo');
+  $favoriteVillagerImage.setAttribute('src', favorite.villagerPicture);
+
+  $imageContainer.appendChild($favoriteVillagerImage);
+  $li.appendChild($imageContainer);
+
+  var $textContainer = document.createElement('div');
+  $textContainer.className = 'column-half';
+  $textContainer.setAttribute('id', favorite.villagerName);
+
+  var $header = document.createElement('h1');
+  $header.className = 'favorites-header no-top-margin';
+  $header.textContent = favorite.villagerName;
+
+  $textContainer.appendChild($header);
+  $li.appendChild($textContainer);
+
+  $ul.appendChild($li);
+}
+
+document.addEventListener('DOMContentLoaded', appendFavorites);
+
+function appendFavorites(event) {
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var favorite = data.favoritesList[i];
+    createFavoritesList(favorite);
   }
 }
