@@ -119,7 +119,7 @@
       </div>
     </div>
     <div class="margin-top">
-      <div data-view="villager-view" id="villager-view">
+      <div data-view="villager-view" id="villager-view" class="hidden">
         <div class="container pop-section row justify-center">
           <div class="column-quarter">
             <div class="pop-up-container pop-vertical row" id="scroll-info">
@@ -162,10 +162,14 @@
           </div>
         </div>
       </div>
-      <div data-view="villager-view" class="container">
+      <div data-view="villager-view" class="container hidden">
         <a class="load-link"> Load More </a>
       </div>
-      <div data-view="favorites-view"></div>
+      <div data-view="favorites-view">
+        <div class="container">
+          <h1 class="favorites-header">Favorites</h1>
+        </div>
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>
