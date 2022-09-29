@@ -26,12 +26,20 @@
         <h3 class="nav-header">MyVillagers</h3>
       </div>
       <div class="column-quarter end">
-        <a href="#villager-view">
-          <i class="fa-solid fa-house nav-icon"></i>
+        <a href="#favorites-view">
+          <i class="fa-regular fa-heart nav-icon"></i>
         </a>
-        <a href="#villager-view">
-          <h3 class="nav-home"> Home </h3>
+        <a href="#favorites-view">
+          <h3 class="nav-home"> Favorites </h3>
         </a>
+        <div class="margin-left column-quarter end">
+          <a href="#villager-view">
+            <i class="fa-solid fa-house nav-icon"></i>
+          </a>
+          <a href="#villager-view">
+            <h3 class="nav-home"> Home </h3>
+          </a>
+        </div>
       </div>
     </nav>
   </header>
@@ -154,7 +162,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div data-view="villager-view" class="container">
         <a class="load-link"> Load More </a>
       </div>
     </div>
