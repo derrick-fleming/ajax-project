@@ -18,7 +18,7 @@ var $rightArrow = document.querySelector('#right-arrow');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
 var $timeInterval = null;
-var countdown = 500;
+var countdown = 250;
 
 var speciesList = [];
 var villagerList = null;
@@ -167,6 +167,7 @@ function openModalWindow(event) {
     var villagerNumber = $modalPopUp.getAttribute('data-id');
     var villagerInfo = villagerList[villagerNumber];
     createInfoCard(villagerInfo);
+    $addedFavorites.className = 'added-favorites hidden';
 
     $overlay.className = 'overlay';
     $modalInformation.className = 'villager-info';
@@ -224,7 +225,7 @@ $modalInformation.addEventListener('click', function () {
     var $imageDelete = document.querySelector('.villager-info-photo');
     resetRightArrowTextContainer();
     $imageDelete.remove();
-    countdown = 500;
+    countdown = 250;
     $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
