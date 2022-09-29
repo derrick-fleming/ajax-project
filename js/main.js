@@ -165,8 +165,6 @@ function openModalWindow(event) {
   var villagerNumber = $modalPopUp.getAttribute('data-id');
   var villagerInfo = villagerList[villagerNumber];
   createInfoCard(villagerInfo);
-  clearInterval($timeInterval);
-  $addedFavorites.className = 'added-favorites hidden';
 
   $overlay.className = 'overlay';
   $modalInformation.className = 'villager-info';
@@ -225,6 +223,8 @@ $modalInformation.addEventListener('click', function () {
     $imageDelete.remove();
     countdown = 300;
     $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
+    clearInterval($timeInterval);
+    $addedFavorites.className = 'added-favorites hidden';
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
     $unhidePhoto.className = 'villager-icon';
