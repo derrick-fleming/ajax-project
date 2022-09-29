@@ -26,6 +26,8 @@ var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
 var $defaultContainer = document.querySelector('.default-container');
+var $villagerViewLinks = document.querySelector('#villager-view-links');
+var $favoritesList = document.querySelector('#favorites-list');
 
 var $timeInterval = null;
 var countdown = 300;
@@ -368,11 +370,18 @@ function changeNavIconAndPage(event) {
   if (navCheck === 'fa-regular fa-heart nav-icon' || navCheck === 'nav-home favorites-page-link') {
     $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon';
     $homePageIcon.className = 'fa-solid fa-house nav-icon house-outline';
+    $villagerView.className = 'hidden';
+    $villagerViewLinks.className = 'hidden';
+    $favoritesList.className = '';
+
   }
 
   if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link') {
     $favoritesPageIcon.className = 'fa-regular fa-heart nav-icon';
     $homePageIcon.className = 'fa solid fa-house nav-icon';
+    $villagerView.className = '';
+    $villagerViewLinks.className = 'container';
+    $favoritesList.className = 'hidden';
   }
 }
 
