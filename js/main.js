@@ -406,7 +406,7 @@ function createFavoritesList(favorite) {
   $li.setAttribute('id', favorite.favoriteOrder);
 
   var $imageContainer = document.createElement('div');
-  $imageContainer.className = 'column-third';
+  $imageContainer.className = 'column-third row justify-center';
 
   var $favoriteVillagerImage = document.createElement('img');
   $favoriteVillagerImage.className = 'favorite-image';
