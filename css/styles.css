@@ -317,6 +317,10 @@ li {
   flex-basis: 100%;
 }
 
+.column-third {
+  flex-basis: 100%;
+}
+
 @media screen and (min-width: 523px) {
   .villager-icon {
     width: 120px;
@@ -385,6 +389,10 @@ li {
 
   .column-one-third {
     flex-basis: 25%;
+  }
+
+  li > .column-one-third {
+    flex-basis: 33%;
   }
 
   .column-fifty {
