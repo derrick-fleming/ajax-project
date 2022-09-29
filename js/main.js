@@ -2,6 +2,7 @@ var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
 var $scrollPopUp = document.querySelector('#scroll-info');
 var $viewInfoPopUp = document.querySelector('#view-info');
+var $favoritesPopUp = document.querySelector('#favorite-info');
 var $modalInformation = document.querySelector('.hidden.villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
 var $infoPhotoContainer = document.querySelector('#info-photo-container');
@@ -14,6 +15,10 @@ var $catchphraseHeading = document.querySelector('#catchphrase');
 var $sayingHeading = document.querySelector('#saying');
 var $leftArrow = document.querySelector('#left-arrow');
 var $rightArrow = document.querySelector('#right-arrow');
+var $emptyHeartIcon = document.querySelector('#favorite-icon');
+var $addedFavorites = document.querySelector('.added-favorites.hidden');
+var $timeInterval = null;
+var countdown = 300;
 
 var speciesList = [];
 var villagerList = null;
@@ -32,6 +37,14 @@ $viewInfoPopUp.addEventListener('click', function () {
     $viewInfoPopUp.className = 'hidden';
     var $hideViewInfoDiv = $viewInfoPopUp.closest('.column-quarter');
     $hideViewInfoDiv.className = 'hidden';
+  }
+});
+
+$favoritesPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favoritesPopUp.className = 'hidden';
+    var $hideFavoritesDiv = $favoritesPopUp.closest('.column-quarter');
+    $hideFavoritesDiv.className = 'hidden';
   }
 });
 
@@ -145,18 +158,20 @@ function generateLink() {
 $villagerView.addEventListener('click', openModalWindow);
 
 function openModalWindow(event) {
-  if (event.target.className === 'villager-icon' || event.target.className === 'villager-name') {
-    var $modalPopUp = event.target.closest('div');
-    var villagerNumber = $modalPopUp.getAttribute('data-id');
-    var villagerInfo = villagerList[villagerNumber];
-    createInfoCard(villagerInfo);
-
-    $overlay.className = 'overlay';
-    $modalInformation.className = 'villager-info';
-    if (event.target.className === 'villager-icon') {
-      event.target.className = 'hidden villager-icon';
-    }
+  if (event.target.className !== 'villager-icon') {
+    return;
   }
+  var $modalPopUp = event.target.closest('div');
+  var villagerNumber = $modalPopUp.getAttribute('data-id');
+  var villagerInfo = villagerList[villagerNumber];
+  createInfoCard(villagerInfo);
+
+  $overlay.className = 'overlay';
+  $modalInformation.className = 'villager-info';
+  if (event.target.className === 'villager-icon') {
+    event.target.className = 'hidden villager-icon';
+  }
+  checkFavoriteVillager(villagerInfo);
 }
 
 function createInfoCard(info) {
@@ -195,6 +210,7 @@ function createInfoCard(info) {
 
   var $sayingInfo = document.querySelector('#saying-card');
   $sayingInfo.textContent = '"' + info.saying + '"';
+
 }
 
 $modalInformation.addEventListener('click', function () {
@@ -205,6 +221,10 @@ $modalInformation.addEventListener('click', function () {
     var $imageDelete = document.querySelector('.villager-info-photo');
     resetRightArrowTextContainer();
     $imageDelete.remove();
+    countdown = 300;
+    $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
+    clearInterval($timeInterval);
+    $addedFavorites.className = 'added-favorites hidden';
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
     $unhidePhoto.className = 'villager-icon';
@@ -217,7 +237,27 @@ $modalInformation.addEventListener('click', function () {
   if (modalId === 'right-arrow') {
     resetLeftArrowTextContainer();
   }
+
+  if (modalId === 'favorite-icon') {
+    if ($emptyHeartIcon.className === 'fa-regular fa-heart empty-heart') {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+      $timeInterval = setInterval(displayText, 0);
+      saveFavoriteVillager();
+    }
+
+  }
 });
+
+function displayText(interval) {
+  countdown--;
+
+  $addedFavorites.className = 'added-favorites';
+
+  if (countdown < 1) {
+    clearInterval($timeInterval);
+    $addedFavorites.className = 'added-favorites hidden';
+  }
+}
 
 function resetRightArrowTextContainer() {
   $leftArrow.className = 'hidden';
@@ -244,4 +284,34 @@ function resetLeftArrowTextContainer() {
   $hobbyHeading.className = 'less-margin';
   $catchphraseHeading.className = 'less-margin';
   $sayingHeading.className = 'less-margin';
+}
+
+function saveFavoriteVillager() {
+  var $hiddenIcon = document.querySelector('.hidden.villager-icon');
+  var $saveFavoriteContainer = $hiddenIcon.closest('div');
+  var getDataInfo = $saveFavoriteContainer.getAttribute('data-id');
+  var villagerData = villagerList[getDataInfo];
+
+  var favoriteVillagerInformation = {
+    favoriteOrder: data.nextFavorite,
+    villagerId: getDataInfo,
+    villagerPicture: villagerData.image_uri,
+    villagerName: villagerData.name['name-USen'],
+    islandStatus: null,
+    photoCollected: null,
+    notes: null
+  };
+
+  data.nextFavorite++;
+  data.favoritesList.push(favoriteVillagerInformation);
+}
+
+function checkFavoriteVillager(info) {
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var checkFavorite = data.favoritesList[i];
+    if (info.name['name-USen'] === checkFavorite.villagerName) {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+      return;
+    }
+  }
 }
