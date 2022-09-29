@@ -24,10 +24,6 @@ var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
 
-/*
-
-*/
-
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
     $scrollPopUp.className = 'hidden';
@@ -295,6 +291,7 @@ function saveFavoriteVillager() {
   var $saveFavoriteContainer = $hiddenIcon.closest('div');
   var getDataInfo = $saveFavoriteContainer.getAttribute('data-id');
   var villagerData = villagerList[getDataInfo];
+
   var favoriteVillagerInformation = {
     favoriteOrder: data.nextFavorite,
     villagerId: getDataInfo,
