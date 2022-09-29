@@ -237,9 +237,12 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if (modalId === 'favorite-icon') {
-    $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-    $timeInterval = setInterval(displayText, 0);
-    saveFavoriteVillager();
+    if ($emptyHeartIcon.className === 'fa-regular fa-heart empty-heart') {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+      $timeInterval = setInterval(displayText, 0);
+      saveFavoriteVillager();
+    }
+
   }
 });
 
