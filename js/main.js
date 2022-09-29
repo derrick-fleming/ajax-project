@@ -18,7 +18,7 @@ var $rightArrow = document.querySelector('#right-arrow');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
 var $timeInterval = null;
-var countdown = 250;
+var countdown = 300;
 
 var speciesList = [];
 var villagerList = null;
@@ -162,18 +162,20 @@ function generateLink() {
 $villagerView.addEventListener('click', openModalWindow);
 
 function openModalWindow(event) {
-  if (event.target.className === 'villager-icon' || event.target.className === 'villager-name') {
-    var $modalPopUp = event.target.closest('div');
-    var villagerNumber = $modalPopUp.getAttribute('data-id');
-    var villagerInfo = villagerList[villagerNumber];
-    createInfoCard(villagerInfo);
-    $addedFavorites.className = 'added-favorites hidden';
+  if (event.target.className !== 'villager-icon') {
+    return;
+  }
+  var $modalPopUp = event.target.closest('div');
+  var villagerNumber = $modalPopUp.getAttribute('data-id');
+  var villagerInfo = villagerList[villagerNumber];
+  createInfoCard(villagerInfo);
+  clearInterval($timeInterval);
+  $addedFavorites.className = 'added-favorites hidden';
 
-    $overlay.className = 'overlay';
-    $modalInformation.className = 'villager-info';
-    if (event.target.className === 'villager-icon') {
-      event.target.className = 'hidden villager-icon';
-    }
+  $overlay.className = 'overlay';
+  $modalInformation.className = 'villager-info';
+  if (event.target.className === 'villager-icon') {
+    event.target.className = 'hidden villager-icon';
   }
   checkFavoriteVillager(villagerInfo);
 }
@@ -225,7 +227,7 @@ $modalInformation.addEventListener('click', function () {
     var $imageDelete = document.querySelector('.villager-info-photo');
     resetRightArrowTextContainer();
     $imageDelete.remove();
-    countdown = 250;
+    countdown = 300;
     $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
