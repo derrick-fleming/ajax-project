@@ -223,6 +223,8 @@ $modalInformation.addEventListener('click', function () {
     var $imageDelete = document.querySelector('.villager-info-photo');
     resetRightArrowTextContainer();
     $imageDelete.remove();
+    countdown = 500;
+    $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
     $unhidePhoto.className = 'villager-icon';
