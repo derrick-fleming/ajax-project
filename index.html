@@ -26,12 +26,20 @@
         <h3 class="nav-header">MyVillagers</h3>
       </div>
       <div class="column-quarter end">
-        <a href="#villager-view">
-          <i class="fa-solid fa-house nav-icon"></i>
+        <a href="#favorites-list">
+          <i class="fa-regular fa-heart nav-icon"></i>
         </a>
-        <a href="#villager-view">
-          <h3 class="nav-home"> Home </h3>
+        <a href="#favorites-list">
+          <h3 class="nav-home favorites-page-link"> Favorites </h3>
         </a>
+        <div class="padding-left column-quarter end">
+          <a href="#villager-view">
+            <i class="fa-solid fa-house nav-icon"></i>
+          </a>
+          <a href="#villager-view">
+            <h3 class="nav-home home-page-link"> Home </h3>
+          </a>
+        </div>
       </div>
     </nav>
   </header>
@@ -111,7 +119,7 @@
       </div>
     </div>
     <div class="margin-top">
-      <div data-view="villager-view" id="villager-view">
+      <div data-view="villager-view" id="villager-view" class="">
         <div class="container pop-section row justify-center">
           <div class="column-quarter">
             <div class="pop-up-container pop-vertical row" id="scroll-info">
@@ -154,8 +162,74 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div id="villager-view-links" class="container ">
         <a class="load-link"> Load More </a>
+      </div>
+      <div data-view="favorites-view" id="favorites-list" class="hidden">
+        <div class="container">
+          <h1 class="favorites-header">Favorites</h1>
+          <div class="default-container">
+            <h3 class="unliked-text">No villagers have been liked.</h3>
+            <div class="container row justify-center">
+              <div class="column-half end">
+                <div class="pop-up-container pop-vertical row" id="home-info">
+                  <a class="column-one-twelfth">
+                    <i class="fa-solid fa-xmark pop-x"></i>
+                  </a>
+                  <div class="column-quarter">
+                    <img src="images/NH-play-houseicon.png" alt="House icon" class="pop-home-icon">
+                  </div>
+                  <div class="column-half">
+                    <h2 class="pop-text">Click &quot;Home&quot; to view villagers</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="column-half">
+                <div class="pop-up-container pop-vertical row" id="scroll-fav-info">
+                  <a class="column-one-twelfth">
+                    <i class="fa-solid fa-xmark pop-x"></i>
+                  </a>
+                  <div class="column-quarter">
+                    <img src="images/NH-Icon-Nook_Phone-Map.webp" alt="Map icon" class="pop-icon">
+                  </div>
+                  <div class="column-half">
+                    <h2 class="pop-text extra-margin">Scroll to find <br>villagers</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="column-half end">
+                <div class="pop-up-container pop-vertical row" id="view-fav-info">
+                  <a class="column-one-twelfth">
+                    <i class="fa-solid fa-xmark pop-x"></i>
+                  </a>
+                  <div class="column-quarter">
+                    <img src="images/NH-Icon-Nook_Phone-Passport.webp" alt="Information icon" class="pop-icon">
+                  </div>
+                  <div class="column-half">
+                    <h2 class="pop-text">Click a villager to view their information</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="column-half">
+                <div class="pop-up-container pop-vertical row" id="favorite-fav-info">
+                  <a class="column-one-twelfth">
+                    <i class="fa-solid fa-xmark pop-x"></i>
+                  </a>
+                  <div class="column-quarter">
+                    <img src="images/NH-Icon-Nook_Phone-Best_Friend_list.webp" alt="Favorite icon" class="pop-icon">
+                  </div>
+                  <div class="column-half">
+                    <h2 class="pop-text">Add villagers to your favorites list</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="favorites-entries">
+            <ul>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </main>

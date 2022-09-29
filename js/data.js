@@ -1,7 +1,7 @@
 /* exported data */
 
 var data = {
-  view: 'favorities-entry',
+  view: 'villager-list',
   favoritesList: [],
   editing: null,
   nextFavorite: 1

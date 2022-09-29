@@ -29,6 +29,16 @@ h2 {
   font-weight: 400;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding-left: 0.5rem;
+  margin-bottom: 3rem;
+}
+
 .nav-container {
   margin: 0 auto;
 }
@@ -39,11 +49,7 @@ h2 {
 
 .leaf-icon {
   width: 50px;
-}
-
-.nav-header {
-  font-size: 1.5rem;
-  margin: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .nav-home {
@@ -56,6 +62,11 @@ h2 {
   font-size: 1.75rem;
   color: #4dc3b9ad;
   margin-top: 0.5rem;
+}
+
+.house-outline {
+  -webkit-text-stroke: 2.5px #4dc3b9ad;
+  color: white;
 }
 
 .pop-section {
@@ -86,6 +97,11 @@ h2 {
   margin: 0.5rem;
 }
 
+.pop-home-icon {
+  width: 75px;
+  margin: 1rem 0.5rem 0.5rem;
+}
+
 .margin-top {
   margin-top: 6rem;
 }
@@ -100,14 +116,16 @@ h2 {
 }
 
 .pop-text {
-  margin-top: 1.5rem;
+  margin-top: 1.3rem;
+  line-height: 1.5rem;
 }
 
 .extra-margin {
   margin-top: 2rem;
 }
 
-.species-header {
+.species-header,
+.favorites-header {
   font-family: "Varela Round", sans-serif;
   font-weight: 400;
   font-size: 1.75rem;
@@ -237,7 +255,8 @@ h2 {
   color: #816f59a6;
 }
 
-#left-arrow {
+#left-arrow,
+.padding-left {
   padding-left: 0.5rem;
 }
 
@@ -249,6 +268,23 @@ h2 {
 
 .blue {
   color: #2ab5cf;
+}
+
+.unliked-text {
+  color: #575757;
+  font-size: 1.5rem;
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  margin: 2.5rem;
+}
+
+.favorite-image {
+  width: 256px;
+  height: 238px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin: 0 1.5rem 0 1rem;
 }
 
 #left-arrow:hover,
@@ -271,6 +307,11 @@ h2 {
   display: none;
 }
 
+.column-one-half,
+.column-third {
+  flex-basis: 100%;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
@@ -278,7 +319,7 @@ h2 {
 }
 
 .column-fifty,
-.column-forty-five {
+.column-forty-five, {
   flex-basis: 100%;
 }
 
@@ -289,9 +330,18 @@ h2 {
 }
 
 @media screen and (min-width: 720px) {
+  .column-third {
+    flex-basis: 33%;
+  }
+
+  .column-one-half {
+    flex-basis: 50%;
+  }
+
   .pop-up-container {
     width: 216px;
     height: 186px;
+    margin-bottom: 2rem;
   }
 
   .pop-vertical {
@@ -299,13 +349,13 @@ h2 {
     flex-wrap: nowrap;
   }
 
-  .pop-text,
   .pop-icon {
-    margin-top: -0.25rem;
+    margin-top: -1rem;
+    width: 100px;
   }
 
-  .pop-icon {
-    width: 100px;
+  .pop-text {
+    margin-top: -0.5rem;
   }
 
   .pop-x {
@@ -313,15 +363,24 @@ h2 {
     padding-left: 0.5rem;
     font-size: 1.75rem;
   }
+
+  .pop-home-icon {
+    width: 85px;
+    margin: 0 0 1.5rem;
+  }
+
+  .favorite-image {
+    height: 256px;
+  }
+
+  .no-top-margin {
+    margin: 0 0 1rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
-  }
-
-  .column-one-third {
-    flex-basis: calc(100%/4);
   }
 
   .villager-icon {
@@ -346,6 +405,10 @@ h2 {
     line-height: 2.1rem;
   }
 
+  .column-one-third {
+    flex-basis: 25%;
+  }
+
   .column-fifty {
     flex-basis: 55%;
   }
@@ -365,5 +428,9 @@ h2 {
 
   .hidden-text-box {
     display: block;
+  }
+
+  .padding-left {
+    padding-left: 2rem;
   }
 }

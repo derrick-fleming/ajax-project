@@ -2,6 +2,10 @@ var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
 var $scrollPopUp = document.querySelector('#scroll-info');
 var $viewInfoPopUp = document.querySelector('#view-info');
+var $homePopUp = document.querySelector('#home-info');
+var $favScrollPopUp = document.querySelector('#scroll-fav-info');
+var $favViewInfoPopUp = document.querySelector('#view-fav-info');
+var $favFavoritesPopUp = document.querySelector('#favorite-fav-info');
 var $favoritesPopUp = document.querySelector('#favorite-info');
 var $modalInformation = document.querySelector('.hidden.villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
@@ -17,6 +21,14 @@ var $leftArrow = document.querySelector('#left-arrow');
 var $rightArrow = document.querySelector('#right-arrow');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
+var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon');
+var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
+var $navBar = document.querySelector('nav');
+var $ul = document.querySelector('ul');
+var $defaultContainer = document.querySelector('.default-container');
+var $villagerViewLinks = document.querySelector('#villager-view-links');
+var $favoritesList = document.querySelector('#favorites-list');
+
 var $timeInterval = null;
 var countdown = 300;
 
@@ -47,6 +59,48 @@ $favoritesPopUp.addEventListener('click', function () {
     $hideFavoritesDiv.className = 'hidden';
   }
 });
+
+$homePopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $homePopUp.className = 'hidden';
+    var $hideHomeDiv = $homePopUp.closest('.column-half.end');
+    $hideHomeDiv.className = 'hidden';
+  }
+});
+
+$favScrollPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favScrollPopUp.className = 'hidden';
+    var $hidefavScrollDiv = $favScrollPopUp.closest('.column-half');
+    $hidefavScrollDiv.className = 'hidden';
+  }
+});
+
+$favViewInfoPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favViewInfoPopUp.className = 'hidden';
+    var $hidefavViewDiv = $favViewInfoPopUp.closest('.column-half.end');
+    $hidefavViewDiv.className = 'hidden';
+  }
+});
+
+$favFavoritesPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favFavoritesPopUp.className = 'hidden';
+    var $hidefavFavoritesDiv = $favFavoritesPopUp.closest('.column-half');
+    $hidefavFavoritesDiv.className = 'hidden';
+  }
+});
+
+function checkFavoriteVillager(info) {
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var checkFavorite = data.favoritesList[i];
+    if (info.name['name-USen'] === checkFavorite.villagerName) {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+      return;
+    }
+  }
+}
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -156,7 +210,6 @@ function generateLink() {
 }
 
 $villagerView.addEventListener('click', openModalWindow);
-
 function openModalWindow(event) {
   if (event.target.className !== 'villager-icon') {
     return;
@@ -304,14 +357,87 @@ function saveFavoriteVillager() {
 
   data.nextFavorite++;
   data.favoritesList.push(favoriteVillagerInformation);
+
+  createFavoritesList(favoriteVillagerInformation);
+  $defaultContainer.className = 'hidden';
+
 }
 
-function checkFavoriteVillager(info) {
+$navBar.addEventListener('click', changeNavIconAndPage);
+
+function changeNavIconAndPage(event) {
+  var navCheck = event.target.className;
+  if (navCheck === 'fa-regular fa-heart nav-icon' || navCheck === 'nav-home favorites-page-link') {
+    data.view = 'favorites-list';
+    switchToFavoritesView();
+  }
+
+  if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link') {
+    data.view = 'villager-view';
+    switchToHomeView();
+  }
+}
+
+function switchToFavoritesView() {
+  $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon';
+  $homePageIcon.className = 'fa-solid fa-house nav-icon house-outline';
+  $villagerView.className = 'hidden';
+  $villagerViewLinks.className = 'hidden';
+  $favoritesList.className = '';
+}
+
+function switchToHomeView() {
+  $favoritesPageIcon.className = 'fa-regular fa-heart nav-icon';
+  $homePageIcon.className = 'fa solid fa-house nav-icon';
+  $villagerView.className = '';
+  $villagerViewLinks.className = 'container';
+  $favoritesList.className = 'hidden';
+}
+
+if (data.view === 'villager-view') {
+  switchToHomeView();
+} else {
+  switchToFavoritesView();
+}
+
+function createFavoritesList(favorite) {
+  var $li = document.createElement('li');
+  $li.className = 'row wrap';
+  $li.setAttribute('id', favorite.favoriteOrder);
+
+  var $imageContainer = document.createElement('div');
+  $imageContainer.className = 'column-third row justify-center';
+
+  var $favoriteVillagerImage = document.createElement('img');
+  $favoriteVillagerImage.className = 'favorite-image';
+  $favoriteVillagerImage.setAttribute('alt', favorite.villagerName + ' Photo');
+  $favoriteVillagerImage.setAttribute('src', favorite.villagerPicture);
+
+  $imageContainer.appendChild($favoriteVillagerImage);
+  $li.appendChild($imageContainer);
+
+  var $textContainer = document.createElement('div');
+  $textContainer.className = 'column-one-half';
+  $textContainer.setAttribute('id', favorite.villagerName);
+
+  var $header = document.createElement('h1');
+  $header.className = 'favorites-header no-top-margin';
+  $header.textContent = favorite.villagerName;
+
+  $textContainer.appendChild($header);
+  $li.appendChild($textContainer);
+
+  $ul.appendChild($li);
+}
+
+document.addEventListener('DOMContentLoaded', appendFavorites);
+function appendFavorites(event) {
   for (var i = 0; i < data.favoritesList.length; i++) {
-    var checkFavorite = data.favoritesList[i];
-    if (info.name['name-USen'] === checkFavorite.villagerName) {
-      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      return;
-    }
+    var favorite = data.favoritesList[i];
+    createFavoritesList(favorite);
+  }
+
+  if (data.favoritesList.length > 0) {
+    $defaultContainer.className = 'hidden';
   }
 }
