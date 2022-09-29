@@ -466,3 +466,13 @@ function appendFavorites(event) {
     $defaultContainer.className = 'hidden';
   }
 }
+
+var $favoritesEntries = document.querySelector('.favorites-entries');
+
+$favoritesEntries.addEventListener('click', changeScreenToAddEditForm);
+
+function changeScreenToAddEditForm(event) {
+  if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
+    data.view = 'add-info';
+  }
+}
