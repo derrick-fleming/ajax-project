@@ -315,3 +315,21 @@ function checkFavoriteVillager(info) {
     }
   }
 }
+
+var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon');
+var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
+var $navBar = document.querySelector('nav');
+
+$navBar.addEventListener('click', changeNavIconAndPage);
+
+function changeNavIconAndPage(event) {
+  if (event.target.className === 'fa-regular fa-heart nav-icon') {
+    $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon';
+    $homePageIcon.className = 'fa-solid fa-house nav-icon house-outline';
+  }
+
+  if (event.target.className === 'fa-solid fa-house nav-icon house-outline') {
+    $favoritesPageIcon.className = 'fa-regular fa-heart nav-icon';
+    $homePageIcon.className = 'fa solid fa-house nav-icon';
+  }
+}

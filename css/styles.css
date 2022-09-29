@@ -58,6 +58,11 @@ h2 {
   margin-top: 0.5rem;
 }
 
+.house-outline {
+  -webkit-text-stroke: 2.5px #4dc3b9ad;
+  color: white;
+}
+
 .pop-section {
   margin-top: 5rem;
   padding-top: 1rem;
