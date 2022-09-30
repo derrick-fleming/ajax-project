@@ -55,6 +55,7 @@ textarea {
   line-height: 1.5rem;
   border: 1px solid #ced4da;
   border-radius: 5px;
+  font-size: 1rem;
 }
 
 p,
@@ -185,6 +186,13 @@ label,
 
 .villager-icon:hover {
   transform: scale3d(1.2, 1.2, 1.2);
+}
+
+.nav-link:hover a,
+.nav-link:hover i,
+.nav-link:hover h3 {
+  color: #4dc3b9;
+  fill: #4dc3b9;
 }
 
 .center {
@@ -340,11 +348,6 @@ label,
   color: #2ab5cf;
 }
 
-.nav-home:hover,
-.nav-icon:hover {
-  color: #4dc3b9;
-}
-
 textarea:focus {
   outline: 1px solid #4dc3b9;
 }
@@ -415,7 +418,7 @@ input[type="checkbox"]:checked {
   margin-right: 0.5rem;
 }
 
-.pencil-icon-container:hover {
+.add-edit:hover .pencil-icon-container {
   background-color: #4dc3b9;
 }
 
@@ -490,6 +493,10 @@ input[type="checkbox"]:checked {
 @media screen and (min-width: 523px) {
   .villager-icon {
     width: 120px;
+  }
+
+  .padding-left {
+    padding-left: 2rem;
   }
 }
 
@@ -605,10 +612,6 @@ input[type="checkbox"]:checked {
 
   .hidden-text-box {
     display: block;
-  }
-
-  .padding-left {
-    padding-left: 2rem;
   }
 
   .notes-section {

@@ -367,7 +367,7 @@ $navBar.addEventListener('click', changeNavIconAndPage);
 
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
-  if (navCheck === 'fa-regular fa-heart nav-icon' || navCheck === 'nav-home favorites-page-link') {
+  if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-home favorites-page-link') {
     data.view = 'favorites-list';
     switchToFavoritesView();
   }
@@ -387,7 +387,7 @@ function switchToFavoritesView() {
 }
 
 function switchToHomeView() {
-  $favoritesPageIcon.className = 'fa-regular fa-heart nav-icon';
+  $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon house-outline';
   $homePageIcon.className = 'fa solid fa-house nav-icon';
   $villagerView.className = '';
   $villagerViewLinks.className = 'container';
@@ -434,7 +434,7 @@ function createFavoritesList(favorite) {
   $anchorElement.className = 'align-items';
 
   var $pencilIconContainer = document.createElement('div');
-  $pencilIconContainer.className = 'pencil-icon-container align-items justify-center';
+  $pencilIconContainer.className = 'pencil-icon-container align-items justify-center nav-link';
 
   var $pencilImage = document.createElement('img');
   $pencilImage.setAttribute('src', 'images/Pencil_NH_Icon.png');
