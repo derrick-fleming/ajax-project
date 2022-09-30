@@ -28,6 +28,7 @@ var $ul = document.querySelector('ul');
 var $defaultContainer = document.querySelector('.default-container');
 var $villagerViewLinks = document.querySelector('#villager-view-links');
 var $favoritesList = document.querySelector('#favorites-list');
+var $addInformationScreen = document.querySelector('#add-information');
 
 var $timeInterval = null;
 var countdown = 300;
@@ -457,6 +458,7 @@ function createFavoritesList(favorite) {
 
 document.addEventListener('DOMContentLoaded', appendFavorites);
 function appendFavorites(event) {
+  data.editing = false;
   for (var i = 0; i < data.favoritesList.length; i++) {
     var favorite = data.favoritesList[i];
     createFavoritesList(favorite);
@@ -492,6 +494,7 @@ function changeScreenToAddEditForm(event) {
         }
       }
     }
+    $addInformationScreen.className = 'container less-padding';
   }
 
 }
@@ -514,6 +517,7 @@ function saveInformation(event) {
   $addEditForm.reset();
   switchToFavoritesView();
   addFavoritesInformationToDom(data.favoritesList[villagerNumber]);
+  $addInformationScreen.className = 'hidden';
 }
 
 function addFavoritesInformationToDom(favorite) {
