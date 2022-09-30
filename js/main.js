@@ -525,7 +525,7 @@ function addFavoritesInformationToDom(favorite) {
 
   var $responseRow = document.createElement('div');
   $responseRow.setAttribute('id', 'id-' + favorite.favoriteOrder);
-  $responseRow.className = 'row';
+  $responseRow.className = 'row shrink-column';
 
   var $columnFirstHalf = document.createElement('div');
   $columnFirstHalf.className = 'column-one-half';

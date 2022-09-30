@@ -615,3 +615,9 @@ input[type="checkbox"]:checked {
     margin: 0 1rem;
   }
 }
+
+@media screen and (max-width: 850px) {
+  .shrink-column > .column-one-half {
+    flex-basis: 100%;
+  }
+}
