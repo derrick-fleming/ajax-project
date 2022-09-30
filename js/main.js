@@ -477,11 +477,15 @@ function changeScreenToAddEditForm(event) {
     $favoritesList.className = 'hidden';
     var $closestVillager = event.target.closest('li');
     var $villagerID = $closestVillager.getAttribute('id');
-    var $villagerGet = data.favoritesList[$villagerID];
-    villagerNumber = $villagerID;
-    $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
-    $placeholderImage.setAttribute('alt', $villagerGet.$villagerName + '"s Photo.');
+    for (var i = 0; i < data.favoritesList.length; i++) {
+      if (parseInt($villagerID) === data.favoritesList[i].favoriteOrder) {
+        var $villagerGet = data.favoritesList[i];
+        villagerNumber = i;
+        $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
+        $placeholderImage.setAttribute('alt', $villagerGet.$villagerName + '"s Photo.');
 
+      }
+    }
   }
 
 }
