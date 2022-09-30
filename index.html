@@ -247,21 +247,40 @@
         </div>
       </div>
       <div data-view="add-info" id="add-information" class="container">
-        <div class="row">
-          <div class="column-full">
-            <h1 class="favorites-header center">Additional Information</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column-third row justify-center">
-            <img src="images/placeholder-image-square-1.jpg" alt="" id="placeholder" class="favorite-image">
-          </div>
-          <div class="column-one-half">
-            <form>
+        <form id="add-edit-form">
+          <div class="row wrap">
+            <div class="column-full">
+              <h1 class="favorites-header center">Additional Information</h1>
+            </div>
+            <div class="column-third row justify-center">
+              <img src="images/placeholder-image-square-1.jpg" alt="" id="placeholder" class="favorite-image">
+            </div>
+            <div class="column-one-half">
+              <label for="photo-collect" class="">Photo Collected:</label>
+              <input id="photo-collect" name="photo-collect" type="checkbox">
 
-            </form>
+              <h2>Island Status</h2>
+              <div class="row">
+                <div class="col-r">
+                  <label for="option1">Formerly on island</label>
+                  <input id="option1" name="island-status" type="radio" value="formerly">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-r">
+                  <label for="option2">Currently on island</label>
+                  <input id="option2" name="island-status" type="radio" value="currently">
+                </div>
+              </div>
+              <label for="option3">Wish on island</label>
+              <input id="option3" name="island-status" type="radio" value="wish">
+            </div>
+            <div class="column-full">
+              <label for="notes-section">Notes</label>
+              <textarea rows="6"></textarea>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </main>
