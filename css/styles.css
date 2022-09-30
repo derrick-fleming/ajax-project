@@ -29,6 +29,11 @@ h2 {
   font-weight: 400;
 }
 
+p {
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -50,6 +55,14 @@ textarea {
   line-height: 1.5rem;
   border: 1px solid #ced4da;
   border-radius: 5px;
+}
+
+p,
+.add-edit {
+  font-family: Montserrat, sans-serif;
+  font-size: 1.125rem;
+  color: #575757;
+  margin-top: 0;
 }
 
 label,
@@ -351,10 +364,40 @@ input[type="checkbox"]:checked {
 }
 
 .add-edit {
-  font-family: Montserrat, sans-serif;
-  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.text-response {
+  margin-top: 0.5rem;
+}
+
+.checked {
+  font-size: 1.25rem;
+  color: #4dc3b9;
+}
+
+.unchecked {
+  font-size: 1.25rem;
   color: #575757;
-  margin-top: 0;
+}
+
+.formerly-island,
+.photo-response,
+.currently-island,
+.wish-island {
+  font-weight: 700;
+}
+
+.formerly-island {
+  color: #e57373;
+}
+
+.currently-island {
+  color: #4dc3b9;
+}
+
+.wish-island {
+  color: #7d83bb;
 }
 
 .edit-icon {

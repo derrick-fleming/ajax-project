@@ -503,6 +503,8 @@ function saveInformation(event) {
   };
 
   data.favoritesList[villagerNumber].formValues = formInputValues;
+  $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
+  $placeholderImage.setAttribute('alt', 'Placeholder Image');
   $addEditForm.reset();
   switchToFavoritesView();
 }
