@@ -468,6 +468,7 @@ function appendFavorites(event) {
 }
 
 var $favoritesEntries = document.querySelector('.favorites-entries');
+var $placeholderImage = document.querySelector('#placeholder');
 
 $favoritesEntries.addEventListener('click', changeScreenToAddEditForm);
 
@@ -475,6 +476,9 @@ function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
     data.view = 'add-info';
     $favoritesList.className = 'hidden';
-
+    var $closestVillager = event.target.closest('li');
+    var $villagerID = $closestVillager.getAttribute('id');
+    $placeholderImage.setAttribute('src', data.favoritesList[$villagerID].villagerPicture);
   }
+
 }
