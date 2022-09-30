@@ -367,12 +367,12 @@ $navBar.addEventListener('click', changeNavIconAndPage);
 
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
-  if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-home favorites-page-link') {
+  if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-home favorites-page-link' || navCheck === 'favorites-page-link') {
     data.view = 'favorites-list';
     switchToFavoritesView();
   }
 
-  if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link') {
+  if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link' || navCheck === 'home-page-link') {
     data.view = 'villager-view';
     switchToHomeView();
   }
