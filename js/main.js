@@ -498,7 +498,7 @@ function saveInformation(event) {
   event.preventDefault();
   var formInputValues = {
     islandStatus: $addEditForm.elements.island.value,
-    photoCollected: $addEditForm.elements.photo.value,
+    photoCollected: $addEditForm.elements.photo.checked,
     notes: $addEditForm.elements.notes.value
   };
 
@@ -522,7 +522,7 @@ function addFavoritesInformationToDom(favorite) {
   var $islandResponse = document.createElement('p');
 
   var islandValue = favorite.formValues.islandStatus;
-  // var photoValue = favorite.formValues.photoCollected;
+  var photoValue = favorite.formValues.photoCollected;
   // var notesValue = favorite.formValues.notes;
 
   if (islandValue === 'formerly') {
@@ -531,10 +531,33 @@ function addFavoritesInformationToDom(favorite) {
   } else if (islandValue === 'currenlty') {
     $islandResponse.className = 'currently-island';
     $islandResponse.textContent = 'Currently on island';
+  } else {
+    $islandResponse.className = 'wish-island';
+    $islandResponse.textContent = 'Wish on island';
   }
 
   $columnFirstHalf.appendChild($islandResponse);
   $responseRow.appendChild($columnFirstHalf);
+
+  var $columnSecondHalf = document.createElement('div');
+  $columnSecondHalf.className = 'column-one-half';
+
+  var $photoResponse = document.createElement('p');
+  $photoResponse.className = 'photo-response inline-block';
+  $photoResponse.textContent = 'Photo Collected: ';
+
+  var $boxIcon = document.createElement('i');
+
+  if (photoValue === true) {
+    $boxIcon.className = 'checked fa-solid fa-square-check';
+  } else {
+    $boxIcon.className = 'unchecked fa-regular fa-square';
+  }
+
+  $columnSecondHalf.appendChild($photoResponse);
+  $columnSecondHalf.appendChild($boxIcon);
+
+  $responseRow.appendChild($columnSecondHalf);
 
   $liUpdate.appendChild($responseRow);
 }

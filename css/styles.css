@@ -374,11 +374,13 @@ input[type="checkbox"]:checked {
 .checked {
   font-size: 1.25rem;
   color: #4dc3b9;
+  padding-left: 0.5rem;
 }
 
 .unchecked {
   font-size: 1.25rem;
   color: #575757;
+  padding-left: 0.5rem;
 }
 
 .formerly-island,
