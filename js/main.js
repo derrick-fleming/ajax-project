@@ -402,7 +402,7 @@ if (data.view === 'villager-view') {
 function createFavoritesList(favorite) {
   var $li = document.createElement('li');
   $li.className = 'row wrap';
-  $li.setAttribute('id', favorite.favoriteOrder);
+  $li.setAttribute('id', favorite.villagerName);
 
   var $imageContainer = document.createElement('div');
   $imageContainer.className = 'column-third row justify-center';
@@ -478,7 +478,7 @@ function changeScreenToAddEditForm(event) {
     var $closestVillager = event.target.closest('li');
     var $villagerID = $closestVillager.getAttribute('id');
     for (var i = 0; i < data.favoritesList.length; i++) {
-      if (parseInt($villagerID) === data.favoritesList[i].favoriteOrder) {
+      if ($villagerID === data.favoritesList[i].villagerName) {
         var $villagerGet = data.favoritesList[i];
         villagerNumber = i;
         $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
@@ -507,4 +507,34 @@ function saveInformation(event) {
   $placeholderImage.setAttribute('alt', 'Placeholder Image');
   $addEditForm.reset();
   switchToFavoritesView();
+  addFavoritesInformationToDom(data.favoritesList[villagerNumber]);
+}
+
+function addFavoritesInformationToDom(favorite) {
+  var $liUpdate = document.getElementById(favorite.villagerName);
+
+  var $responseRow = document.createElement('div');
+  $responseRow.className = 'row';
+
+  var $columnFirstHalf = document.createElement('div');
+  $columnFirstHalf.className = 'column-one-half';
+
+  var $islandResponse = document.createElement('p');
+
+  var islandValue = favorite.formValues.islandStatus;
+  // var photoValue = favorite.formValues.photoCollected;
+  // var notesValue = favorite.formValues.notes;
+
+  if (islandValue === 'formerly') {
+    $islandResponse.className = 'formerly-island';
+    $islandResponse.textContent = 'Formerly on island';
+  } else if (islandValue === 'currenlty') {
+    $islandResponse.className = 'currently-island';
+    $islandResponse.textContent = 'Currently on island';
+  }
+
+  $columnFirstHalf.appendChild($islandResponse);
+  $responseRow.appendChild($columnFirstHalf);
+
+  $liUpdate.appendChild($responseRow);
 }
