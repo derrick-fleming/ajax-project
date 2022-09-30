@@ -3,8 +3,8 @@
 var data = {
   view: 'villager-list',
   favoritesList: [],
-  editing: null,
-  nextFavorite: 1
+  editing: false,
+  nextFavorite: 0
 };
 
 var previousData = localStorage.getItem('acnh-villager-favorites');

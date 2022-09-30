@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Montserrat:wght@300;400;700&family=Varela+Round&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Montserrat:wght@200;300;400;700&family=Varela+Round&display=swap"
     rel="stylesheet">
 </head>
 <body>
@@ -26,17 +26,19 @@
         <h3 class="nav-header">MyVillagers</h3>
       </div>
       <div class="column-quarter end">
-        <a href="#favorites-list">
-          <i class="fa-regular fa-heart nav-icon"></i>
-        </a>
-        <a href="#favorites-list">
-          <h3 class="nav-home favorites-page-link"> Favorites </h3>
-        </a>
-        <div class="padding-left column-quarter end">
-          <a href="#villager-view">
+        <div class="column-quarter end nav-link">
+          <a href="#favorites-list" class="favorites-page-link">
+            <i class="fa-regular fa-heart nav-icon"></i>
+          </a>
+          <a href="#favorites-list" class="favorites-page-link">
+            <h3 class="nav-home favorites-page-link"> Favorites </h3>
+          </a>
+        </div>
+        <div class="padding-left column-quarter end nav-link">
+          <a href="#villager-view" class="home-page-link">
             <i class="fa-solid fa-house nav-icon"></i>
           </a>
-          <a href="#villager-view">
+          <a href="#villager-view" class="home-page-link">
             <h3 class="nav-home home-page-link"> Home </h3>
           </a>
         </div>
@@ -162,7 +164,7 @@
           </div>
         </div>
       </div>
-      <div id="villager-view-links" class="container ">
+      <div id="villager-view-links" class="container">
         <a class="load-link"> Load More </a>
       </div>
       <div data-view="favorites-view" id="favorites-list" class="hidden">
@@ -230,6 +232,49 @@
             </ul>
           </div>
         </div>
+      </div>
+      <div data-view="add-info" id="add-information" class="container less-padding hidden">
+        <form id="add-edit-form">
+          <div class="row wrap">
+            <div class="column-full">
+              <h1 class="favorites-header center">Additional Information</h1>
+            </div>
+            <div class="column-third row justify-center favorites-header">
+              <img src="images/placeholder-image-square-1.jpg" alt="placeholder" id="placeholder" class="favorite-image">
+            </div>
+            <div class="column-one-half align-items">
+              <div class="one-hundred-width">
+                <label for="photo-collect" class="photo-collect">Photo Collected:</label>
+                <input id="photo-collect" name="photo" type="checkbox" class="photo-option" value="yes">
+                <h2 class="island-stats less-margin">Island Status: </h2>
+                <div class="row">
+                  <div class="col-l">
+                    <div>
+                      <input required id="option1" name="island" type="radio" value="formerly">
+                      <label for="option1">Formerly on island</label>
+                    </div>
+                    <input required id="option2" name="island" type="radio" value="currently">
+                    <label for="option2">Currently on island</label>
+                  </div>
+                  <div class="col-r">
+                    <input required id="option3" name="island" type="radio" value="wish">
+                    <label for="option3">Wish on island</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column-full notes-section">
+              <label for="notes-section">Notes</label>
+              <textarea required id="notes-section" name="notes" rows="4"></textarea>
+            </div>
+            <div class="column-half align-items">
+              <a class="cancel button">CANCEL</a>
+            </div>
+            <div class="column-half align-right">
+              <input type="submit" class="save button" value="SAVE">
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </main>

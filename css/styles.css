@@ -8,6 +8,7 @@ header {
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 1;
 }
 
 nav {
@@ -29,14 +30,48 @@ h2 {
   font-weight: 400;
 }
 
+p {
+  line-height: 1.7rem;
+  margin-bottom: 0.5rem;
+}
+
 ul {
-  list-style: none;
   padding: 0;
 }
 
 li {
   padding-left: 0.5rem;
   margin-bottom: 3rem;
+}
+
+input {
+  font-size: 1rem;
+}
+
+textarea {
+  width: 100%;
+  font-family: Montserrat, sans-serif;
+  padding: 0.5rem;
+  line-height: 1.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+p,
+.add-edit {
+  font-family: Montserrat, sans-serif;
+  font-size: 1.125rem;
+  color: #575757;
+  margin-top: 0;
+}
+
+label,
+.island-stats,
+.photo-collect {
+  color: #575757;
+  font-family: Montserrat, sans-serif;
+  line-height: 2rem;
 }
 
 .nav-container {
@@ -106,6 +141,10 @@ li {
   margin-top: 6rem;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .pop-text,
 .top-link,
 .load-link {
@@ -132,6 +171,10 @@ li {
   color: #575757;
 }
 
+.favorites-header {
+  margin-bottom: 1.25rem;
+}
+
 .header-container {
   width: 150px;
 }
@@ -143,6 +186,13 @@ li {
 
 .villager-icon:hover {
   transform: scale3d(1.2, 1.2, 1.2);
+}
+
+.nav-link:hover a,
+.nav-link:hover i,
+.nav-link:hover h3 {
+  color: #4dc3b9;
+  fill: #4dc3b9;
 }
 
 .center {
@@ -298,9 +348,13 @@ li {
   color: #2ab5cf;
 }
 
-.nav-home:hover,
-.nav-icon:hover {
-  color: #4dc3b9;
+textarea:focus {
+  outline: 1px solid #4dc3b9;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  accent-color: #4dc3b9;
 }
 
 .hidden-text-box {
@@ -309,6 +363,123 @@ li {
 
 .column-one-half,
 .column-third {
+  flex-basis: 100%;
+}
+
+.add-edit {
+  margin-bottom: 1rem;
+}
+
+.text-response {
+  margin-top: 0.25rem;
+}
+
+.checked {
+  font-size: 1.25rem;
+  color: #4dc3b9;
+  padding-left: 0.5rem;
+}
+
+.unchecked {
+  font-size: 1.25rem;
+  color: #979797;
+  padding-left: 0.5rem;
+}
+
+.formerly-island,
+.photo-response,
+.currently-island,
+.wish-island {
+  font-weight: 700;
+}
+
+.formerly-island {
+  color: #e57373;
+}
+
+.currently-island {
+  color: #4dc3b9;
+}
+
+.wish-island {
+  color: #7d83bb;
+}
+
+.edit-icon {
+  width: 20px;
+}
+
+.pencil-icon-container {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  background-color: #4dc3b95e;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.add-edit:hover .pencil-icon-container {
+  background-color: #4dc3b9;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.light-weight {
+  font-weight: 300;
+}
+
+.island-stats,
+.photo-collect {
+  font-size: 1.125rem;
+}
+
+.photo-option {
+  font-size: 2rem;
+}
+
+.col-l {
+  flex-basis: 55%;
+}
+
+.col-r {
+  flex-basis: 45%;
+}
+
+.less-padding {
+  padding: 0 1rem;
+}
+
+.one-hundred-width {
+  width: 100%;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.save {
+  background-color: #4dc3b9;
+  color: #ffff;
+  border-radius: 5px;
+}
+
+.cancel {
+  background-color: transparent;
+  color: #575757;
+}
+
+.button {
+  border: 0;
+  font-size: 1.125rem;
+  font-family: "varela Round", sans-serif;
+  font-weight: 400;
+  padding: 0.3rem 0.75rem;
+  margin: 1.5rem;
+}
+
+.column-two-third {
   flex-basis: 100%;
 }
 
@@ -327,14 +498,32 @@ li {
   .villager-icon {
     width: 120px;
   }
+
+  .padding-left {
+    padding-left: 2rem;
+  }
 }
 
 @media screen and (min-width: 720px) {
+  .col-r,
+  .col-l {
+    flex-basis: 100%;
+  }
+
+  textarea {
+    height: 200px;
+  }
+
+  .less-padding {
+    padding-left: 5rem;
+  }
+
   .column-third {
     flex-basis: 33%;
   }
 
-  .column-one-half {
+  .column-one-half,
+  .column-two-third {
     flex-basis: 50%;
   }
 
@@ -374,7 +563,7 @@ li {
   }
 
   .no-top-margin {
-    margin: 0 0 1rem;
+    margin: 0 0 0.5rem;
   }
 }
 
@@ -388,7 +577,7 @@ li {
   }
 
   .nav-container {
-    max-width: 900px;
+    max-width: 850px;
   }
 
   .villager-info {
@@ -397,7 +586,7 @@ li {
   }
 
   .villager-info-text-box {
-    height: 239px;
+    height: 243px;
   }
 
   .less-margin {
@@ -430,7 +619,23 @@ li {
     display: block;
   }
 
-  .padding-left {
-    padding-left: 2rem;
+  .notes-section {
+    margin: 0 1rem;
+  }
+}
+
+@media screen and (min-width: 860px) {
+  .column-two-third {
+    flex-basis: 60%;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .shrink-column > .column-one-half {
+    flex-basis: 100%;
+  }
+
+  .minus-padding {
+    padding-right: -2rem;
   }
 }
