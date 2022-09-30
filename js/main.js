@@ -483,7 +483,9 @@ function changeScreenToAddEditForm(event) {
         villagerNumber = i;
         $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
         $placeholderImage.setAttribute('alt', $villagerGet.$villagerName + '"s Photo.');
-        editVillagerInformation($villagerGet);
+        if ($villagerGet.formValues !== null) {
+          editVillagerInformation($villagerGet);
+        }
       }
     }
   }
@@ -566,13 +568,14 @@ function addFavoritesInformationToDom(favorite) {
   $responseRow.appendChild($paragraphText);
 
   $liUpdate.appendChild($responseRow);
+
 }
 
 function editVillagerInformation(favorites) {
   if (favorites.formInputValues === null) {
     return;
   }
-
+  data.editing = true;
   $addEditForm.elements.island.value = favorites.formValues.islandStatus;
   $addEditForm.elements.photo.checked = favorites.formValues.photoCollected;
   $addEditForm.elements.notes.value = favorites.formValues.notes;
