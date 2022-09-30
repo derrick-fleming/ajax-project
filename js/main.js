@@ -474,5 +474,7 @@ $favoritesEntries.addEventListener('click', changeScreenToAddEditForm);
 function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
     data.view = 'add-info';
+    $favoritesList.className = 'hidden';
+
   }
 }
