@@ -162,7 +162,7 @@
           </div>
         </div>
       </div>
-      <div id="villager-view-links" class="container ">
+      <div id="villager-view-links" class="container">
         <a class="load-link"> Load More </a>
       </div>
       <div data-view="favorites-view" id="favorites-list" class="hidden">
@@ -246,38 +246,45 @@
           </div>
         </div>
       </div>
-      <div data-view="add-info" id="add-information" class="container">
+      <div data-view="add-info" id="add-information" class="container less-padding">
         <form id="add-edit-form">
           <div class="row wrap">
             <div class="column-full">
               <h1 class="favorites-header center">Additional Information</h1>
             </div>
-            <div class="column-third row justify-center">
-              <img src="images/placeholder-image-square-1.jpg" alt="" id="placeholder" class="favorite-image">
+            <div class="column-third row justify-center favorites-header">
+              <img src="images/placeholder-image-square-1.jpg" alt="placeholder" id="placeholder" class="favorite-image">
             </div>
-            <div class="column-one-half">
-              <label for="photo-collect" class="">Photo Collected:</label>
-              <input id="photo-collect" name="photo-collect" type="checkbox">
-
-              <h2>Island Status</h2>
-              <div class="row">
-                <div class="col-r">
-                  <label for="option1">Formerly on island</label>
-                  <input id="option1" name="island-status" type="radio" value="formerly">
+            <div class="column-one-half align-items">
+              <div class="one-hundred-width">
+                <label for="photo-collect" class="photo-collect">Photo Collected:</label>
+                <input id="photo-collect" name="photo-collect" type="checkbox" class="photo-option">
+                <h2 class="island-stats less-margin">Island Status: </h2>
+                <div class="row">
+                  <div class="col-l">
+                    <div>
+                      <input id="option1" name="island-status" type="radio" value="formerly">
+                      <label for="option1">Formerly on island</label>
+                    </div>
+                    <input id="option2" name="island-status" type="radio" value="currently">
+                    <label for="option2">Currently on island</label>
+                  </div>
+                  <div class="col-r">
+                    <input id="option3" name="island-status" type="radio" value="wish">
+                    <label for="option3">Wish on island</label>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-r">
-                  <label for="option2">Currently on island</label>
-                  <input id="option2" name="island-status" type="radio" value="currently">
-                </div>
-              </div>
-              <label for="option3">Wish on island</label>
-              <input id="option3" name="island-status" type="radio" value="wish">
             </div>
-            <div class="column-full">
+            <div class="column-full notes-section">
               <label for="notes-section">Notes</label>
-              <textarea rows="6"></textarea>
+              <textarea id="notes-section" name="notes-section" rows="4"></textarea>
+            </div>
+            <div class="column-half">
+              <button class="cancel button">CANCEL</button>
+            </div>
+            <div class="column-half align-right">
+              <input type="submit" class="save button" value="SAVE">
             </div>
           </div>
         </form>

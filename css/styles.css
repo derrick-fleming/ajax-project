@@ -39,6 +39,27 @@ li {
   margin-bottom: 3rem;
 }
 
+input {
+  font-size: 1rem;
+}
+
+textarea {
+  width: 100%;
+  font-family: Montserrat, sans-serif;
+  padding: 0.5rem;
+  line-height: 1.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+label,
+.island-stats,
+.photo-collect {
+  color: #575757;
+  font-family: Montserrat, sans-serif;
+  line-height: 2rem;
+}
+
 .nav-container {
   margin: 0 auto;
 }
@@ -137,7 +158,7 @@ li {
 }
 
 .favorites-header {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .header-container {
@@ -311,6 +332,15 @@ li {
   color: #4dc3b9;
 }
 
+textarea:focus {
+  outline: 1px solid #4dc3b9;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  accent-color: #4dc3b9;
+}
+
 .hidden-text-box {
   display: none;
 }
@@ -352,6 +382,55 @@ li {
   font-weight: 300;
 }
 
+.island-stats,
+.photo-collect {
+  font-size: 1.125rem;
+}
+
+.photo-option {
+  font-size: 2rem;
+}
+
+.col-l {
+  flex-basis: 55%;
+}
+
+.col-r {
+  flex-basis: 45%;
+}
+
+.less-padding {
+  padding: 0 1rem;
+}
+
+.one-hundred-width {
+  width: 100%;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.save {
+  background-color: #4dc3b9;
+  color: #ffff;
+  border-radius: 5px;
+}
+
+.cancel {
+  background-color: transparent;
+  color: #575757;
+}
+
+.button {
+  border: 0;
+  font-size: 1.125rem;
+  font-family: "varela Round", sans-serif;
+  font-weight: 400;
+  padding: 0.3rem 0.75rem;
+  margin: 1.5rem;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
@@ -370,6 +449,19 @@ li {
 }
 
 @media screen and (min-width: 720px) {
+  .col-r,
+  .col-l {
+    flex-basis: 100%;
+  }
+
+  textarea {
+    height: 200px;
+  }
+
+  .less-padding {
+    padding-left: 5rem;
+  }
+
   .column-third {
     flex-basis: 33%;
   }
@@ -428,7 +520,7 @@ li {
   }
 
   .nav-container {
-    max-width: 900px;
+    max-width: 850px;
   }
 
   .villager-info {
@@ -437,7 +529,7 @@ li {
   }
 
   .villager-info-text-box {
-    height: 239px;
+    height: 243px;
   }
 
   .less-margin {
@@ -472,5 +564,9 @@ li {
 
   .padding-left {
     padding-left: 2rem;
+  }
+
+  .notes-section {
+    margin: 0 1rem;
   }
 }

@@ -478,7 +478,9 @@ function changeScreenToAddEditForm(event) {
     $favoritesList.className = 'hidden';
     var $closestVillager = event.target.closest('li');
     var $villagerID = $closestVillager.getAttribute('id');
-    $placeholderImage.setAttribute('src', data.favoritesList[$villagerID].villagerPicture);
+    var $villagerGet = data.favoritesList[$villagerID];
+    $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
+    $placeholderImage.setAttribute('alt', $villagerGet.$villagerName + '"s Photo.');
   }
 
 }
