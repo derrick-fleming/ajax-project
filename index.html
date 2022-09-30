@@ -258,19 +258,19 @@
             <div class="column-one-half align-items">
               <div class="one-hundred-width">
                 <label for="photo-collect" class="photo-collect">Photo Collected:</label>
-                <input id="photo-collect" name="photo-collect" type="checkbox" class="photo-option">
+                <input id="photo-collect" name="photo" type="checkbox" class="photo-option">
                 <h2 class="island-stats less-margin">Island Status: </h2>
                 <div class="row">
                   <div class="col-l">
                     <div>
-                      <input required id="option1" name="island-status" type="radio" value="formerly">
+                      <input required id="option1" name="island" type="radio" value="formerly">
                       <label for="option1">Formerly on island</label>
                     </div>
-                    <input required id="option2" name="island-status" type="radio" value="currently">
+                    <input required id="option2" name="island" type="radio" value="currently">
                     <label for="option2">Currently on island</label>
                   </div>
                   <div class="col-r">
-                    <input required id="option3" name="island-status" type="radio" value="wish">
+                    <input required id="option3" name="island" type="radio" value="wish">
                     <label for="option3">Wish on island</label>
                   </div>
                 </div>
@@ -278,7 +278,7 @@
             </div>
             <div class="column-full notes-section">
               <label for="notes-section">Notes</label>
-              <textarea id="notes-section" name="notes-section" rows="4"></textarea>
+              <textarea required id="notes-section" name="notes" rows="4"></textarea>
             </div>
             <div class="column-half">
               <button class="cancel button">CANCEL</button>

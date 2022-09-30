@@ -35,6 +35,7 @@ var countdown = 300;
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
+var villagerNumber = null;
 
 $scrollPopUp.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
@@ -350,9 +351,7 @@ function saveFavoriteVillager() {
     villagerId: getDataInfo,
     villagerPicture: villagerData.image_uri,
     villagerName: villagerData.name['name-USen'],
-    islandStatus: null,
-    photoCollected: null,
-    notes: null
+    formValues: null
   };
 
   data.nextFavorite++;
@@ -479,8 +478,26 @@ function changeScreenToAddEditForm(event) {
     var $closestVillager = event.target.closest('li');
     var $villagerID = $closestVillager.getAttribute('id');
     var $villagerGet = data.favoritesList[$villagerID];
+    villagerNumber = $villagerID;
     $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
     $placeholderImage.setAttribute('alt', $villagerGet.$villagerName + '"s Photo.');
+
   }
 
+}
+
+var $addEditForm = document.querySelector('form');
+
+$addEditForm.addEventListener('submit', saveInformation);
+
+function saveInformation(event) {
+  event.preventDefault();
+  var formInputValues = {
+    islandStatus: $addEditForm.elements.island.value,
+    photoCollected: $addEditForm.elements.photo.value,
+    notes: $addEditForm.elements.notes.value
+  };
+
+  data.favoritesList[villagerNumber].formValues = formInputValues;
+  return data;
 }
