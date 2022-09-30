@@ -443,7 +443,7 @@ function createFavoritesList(favorite) {
   $pencilIconContainer.className = 'pencil-icon-container align-items justify-center nav-link';
 
   var $pencilImage = document.createElement('img');
-  $pencilImage.setAttribute('src', 'images/Pencil_NH_Icon.png');
+  $pencilImage.setAttribute('src', 'images/pencil-icon.png');
   $pencilImage.setAttribute('alt', 'Edit Icon');
   $pencilImage.className = 'edit-icon';
 
