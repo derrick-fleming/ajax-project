@@ -503,5 +503,6 @@ function saveInformation(event) {
   };
 
   data.favoritesList[villagerNumber].formValues = formInputValues;
-  return data;
+  $addEditForm.reset();
+  switchToFavoritesView();
 }
