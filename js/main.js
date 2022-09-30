@@ -600,5 +600,7 @@ function cancelEntries(event) {
   if (event.target.tagName === 'A') {
     $addEditForm.reset();
     switchToFavoritesView();
+    $addInformationScreen.className = 'hidden';
+
   }
 }
