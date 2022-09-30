@@ -452,6 +452,7 @@ function createFavoritesList(favorite) {
   $textContainer.appendChild($addEditContainer);
 
   $ul.appendChild($li);
+
 }
 
 document.addEventListener('DOMContentLoaded', appendFavorites);
@@ -459,6 +460,9 @@ function appendFavorites(event) {
   for (var i = 0; i < data.favoritesList.length; i++) {
     var favorite = data.favoritesList[i];
     createFavoritesList(favorite);
+    if (favorite.formValues !== null) {
+      addFavoritesInformationToDom(favorite);
+    }
   }
 
   if (data.favoritesList.length > 0) {
