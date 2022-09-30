@@ -516,6 +516,7 @@ function addFavoritesInformationToDom(favorite) {
   var $liUpdate = document.getElementById(favorite.villagerName);
 
   var $responseRow = document.createElement('div');
+  $responseRow.setAttribute('id', 'id-' + favorite.favoriteOrder);
   $responseRow.className = 'row';
 
   var $columnFirstHalf = document.createElement('div');
@@ -567,14 +568,18 @@ function addFavoritesInformationToDom(favorite) {
 
   $responseRow.appendChild($paragraphText);
 
+  if (data.editing === true) {
+    data.editing = false;
+    var $replaceRow = document.querySelector('#id-' + favorite.favoriteOrder);
+    $replaceRow.replaceWith($responseRow);
+    return;
+  }
+
   $liUpdate.appendChild($responseRow);
 
 }
 
 function editVillagerInformation(favorites) {
-  if (favorites.formInputValues === null) {
-    return;
-  }
   data.editing = true;
   $addEditForm.elements.island.value = favorites.formValues.islandStatus;
   $addEditForm.elements.photo.checked = favorites.formValues.photoCollected;

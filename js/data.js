@@ -3,7 +3,7 @@
 var data = {
   view: 'villager-list',
   favoritesList: [],
-  editing: null,
+  editing: false,
   nextFavorite: 0
 };
 
