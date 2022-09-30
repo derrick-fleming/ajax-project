@@ -593,3 +593,12 @@ function editVillagerInformation(favorites) {
   $addEditForm.elements.photo.checked = favorites.formValues.photoCollected;
   $addEditForm.elements.notes.value = favorites.formValues.notes;
 }
+
+$addInformationScreen.addEventListener('click', cancelEntries);
+
+function cancelEntries(event) {
+  if (event.target.tagName === 'A') {
+    $addEditForm.reset();
+    switchToFavoritesView();
+  }
+}
