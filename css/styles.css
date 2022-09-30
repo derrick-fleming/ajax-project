@@ -32,11 +32,10 @@ h2 {
 
 p {
   line-height: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 ul {
-  list-style: none;
   padding: 0;
 }
 
@@ -383,7 +382,7 @@ input[type="checkbox"]:checked {
 
 .unchecked {
   font-size: 1.25rem;
-  color: #575757;
+  color: #979797;
   padding-left: 0.5rem;
 }
 
@@ -480,6 +479,10 @@ input[type="checkbox"]:checked {
   margin: 1.5rem;
 }
 
+.column-two-third {
+  flex-basis: 100%;
+}
+
 @media screen and (max-width: 523px) {
   .nav-home {
     display: none;
@@ -519,7 +522,8 @@ input[type="checkbox"]:checked {
     flex-basis: 33%;
   }
 
-  .column-one-half {
+  .column-one-half,
+  .column-two-third {
     flex-basis: 50%;
   }
 
@@ -559,7 +563,7 @@ input[type="checkbox"]:checked {
   }
 
   .no-top-margin {
-    margin: 0 0 1rem;
+    margin: 0 0 0.5rem;
   }
 }
 
@@ -620,8 +624,18 @@ input[type="checkbox"]:checked {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (min-width: 860px) {
+  .column-two-third {
+    flex-basis: 60%;
+  }
+}
+
+@media screen and (max-width: 860px) {
   .shrink-column > .column-one-half {
     flex-basis: 100%;
+  }
+
+  .minus-padding {
+    padding-right: -2rem;
   }
 }

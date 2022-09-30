@@ -29,6 +29,8 @@ var $defaultContainer = document.querySelector('.default-container');
 var $villagerViewLinks = document.querySelector('#villager-view-links');
 var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
+var $navHomeText = document.querySelector('.nav-home.home-page-link');
+var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
 
 var $timeInterval = null;
 var countdown = 300;
@@ -379,8 +381,10 @@ function changeNavIconAndPage(event) {
 }
 
 function switchToFavoritesView() {
-  $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon';
+  $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon currently-island';
+  $navFavoriteText.className = 'nav-home favorites-page-link currently-island';
   $homePageIcon.className = 'fa-solid fa-house nav-icon house-outline';
+  $navHomeText.className = 'nav-home home-page-link';
   $villagerView.className = 'hidden';
   $villagerViewLinks.className = 'hidden';
   $favoritesList.className = '';
@@ -388,7 +392,9 @@ function switchToFavoritesView() {
 
 function switchToHomeView() {
   $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon house-outline';
-  $homePageIcon.className = 'fa solid fa-house nav-icon';
+  $homePageIcon.className = 'fa solid fa-house nav-icon currently-island';
+  $navFavoriteText.className = 'nav-home favorites-page-link';
+  $navHomeText.className = 'nav-home home-page-link currently-island';
   $villagerView.className = '';
   $villagerViewLinks.className = 'container';
   $favoritesList.className = 'hidden';
@@ -402,7 +408,7 @@ if (data.view === 'villager-view') {
 
 function createFavoritesList(favorite) {
   var $li = document.createElement('li');
-  $li.className = 'row wrap';
+  $li.className = 'row';
   $li.setAttribute('id', favorite.villagerId);
 
   var $imageContainer = document.createElement('div');
@@ -417,7 +423,7 @@ function createFavoritesList(favorite) {
   $li.appendChild($imageContainer);
 
   var $textContainer = document.createElement('div');
-  $textContainer.className = 'column-one-half';
+  $textContainer.className = 'column-two-third';
   $textContainer.setAttribute('id', favorite.villagerName);
 
   var $header = document.createElement('h1');
