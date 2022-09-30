@@ -402,7 +402,7 @@ if (data.view === 'villager-view') {
 function createFavoritesList(favorite) {
   var $li = document.createElement('li');
   $li.className = 'row wrap';
-  $li.setAttribute('id', favorite.villagerName);
+  $li.setAttribute('id', favorite.villagerId);
 
   var $imageContainer = document.createElement('div');
   $imageContainer.className = 'column-third row justify-center';
@@ -478,7 +478,7 @@ function changeScreenToAddEditForm(event) {
     var $closestVillager = event.target.closest('li');
     var $villagerID = $closestVillager.getAttribute('id');
     for (var i = 0; i < data.favoritesList.length; i++) {
-      if ($villagerID === data.favoritesList[i].villagerName) {
+      if ($villagerID === data.favoritesList[i].villagerId) {
         var $villagerGet = data.favoritesList[i];
         villagerNumber = i;
         $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
@@ -523,7 +523,7 @@ function addFavoritesInformationToDom(favorite) {
 
   var islandValue = favorite.formValues.islandStatus;
   var photoValue = favorite.formValues.photoCollected;
-  // var notesValue = favorite.formValues.notes;
+  var notesValue = favorite.formValues.notes;
 
   if (islandValue === 'formerly') {
     $islandResponse.className = 'formerly-island';
@@ -558,6 +558,12 @@ function addFavoritesInformationToDom(favorite) {
   $columnSecondHalf.appendChild($boxIcon);
 
   $responseRow.appendChild($columnSecondHalf);
+
+  var $paragraphText = document.createElement('p');
+  $paragraphText.className = 'light-weight text-response';
+  $paragraphText.textContent = notesValue;
+
+  $responseRow.appendChild($paragraphText);
 
   $liUpdate.appendChild($responseRow);
 }
