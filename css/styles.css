@@ -22,8 +22,6 @@ h2,
 }
 
 nav {
-  font-family: Arvo, sans-serif;
-  color: #4dc3b9;
   padding: 1rem;
   height: 64px;
 }
@@ -93,6 +91,12 @@ label,
   font-size: 1rem;
   padding-left: 0.75rem;
   color: #4dc3b9ad;
+}
+
+.nav-header,
+.nav-home {
+  font-family: Arvo, sans-serif;
+  color: #4dc3b9;
 }
 
 .nav-icon {
