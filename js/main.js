@@ -142,14 +142,13 @@ function renderDomVillagersList() {
       $villagerSection.className = 'villager-section';
 
       var $villagerContainerHeader = document.createElement('div');
-      $villagerContainerHeader.className = 'container species-header row';
+      $villagerContainerHeader.className = 'container row';
 
       var $headerContainer = document.createElement('div');
       $headerContainer.className = 'header-container';
 
       var $h1 = document.createElement('h1');
       $h1.textContent = villagerSpecies;
-      $h1.className = 'species-header';
 
       $headerContainer.appendChild($h1);
       $villagerContainerHeader.appendChild($headerContainer);
@@ -427,7 +426,7 @@ function createFavoritesList(favorite) {
   $textContainer.setAttribute('id', favorite.villagerName);
 
   var $header = document.createElement('h1');
-  $header.className = 'favorites-header no-top-margin';
+  $header.className = 'no-top-margin';
   $header.textContent = favorite.villagerName;
 
   $textContainer.appendChild($header);
