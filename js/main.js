@@ -492,7 +492,7 @@ function changeScreenToAddEditForm(event) {
         var $villagerGet = data.favoritesList[i];
         villagerNumber = i;
         $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
-        $placeholderImage.setAttribute('alt', $villagerGet.$villagerName + '"s Photo.');
+        $placeholderImage.setAttribute('alt', $villagerGet.villagerName + "'s Photo.");
         if ($villagerGet.formValues !== null) {
           editVillagerInformation($villagerGet);
         }
@@ -529,7 +529,7 @@ function addFavoritesInformationToDom(favorite) {
 
   var $responseRow = document.createElement('div');
   $responseRow.setAttribute('id', 'id-' + favorite.favoriteOrder);
-  $responseRow.className = 'row shrink-column';
+  $responseRow.className = 'row shrink-indicator';
 
   var $columnFirstHalf = document.createElement('div');
   $columnFirstHalf.className = 'column-one-half';
@@ -575,7 +575,7 @@ function addFavoritesInformationToDom(favorite) {
   $responseRow.appendChild($columnSecondHalf);
 
   var $paragraphText = document.createElement('p');
-  $paragraphText.className = 'light-weight text-response';
+  $paragraphText.className = 'text-response';
   $paragraphText.textContent = notesValue;
 
   $responseRow.appendChild($paragraphText);
