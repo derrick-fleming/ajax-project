@@ -174,7 +174,7 @@ function generateDomVillagersList() {
     $villagerIcon.className = 'villager-icon';
     $villagerIcon.setAttribute('alt', villagerName);
 
-    var $villagerName = document.createElement('h2');
+    var $villagerName = document.createElement('h4');
     $villagerName.className = 'villager-name';
     $villagerName.textContent = villagerName;
 
