@@ -145,7 +145,7 @@ function renderDomVillagersList() {
       $villagerContainerHeader.className = 'container row';
 
       var $headerContainer = document.createElement('div');
-      $headerContainer.className = 'header-container';
+      $headerContainer.className = 'header-species-container';
 
       var $h1 = document.createElement('h1');
       $h1.textContent = villagerSpecies;
@@ -157,7 +157,7 @@ function renderDomVillagersList() {
       $villagerView.appendChild($villagerSection);
 
       var $villagerContainerSpeciesList = document.createElement('div');
-      $villagerContainerSpeciesList.className = 'container species-list row';
+      $villagerContainerSpeciesList.className = 'container row';
       $villagerContainerSpeciesList.setAttribute('id', villagerSpecies.toLowerCase());
 
     }
@@ -207,7 +207,7 @@ function renderDomVillagersList() {
 function generateLink() {
   var $topLink = document.createElement('a');
   $topLink.textContent = 'Back to top';
-  $topLink.className = 'top-link';
+  $topLink.className = 'top-page-link';
   $topLink.setAttribute('href', '#villager-view');
   return $topLink;
 }

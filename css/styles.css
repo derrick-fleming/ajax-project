@@ -26,6 +26,10 @@ h1 {
   font-size: 1.75rem;
 }
 
+h4 {
+  font-size: 1.125rem;
+}
+
 nav {
   padding: 0 1rem;
 }
@@ -109,6 +113,13 @@ label,
   margin-top: 0.5rem;
 }
 
+.nav-link:hover a,
+.nav-link:hover i,
+.nav-link:hover h3 {
+  color: #4dc3b9;
+  fill: #4dc3b9;
+}
+
 .house-outline {
   -webkit-text-stroke: 2.5px #4dc3b9ad;
   color: white;
@@ -153,7 +164,7 @@ label,
 }
 
 .pop-text,
-.top-link,
+.top-page-link,
 .load-link {
   color: #575757;
   font-size: 1.125rem;
@@ -168,7 +179,7 @@ label,
   margin-top: 1.5rem;
 }
 
-.header-container {
+.header-species-container {
   width: 150px;
 }
 
@@ -181,13 +192,6 @@ label,
   transform: scale3d(1.2, 1.2, 1.2);
 }
 
-.nav-link:hover a,
-.nav-link:hover i,
-.nav-link:hover h3 {
-  color: #4dc3b9;
-  fill: #4dc3b9;
-}
-
 .center {
   text-align: center;
 }
@@ -196,10 +200,9 @@ label,
   color: #816f59;
   font-weight: 300;
   margin-top: 0;
-  font-size: 1.125rem;
 }
 
-.top-link {
+.top-page-link {
   padding-top: 1.75rem;
   line-height: 1.2;
 }
