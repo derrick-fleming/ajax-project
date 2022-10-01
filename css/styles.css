@@ -304,11 +304,10 @@ label,
   color: #2ab5cf;
 }
 
-.unliked-text {
-  color: #575757;
+.no-villagers-liked-text {
   font-size: 1.5rem;
   text-align: center;
-  margin: 2.5rem;
+  margin: 2.5rem 1rem;
 }
 
 .favorite-image {
@@ -328,15 +327,6 @@ label,
 
 #favorite-icon:hover {
   color: #2ab5cf;
-}
-
-textarea:focus {
-  outline: 1px solid #4dc3b9;
-}
-
-input[type="radio"]:checked,
-input[type="checkbox"]:checked {
-  accent-color: #4dc3b9;
 }
 
 .hidden-text-box {
@@ -402,6 +392,15 @@ input[type="checkbox"]:checked {
 
 .add-edit:hover .pencil-icon-container {
   background-color: #4dc3b9;
+}
+
+textarea:focus {
+  outline: 1px solid #4dc3b9;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  accent-color: #4dc3b9;
 }
 
 .inline-block {

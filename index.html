@@ -179,8 +179,8 @@
       <div data-view="favorites-view" id="favorites-list" class="hidden">
         <div class="container">
           <h1>Favorites</h1>
-          <div class="default-container">
-            <h3 class="unliked-text">No villagers have been liked.</h3>
+          <div class="no-favorites-container">
+            <h3 class="no-villagers-liked-text">No villagers have been liked.</h3>
             <div class="container row justify-center">
               <div class="column-half end">
                 <div class="pop-info-container pop-vertical row" id="home-info">
@@ -191,7 +191,11 @@
                     <img src="images/nh-houseicon.png" alt="House icon" class="pop-home-icon">
                   </div>
                   <div class="column-half">
-                    <h2 class="pop-text">Click &quot;Home&quot; to view villagers</h2>
+                    <div class="align-items">
+                      <div class="column-full">
+                        <h2 class="pop-text pop-top-margin">Click &quot;Home&quot; to view villagers</h2>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -234,16 +238,14 @@
                     <img src="images/nh-best-friends.webp" alt="Favorite icon" class="pop-icon">
                   </div>
                   <div class="column-half">
-                    <h2 class="pop-text">Add villagers to your favorites list</h2>
+                    <h2 class="pop-text pop-top-margin">Add villagers to your favorites list</h2>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="favorites-entries">
-            <ul>
-            </ul>
-          </div>
+          <ul>
+          </ul>
         </div>
       </div>
       <div data-view="add-info" id="add-information" class="container less-padding hidden">

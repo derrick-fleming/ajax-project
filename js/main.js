@@ -25,7 +25,7 @@ var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon')
 var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
-var $defaultContainer = document.querySelector('.default-container');
+var $noFavoritesContainer = document.querySelector('.no-favorites-container');
 var $villagerViewLinks = document.querySelector('#villager-view-links');
 var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
@@ -360,7 +360,7 @@ function saveFavoriteVillager() {
   data.favoritesList.push(favoriteVillagerInformation);
 
   createFavoritesList(favoriteVillagerInformation);
-  $defaultContainer.className = 'hidden';
+  $noFavoritesContainer.className = 'hidden';
 
 }
 
@@ -473,14 +473,13 @@ function appendFavorites(event) {
   }
 
   if (data.favoritesList.length > 0) {
-    $defaultContainer.className = 'hidden';
+    $noFavoritesContainer.className = 'hidden';
   }
 }
 
-var $favoritesEntries = document.querySelector('.favorites-entries');
 var $placeholderImage = document.querySelector('#placeholder');
 
-$favoritesEntries.addEventListener('click', changeScreenToAddEditForm);
+$favoritesList.addEventListener('click', changeScreenToAddEditForm);
 
 function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
