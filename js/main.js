@@ -7,7 +7,7 @@ var $favScrollPopUp = document.querySelector('#scroll-fav-info');
 var $favViewInfoPopUp = document.querySelector('#view-fav-info');
 var $favFavoritesPopUp = document.querySelector('#favorite-fav-info');
 var $favoritesPopUp = document.querySelector('#favorite-info');
-var $modalInformation = document.querySelector('.hidden.villager-info-modal');
+var $modalInformation = document.querySelector('.hidden.modal-villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
 var $infoPhotoContainer = document.querySelector('#info-photo-container');
 var $speciesHeading = document.querySelector('#species');
@@ -223,7 +223,7 @@ function openModalWindow(event) {
   createInfoCard(villagerInfo);
 
   $overlay.className = 'overlay';
-  $modalInformation.className = 'villager-info-modal';
+  $modalInformation.className = 'modal-villager-info';
   if (event.target.className === 'villager-icon') {
     event.target.className = 'hidden villager-icon';
   }
@@ -273,7 +273,7 @@ $modalInformation.addEventListener('click', function () {
   var modalId = event.target.getAttribute('id');
   if (modalId === 'cancel') {
     $overlay.className = 'hidden overlay';
-    $modalInformation.className = 'hidden villager-info-modal';
+    $modalInformation.className = 'hidden modal-villager-info';
     var $imageDelete = document.querySelector('.villager-info-photo');
     resetRightArrowTextContainer();
     $imageDelete.remove();
