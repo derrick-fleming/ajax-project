@@ -86,10 +86,6 @@ label,
   margin: 0 auto;
 }
 
-.hidden {
-  display: none;
-}
-
 .leaf-icon {
   width: 50px;
   margin-right: 0.5rem;
@@ -129,7 +125,7 @@ label,
   padding-top: 1rem;
 }
 
-.pop-up-container {
+.pop-info-container {
   text-align: center;
   margin: 0 1rem 1rem;
   height: 97px;
@@ -141,7 +137,7 @@ label,
 
 .pop-x {
   color: #816f59a6;
-  font-size: 20px;
+  font-size: 1.25rem;
   padding-top: 0.3rem;
 }
 
@@ -205,9 +201,10 @@ label,
 .top-page-link {
   padding-top: 1.75rem;
   line-height: 1.2;
+  color: #838383;
 }
 
-.villager-section {
+.species-list {
   border-bottom: 1px solid #c7c7c7;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
@@ -215,11 +212,14 @@ label,
 
 .load-link {
   float: right;
-  margin: 1rem;
+  color: #838383;
+  line-height: 2;
+  margin-bottom: 1rem;
 }
 
-.load-link:hover {
-  cursor: pointer;
+.load-link:hover,
+.top-page-link:hover {
+  color: #4dc3b9;
 }
 
 .overlay {

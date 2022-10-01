@@ -139,7 +139,7 @@ function renderDomVillagersList() {
 
       var $villagerSection = document.createElement('div');
       $villagerSection.setAttribute('id', villagerSpecies);
-      $villagerSection.className = 'villager-section';
+      $villagerSection.className = 'species-list';
 
       var $villagerContainerHeader = document.createElement('div');
       $villagerContainerHeader.className = 'container row';

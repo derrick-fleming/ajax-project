@@ -57,3 +57,7 @@
 .wrap {
   flex-wrap: wrap;
 }
+
+.hidden {
+  display: none;
+}
