@@ -43,7 +43,6 @@ a {
 h2 {
   font-size: 1.375rem;
   color: #816f59;
-  font-weight: 400;
 }
 
 ul {
@@ -171,7 +170,8 @@ label,
   margin-top: 0.5rem;
 }
 
-.pop-top-margin {
+.pop-top-margin,
+.modal-text-margin {
   margin-top: 1.5rem;
 }
 
@@ -269,13 +269,13 @@ label,
   z-index: 3;
 }
 
-.villager-info-title {
+.modal-heading {
   color: #816f59;
   font-size: 2.375rem;
   margin: 0.5rem 0;
 }
 
-.villager-info-text-box {
+.modal-info-text-box {
   background-color: #f8f2dd;
   border-radius: 0 0 15px 15px;
   height: 200px;
@@ -288,10 +288,6 @@ label,
 
 .less-margin {
   margin: 0.4rem 0;
-}
-
-.box {
-  margin: 1.2rem 0;
 }
 
 .arrow {
@@ -467,7 +463,7 @@ input[type="checkbox"]:checked {
   flex-basis: 100%;
 }
 
-.column-fifty,
+.column-fifty-five,
 .column-forty-five {
   flex-basis: 100%;
 }
@@ -569,7 +565,7 @@ input[type="checkbox"]:checked {
     height: 598px;
   }
 
-  .villager-info-text-box {
+  .modal-info-text-box {
     height: 243px;
   }
 
@@ -582,7 +578,7 @@ input[type="checkbox"]:checked {
     flex-basis: 25%;
   }
 
-  .column-fifty {
+  .column-fifty-five {
     flex-basis: 55%;
   }
 

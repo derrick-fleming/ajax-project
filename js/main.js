@@ -238,7 +238,7 @@ function createInfoCard(info) {
 
   $modalPhotoContainer.appendChild($villagerInfoPhoto);
 
-  var $titleInfo = document.querySelector('.villager-info-title');
+  var $titleInfo = document.querySelector('.modal-heading');
   $titleInfo.textContent = info.name['name-USen'];
 
   var $speciesInfo = document.querySelector('#species-card');
