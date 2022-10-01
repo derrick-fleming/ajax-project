@@ -2,6 +2,7 @@ body {
   background-color: #f6f6f6;
   font-family: Montserrat, sans-serif;
   color: #575757;
+  line-height: 1.6;
 }
 
 header {
@@ -9,7 +10,6 @@ header {
   box-shadow: 0 1px 2px 0 #00000040;
   position: fixed;
   width: 100%;
-  top: 0;
   z-index: 1;
 }
 
@@ -19,11 +19,15 @@ h2,
 .button {
   font-family: "Varela Round", sans-serif;
   font-weight: 400;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 1.75rem;
 }
 
 nav {
-  padding: 1rem;
-  height: 64px;
+  padding: 0 1rem;
 }
 
 a {
@@ -111,7 +115,6 @@ label,
 }
 
 .pop-section {
-  margin-top: 5rem;
   padding-top: 1rem;
 }
 
@@ -120,8 +123,6 @@ label,
   margin: 0 1rem 1rem;
   height: 97px;
   width: 292px;
-  left: 42px;
-  top: 87px;
   border-radius: 8px;
   background-color: #4dc3b959;
   box-shadow: 0 1px 2px 0 #00000040;
@@ -155,28 +156,16 @@ label,
 .top-link,
 .load-link {
   color: #575757;
-  font-weight: 400;
   font-size: 1.125rem;
 }
 
 .pop-text {
-  margin-top: 1.3rem;
-  line-height: 1.5rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
 }
 
-.extra-margin {
-  margin-top: 2rem;
-}
-
-.species-header,
-.favorites-header {
-  font-weight: 400;
-  font-size: 1.75rem;
-  color: #575757;
-}
-
-.favorites-header {
-  margin-bottom: 1.25rem;
+.pop-top-margin {
+  margin-top: 1.5rem;
 }
 
 .header-container {
@@ -212,6 +201,7 @@ label,
 
 .top-link {
   padding-top: 1.75rem;
+  line-height: 1.2;
 }
 
 .villager-section {
@@ -264,7 +254,7 @@ label,
   top: 4rem;
 }
 
-.villager-info {
+.villager-info-modal {
   top: 129px;
   position: fixed;
   width: 350px;
@@ -570,7 +560,7 @@ input[type="checkbox"]:checked {
     max-width: 850px;
   }
 
-  .villager-info {
+  .villager-info-modal {
     width: 650px;
     height: 598px;
   }
