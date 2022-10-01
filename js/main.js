@@ -274,7 +274,7 @@ $modalInformation.addEventListener('click', function () {
   if (modalId === 'cancel') {
     $overlay.className = 'hidden overlay';
     $modalInformation.className = 'hidden modal-villager-info';
-    var $imageDelete = document.querySelector('.villager-info-photo');
+    var $imageDelete = document.querySelector('.modal-villager-photo');
     resetRightArrowTextContainer();
     $imageDelete.remove();
     countdown = 300;
