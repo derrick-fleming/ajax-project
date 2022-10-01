@@ -262,7 +262,6 @@ label,
   top: 129px;
   position: fixed;
   width: 350px;
-  height: 555px;
   background-color: #fafafa;
   border: 1px solid #afafaf;
   border-radius: 15px;
@@ -282,7 +281,7 @@ label,
   height: 200px;
 }
 
-.villager-info-photo {
+.modal-villager-photo {
   border-radius: 5px;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
 }
@@ -512,7 +511,7 @@ input[type="checkbox"]:checked {
     flex-basis: 50%;
   }
 
-  .pop-up-container {
+  .pop-info-container {
     width: 216px;
     height: 186px;
     margin-bottom: 2rem;

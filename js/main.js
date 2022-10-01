@@ -9,7 +9,7 @@ var $favFavoritesPopUp = document.querySelector('#favorite-fav-info');
 var $favoritesPopUp = document.querySelector('#favorite-info');
 var $modalInformation = document.querySelector('.hidden.modal-villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
-var $infoPhotoContainer = document.querySelector('#info-photo-container');
+var $modalPhotoContainer = document.querySelector('#modal-photo-container');
 var $speciesHeading = document.querySelector('#species');
 var $genderHeading = document.querySelector('#gender');
 var $personalityHeading = document.querySelector('#personality');
@@ -234,9 +234,9 @@ function createInfoCard(info) {
   var $villagerInfoPhoto = document.createElement('img');
   $villagerInfoPhoto.setAttribute('src', info.image_uri);
   $villagerInfoPhoto.setAttribute('alt', 'Image of ' + info.name['name-USen']);
-  $villagerInfoPhoto.className = 'villager-info-photo';
+  $villagerInfoPhoto.className = 'modal-villager-photo';
 
-  $infoPhotoContainer.appendChild($villagerInfoPhoto);
+  $modalPhotoContainer.appendChild($villagerInfoPhoto);
 
   var $titleInfo = document.querySelector('.villager-info-title');
   $titleInfo.textContent = info.name['name-USen'];
