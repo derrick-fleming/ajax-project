@@ -134,33 +134,16 @@ function renderVillagersList() {
           generateDomTree('a', { class: 'top-page-link', href: '#villager-view', textContent: 'Back to Top' })
         ])
       ]);
-
       $villagerView.appendChild($villagerSection);
-
-      var $villagerContainerSpeciesList = document.createElement('div');
-      $villagerContainerSpeciesList.className = 'container row';
-      $villagerContainerSpeciesList.setAttribute('id', 'section- ' + villagerSpecies.toLowerCase());
-
+      var $villagerContainerSpeciesList = generateDomTree('div', { class: 'container row', id: 'section-' + villagerSpecies.toLowerCase() });
     }
 
-    var $villagerColumn = document.createElement('div');
-    $villagerColumn.setAttribute('data-id', i);
-    $villagerColumn.className = 'column-one-third center';
-
-    var $anchorVillager = document.createElement('a');
-
-    var $villagerIcon = document.createElement('img');
-    $villagerIcon.setAttribute('src', villagerIcon);
-    $villagerIcon.className = 'villager-icon';
-    $villagerIcon.setAttribute('alt', villagerName);
-
-    var $villagerName = document.createElement('h4');
-    $villagerName.className = 'villager-name';
-    $villagerName.textContent = villagerName;
-
-    $anchorVillager.appendChild($villagerIcon);
-    $anchorVillager.appendChild($villagerName);
-    $villagerColumn.appendChild($anchorVillager);
+    var $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
+      generateDomTree('a', {}, [
+        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName }),
+        generateDomTree('h4', { class: 'villager-name', textContent: villagerName })
+      ])
+    ]);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
       var $villagerSectionUpdate = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
