@@ -78,7 +78,7 @@ label,
 .island-stats,
 .photo-collect {
   color: #575757;
-  line-height: 2rem;
+  line-height: 1.5;
 }
 
 .nav-container {
@@ -531,6 +531,10 @@ input[type="checkbox"]:checked {
   .no-top-margin {
     margin: 0 0 0.5rem;
   }
+
+  .notes-section {
+    margin: 0 1rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -552,12 +556,12 @@ input[type="checkbox"]:checked {
   }
 
   .modal-info-text-box {
-    height: 243px;
+    height: 238px;
   }
 
   .less-margin {
     text-align: left;
-    line-height: 2.1rem;
+    line-height: 1.5;
   }
 
   .column-one-third {
@@ -583,10 +587,6 @@ input[type="checkbox"]:checked {
 
   .hidden-text-box {
     display: block;
-  }
-
-  .notes-section {
-    margin: 0 1rem;
   }
 }
 
