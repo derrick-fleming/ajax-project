@@ -96,16 +96,6 @@ $favFavoritesPopUp.addEventListener('click', function () {
   }
 });
 
-function checkFavoriteVillager(info) {
-  for (var i = 0; i < data.favoritesList.length; i++) {
-    var checkFavorite = data.favoritesList[i];
-    if (info.name['name-USen'] === checkFavorite.villagerName) {
-      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      return;
-    }
-  }
-}
-
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
 xhr.responseType = 'json';
@@ -115,18 +105,18 @@ xhr.send();
 
 function generateList(event) {
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
-  renderDomVillagersList();
+  renderVillagersList();
   return villagerList;
 }
 
 $loadMoreLink.addEventListener('click', function () {
-  renderDomVillagersList();
+  renderVillagersList();
   if (speciesNumber > 300) {
     $loadMoreLink.className = 'load-link hidden';
   }
 });
 
-function renderDomVillagersList() {
+function renderVillagersList() {
 
   for (var i = speciesNumber; i < speciesNumber + 100; i++) {
 
@@ -230,6 +220,16 @@ function openModalWindow(event) {
   checkFavoriteVillager(villagerInfo);
 }
 
+function checkFavoriteVillager(info) {
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var checkFavorite = data.favoritesList[i];
+    if (info.name['name-USen'] === checkFavorite.villagerName) {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+      return;
+    }
+  }
+}
+
 function createInfoCard(info) {
   var $villagerInfoPhoto = document.createElement('img');
   $villagerInfoPhoto.setAttribute('src', info.image_uri);
@@ -238,35 +238,34 @@ function createInfoCard(info) {
 
   $modalPhotoContainer.appendChild($villagerInfoPhoto);
 
-  var $titleInfo = document.querySelector('.modal-heading');
-  $titleInfo.textContent = info.name['name-USen'];
-
-  var $speciesInfo = document.querySelector('#species-card');
-  $speciesInfo.textContent = info.species;
-
-  var $genderInfo = document.querySelector('#gender-card');
-  $genderInfo.textContent = info.gender;
-
-  var $personalityInfo = document.querySelector('#personality-card');
-  $personalityInfo.textContent = info.personality;
-
-  var $birthdayInfo = document.querySelector('#birthday-card');
   var birthday = info.birthday.split('/');
   var birthdayReverse = birthday.reverse();
-  $birthdayInfo.textContent = birthdayReverse.join('/');
 
-  var $hobbyInfo = document.querySelector('#hobby-card');
-  $hobbyInfo.textContent = info.hobby;
-
-  var $catchphraseInfo = document.querySelector('#catchphrase-card');
   var capitalizeCatch = info['catch-phrase'];
   var firstLetter = capitalizeCatch[0].toUpperCase();
   var wordOutput = firstLetter + capitalizeCatch.slice(1);
-  $catchphraseInfo.textContent = '"' + wordOutput + '"';
+  var catchphrase = '"' + wordOutput + '"';
 
-  var $sayingInfo = document.querySelector('#saying-card');
-  $sayingInfo.textContent = '"' + info.saying + '"';
+  var saying = '"' + info.saying + '"';
 
+  var infoCardArray = [
+    ['.modal-heading', info.name['name-USen']],
+    ['#species-card', info.species],
+    ['#gender-card', info.gender],
+    ['#personality-card', info.personality],
+    ['#birthday-card', birthdayReverse.join('/')],
+    ['#hobby-card', info.hobby],
+    ['#catchphrase-card', catchphrase],
+    ['#saying-card', saying]
+  ];
+  addModalTextContent(infoCardArray);
+}
+
+function addModalTextContent(array) {
+  for (var i = 0; i < array.length; i++) {
+    var $element = document.querySelector(array[i][0]);
+    $element.textContent = array[i][1];
+  }
 }
 
 $modalInformation.addEventListener('click', function () {
@@ -401,62 +400,46 @@ function switchToHomeView() {
 
 if (data.view === 'villager-view') {
   switchToHomeView();
-} else {
+} else if (data.view === 'add-info' || data.view === 'favorites-view') {
   switchToFavoritesView();
 }
 
+function generateDomTree(tagName, attributes, children) {
+  if (!children) {
+    children = [];
+  }
+
+  var $element = document.createElement(tagName);
+  for (var key in attributes) {
+    if (key === 'textContent') {
+      $element.textContent = attributes.textContent;
+    } else {
+      $element.setAttribute(key, attributes[key]);
+    }
+  }
+  for (var i = 0; i < children.length; i++) {
+    $element.append(children[i]);
+  }
+  return $element;
+}
+
 function createFavoritesList(favorite) {
-  var $li = document.createElement('li');
-  $li.className = 'row';
-  $li.setAttribute('id', favorite.villagerId);
 
-  var $imageContainer = document.createElement('div');
-  $imageContainer.className = 'column-third row justify-center';
-
-  var $favoriteVillagerImage = document.createElement('img');
-  $favoriteVillagerImage.className = 'favorite-image';
-  $favoriteVillagerImage.setAttribute('alt', favorite.villagerName + ' Photo');
-  $favoriteVillagerImage.setAttribute('src', favorite.villagerPicture);
-
-  $imageContainer.appendChild($favoriteVillagerImage);
-  $li.appendChild($imageContainer);
-
-  var $textContainer = document.createElement('div');
-  $textContainer.className = 'column-two-third';
-  $textContainer.setAttribute('id', favorite.villagerName);
-
-  var $header = document.createElement('h1');
-  $header.className = 'no-top-margin';
-  $header.textContent = favorite.villagerName;
-
-  $textContainer.appendChild($header);
-  $li.appendChild($textContainer);
-
-  var $addEditContainer = document.createElement('div');
-  $addEditContainer.className = 'add-edit';
-
-  var $anchorElement = document.createElement('a');
-  $anchorElement.className = 'align-items';
-
-  var $pencilIconContainer = document.createElement('div');
-  $pencilIconContainer.className = 'pencil-icon-container align-items justify-center nav-link';
-
-  var $pencilImage = document.createElement('img');
-  $pencilImage.setAttribute('src', 'images/pencil-icon.png');
-  $pencilImage.setAttribute('alt', 'Edit Icon');
-  $pencilImage.className = 'edit-icon';
-
-  var $addText = document.createElement('p');
-  $addText.className = 'light-weight no-margin';
-  $addText.textContent = 'Add/Edit Information';
-
-  $pencilIconContainer.appendChild($pencilImage);
-  $anchorElement.appendChild($pencilIconContainer);
-  $anchorElement.appendChild($addText);
-  $addEditContainer.appendChild($anchorElement);
-
-  $textContainer.appendChild($addEditContainer);
-
+  var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId },
+    [generateDomTree('div', { class: 'column-third row justify-center' }, [
+      generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture }, [])]),
+    generateDomTree('div', { class: 'column-two-third', id: favorite.villagerName }, [
+      generateDomTree('h1', { class: 'no-top-margin', textContent: favorite.villagerName }),
+      generateDomTree('div', { class: 'add-edit' }, [
+        generateDomTree('a', { class: 'align-items' }, [
+          generateDomTree('div', { class: 'pencil-icon-container align-items justify-center nav-link' }, [
+            generateDomTree('img', { class: 'edit-icon', src: 'images/pencil-icon.png', alt: 'Edit Icon' })]),
+          generateDomTree('p', { class: 'light-weight no-margin', textContent: 'Add/Edit Information' })
+        ])
+      ])
+    ])
+    ]
+  );
   $ul.appendChild($li);
 
 }
