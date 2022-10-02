@@ -71,6 +71,7 @@ function generateDomTree(tagName, attributes, children) {
       $element.setAttribute(key, attributes[key]);
     }
   }
+
   for (var i = 0; i < children.length; i++) {
     $element.append(children[i]);
   }
@@ -349,6 +350,7 @@ function switchToFavoritesView() {
   $navHomeText.className = 'nav-home home-page-link';
   $villagerView.className = 'hidden';
   $villagerViewLinks.className = 'hidden';
+  $addInformationScreen.className = 'hidden';
   $favoritesList.className = '';
 }
 
@@ -360,6 +362,7 @@ function switchToHomeView() {
   $villagerView.className = '';
   $villagerViewLinks.className = 'container';
   $favoritesList.className = 'hidden';
+  $addInformationScreen.className = 'hidden';
 }
 
 if (data.view === 'villager-view') {
@@ -477,7 +480,8 @@ function addFavoritesInformationToDom(favorite) {
     boxClass = 'unchecked fa-regular fa-square';
   }
 
-  var $responseRow = generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
+  var $responseRow =
+  generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
     generateDomTree('div', { class: 'column-one-half' }, [
       generateDomTree('p', { class: islandClass, textContent: islandText })]),
     generateDomTree('div', { class: 'column-one-half' }, [
@@ -510,7 +514,6 @@ function cancelEntries(event) {
   if (event.target.tagName === 'A') {
     $addEditForm.reset();
     switchToFavoritesView();
-    $addInformationScreen.className = 'hidden';
     $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
     $placeholderImage.setAttribute('alt', 'Placeholder Image');
 
