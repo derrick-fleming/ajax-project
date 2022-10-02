@@ -424,7 +424,6 @@ function generateDomTree(tagName, attributes, children) {
 }
 
 function createFavoritesList(favorite) {
-
   var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId },
     [generateDomTree('div', { class: 'column-third row justify-center' }, [
       generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture }, [])]),
@@ -509,59 +508,38 @@ function saveInformation(event) {
 
 function addFavoritesInformationToDom(favorite) {
   var $liUpdate = document.getElementById(favorite.villagerName);
-
-  var $responseRow = document.createElement('div');
-  $responseRow.setAttribute('id', 'id-' + favorite.favoriteOrder);
-  $responseRow.className = 'row shrink-indicator';
-
-  var $columnFirstHalf = document.createElement('div');
-  $columnFirstHalf.className = 'column-one-half';
-
-  var $islandResponse = document.createElement('p');
-
   var islandValue = favorite.formValues.islandStatus;
+  var islandText = null;
+  var islandClass = null;
   var photoValue = favorite.formValues.photoCollected;
   var notesValue = favorite.formValues.notes;
+  var boxClass = null;
 
   if (islandValue === 'formerly') {
-    $islandResponse.className = 'formerly-island';
-    $islandResponse.textContent = 'Formerly on island';
+    islandClass = 'formerly-island';
+    islandText = 'Formerly on island';
   } else if (islandValue === 'currently') {
-    $islandResponse.className = 'currently-island';
-    $islandResponse.textContent = 'Currently on island';
+    islandClass = 'currently-island';
+    islandText = 'Currently on island';
   } else {
-    $islandResponse.className = 'wish-island';
-    $islandResponse.textContent = 'Wish on island';
+    islandClass = 'wish-island';
+    islandText = 'Wish on island';
   }
-
-  $columnFirstHalf.appendChild($islandResponse);
-  $responseRow.appendChild($columnFirstHalf);
-
-  var $columnSecondHalf = document.createElement('div');
-  $columnSecondHalf.className = 'column-one-half';
-
-  var $photoResponse = document.createElement('p');
-  $photoResponse.className = 'photo-response inline-block';
-  $photoResponse.textContent = 'Photo Collected: ';
-
-  var $boxIcon = document.createElement('i');
 
   if (photoValue === true) {
-    $boxIcon.className = 'checked fa-solid fa-square-check';
+    boxClass = 'checked fa-solid fa-square-check';
   } else {
-    $boxIcon.className = 'unchecked fa-regular fa-square';
+    boxClass = 'unchecked fa-regular fa-square';
   }
 
-  $columnSecondHalf.appendChild($photoResponse);
-  $columnSecondHalf.appendChild($boxIcon);
-
-  $responseRow.appendChild($columnSecondHalf);
-
-  var $paragraphText = document.createElement('p');
-  $paragraphText.className = 'text-response';
-  $paragraphText.textContent = notesValue;
-
-  $responseRow.appendChild($paragraphText);
+  var $responseRow = generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
+    generateDomTree('div', { class: 'column-one-half' }, [
+      generateDomTree('p', { class: islandClass, textContent: islandText })]),
+    generateDomTree('div', { class: 'column-one-half' }, [
+      generateDomTree('p', { class: 'photo-response inline-block', textContent: 'Photo Collected: ' }),
+      generateDomTree('i', { class: boxClass })
+    ]),
+    generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
 
   if (data.editing === true) {
     data.editing = false;
