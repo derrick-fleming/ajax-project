@@ -127,28 +127,19 @@ function renderVillagersList() {
     if (!speciesList.includes(villagerSpecies)) {
       speciesList.push(villagerSpecies);
 
-      var $villagerSection = document.createElement('div');
-      $villagerSection.setAttribute('id', villagerSpecies);
-      $villagerSection.className = 'species-list';
+      var $villagerSection = generateDomTree('div', { class: 'species-list', id: villagerSpecies }, [
+        generateDomTree('div', { class: 'container row' }, [
+          generateDomTree('div', { class: 'header-species-container' }, [
+            generateDomTree('h1', { textContent: villagerSpecies })]),
+          generateDomTree('a', { class: 'top-page-link', href: '#villager-view', textContent: 'Back to Top' })
+        ])
+      ]);
 
-      var $villagerContainerHeader = document.createElement('div');
-      $villagerContainerHeader.className = 'container row';
-
-      var $headerContainer = document.createElement('div');
-      $headerContainer.className = 'header-species-container';
-
-      var $h1 = document.createElement('h1');
-      $h1.textContent = villagerSpecies;
-
-      $headerContainer.appendChild($h1);
-      $villagerContainerHeader.appendChild($headerContainer);
-      $villagerContainerHeader.appendChild(generateLink());
-      $villagerSection.appendChild($villagerContainerHeader);
       $villagerView.appendChild($villagerSection);
 
       var $villagerContainerSpeciesList = document.createElement('div');
       $villagerContainerSpeciesList.className = 'container row';
-      $villagerContainerSpeciesList.setAttribute('id', villagerSpecies.toLowerCase());
+      $villagerContainerSpeciesList.setAttribute('id', 'section- ' + villagerSpecies.toLowerCase());
 
     }
 
@@ -172,7 +163,7 @@ function renderVillagersList() {
     $villagerColumn.appendChild($anchorVillager);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
-      var $villagerSectionUpdate = document.querySelector('#' + villagerSpecies.toLowerCase());
+      var $villagerSectionUpdate = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
       $villagerSectionUpdate.appendChild($villagerColumn);
       continue;
     }
@@ -194,14 +185,6 @@ function renderVillagersList() {
   return speciesNumber;
 }
 
-function generateLink() {
-  var $topLink = document.createElement('a');
-  $topLink.textContent = 'Back to top';
-  $topLink.className = 'top-page-link';
-  $topLink.setAttribute('href', '#villager-view');
-  return $topLink;
-}
-
 $villagerView.addEventListener('click', openModalWindow);
 function openModalWindow(event) {
   if (event.target.className !== 'villager-icon') {
@@ -210,7 +193,7 @@ function openModalWindow(event) {
   var $modalPopUp = event.target.closest('div');
   var villagerNumber = $modalPopUp.getAttribute('data-id');
   var villagerInfo = villagerList[villagerNumber];
-  createInfoCard(villagerInfo);
+  UpdateModalInfo(villagerInfo);
 
   $overlay.className = 'overlay';
   $modalInformation.className = 'modal-villager-info';
@@ -230,7 +213,7 @@ function checkFavoriteVillager(info) {
   }
 }
 
-function createInfoCard(info) {
+function UpdateModalInfo(info) {
   var $villagerInfoPhoto = document.createElement('img');
   $villagerInfoPhoto.setAttribute('src', info.image_uri);
   $villagerInfoPhoto.setAttribute('alt', 'Image of ' + info.name['name-USen']);
@@ -244,9 +227,6 @@ function createInfoCard(info) {
   var capitalizeCatch = info['catch-phrase'];
   var firstLetter = capitalizeCatch[0].toUpperCase();
   var wordOutput = firstLetter + capitalizeCatch.slice(1);
-  var catchphrase = '"' + wordOutput + '"';
-
-  var saying = '"' + info.saying + '"';
 
   var infoCardArray = [
     ['.modal-heading', info.name['name-USen']],
@@ -255,8 +235,8 @@ function createInfoCard(info) {
     ['#personality-card', info.personality],
     ['#birthday-card', birthdayReverse.join('/')],
     ['#hobby-card', info.hobby],
-    ['#catchphrase-card', catchphrase],
-    ['#saying-card', saying]
+    ['#catchphrase-card', '"' + wordOutput + '"'],
+    ['#saying-card', '"' + info.saying + '"']
   ];
   addModalTextContent(infoCardArray);
 }
@@ -566,6 +546,8 @@ function cancelEntries(event) {
     $addEditForm.reset();
     switchToFavoritesView();
     $addInformationScreen.className = 'hidden';
+    $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
+    $placeholderImage.setAttribute('alt', 'Placeholder Image');
 
   }
 }
