@@ -1,12 +1,10 @@
 var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
-var $scrollPopUp = document.querySelector('#scroll-info');
-var $viewInfoPopUp = document.querySelector('#view-info');
+var $containerPopSection = document.querySelector('.container.pop-section.row.justify-center');
 var $homePopUp = document.querySelector('#home-info');
 var $favScrollPopUp = document.querySelector('#scroll-fav-info');
 var $favViewInfoPopUp = document.querySelector('#view-fav-info');
 var $favFavoritesPopUp = document.querySelector('#favorite-fav-info');
-var $favoritesPopUp = document.querySelector('#favorite-info');
 var $modalInformation = document.querySelector('.hidden.modal-villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
 var $modalPhotoContainer = document.querySelector('#modal-photo-container');
@@ -40,62 +38,6 @@ var villagerList = null;
 var speciesNumber = 0;
 var villagerNumber = null;
 
-$scrollPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $scrollPopUp.className = 'hidden';
-    var $hideScrollDiv = $scrollPopUp.closest('.column-quarter');
-    $hideScrollDiv.className = 'hidden';
-  }
-});
-
-$viewInfoPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $viewInfoPopUp.className = 'hidden';
-    var $hideViewInfoDiv = $viewInfoPopUp.closest('.column-quarter');
-    $hideViewInfoDiv.className = 'hidden';
-  }
-});
-
-$favoritesPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $favoritesPopUp.className = 'hidden';
-    var $hideFavoritesDiv = $favoritesPopUp.closest('.column-quarter');
-    $hideFavoritesDiv.className = 'hidden';
-  }
-});
-
-$homePopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $homePopUp.className = 'hidden';
-    var $hideHomeDiv = $homePopUp.closest('.column-half.end');
-    $hideHomeDiv.className = 'hidden';
-  }
-});
-
-$favScrollPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $favScrollPopUp.className = 'hidden';
-    var $hidefavScrollDiv = $favScrollPopUp.closest('.column-half');
-    $hidefavScrollDiv.className = 'hidden';
-  }
-});
-
-$favViewInfoPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $favViewInfoPopUp.className = 'hidden';
-    var $hidefavViewDiv = $favViewInfoPopUp.closest('.column-half.end');
-    $hidefavViewDiv.className = 'hidden';
-  }
-});
-
-$favFavoritesPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $favFavoritesPopUp.className = 'hidden';
-    var $hidefavFavoritesDiv = $favFavoritesPopUp.closest('.column-half');
-    $hidefavFavoritesDiv.className = 'hidden';
-  }
-});
-
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
 xhr.responseType = 'json';
@@ -115,6 +57,25 @@ $loadMoreLink.addEventListener('click', function () {
     $loadMoreLink.className = 'load-link hidden';
   }
 });
+
+function generateDomTree(tagName, attributes, children) {
+  if (!children) {
+    children = [];
+  }
+
+  var $element = document.createElement(tagName);
+  for (var key in attributes) {
+    if (key === 'textContent') {
+      $element.textContent = attributes.textContent;
+    } else {
+      $element.setAttribute(key, attributes[key]);
+    }
+  }
+  for (var i = 0; i < children.length; i++) {
+    $element.append(children[i]);
+  }
+  return $element;
+}
 
 function renderVillagersList() {
 
@@ -167,6 +128,46 @@ function renderVillagersList() {
   speciesNumber += 100;
   return speciesNumber;
 }
+
+$containerPopSection.addEventListener('click', aidDisappear);
+function aidDisappear(event) {
+  if (event.target.tagName === 'I') {
+    var $hideScrollDiv = event.target.closest('.column-quarter');
+    $hideScrollDiv.className = 'hidden';
+  }
+}
+
+$homePopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $homePopUp.className = 'hidden';
+    var $hideHomeDiv = $homePopUp.closest('.column-half.end');
+    $hideHomeDiv.className = 'hidden';
+  }
+});
+
+$favScrollPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favScrollPopUp.className = 'hidden';
+    var $hidefavScrollDiv = $favScrollPopUp.closest('.column-half');
+    $hidefavScrollDiv.className = 'hidden';
+  }
+});
+
+$favViewInfoPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favViewInfoPopUp.className = 'hidden';
+    var $hidefavViewDiv = $favViewInfoPopUp.closest('.column-half.end');
+    $hidefavViewDiv.className = 'hidden';
+  }
+});
+
+$favFavoritesPopUp.addEventListener('click', function () {
+  if (event.target.tagName === 'I') {
+    $favFavoritesPopUp.className = 'hidden';
+    var $hidefavFavoritesDiv = $favFavoritesPopUp.closest('.column-half');
+    $hidefavFavoritesDiv.className = 'hidden';
+  }
+});
 
 $villagerView.addEventListener('click', openModalWindow);
 function openModalWindow(event) {
@@ -365,25 +366,6 @@ if (data.view === 'villager-view') {
   switchToHomeView();
 } else if (data.view === 'add-info' || data.view === 'favorites-view') {
   switchToFavoritesView();
-}
-
-function generateDomTree(tagName, attributes, children) {
-  if (!children) {
-    children = [];
-  }
-
-  var $element = document.createElement(tagName);
-  for (var key in attributes) {
-    if (key === 'textContent') {
-      $element.textContent = attributes.textContent;
-    } else {
-      $element.setAttribute(key, attributes[key]);
-    }
-  }
-  for (var i = 0; i < children.length; i++) {
-    $element.append(children[i]);
-  }
-  return $element;
 }
 
 function createFavoritesList(favorite) {
