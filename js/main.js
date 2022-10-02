@@ -96,7 +96,14 @@ function renderVillagersList() {
           generateDomTree('a', { class: 'top-page-link', href: '#villager-view', textContent: 'Back to Top' })
         ])
       ]);
+
       $villagerView.appendChild($villagerSection);
+
+      if (villagerSpecies === 'Alligator') {
+        var removeLink = document.querySelector('.top-page-link');
+        removeLink.remove();
+      }
+
       var $villagerContainerSpeciesList = generateDomTree('div', { class: 'container row', id: 'section-' + villagerSpecies.toLowerCase() });
     }
 
