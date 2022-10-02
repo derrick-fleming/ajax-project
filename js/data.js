@@ -13,6 +13,7 @@ if (previousData !== null) {
 }
 
 window.addEventListener('beforeunload', storeToLocalStorage);
+window.addEventListener('pagehide', storeToLocalStorage);
 
 function storeToLocalStorage(event) {
   var dataJSON = JSON.stringify(data);
