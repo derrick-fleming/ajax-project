@@ -45,8 +45,7 @@
     </nav>
   </header>
   <main>
-    <div class="hidden overlay"></div>
-    <div class="container align-items justify-center">
+    <div class="container row justify-center">
       <div class="hidden modal-villager-info">
         <div class="row">
           <div class="column-half">
@@ -91,7 +90,8 @@
             </div>
             <div class="row">
               <div class="column-forty-five">
-                <h2 id="personality" class="less-margin">Personality: <span id="personality-card" class="blue">  </span> </h2>
+                <h2 id="personality" class="less-margin">Personality: <span id="personality-card" class="blue"> </span>
+                </h2>
               </div>
               <div class="column-fifty-five">
                 <h2 id="birthday" class="less-margin">Birthday: <span id="birthday-card"></span></h2>
@@ -102,7 +102,8 @@
                 <h2 id="hobby" class="less-margin hidden-text-box">Hobby: <span id="hobby-card"></span></h2>
               </div>
               <div class="column-fifty-five">
-                <h2 id="catchphrase" class="less-margin hidden-text-box">Catchphrase: <span id="catchphrase-card" class="blue"></span></h2>
+                <h2 id="catchphrase" class="less-margin hidden-text-box">Catchphrase: <span id="catchphrase-card"
+                    class="blue"></span></h2>
               </div>
             </div>
             <div class="row">
@@ -119,179 +120,178 @@
         </div>
       </div>
     </div>
-    <div class="margin-top">
-      <div data-view="villager-view" id="villager-view" class="">
-        <div class="container pop-section row justify-center">
-          <div class="column-quarter">
-            <div class="pop-info-container pop-vertical row" id="scroll-info">
-              <a class="column-one-twelfth">
-                <i class="fa-solid fa-xmark pop-x"></i>
-              </a>
-              <div class="column-quarter">
-                <img src="images/nh-map-icon.webp" alt="Map icon" class="pop-icon">
-              </div>
-              <div class="column-half">
-                <div class="align-items justify-center">
-                  <h2 class="pop-text pop-top-margin">Scroll to find <br>villagers</h2>
-                </div>
-              </div>
+    <div data-view="villager-view" id="villager-view" class="margin-top">
+      <div class="container pop-section row justify-center">
+        <div class="column-quarter">
+          <div class="pop-info-container pop-vertical row" id="scroll-info">
+            <a class="column-one-twelfth">
+              <i class="fa-solid fa-xmark pop-x"></i>
+            </a>
+            <div class="column-quarter">
+              <img src="images/nh-map-icon.webp" alt="Map icon" class="pop-icon">
             </div>
-          </div>
-          <div class="column-quarter">
-            <div class="pop-info-container pop-vertical row" id="view-info">
-              <a class="column-one-twelfth">
-                <i class="fa-solid fa-xmark pop-x"></i>
-              </a>
-              <div class="column-quarter">
-                <img src="images/nh-passport-photo.webp" alt="Information icon" class="pop-icon">
-              </div>
-              <div class="column-half">
-                <div class="align-items justify-center">
-                  <h2 class="pop-text">Click a villager to view their information</h2>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column-quarter">
-            <div class="pop-info-container pop-vertical row" id="favorite-info">
-              <a class="column-one-twelfth">
-                <i class="fa-solid fa-xmark pop-x"></i>
-              </a>
-              <div class="column-quarter">
-                <img src="images/nh-best-friends.webp" alt="Favorite icon" class="pop-icon">
-              </div>
-              <div class="column-half">
-                <div class="align-items">
-                  <div class="column-full">
-                    <div class="align-items justify-center">
-                      <h2 class="pop-text pop-top-margin">Add villagers to your favorites list</h2>
-                    </div>
-                  </div>
-                </div>
+            <div class="column-half">
+              <div class="align-items justify-center">
+                <h2 class="pop-text pop-top-margin">Scroll to find <br>villagers</h2>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="villager-view-links" class="container">
-        <a class="load-link"> Load More </a>
-      </div>
-      <div data-view="favorites-view" id="favorites-list" class="hidden">
-        <div class="container">
-          <h1>Favorites</h1>
-          <div class="no-favorites-container">
-            <h3 class="no-villagers-liked-text">No villagers have been liked.</h3>
-            <div class="container row justify-center">
-              <div class="column-half end">
-                <div class="pop-info-container pop-vertical row" id="home-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark pop-x"></i>
-                  </a>
-                  <div class="column-quarter">
-                    <img src="images/nh-houseicon.png" alt="House icon" class="pop-home-icon">
-                  </div>
-                  <div class="column-half">
-                    <div class="align-items">
-                      <div class="column-full">
-                        <h2 class="pop-text pop-top-margin">Click &quot;Home&quot; to view villagers</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        <div class="column-quarter">
+          <div class="pop-info-container pop-vertical row" id="view-info">
+            <a class="column-one-twelfth">
+              <i class="fa-solid fa-xmark pop-x"></i>
+            </a>
+            <div class="column-quarter">
+              <img src="images/nh-passport-photo.webp" alt="Information icon" class="pop-icon">
+            </div>
+            <div class="column-half">
+              <div class="align-items justify-center">
+                <h2 class="pop-text">Click a villager to view their information</h2>
               </div>
-              <div class="column-half">
-                <div class="pop-info-container pop-vertical row" id="scroll-fav-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark pop-x"></i>
-                  </a>
-                  <div class="column-quarter">
-                    <img src="images/nh-map-icon.webp" alt="Map icon" class="pop-icon">
-                  </div>
-                  <div class="column-half">
-                    <div class="align-items">
-                      <div class="column-full">
-                        <h2 class="pop-text pop-top-margin">Scroll to find <br>villagers</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="column-half end">
-                <div class="pop-info-container pop-vertical row" id="view-fav-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark pop-x"></i>
-                  </a>
-                  <div class="column-quarter">
-                    <img src="images/nh-passport-photo.webp" alt="Information icon" class="pop-icon">
-                  </div>
-                  <div class="column-half">
-                    <h2 class="pop-text">Click a villager to view their information</h2>
-                  </div>
-                </div>
-              </div>
-              <div class="column-half">
-                <div class="pop-info-container pop-vertical row" id="favorite-fav-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark pop-x"></i>
-                  </a>
-                  <div class="column-quarter">
-                    <img src="images/nh-best-friends.webp" alt="Favorite icon" class="pop-icon">
-                  </div>
-                  <div class="column-half">
+            </div>
+          </div>
+        </div>
+        <div class="column-quarter">
+          <div class="pop-info-container pop-vertical row" id="favorite-info">
+            <a class="column-one-twelfth">
+              <i class="fa-solid fa-xmark pop-x"></i>
+            </a>
+            <div class="column-quarter">
+              <img src="images/nh-best-friends.webp" alt="Favorite icon" class="pop-icon">
+            </div>
+            <div class="column-half">
+              <div class="align-items">
+                <div class="column-full">
+                  <div class="align-items justify-center">
                     <h2 class="pop-text pop-top-margin">Add villagers to your favorites list</h2>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <ul>
-          </ul>
         </div>
       </div>
-      <div data-view="add-info" id="add-information" class="container less-padding hidden">
-        <form id="add-edit-form">
-          <div class="row wrap">
-            <div class="column-full">
-              <h1 class="center">Additional Information</h1>
-            </div>
-            <div class="column-third row justify-center">
-              <img src="images/placeholder-image-square-1.jpg" alt="placeholder" id="placeholder" class="favorite-image margin-bottom">
-            </div>
-            <div class="column-one-half align-items">
-              <div class="one-hundred-width">
-                <label for="photo-collect" class="photo-collect">Photo Collected:</label>
-                <input id="photo-collect" name="photo" type="checkbox" class="photo-option" value="yes">
-                <h2 class="island-stats less-margin">Island Status: </h2>
-                <div class="row">
-                  <div class="col-l">
-                    <div>
-                      <input required id="option1" name="island" type="radio" value="formerly">
-                      <label for="option1">Formerly on island</label>
+    </div>
+    <div id="villager-view-links" class="container">
+      <a class="load-link"> Load More </a>
+    </div>
+    <div data-view="favorites-view" id="favorites-list" class="hidden">
+      <div class="container">
+        <h1>Favorites</h1>
+        <div class="no-favorites-container">
+          <h3 class="no-villagers-liked-text">No villagers have been liked.</h3>
+          <div class="container row justify-center">
+            <div class="column-half end">
+              <div class="pop-info-container pop-vertical row" id="home-info">
+                <a class="column-one-twelfth">
+                  <i class="fa-solid fa-xmark pop-x"></i>
+                </a>
+                <div class="column-quarter">
+                  <img src="images/nh-houseicon.png" alt="House icon" class="pop-home-icon">
+                </div>
+                <div class="column-half">
+                  <div class="align-items">
+                    <div class="column-full">
+                      <h2 class="pop-text pop-top-margin">Click &quot;Home&quot; to view villagers</h2>
                     </div>
-                    <input required id="option2" name="island" type="radio" value="currently">
-                    <label for="option2">Currently on island</label>
-                  </div>
-                  <div class="col-r">
-                    <input required id="option3" name="island" type="radio" value="wish">
-                    <label for="option3">Wish on island</label>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="column-full notes-section">
-              <label for="notes-section">Notes</label>
-              <textarea required id="notes-section" name="notes" rows="4"></textarea>
+            <div class="column-half">
+              <div class="pop-info-container pop-vertical row" id="scroll-fav-info">
+                <a class="column-one-twelfth">
+                  <i class="fa-solid fa-xmark pop-x"></i>
+                </a>
+                <div class="column-quarter">
+                  <img src="images/nh-map-icon.webp" alt="Map icon" class="pop-icon">
+                </div>
+                <div class="column-half">
+                  <div class="align-items">
+                    <div class="column-full">
+                      <h2 class="pop-text pop-top-margin">Scroll to find <br>villagers</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="column-half align-items">
-              <a class="cancel button">CANCEL</a>
+            <div class="column-half end">
+              <div class="pop-info-container pop-vertical row" id="view-fav-info">
+                <a class="column-one-twelfth">
+                  <i class="fa-solid fa-xmark pop-x"></i>
+                </a>
+                <div class="column-quarter">
+                  <img src="images/nh-passport-photo.webp" alt="Information icon" class="pop-icon">
+                </div>
+                <div class="column-half">
+                  <h2 class="pop-text">Click a villager to view their information</h2>
+                </div>
+              </div>
             </div>
-            <div class="column-half align-right">
-              <input type="submit" class="save button" value="SAVE">
+            <div class="column-half">
+              <div class="pop-info-container pop-vertical row" id="favorite-fav-info">
+                <a class="column-one-twelfth">
+                  <i class="fa-solid fa-xmark pop-x"></i>
+                </a>
+                <div class="column-quarter">
+                  <img src="images/nh-best-friends.webp" alt="Favorite icon" class="pop-icon">
+                </div>
+                <div class="column-half">
+                  <h2 class="pop-text pop-top-margin">Add villagers to your favorites list</h2>
+                </div>
+              </div>
             </div>
           </div>
-        </form>
+        </div>
+        <ul>
+        </ul>
       </div>
     </div>
+    <div data-view="add-info" id="add-information" class="container less-padding margin-top hidden">
+      <form id="add-edit-form">
+        <div class="row wrap">
+          <div class="column-full">
+            <h1 class="center">Additional Information</h1>
+          </div>
+          <div class="column-third row justify-center">
+            <img src="images/placeholder-image-square-1.jpg" alt="placeholder" id="placeholder" class="favorite-image margin-bottom">
+          </div>
+          <div class="column-one-half align-items">
+            <div class="one-hundred-width">
+              <label for="photo-collect" class="photo-collect">Photo Collected:</label>
+              <input id="photo-collect" name="photo" type="checkbox" class="photo-option" value="yes">
+              <h2 class="island-stats less-margin">Island Status: </h2>
+              <div class="row">
+                <div class="col-l">
+                  <div>
+                    <input required id="option1" name="island" type="radio" value="formerly">
+                    <label for="option1">Formerly on island</label>
+                  </div>
+                  <input required id="option2" name="island" type="radio" value="currently">
+                  <label for="option2">Currently on island</label>
+                </div>
+                <div class="col-r">
+                  <input required id="option3" name="island" type="radio" value="wish">
+                  <label for="option3">Wish on island</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column-full notes-section">
+            <label for="notes-section">Notes</label>
+            <textarea required id="notes-section" name="notes" rows="4"></textarea>
+          </div>
+          <div class="column-half align-items">
+            <a class="cancel button">CANCEL</a>
+          </div>
+          <div class="column-half align-right">
+            <input type="submit" class="save button" value="SAVE">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="hidden overlay"></div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

@@ -151,7 +151,7 @@ label,
 }
 
 .margin-top {
-  margin-top: 6rem;
+  margin-top: 5rem;
 }
 
 .no-margin {
@@ -259,7 +259,6 @@ label,
 }
 
 .modal-villager-info {
-  top: 129px;
   position: fixed;
   width: 350px;
   background-color: #fafafa;
@@ -267,6 +266,9 @@ label,
   border-radius: 15px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal-heading {

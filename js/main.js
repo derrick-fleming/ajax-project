@@ -358,7 +358,7 @@ function switchToFavoritesView() {
   $villagerView.className = 'hidden';
   $villagerViewLinks.className = 'hidden';
   $addInformationScreen.className = 'hidden';
-  $favoritesList.className = '';
+  $favoritesList.className = 'margin-top';
 }
 
 function switchToHomeView() {
@@ -366,7 +366,7 @@ function switchToHomeView() {
   $homePageIcon.className = 'fa solid fa-house nav-icon currently-island';
   $navFavoriteText.className = 'nav-home favorites-page-link';
   $navHomeText.className = 'nav-home home-page-link currently-island';
-  $villagerView.className = '';
+  $villagerView.className = 'margin-top';
   $villagerViewLinks.className = 'container';
   $favoritesList.className = 'hidden';
   $addInformationScreen.className = 'hidden';
@@ -435,7 +435,7 @@ function changeScreenToAddEditForm(event) {
         }
       }
     }
-    $addInformationScreen.className = 'container less-padding';
+    $addInformationScreen.className = 'container less-padding margin-top';
   }
 
 }
