@@ -1,6 +1,6 @@
 var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
-var $containerPopSection = document.querySelector('.container.pop-section.row.justify-center');
+var $containerPopSection = document.querySelector('.container.row.justify-center');
 var $homePopUp = document.querySelector('#home-info');
 var $favScrollPopUp = document.querySelector('#scroll-fav-info');
 var $favViewInfoPopUp = document.querySelector('#view-fav-info');
