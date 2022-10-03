@@ -268,14 +268,14 @@ $modalInformation.addEventListener('click', function () {
   if (modalId === 'favorite-icon') {
     if ($emptyHeartIcon.className === 'fa-regular fa-heart empty-heart') {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      $timeInterval = setInterval(displayText, 0);
+      $timeInterval = setInterval(displayAddedToFavoritesText, 0);
       saveFavoriteVillager();
     }
 
   }
 });
 
-function displayText(interval) {
+function displayAddedToFavoritesText(interval) {
   countdown--;
 
   $addedFavorites.className = 'added-favorites';
@@ -337,6 +337,12 @@ function saveFavoriteVillager() {
 
 $navBar.addEventListener('click', changeNavIconAndPage);
 
+if (data.view === 'villager-view') {
+  switchToHomeView();
+} else if (data.view === 'add-info' || data.view === 'favorites-view') {
+  switchToFavoritesView();
+}
+
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
   if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-home favorites-page-link' || navCheck === 'favorites-page-link') {
@@ -370,12 +376,6 @@ function switchToHomeView() {
   $villagerViewLinks.className = 'container';
   $favoritesList.className = 'hidden';
   $addInformationScreen.className = 'hidden';
-}
-
-if (data.view === 'villager-view') {
-  switchToHomeView();
-} else if (data.view === 'add-info' || data.view === 'favorites-view') {
-  switchToFavoritesView();
 }
 
 function createFavoritesList(favorite) {
@@ -415,7 +415,6 @@ function appendFavorites(event) {
 }
 
 var $placeholderImage = document.querySelector('#placeholder');
-
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
 
 function changeScreenToAddEditForm(event) {
@@ -441,7 +440,6 @@ function changeScreenToAddEditForm(event) {
 }
 
 var $addEditForm = document.querySelector('form');
-
 $addEditForm.addEventListener('submit', saveInformation);
 
 function saveInformation(event) {
@@ -523,6 +521,5 @@ function cancelEntries(event) {
     switchToFavoritesView();
     $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
     $placeholderImage.setAttribute('alt', 'Placeholder Image');
-
   }
 }
