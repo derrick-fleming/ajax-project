@@ -34,7 +34,8 @@ nav {
   padding: 0 1rem;
 }
 
-a {
+a,
+.save {
   text-decoration: none;
   cursor: pointer;
   font-family: inherit;
@@ -99,6 +100,9 @@ label,
 .nav-header,
 .nav-home {
   font-family: Arvo, sans-serif;
+}
+
+.nav-header {
   color: #4dc3b9;
 }
 
@@ -342,6 +346,7 @@ label,
 
 .add-edit {
   padding-bottom: 1rem;
+  color: #888;
 }
 
 .edit-icon {
@@ -359,6 +364,10 @@ label,
 
 .add-edit:hover .pencil-icon-container {
   background-color: #4dc3b9;
+}
+
+.add-edit:hover {
+  color: #575757;
 }
 
 .checked {
@@ -439,13 +448,21 @@ input[type="checkbox"]:checked {
 }
 
 .save {
-  background-color: #4dc3b9;
+  background-color: #4dc3b9ad;
   color: #ffff;
   border-radius: 5px;
   line-height: 1.7;
 }
 
+.save:hover {
+  background-color: #4dc3b9;
+}
+
 .cancel {
+  color: #575757b8;
+}
+
+.cancel:hover {
   color: #575757;
 }
 

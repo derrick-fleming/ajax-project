@@ -109,9 +109,9 @@ function renderVillagersList() {
 
     var $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
       generateDomTree('a', {}, [
-        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName }),
-        generateDomTree('h4', { class: 'villager-name', textContent: villagerName })
-      ])
+        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName })
+      ]),
+      generateDomTree('h4', { class: 'villager-name', textContent: villagerName })
     ]);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
