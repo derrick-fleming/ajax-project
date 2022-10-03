@@ -32,6 +32,15 @@
   flex-basis: calc(100%/3);
 }
 
+.column-two-third {
+  flex-basis: 100%;
+}
+
+.column-fifty-five,
+.column-forty-five {
+  flex-basis: 100%;
+}
+
 .align-items {
   display: flex;
   align-items: center;
@@ -56,4 +65,8 @@
 
 .wrap {
   flex-wrap: wrap;
+}
+
+.hidden {
+  display: none;
 }
