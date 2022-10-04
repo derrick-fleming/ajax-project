@@ -138,6 +138,11 @@ label,
   color: white;
 }
 
+.error-text {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
 .pop-info-container {
   text-align: center;
   margin: 0 1rem 1rem;
@@ -268,8 +273,9 @@ label,
 .added-favorites {
   font-size: 1.5rem;
   color: #f6f6f6;
-  position: fixed;
-  top: 4rem;
+  position: absolute;
+  top: -3.5rem;
+  z-index: 5;
 }
 
 .modal-villager-info {
@@ -534,10 +540,6 @@ input[type="checkbox"]:checked {
 
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
-}
-
-.error-message {
-  text-align: center;
 }
 
 @keyframes lds-ring {

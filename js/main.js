@@ -29,10 +29,9 @@ var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $navHomeText = document.querySelector('.nav-home.home-page-link');
 var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
-
+var $errorMessageContainer = document.querySelector('.hidden.container.error-message-container.margin-top');
 var $timeInterval = null;
 var countdown = 300;
-
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
@@ -45,7 +44,9 @@ xhr.responseType = 'json';
 
 xhr.addEventListener('load', generateList);
 xhr.send();
-
+xhr.addEventListener('error', function () {
+  $errorMessageContainer.className = 'hidden.container.error-message-container.margin-top';
+});
 function generateList(event) {
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
@@ -262,7 +263,6 @@ $modalInformation.addEventListener('click', function () {
     $imageDelete.remove();
     countdown = 300;
     $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
-    clearInterval($timeInterval);
     $addedFavorites.className = 'added-favorites hidden';
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
@@ -289,9 +289,7 @@ $modalInformation.addEventListener('click', function () {
 
 function displayAddedToFavoritesText(interval) {
   countdown--;
-
   $addedFavorites.className = 'added-favorites';
-
   if (countdown < 1) {
     clearInterval($timeInterval);
     $addedFavorites.className = 'added-favorites hidden';

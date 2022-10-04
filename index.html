@@ -51,6 +51,9 @@
       <div></div>
       <div></div>
     </div>
+    <div class="hidden container error-message-container margin-top">
+      <h2 class="error-text">Sorry,there was an error connecting to the network! Please check your internect connection and try again!</h2>
+    </div>
     <div data-view="villager-view" id="villager-view" class="margin-top">
       <div class="container pop-section row justify-center">
         <div class="column-quarter">
@@ -226,6 +229,11 @@
     <div class="container row justify-center">
       <div class="hidden modal-villager-info">
         <div class="row">
+          <div class="column-full">
+            <div class="end">
+              <h3 class="added-favorites hidden">Added to Favorites</h3>
+            </div>
+          </div>
           <div class="column-half">
             <a>
               <i id="cancel" class="fa-solid fa-xmark"></i>
@@ -236,7 +244,6 @@
               <a>
                 <i id="favorite-icon" class="fa-regular fa-heart empty-heart"></i>
               </a>
-              <h3 class="added-favorites hidden">Added to Favorites</h3>
             </div>
           </div>
         </div>
