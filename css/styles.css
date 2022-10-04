@@ -508,7 +508,7 @@ input[type="checkbox"]:checked {
   }
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 600px) {
   textarea {
     height: 200px;
   }
@@ -516,6 +516,7 @@ input[type="checkbox"]:checked {
   .col-r,
   .col-l {
     flex-basis: 100%;
+    line-height: 2.5;
   }
 
   .less-padding {
@@ -529,6 +530,10 @@ input[type="checkbox"]:checked {
   .column-one-half,
   .column-two-third {
     flex-basis: 50%;
+  }
+
+  .row.wrap > .column-one-half {
+    flex-basis: 40%;
   }
 
   .favorite-image {
@@ -564,7 +569,7 @@ input[type="checkbox"]:checked {
   }
 
   .nav-container {
-    max-width: 850px;
+    max-width: 900px;
   }
 
   .modal-villager-info {
