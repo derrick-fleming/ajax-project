@@ -75,6 +75,11 @@ p {
   font-weight: 300;
 }
 
+form {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
 label,
 .island-stats,
 .photo-collect {
@@ -347,7 +352,7 @@ label,
 }
 
 .add-edit {
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   color: #888;
 }
 
@@ -430,11 +435,15 @@ input[type="checkbox"]:checked {
 }
 
 .col-l {
-  flex-basis: 55%;
+  line-height: 2.5;
 }
 
 .col-r {
-  flex-basis: 45%;
+  line-height: 2.5;
+}
+
+.no-top-margin {
+  margin: 1rem 0 0.5rem;
 }
 
 .one-hundred-width {
@@ -508,7 +517,15 @@ input[type="checkbox"]:checked {
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 620px) {
+  form {
+    max-width: 750px;
+  }
+
+  .species-list > .container {
+    max-width: 625px;
+  }
+
   textarea {
     height: 200px;
   }
@@ -516,7 +533,6 @@ input[type="checkbox"]:checked {
   .col-r,
   .col-l {
     flex-basis: 100%;
-    line-height: 2.5;
   }
 
   .less-padding {
@@ -527,12 +543,15 @@ input[type="checkbox"]:checked {
     flex-basis: 33%;
   }
 
-  .column-one-half,
-  .column-two-third {
+  .column-one-half {
     flex-basis: 50%;
   }
 
   .row.wrap > .column-one-half {
+    flex-basis: 40%;
+  }
+
+  .column-two-third {
     flex-basis: 40%;
   }
 
@@ -547,6 +566,14 @@ input[type="checkbox"]:checked {
   .notes-section {
     margin: 0 1rem;
   }
+
+  #favorites-list > .container {
+    padding: 0 3rem;
+  }
+
+  #add-information {
+    padding: 0 3rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -558,6 +585,10 @@ input[type="checkbox"]:checked {
   .header-species-container {
     width: 200px;
     padding-left: 2.5rem;
+  }
+
+  .species-list > .container {
+    max-width: 900px;
   }
 
   #villager-view > .container {

@@ -434,7 +434,7 @@ function changeScreenToAddEditForm(event) {
         }
       }
     }
-    $addInformationScreen.className = 'container less-padding margin-top';
+    $addInformationScreen.className = 'container margin-top';
   }
 
 }
