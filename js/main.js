@@ -45,7 +45,8 @@ xhr.responseType = 'json';
 xhr.addEventListener('load', generateList);
 xhr.send();
 xhr.addEventListener('error', function () {
-  $errorMessageContainer.className = 'hidden.container.error-message-container.margin-top';
+  $errorMessageContainer.className = 'container.error-message-container.margin-top';
+  $villagerView.className = 'hidden';
 });
 function generateList(event) {
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
@@ -55,6 +56,7 @@ function generateList(event) {
 
 $loadMoreLink.addEventListener('click', function () {
   renderVillagersList();
+
   if (speciesNumber > 300) {
     $loadMoreLink.className = 'load-link hidden';
   }
@@ -200,7 +202,7 @@ function openModalWindow(event) {
 }
 
 function loadingImageIcon() {
-  var image = $modalInformation.querySelector('.modal-villager-photo');
+  var image = document.querySelector('.modal-villager-photo');
   loadingIcon.className = 'lds-ring';
   if (image.complete === true) {
     loadingIcon.className = 'lds-ring hidden';

@@ -3,7 +3,7 @@ body {
   font-family: Montserrat, sans-serif;
   color: #575757;
   line-height: 1.6;
-  position: absolute;
+  position: relative;
 }
 
 header {
@@ -170,7 +170,7 @@ label,
 }
 
 .margin-top {
-  margin-top: 5rem;
+  padding-top: 5rem;
 }
 
 .no-margin {
@@ -524,9 +524,6 @@ input[type="checkbox"]:checked {
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #4dc3b9 transparent transparent;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 4;
 }
 
@@ -601,10 +598,7 @@ input[type="checkbox"]:checked {
     padding-left: 2.5rem;
   }
 
-  .species-list > .container {
-    max-width: 900px;
-  }
-
+  .species-list > .container,
   #villager-view > .container {
     max-width: 900px;
   }
