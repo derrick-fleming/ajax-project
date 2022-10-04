@@ -19,7 +19,7 @@ var $leftArrow = document.querySelector('#left-arrow');
 var $rightArrow = document.querySelector('#right-arrow');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
-var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon');
+var $favoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
 var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
@@ -29,14 +29,14 @@ var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $navHomeText = document.querySelector('.nav-home.home-page-link');
 var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
-
+var $errorMessageContainer = document.querySelector('.hidden.container.error-message-container.margin-top');
 var $timeInterval = null;
 var countdown = 300;
-
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
 var villagerNumber = null;
+var timerId = null;
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -44,6 +44,10 @@ xhr.responseType = 'json';
 
 xhr.addEventListener('load', generateList);
 xhr.send();
+xhr.addEventListener('error', function () {
+  $errorMessageContainer.className = 'container.error-message-container.margin-top';
+  $villagerView.className = 'hidden';
+});
 
 function generateList(event) {
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
@@ -53,6 +57,7 @@ function generateList(event) {
 
 $loadMoreLink.addEventListener('click', function () {
   renderVillagersList();
+
   if (speciesNumber > 300) {
     $loadMoreLink.className = 'load-link hidden';
   }
@@ -109,9 +114,9 @@ function renderVillagersList() {
 
     var $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
       generateDomTree('a', {}, [
-        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName }),
-        generateDomTree('h4', { class: 'villager-name', textContent: villagerName })
-      ])
+        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName })
+      ]),
+      generateDomTree('h4', { class: 'villager-name', textContent: villagerName })
     ]);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
@@ -186,13 +191,24 @@ function openModalWindow(event) {
   var villagerNumber = $modalPopUp.getAttribute('data-id');
   var villagerInfo = villagerList[villagerNumber];
   UpdateModalInfo(villagerInfo);
+  checkFavoriteVillager(villagerInfo);
 
   $overlay.className = 'overlay';
   $modalInformation.className = 'modal-villager-info';
   if (event.target.className === 'villager-icon') {
     event.target.className = 'hidden villager-icon';
   }
-  checkFavoriteVillager(villagerInfo);
+
+  timerId = setInterval(loadingImageIcon, 0);
+}
+
+function loadingImageIcon() {
+  var image = document.querySelector('.modal-villager-photo');
+  loadingIcon.className = 'lds-ring';
+  if (image.complete === true) {
+    loadingIcon.className = 'lds-ring hidden';
+    clearInterval(timerId);
+  }
 }
 
 function checkFavoriteVillager(info) {
@@ -250,7 +266,6 @@ $modalInformation.addEventListener('click', function () {
     $imageDelete.remove();
     countdown = 300;
     $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
-    clearInterval($timeInterval);
     $addedFavorites.className = 'added-favorites hidden';
 
     var $unhidePhoto = document.querySelector('.villager-icon.hidden');
@@ -277,9 +292,7 @@ $modalInformation.addEventListener('click', function () {
 
 function displayAddedToFavoritesText(interval) {
   countdown--;
-
   $addedFavorites.className = 'added-favorites';
-
   if (countdown < 1) {
     clearInterval($timeInterval);
     $addedFavorites.className = 'added-favorites hidden';
@@ -387,7 +400,7 @@ function createFavoritesList(favorite) {
       generateDomTree('div', { class: 'add-edit' }, [
         generateDomTree('a', { class: 'align-items' }, [
           generateDomTree('div', { class: 'pencil-icon-container align-items justify-center nav-link' }, [
-            generateDomTree('img', { class: 'edit-icon', src: 'images/pencil-icon.png', alt: 'Edit Icon' })]),
+            generateDomTree('img', { class: 'edit-icon', src: 'images/pencil-icon.webp', alt: 'Edit Icon' })]),
           generateDomTree('p', { class: 'light-weight no-margin', textContent: 'Add/Edit Information' })
         ])
       ])
@@ -396,6 +409,15 @@ function createFavoritesList(favorite) {
   );
   $ul.appendChild($li);
 
+}
+var loadingIcon = document.querySelector('.lds-ring.hidden');
+document.addEventListener('readystatechange', loadingCursor);
+function loadingCursor(event) {
+  if (document.readyState === 'loading' || document.readyState === 'interactive') {
+    loadingIcon.className = 'lds-ring';
+  } else {
+    loadingIcon.className = 'lds-ring hidden';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', appendFavorites);
@@ -434,7 +456,7 @@ function changeScreenToAddEditForm(event) {
         }
       }
     }
-    $addInformationScreen.className = 'container less-padding margin-top';
+    $addInformationScreen.className = 'container margin-top';
   }
 
 }
@@ -486,14 +508,14 @@ function addFavoritesInformationToDom(favorite) {
   }
 
   var $responseRow =
-  generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
-    generateDomTree('div', { class: 'column-one-half' }, [
-      generateDomTree('p', { class: islandClass, textContent: islandText })]),
-    generateDomTree('div', { class: 'column-one-half' }, [
-      generateDomTree('p', { class: 'photo-response inline-block', textContent: 'Photo Collected: ' }),
-      generateDomTree('i', { class: boxClass })
-    ]),
-    generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
+    generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
+      generateDomTree('div', { class: 'column-one-half' }, [
+        generateDomTree('p', { class: islandClass, textContent: islandText })]),
+      generateDomTree('div', { class: 'column-one-half' }, [
+        generateDomTree('p', { class: 'photo-response inline-block', textContent: 'Photo Collected: ' }),
+        generateDomTree('i', { class: boxClass })
+      ]),
+      generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
 
   if (data.editing === true) {
     data.editing = false;
