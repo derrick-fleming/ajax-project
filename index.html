@@ -27,7 +27,7 @@
       <div class="column-quarter end">
         <div class="column-quarter end nav-link">
           <a href="#favorites-list" class="favorites-page-link">
-            <i class="fa-regular fa-heart nav-icon"></i>
+            <i class="fa-solid fa-heart nav-icon house-outline"></i>
           </a>
           <a href="#favorites-list" class="favorites-page-link">
             <h3 class="nav-home favorites-page-link"> Favorites </h3>
@@ -45,86 +45,13 @@
     </nav>
   </header>
   <main>
-    <div class="container row justify-center">
-      <div class="hidden modal-villager-info">
-        <div class="row">
-          <div class="column-half">
-            <a>
-              <i id="cancel" class="fa-solid fa-xmark"></i>
-            </a>
-          </div>
-          <div class="column-half">
-            <div class="end">
-              <a>
-                <i id="favorite-icon" class="fa-regular fa-heart empty-heart"></i>
-              </a>
-              <h3 class="added-favorites hidden">Added to Favorites</h3>
-            </div>
-          </div>
-        </div>
-        <div class="row image-card-container">
-          <div class="column-full">
-            <div id="modal-photo-container" class="row justify-center">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="column-full center">
-            <h1 class="modal-heading"></h1>
-          </div>
-        </div>
-        <div class="row space-evenly modal-info-text-box">
-          <div class="column-one-twelfth align-items">
-            <a>
-              <i id="left-arrow" class="hidden"></i>
-            </a>
-          </div>
-          <div class="modal-text-margin column-ten-twelfths center">
-            <div class="row">
-              <div class="column-forty-five">
-                <h2 id="species" class="less-margin">Species: <span id="species-card" class="blue"></span></h2>
-              </div>
-              <div class="column-fifty-five">
-                <h2 id="gender" class="less-margin">Gender: <span id="gender-card"></span></h2>
-              </div>
-            </div>
-            <div class="row">
-              <div class="column-forty-five">
-                <h2 id="personality" class="less-margin">Personality: <span id="personality-card" class="blue"> </span>
-                </h2>
-              </div>
-              <div class="column-fifty-five">
-                <h2 id="birthday" class="less-margin">Birthday: <span id="birthday-card"></span></h2>
-              </div>
-            </div>
-            <div class="row">
-              <div class="column-forty-five">
-                <h2 id="hobby" class="less-margin hidden-text-box">Hobby: <span id="hobby-card"></span></h2>
-              </div>
-              <div class="column-fifty-five">
-                <h2 id="catchphrase" class="less-margin hidden-text-box">Catchphrase: <span id="catchphrase-card"
-                    class="blue"></span></h2>
-              </div>
-            </div>
-            <div class="row">
-              <div class="column-full">
-                <h2 id="saying" class="less-margin hidden-text-box">Saying: <span id="saying-card"></span> </h2>
-              </div>
-            </div>
-          </div>
-          <div class="column-one-twelfth align-items">
-            <a>
-              <i id="right-arrow" class="fa-solid fa-chevron-right arrow"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="hidden lds-ring">
       <div></div>
       <div></div>
       <div></div>
       <div></div>
+    </div>
+    <div class="nav-anchor">
     </div>
     <div data-view="villager-view" id="villager-view" class="margin-top">
       <div class="container pop-section row justify-center">
@@ -298,6 +225,81 @@
       </form>
     </div>
     <div class="hidden overlay"></div>
+    <div class="container row justify-center">
+      <div class="hidden modal-villager-info">
+        <div class="row">
+          <div class="column-half">
+            <a>
+              <i id="cancel" class="fa-solid fa-xmark"></i>
+            </a>
+          </div>
+          <div class="column-half">
+            <div class="end">
+              <a>
+                <i id="favorite-icon" class="fa-regular fa-heart empty-heart"></i>
+              </a>
+              <h3 class="added-favorites hidden">Added to Favorites</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row image-card-container">
+          <div class="column-full">
+            <div id="modal-photo-container" class="row justify-center">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full center">
+            <h1 class="modal-heading"></h1>
+          </div>
+        </div>
+        <div class="row space-evenly modal-info-text-box">
+          <div class="column-one-twelfth align-items">
+            <a>
+              <i id="left-arrow" class="hidden"></i>
+            </a>
+          </div>
+          <div class="modal-text-margin column-ten-twelfths center">
+            <div class="row">
+              <div class="column-forty-five">
+                <h2 id="species" class="less-margin">Species: <span id="species-card" class="blue"></span></h2>
+              </div>
+              <div class="column-fifty-five">
+                <h2 id="gender" class="less-margin">Gender: <span id="gender-card"></span></h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-forty-five">
+                <h2 id="personality" class="less-margin">Personality: <span id="personality-card" class="blue"> </span>
+                </h2>
+              </div>
+              <div class="column-fifty-five">
+                <h2 id="birthday" class="less-margin">Birthday: <span id="birthday-card"></span></h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-forty-five">
+                <h2 id="hobby" class="less-margin hidden-text-box">Hobby: <span id="hobby-card"></span></h2>
+              </div>
+              <div class="column-fifty-five">
+                <h2 id="catchphrase" class="less-margin hidden-text-box">Catchphrase: <span id="catchphrase-card"
+                    class="blue"></span></h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-full">
+                <h2 id="saying" class="less-margin hidden-text-box">Saying: <span id="saying-card"></span> </h2>
+              </div>
+            </div>
+          </div>
+          <div class="column-one-twelfth align-items">
+            <a>
+              <i id="right-arrow" class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

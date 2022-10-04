@@ -19,7 +19,7 @@ var $leftArrow = document.querySelector('#left-arrow');
 var $rightArrow = document.querySelector('#right-arrow');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
-var $favoritesPageIcon = document.querySelector('.fa-regular.fa-heart.nav-icon');
+var $favoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
 var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
@@ -507,14 +507,14 @@ function addFavoritesInformationToDom(favorite) {
   }
 
   var $responseRow =
-  generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
-    generateDomTree('div', { class: 'column-one-half' }, [
-      generateDomTree('p', { class: islandClass, textContent: islandText })]),
-    generateDomTree('div', { class: 'column-one-half' }, [
-      generateDomTree('p', { class: 'photo-response inline-block', textContent: 'Photo Collected: ' }),
-      generateDomTree('i', { class: boxClass })
-    ]),
-    generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
+    generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
+      generateDomTree('div', { class: 'column-one-half' }, [
+        generateDomTree('p', { class: islandClass, textContent: islandText })]),
+      generateDomTree('div', { class: 'column-one-half' }, [
+        generateDomTree('p', { class: 'photo-response inline-block', textContent: 'Photo Collected: ' }),
+        generateDomTree('i', { class: boxClass })
+      ]),
+      generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
 
   if (data.editing === true) {
     data.editing = false;
