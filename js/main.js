@@ -37,6 +37,7 @@ var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
 var villagerNumber = null;
+var timerId = null;
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -186,13 +187,24 @@ function openModalWindow(event) {
   var villagerNumber = $modalPopUp.getAttribute('data-id');
   var villagerInfo = villagerList[villagerNumber];
   UpdateModalInfo(villagerInfo);
+  checkFavoriteVillager(villagerInfo);
 
   $overlay.className = 'overlay';
   $modalInformation.className = 'modal-villager-info';
   if (event.target.className === 'villager-icon') {
     event.target.className = 'hidden villager-icon';
   }
-  checkFavoriteVillager(villagerInfo);
+
+  timerId = setInterval(loadingImageIcon, 0);
+}
+
+function loadingImageIcon() {
+  var image = $modalInformation.querySelector('.modal-villager-photo');
+  loadingIcon.className = 'lds-ring';
+  if (image.complete === true) {
+    loadingIcon.className = 'lds-ring hidden';
+    clearInterval(timerId);
+  }
 }
 
 function checkFavoriteVillager(info) {
@@ -396,6 +408,15 @@ function createFavoritesList(favorite) {
   );
   $ul.appendChild($li);
 
+}
+var loadingIcon = document.querySelector('.lds-ring.hidden');
+document.addEventListener('readystatechange', loadingCursor);
+function loadingCursor(event) {
+  if (document.readyState === 'loading' || document.readyState === 'interactive') {
+    loadingIcon.className = 'lds-ring';
+  } else {
+    loadingIcon.className = 'lds-ring hidden';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', appendFavorites);
