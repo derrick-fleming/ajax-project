@@ -48,6 +48,7 @@ xhr.addEventListener('error', function () {
   $errorMessageContainer.className = 'container.error-message-container.margin-top';
   $villagerView.className = 'hidden';
 });
+
 function generateList(event) {
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
@@ -399,7 +400,7 @@ function createFavoritesList(favorite) {
       generateDomTree('div', { class: 'add-edit' }, [
         generateDomTree('a', { class: 'align-items' }, [
           generateDomTree('div', { class: 'pencil-icon-container align-items justify-center nav-link' }, [
-            generateDomTree('img', { class: 'edit-icon', src: 'images/pencil-icon.png', alt: 'Edit Icon' })]),
+            generateDomTree('img', { class: 'edit-icon', src: 'images/pencil-icon.webp', alt: 'Edit Icon' })]),
           generateDomTree('p', { class: 'light-weight no-margin', textContent: 'Add/Edit Information' })
         ])
       ])

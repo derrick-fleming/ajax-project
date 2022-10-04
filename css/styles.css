@@ -101,10 +101,6 @@ label,
   margin-right: 0.5rem;
 }
 
-.nav-anchor {
-  display: flex;
-}
-
 .nav-home {
   font-size: 1rem;
   padding-left: 0.75rem;
@@ -590,7 +586,6 @@ input[type="checkbox"]:checked {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
-    padding: 0 3rem;
   }
 
   .header-species-container {
@@ -729,10 +724,6 @@ input[type="checkbox"]:checked {
   #favorites-list > .container {
     padding: 0 3rem;
     max-width: 900px;
-  }
-
-  #add-information {
-    padding: 0 3rem;
   }
 }
 
