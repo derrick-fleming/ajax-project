@@ -31,9 +31,9 @@ var countdown = 300;
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
-var villagerNumber = null;
 var timerId = null;
-var modalVillager = null;
+var modalVillagerNumber = null;
+var villagerNumber = null;
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -155,11 +155,10 @@ function openModalWindow(event) {
     return;
   }
   var $modalPopUp = event.target.closest('div');
-  var villagerNumber = $modalPopUp.getAttribute('data-id');
-  modalVillager = villagerNumber;
-  var villagerInfo = villagerList[villagerNumber];
-  UpdateModalInfo(villagerInfo);
-  checkFavoriteVillager(villagerInfo);
+  modalVillagerNumber = $modalPopUp.getAttribute('data-id');
+  var addedModalInfo = villagerList[modalVillagerNumber];
+  renderModalInfo(addedModalInfo);
+  checkFavoriteVillager(addedModalInfo);
 
   $overlay.className = 'overlay';
   $modalInformation.className = 'modal-villager-info';
@@ -173,7 +172,7 @@ function loadingImageIcon() {
     loadingIcon.className = 'lds-ring hidden';
     clearInterval(timerId);
   }
-  return loadingIcon;
+  return timerId;
 }
 
 function checkFavoriteVillager(info) {
@@ -186,12 +185,9 @@ function checkFavoriteVillager(info) {
   }
 }
 
-function UpdateModalInfo(info) {
-  var $villagerInfoPhoto = document.createElement('img');
-  $villagerInfoPhoto.setAttribute('src', info.image_uri);
-  $villagerInfoPhoto.setAttribute('alt', 'Image of ' + info.name['name-USen']);
-  $villagerInfoPhoto.className = 'modal-villager-photo';
-
+function renderModalInfo(info) {
+  var $villagerInfoPhoto =
+    generateDomTree('img', { src: info.image_uri, alt: 'Image of ' + info.name['name-USen'], class: 'modal-villager-photo' }, []);
   $modalPhotoContainer.appendChild($villagerInfoPhoto);
 
   var birthday = info.birthday.split('/');
@@ -211,13 +207,9 @@ function UpdateModalInfo(info) {
     ['#catchphrase-card', '"' + wordOutput + '"'],
     ['#saying-card', '"' + info.saying + '"']
   ];
-  addModalTextContent(infoCardArray);
-}
-
-function addModalTextContent(array) {
-  for (var i = 0; i < array.length; i++) {
-    var $element = document.querySelector(array[i][0]);
-    $element.textContent = array[i][1];
+  for (var i = 0; i < infoCardArray.length; i++) {
+    var $element = document.querySelector(infoCardArray[i][0]);
+    $element.textContent = infoCardArray[i][1];
   }
 }
 
@@ -292,16 +284,16 @@ function resetLeftArrowTextContainer() {
 }
 
 function saveFavoriteVillager() {
-  var villagerData = villagerList[modalVillager];
+  var villagerData = villagerList[modalVillagerNumber];
 
   var favoriteVillagerInformation = {
     favoriteOrder: data.nextFavorite,
-    villagerId: modalVillager,
+    villagerId: modalVillagerNumber,
     villagerPicture: villagerData.image_uri,
     villagerName: villagerData.name['name-USen'],
     formValues: null
   };
-  modalVillager = 0;
+  modalVillagerNumber = 0;
   data.nextFavorite++;
   data.favoritesList.push(favoriteVillagerInformation);
   return favoriteVillagerInformation;
@@ -339,6 +331,21 @@ function switchToFavoritesView() {
   $addInformationScreen.className = 'hidden';
   $favoritesList.className = 'margin-top';
 }
+/*
+var switchToFavoritesArray = [
+  [$favoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'],
+  [$navFavoriteText, 'nav-home favorites-pages-link currently-island'],
+  [$homePageIcon, 'fa-solid fa-house nav-icon house-outline'],
+  [$navHomeText, 'nav-home home-page-link'],
+  [$villagerView, 'hidden'],
+  [$villagerViewLinks, 'hidden'],
+  [$addInformationScreen, 'hidden'],
+  [$favoritesList, 'margin-top']];
+
+for (var i = 0; i < array.length; i++) {
+  array[i][0].className = array[i][0];
+}
+*/
 
 function switchToHomeView() {
   $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon house-outline';
