@@ -1,10 +1,6 @@
 var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
 var $containerPopSection = document.querySelector('.container.pop-section.row.justify-center');
-var $homePopUp = document.querySelector('#home-info');
-var $favScrollPopUp = document.querySelector('#scroll-fav-info');
-var $favViewInfoPopUp = document.querySelector('#view-fav-info');
-var $favFavoritesPopUp = document.querySelector('#favorite-fav-info');
 var $modalInformation = document.querySelector('.hidden.modal-villager-info');
 var $overlay = document.querySelector('.hidden.overlay');
 var $modalPhotoContainer = document.querySelector('#modal-photo-container');
@@ -57,7 +53,6 @@ function generateList(event) {
 
 $loadMoreLink.addEventListener('click', function () {
   renderVillagersList();
-
   if (speciesNumber > 300) {
     $loadMoreLink.className = 'load-link hidden';
   }
@@ -84,7 +79,6 @@ function generateDomTree(tagName, attributes, children) {
 }
 
 function renderVillagersList() {
-
   for (var i = speciesNumber; i < speciesNumber + 100; i++) {
 
     var villagerSpecies = villagerList[i].species;
@@ -93,7 +87,6 @@ function renderVillagersList() {
     var villagerName = villagerList[i].name['name-USen'];
     if (!speciesList.includes(villagerSpecies)) {
       speciesList.push(villagerSpecies);
-
       var $villagerSection = generateDomTree('div', { class: 'species-list', id: villagerSpecies }, [
         generateDomTree('div', { class: 'container row' }, [
           generateDomTree('div', { class: 'header-species-container' }, [
@@ -150,35 +143,15 @@ function aidDisappear(event) {
   }
 }
 
-$homePopUp.addEventListener('click', function () {
+$noFavoritesContainer.addEventListener('click', function () {
   if (event.target.tagName === 'I') {
-    $homePopUp.className = 'hidden';
-    var $hideHomeDiv = $homePopUp.closest('.column-half.end');
-    $hideHomeDiv.className = 'hidden';
-  }
-});
-
-$favScrollPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $favScrollPopUp.className = 'hidden';
-    var $hidefavScrollDiv = $favScrollPopUp.closest('.column-half');
-    $hidefavScrollDiv.className = 'hidden';
-  }
-});
-
-$favViewInfoPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $favViewInfoPopUp.className = 'hidden';
-    var $hidefavViewDiv = $favViewInfoPopUp.closest('.column-half.end');
-    $hidefavViewDiv.className = 'hidden';
-  }
-});
-
-$favFavoritesPopUp.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    $favFavoritesPopUp.className = 'hidden';
-    var $hidefavFavoritesDiv = $favFavoritesPopUp.closest('.column-half');
-    $hidefavFavoritesDiv.className = 'hidden';
+    var $closestColumn = event.target.closest('.column-half.end');
+    if ($closestColumn !== null) {
+      $closestColumn.className = 'hidden';
+    } else {
+      $closestColumn = event.target.closest('.column-half');
+      $closestColumn.className = 'hidden';
+    }
   }
 });
 
