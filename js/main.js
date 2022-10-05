@@ -26,14 +26,13 @@ var $addInformationScreen = document.querySelector('#add-information');
 var $navHomeText = document.querySelector('.nav-home.home-page-link');
 var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
 var $errorMessageContainer = document.querySelector('.hidden.container.error-message-container.margin-top');
-var $timeInterval = null;
+var addedFavoritesTimer = null;
 var countdown = 300;
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
 var timerId = null;
 var modalVillagerNumber = null;
-var villagerNumber = null;
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -186,12 +185,11 @@ function checkFavoriteVillager(info) {
 }
 
 function renderModalInfo(info) {
-  var $villagerInfoPhoto =
-    generateDomTree('img', { src: info.image_uri, alt: 'Image of ' + info.name['name-USen'], class: 'modal-villager-photo' }, []);
+  var $villagerInfoPhoto = generateDomTree('img', { src: info.image_uri, alt: 'Image of ' + info.name['name-USen'], class: 'modal-villager-photo' }, []);
   $modalPhotoContainer.appendChild($villagerInfoPhoto);
 
   var birthday = info.birthday.split('/');
-  var birthdayReverse = birthday.reverse();
+  birthday = birthday.reverse();
 
   var capitalizeCatch = info['catch-phrase'];
   var firstLetter = capitalizeCatch[0].toUpperCase();
@@ -202,7 +200,7 @@ function renderModalInfo(info) {
     ['#species-card', info.species],
     ['#gender-card', info.gender],
     ['#personality-card', info.personality],
-    ['#birthday-card', birthdayReverse.join('/')],
+    ['#birthday-card', birthday.join('/')],
     ['#hobby-card', info.hobby],
     ['#catchphrase-card', '"' + wordOutput + '"'],
     ['#saying-card', '"' + info.saying + '"']
@@ -216,13 +214,14 @@ function renderModalInfo(info) {
 $modalInformation.addEventListener('click', function () {
   var modalId = event.target.getAttribute('id');
   if (modalId === 'cancel') {
-    $overlay.className = 'hidden overlay';
-    $modalInformation.className = 'hidden modal-villager-info';
     var $imageDelete = document.querySelector('.modal-villager-photo');
     resetRightArrowTextContainer();
     $imageDelete.remove();
     countdown = 300;
+    $overlay.className = 'hidden overlay';
+    $modalInformation.className = 'hidden modal-villager-info';
     $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
+    clearInterval(addedFavoritesTimer);
     $addedFavorites.className = 'added-favorites hidden';
   }
 
@@ -237,7 +236,7 @@ $modalInformation.addEventListener('click', function () {
   if (modalId === 'favorite-icon') {
     if ($emptyHeartIcon.className === 'fa-regular fa-heart empty-heart') {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      $timeInterval = setInterval(displayAddedToFavoritesText, 0);
+      addedFavoritesTimer = setInterval(displayAddedToFavoritesText, 0);
       var favoriteInfo = saveFavoriteVillager();
       createFavoritesList(favoriteInfo);
       $noFavoritesContainer.className = 'hidden';
@@ -250,7 +249,7 @@ function displayAddedToFavoritesText() {
   countdown--;
   $addedFavorites.className = 'added-favorites';
   if (countdown < 1) {
-    clearInterval($timeInterval);
+    clearInterval(addedFavoritesTimer);
     $addedFavorites.className = 'added-favorites hidden';
   }
   return $addedFavorites;
@@ -301,13 +300,6 @@ function saveFavoriteVillager() {
 }
 
 $navBar.addEventListener('click', changeNavIconAndPage);
-
-if (data.view === 'villager-view') {
-  switchToHomeView();
-} else if (data.view === 'add-info' || data.view === 'favorites-view') {
-  switchToFavoritesView();
-}
-
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
   if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-home favorites-page-link' || navCheck === 'favorites-page-link') {
@@ -319,6 +311,12 @@ function changeNavIconAndPage(event) {
     data.view = 'villager-view';
     switchToHomeView();
   }
+}
+
+if (data.view === 'villager-view') {
+  switchToHomeView();
+} else if (data.view === 'add-info' || data.view === 'favorites-view') {
+  switchToFavoritesView();
 }
 
 function switchToFavoritesView() {
@@ -375,8 +373,8 @@ function createFavoritesList(favorite) {
     ]
   );
   $ul.appendChild($li);
-
 }
+
 var loadingIcon = document.querySelector('.lds-ring.hidden');
 document.addEventListener('readystatechange', loadingCursor);
 function loadingCursor(event) {
@@ -387,8 +385,8 @@ function loadingCursor(event) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', appendFavorites);
-function appendFavorites(event) {
+document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
+function appendFavoriteVillagersToFavoritesPage(event) {
   data.editing = false;
   for (var i = 0; i < data.favoritesList.length; i++) {
     var favorite = data.favoritesList[i];
@@ -405,7 +403,6 @@ function appendFavorites(event) {
 
 var $placeholderImage = document.querySelector('#placeholder');
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
-
 function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
     data.view = 'add-info';
@@ -415,7 +412,7 @@ function changeScreenToAddEditForm(event) {
     for (var i = 0; i < data.favoritesList.length; i++) {
       if ($villagerID === data.favoritesList[i].villagerId) {
         var $villagerGet = data.favoritesList[i];
-        villagerNumber = i;
+        data.editingNumber = i;
         $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
         $placeholderImage.setAttribute('alt', $villagerGet.villagerName + "'s Photo.");
         if ($villagerGet.formValues !== null) {
@@ -430,8 +427,8 @@ function changeScreenToAddEditForm(event) {
 
 var $addEditForm = document.querySelector('form');
 $addEditForm.addEventListener('submit', saveInformation);
-
 function saveInformation(event) {
+  var villagerNumber = data.editingNumber;
   event.preventDefault();
   var formInputValues = {
     islandStatus: $addEditForm.elements.island.value,

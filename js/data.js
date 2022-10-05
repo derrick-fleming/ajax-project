@@ -4,6 +4,7 @@ var data = {
   view: 'villager-list',
   favoritesList: [],
   editing: false,
+  editingNumber: null,
   nextFavorite: 0
 };
 
