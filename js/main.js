@@ -193,7 +193,9 @@ function renderModalInfo(info) {
   var capitalizeCatch = info['catch-phrase'];
   var firstLetter = capitalizeCatch[0].toUpperCase();
   var wordOutput = firstLetter + capitalizeCatch.slice(1);
+  var $span = document.querySelectorAll('span');
 
+  /*
   var infoCardArray = [
     ['.modal-heading', info.name['name-USen']],
     ['#species-card', info.species],
@@ -204,9 +206,12 @@ function renderModalInfo(info) {
     ['#catchphrase-card', '"' + wordOutput + '"'],
     ['#saying-card', '"' + info.saying + '"']
   ];
+
+  */
+
+  var infoCardArray = [info.name['name-USen'], info.species, info.gender, info.personality, birthday.join('/'), info.hobby, '"' + wordOutput + '"', '"' + info.saying + '"'];
   for (var i = 0; i < infoCardArray.length; i++) {
-    var $element = document.querySelector(infoCardArray[i][0]);
-    $element.textContent = infoCardArray[i][1];
+    $span[i].textContent = infoCardArray[i];
   }
 }
 
