@@ -161,10 +161,6 @@ function openModalWindow(event) {
 
   $overlay.className = 'overlay';
   $modalInformation.className = 'modal-villager-info';
-  if (event.target.className === 'villager-icon') {
-    event.target.className = 'hidden villager-icon';
-  }
-
   timerId = setInterval(loadingImageIcon, 0);
 }
 
@@ -175,6 +171,7 @@ function loadingImageIcon() {
     loadingIcon.className = 'lds-ring hidden';
     clearInterval(timerId);
   }
+  return loadingIcon;
 }
 
 function checkFavoriteVillager(info) {
@@ -182,7 +179,7 @@ function checkFavoriteVillager(info) {
     var checkFavorite = data.favoritesList[i];
     if (info.name['name-USen'] === checkFavorite.villagerName) {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      return;
+      return $emptyHeartIcon;
     }
   }
 }
@@ -233,9 +230,6 @@ $modalInformation.addEventListener('click', function () {
     countdown = 300;
     $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
     $addedFavorites.className = 'added-favorites hidden';
-
-    var $unhidePhoto = document.querySelector('.villager-icon.hidden');
-    $unhidePhoto.className = 'villager-icon';
   }
 
   if (modalId === 'left-arrow') {
