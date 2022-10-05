@@ -24,7 +24,6 @@ var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $navHomeText = document.querySelector('.nav-home.home-page-link');
 var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
-var $errorMessageContainer = document.querySelector('.hidden.container.error-message-container.padding-top');
 var addedFavoritesTimer = null;
 var countdown = 300;
 var speciesList = [];
@@ -42,8 +41,8 @@ xhr.addEventListener('load', generateList);
 xhr.send();
 
 xhr.addEventListener('error', function () {
-  $errorMessageContainer.className = 'container.error-message-container.padding-top';
-  $villagerView.className = 'hidden';
+  data.view = 'error-message';
+  switchViews('error-message');
 });
 
 function generateList(event) {
@@ -332,12 +331,12 @@ function changeNavIconAndPage(event) {
 }
 
 if (data.view === 'home-view') {
-  switchViews('home-view');
+  switchViews(data.view);
   for (var x = 0; x < changeNavClassToHome.length; x++) {
     changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
   }
 } else if (data.view === 'add-info' || data.view === 'favorites-view') {
-  switchViews('favorites-view');
+  switchViews(data.view);
   for (var i = 0; i < changeNavClassToFavorites.length; i++) {
     changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
   }
@@ -403,7 +402,7 @@ $favoritesList.addEventListener('click', changeScreenToAddEditForm);
 function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
     data.view = 'add-info';
-    switchViews('add-info');
+    switchViews(data.view);
     var $closestVillager = event.target.closest('li');
     var $villagerID = $closestVillager.getAttribute('id');
     for (var i = 0; i < data.favoritesList.length; i++) {
@@ -413,7 +412,10 @@ function changeScreenToAddEditForm(event) {
         $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
         $placeholderImage.setAttribute('alt', $villagerGet.villagerName + "'s Photo.");
         if ($villagerGet.formValues !== null) {
-          editVillagerInformation($villagerGet);
+          data.editing = true;
+          $addEditForm.elements.island.value = $villagerGet.formValues.islandStatus;
+          $addEditForm.elements.photo.checked = $villagerGet.formValues.photoCollected;
+          $addEditForm.elements.notes.value = $villagerGet.formValues.notes;
         }
       }
     }
@@ -437,7 +439,8 @@ function saveInformation(event) {
   $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
   $placeholderImage.setAttribute('alt', 'Placeholder Image');
   $addEditForm.reset();
-  switchViews('favorites-view');
+  data.view = 'favorites-view';
+  switchViews(data.view);
   addFavoritesInformationToDom(data.favoritesList[villagerNumber]);
   $addInformationScreen.className = 'hidden';
 }
@@ -489,19 +492,12 @@ function addFavoritesInformationToDom(favorite) {
 
 }
 
-function editVillagerInformation(favorites) {
-  data.editing = true;
-  $addEditForm.elements.island.value = favorites.formValues.islandStatus;
-  $addEditForm.elements.photo.checked = favorites.formValues.photoCollected;
-  $addEditForm.elements.notes.value = favorites.formValues.notes;
-}
-
 $addInformationScreen.addEventListener('click', cancelEntries);
 function cancelEntries(event) {
   if (event.target.tagName === 'A') {
     $addEditForm.reset();
     data.view = 'favorites-view';
-    switchViews('favorites-view');
+    switchViews(data.view);
     $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
     $placeholderImage.setAttribute('alt', 'Placeholder Image');
   }
