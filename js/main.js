@@ -33,6 +33,7 @@ var villagerList = null;
 var speciesNumber = 0;
 var villagerNumber = null;
 var timerId = null;
+var modalVillager = null;
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -155,6 +156,7 @@ function openModalWindow(event) {
   }
   var $modalPopUp = event.target.closest('div');
   var villagerNumber = $modalPopUp.getAttribute('data-id');
+  modalVillager = villagerNumber;
   var villagerInfo = villagerList[villagerNumber];
   UpdateModalInfo(villagerInfo);
   checkFavoriteVillager(villagerInfo);
@@ -244,19 +246,22 @@ $modalInformation.addEventListener('click', function () {
     if ($emptyHeartIcon.className === 'fa-regular fa-heart empty-heart') {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
       $timeInterval = setInterval(displayAddedToFavoritesText, 0);
-      saveFavoriteVillager();
+      var favoriteInfo = saveFavoriteVillager();
+      createFavoritesList(favoriteInfo);
+      $noFavoritesContainer.className = 'hidden';
     }
 
   }
 });
 
-function displayAddedToFavoritesText(interval) {
+function displayAddedToFavoritesText() {
   countdown--;
   $addedFavorites.className = 'added-favorites';
   if (countdown < 1) {
     clearInterval($timeInterval);
     $addedFavorites.className = 'added-favorites hidden';
   }
+  return $addedFavorites;
 }
 
 function resetRightArrowTextContainer() {
@@ -287,24 +292,19 @@ function resetLeftArrowTextContainer() {
 }
 
 function saveFavoriteVillager() {
-  var $hiddenIcon = document.querySelector('.hidden.villager-icon');
-  var $saveFavoriteContainer = $hiddenIcon.closest('div');
-  var getDataInfo = $saveFavoriteContainer.getAttribute('data-id');
-  var villagerData = villagerList[getDataInfo];
+  var villagerData = villagerList[modalVillager];
 
   var favoriteVillagerInformation = {
     favoriteOrder: data.nextFavorite,
-    villagerId: getDataInfo,
+    villagerId: modalVillager,
     villagerPicture: villagerData.image_uri,
     villagerName: villagerData.name['name-USen'],
     formValues: null
   };
-
+  modalVillager = 0;
   data.nextFavorite++;
   data.favoritesList.push(favoriteVillagerInformation);
-
-  createFavoritesList(favoriteVillagerInformation);
-  $noFavoritesContainer.className = 'hidden';
+  return favoriteVillagerInformation;
 
 }
 
