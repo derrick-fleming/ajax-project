@@ -165,7 +165,7 @@ label,
   margin: 1rem 0.5rem 0.5rem;
 }
 
-.margin-top {
+.padding-top {
   padding-top: 5rem;
 }
 
@@ -455,10 +455,6 @@ input[type="checkbox"]:checked {
 
 .no-top-margin {
   margin: 1rem 0 0.5rem;
-}
-
-.one-hundred-width {
-  width: 100%;
 }
 
 .margin-bottom {

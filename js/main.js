@@ -25,7 +25,7 @@ var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $navHomeText = document.querySelector('.nav-home.home-page-link');
 var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
-var $errorMessageContainer = document.querySelector('.hidden.container.error-message-container.margin-top');
+var $errorMessageContainer = document.querySelector('.hidden.container.error-message-container.padding-top');
 var addedFavoritesTimer = null;
 var countdown = 300;
 var speciesList = [];
@@ -42,7 +42,7 @@ xhr.addEventListener('load', generateList);
 xhr.send();
 
 xhr.addEventListener('error', function () {
-  $errorMessageContainer.className = 'container.error-message-container.margin-top';
+  $errorMessageContainer.className = 'container.error-message-container.padding-top';
   $villagerView.className = 'hidden';
 });
 
