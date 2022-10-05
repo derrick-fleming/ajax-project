@@ -40,6 +40,7 @@ xhr.responseType = 'json';
 
 xhr.addEventListener('load', generateList);
 xhr.send();
+
 xhr.addEventListener('error', function () {
   $errorMessageContainer.className = 'container.error-message-container.margin-top';
   $villagerView.className = 'hidden';
@@ -80,14 +81,13 @@ function generateDomTree(tagName, attributes, children) {
 
 function renderVillagersList() {
   for (var i = speciesNumber; i < speciesNumber + 100; i++) {
-
     var villagerSpecies = villagerList[i].species;
-
     var villagerIcon = villagerList[i].icon_uri;
     var villagerName = villagerList[i].name['name-USen'];
     if (!speciesList.includes(villagerSpecies)) {
       speciesList.push(villagerSpecies);
-      var $villagerSection = generateDomTree('div', { class: 'species-list', id: villagerSpecies }, [
+      var $villagerSection =
+      generateDomTree('div', { class: 'species-list', id: villagerSpecies }, [
         generateDomTree('div', { class: 'container row' }, [
           generateDomTree('div', { class: 'header-species-container' }, [
             generateDomTree('h1', { textContent: villagerSpecies })]),
@@ -96,7 +96,6 @@ function renderVillagersList() {
       ]);
 
       $villagerView.appendChild($villagerSection);
-
       if (villagerSpecies === 'Alligator') {
         var removeLink = document.querySelector('.top-page-link');
         removeLink.remove();
@@ -105,7 +104,8 @@ function renderVillagersList() {
       var $villagerContainerSpeciesList = generateDomTree('div', { class: 'container row', id: 'section-' + villagerSpecies.toLowerCase() });
     }
 
-    var $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
+    var $villagerColumn =
+    generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
       generateDomTree('a', {}, [
         generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName })
       ]),
@@ -123,7 +123,6 @@ function renderVillagersList() {
     if (i === 390) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
       speciesNumber = 390;
-      return;
     }
 
     if (villagerSpecies !== villagerList[i + 1].species || i === speciesNumber + 99) {
@@ -132,28 +131,22 @@ function renderVillagersList() {
 
   }
   speciesNumber += 100;
-  return speciesNumber;
+  return $villagerContainerSpeciesList;
 }
 
 $containerPopSection.addEventListener('click', aidDisappear);
+$noFavoritesContainer.addEventListener('click', aidDisappear);
 function aidDisappear(event) {
   if (event.target.tagName === 'I') {
-    var $hideScrollDiv = event.target.closest('.column-quarter');
-    $hideScrollDiv.className = 'hidden';
-  }
-}
-
-$noFavoritesContainer.addEventListener('click', function () {
-  if (event.target.tagName === 'I') {
-    var $closestColumn = event.target.closest('.column-half.end');
-    if ($closestColumn !== null) {
-      $closestColumn.className = 'hidden';
+    var $hideElement = event.target.closest('.column-quarter');
+    if ($hideElement !== null) {
+      $hideElement.className = 'hidden';
     } else {
-      $closestColumn = event.target.closest('.column-half');
-      $closestColumn.className = 'hidden';
+      $hideElement = event.target.closest('.help');
+      $hideElement.className = 'hidden';
     }
   }
-});
+}
 
 $villagerView.addEventListener('click', openModalWindow);
 function openModalWindow(event) {
@@ -509,7 +502,6 @@ function editVillagerInformation(favorites) {
 }
 
 $addInformationScreen.addEventListener('click', cancelEntries);
-
 function cancelEntries(event) {
   if (event.target.tagName === 'A') {
     $addEditForm.reset();

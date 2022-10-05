@@ -535,6 +535,22 @@ input[type="checkbox"]:checked {
   animation-delay: -0.15s;
 }
 
+#no-favorites-help:nth-child(odd) {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#no-favorites-help:nth-child(even) {
+  flex-basis: 50%;
+}
+
+.no-favorites-container {
+  max-width: 750px;
+  text-align: center;
+  margin: 0 auto;
+}
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
