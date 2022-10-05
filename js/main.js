@@ -20,7 +20,6 @@ var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
 var $noFavoritesContainer = document.querySelector('.no-favorites-container');
-var $villagerViewLinks = document.querySelector('#villager-view-links');
 var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $navHomeText = document.querySelector('.nav-home.home-page-link');
@@ -33,6 +32,7 @@ var villagerList = null;
 var speciesNumber = 0;
 var timerId = null;
 var modalVillagerNumber = null;
+var $viewSwapping = document.querySelectorAll('.page');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
@@ -91,7 +91,7 @@ function renderVillagersList() {
         generateDomTree('div', { class: 'container row' }, [
           generateDomTree('div', { class: 'header-species-container' }, [
             generateDomTree('h1', { textContent: villagerSpecies })]),
-          generateDomTree('a', { class: 'top-page-link', href: '#villager-view', textContent: 'Back to Top' })
+          generateDomTree('a', { class: 'top-page-link', href: '#home-view', textContent: 'Back to Top' })
         ])
       ]);
 
@@ -299,61 +299,58 @@ function saveFavoriteVillager() {
 
 }
 
+var changeNavClassToFavorites = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-home favorites-page-link currently-island'],
+  [$homePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-home home-page-link']];
+
+var changeNavClassToHome = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'],
+  [$homePageIcon, 'fa solid fa-house nav-icon currently-island'],
+  [$navFavoriteText, 'nav-home favorites-page-link'],
+  [$navHomeText, 'nav-home home-page-link currently-island']];
+
 $navBar.addEventListener('click', changeNavIconAndPage);
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
   if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-home favorites-page-link' || navCheck === 'favorites-page-link') {
-    data.view = 'favorites-list';
-    switchToFavoritesView();
+    data.view = 'favorites-view';
+    switchViews(data.view);
   }
 
   if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link' || navCheck === 'home-page-link') {
-    data.view = 'villager-view';
-    switchToHomeView();
+    data.view = 'home-view';
+    switchViews(data.view);
+  }
+
+  if (data.view === 'favorites-view') {
+    for (var i = 0; i < changeNavClassToFavorites.length; i++) {
+      changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
+    }
+  } else {
+    for (var x = 0; x < changeNavClassToHome.length; x++) {
+      changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
+    }
   }
 }
 
-if (data.view === 'villager-view') {
-  switchToHomeView();
+if (data.view === 'home-view') {
+  switchViews('home-view');
+  for (var x = 0; x < changeNavClassToHome.length; x++) {
+    changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
+  }
 } else if (data.view === 'add-info' || data.view === 'favorites-view') {
-  switchToFavoritesView();
+  switchViews('favorites-view');
+  for (var i = 0; i < changeNavClassToFavorites.length; i++) {
+    changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
+  }
 }
 
-function switchToFavoritesView() {
-  $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon currently-island';
-  $navFavoriteText.className = 'nav-home favorites-page-link currently-island';
-  $homePageIcon.className = 'fa-solid fa-house nav-icon house-outline';
-  $navHomeText.className = 'nav-home home-page-link';
-  $villagerView.className = 'hidden';
-  $villagerViewLinks.className = 'hidden';
-  $addInformationScreen.className = 'hidden';
-  $favoritesList.className = 'margin-top';
-}
-/*
-var switchToFavoritesArray = [
-  [$favoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'],
-  [$navFavoriteText, 'nav-home favorites-pages-link currently-island'],
-  [$homePageIcon, 'fa-solid fa-house nav-icon house-outline'],
-  [$navHomeText, 'nav-home home-page-link'],
-  [$villagerView, 'hidden'],
-  [$villagerViewLinks, 'hidden'],
-  [$addInformationScreen, 'hidden'],
-  [$favoritesList, 'margin-top']];
-
-for (var i = 0; i < array.length; i++) {
-  array[i][0].className = array[i][0];
-}
-*/
-
-function switchToHomeView() {
-  $favoritesPageIcon.className = 'fa-solid fa-heart nav-icon house-outline';
-  $homePageIcon.className = 'fa solid fa-house nav-icon currently-island';
-  $navFavoriteText.className = 'nav-home favorites-page-link';
-  $navHomeText.className = 'nav-home home-page-link currently-island';
-  $villagerView.className = 'margin-top';
-  $villagerViewLinks.className = 'container';
-  $favoritesList.className = 'hidden';
-  $addInformationScreen.className = 'hidden';
+function switchViews(view) {
+  for (var i = 0; i < $viewSwapping.length; i++) {
+    if ($viewSwapping[i].getAttribute('data-view') === view) {
+      $viewSwapping[i].className = 'page';
+    } else {
+      $viewSwapping[i].className = 'hidden';
+    }
+  }
 }
 
 function createFavoritesList(favorite) {
@@ -362,7 +359,7 @@ function createFavoritesList(favorite) {
       generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture }, [])]),
     generateDomTree('div', { class: 'column-two-third', id: favorite.villagerName }, [
       generateDomTree('h1', { class: 'no-top-margin', textContent: favorite.villagerName }),
-      generateDomTree('div', { class: 'add-edit' }, [
+      generateDomTree('div', { class: 'add-edit', 'data-view': 'add-info' }, [
         generateDomTree('a', { class: 'align-items' }, [
           generateDomTree('div', { class: 'pencil-icon-container align-items justify-center nav-link' }, [
             generateDomTree('img', { class: 'edit-icon', src: 'images/pencil-icon.webp', alt: 'Edit Icon' })]),
@@ -406,7 +403,7 @@ $favoritesList.addEventListener('click', changeScreenToAddEditForm);
 function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
     data.view = 'add-info';
-    $favoritesList.className = 'hidden';
+    switchViews('add-info');
     var $closestVillager = event.target.closest('li');
     var $villagerID = $closestVillager.getAttribute('id');
     for (var i = 0; i < data.favoritesList.length; i++) {
@@ -420,7 +417,7 @@ function changeScreenToAddEditForm(event) {
         }
       }
     }
-    $addInformationScreen.className = 'container margin-top';
+    $addInformationScreen.className = 'container padding-top';
   }
 
 }
@@ -440,7 +437,7 @@ function saveInformation(event) {
   $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
   $placeholderImage.setAttribute('alt', 'Placeholder Image');
   $addEditForm.reset();
-  switchToFavoritesView();
+  switchViews('favorites-view');
   addFavoritesInformationToDom(data.favoritesList[villagerNumber]);
   $addInformationScreen.className = 'hidden';
 }
@@ -503,7 +500,8 @@ $addInformationScreen.addEventListener('click', cancelEntries);
 function cancelEntries(event) {
   if (event.target.tagName === 'A') {
     $addEditForm.reset();
-    switchToFavoritesView();
+    data.view = 'favorites-view';
+    switchViews('favorites-view');
     $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
     $placeholderImage.setAttribute('alt', 'Placeholder Image');
   }
