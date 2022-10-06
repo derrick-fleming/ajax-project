@@ -339,6 +339,7 @@ if (data.view === 'home-view') {
     changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
   }
 } else if (data.view === 'add-info' || data.view === 'favorites-view') {
+  data.view = 'favorites-view';
   switchViews(data.view);
   for (var i = 0; i < changeNavClassToFavorites.length; i++) {
     changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
