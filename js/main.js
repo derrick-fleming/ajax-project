@@ -46,9 +46,6 @@ function generateList(event) {
   if (xhr.status !== 200) {
     data.view = 'error-message';
     switchViews(data.view);
-  } else {
-    data.view = 'home-view';
-    switchViews(data.view);
   }
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
