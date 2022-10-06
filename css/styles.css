@@ -55,7 +55,8 @@ li {
   margin-bottom: 3rem;
 }
 
-input {
+input,
+textarea {
   font-size: 1rem;
 }
 
@@ -66,7 +67,6 @@ textarea {
   line-height: 1.5rem;
   border: 1px solid #ced4da;
   border-radius: 5px;
-  font-size: 1rem;
 }
 
 p {
@@ -88,10 +88,6 @@ label,
   line-height: 1.5;
 }
 
-#villager-view {
-  position: relative;
-}
-
 .nav-container {
   margin: 0 auto;
 }
@@ -101,18 +97,18 @@ label,
   margin-right: 0.5rem;
 }
 
-.nav-home {
+.nav-link-text {
   font-size: 1rem;
   padding-left: 0.75rem;
   color: #4dc3b9ad;
 }
 
-.nav-header,
-.nav-home {
+.nav-title,
+.nav-link-text {
   font-family: Arvo, sans-serif;
 }
 
-.nav-header {
+.nav-title {
   color: #4dc3b9;
 }
 
@@ -213,16 +209,16 @@ label,
   margin-top: 0;
 }
 
-.top-page-link {
-  padding-top: 1.75rem;
-  line-height: 1.2;
-  color: #838383;
-}
-
 .species-list {
   border-bottom: 1px solid #c7c7c7;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+}
+
+.top-page-link {
+  padding-top: 1.75rem;
+  line-height: 1.2;
+  color: #838383;
 }
 
 .load-link {
@@ -247,7 +243,20 @@ label,
   z-index: 2;
 }
 
-#cancel {
+.modal-villager-info {
+  position: fixed;
+  width: 310px;
+  background-color: #fafafa;
+  border: 1px solid #afafaf;
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#exit-modal {
   font-size: 1.75rem;
   color: #b0b0b0;
   padding: 0.5rem 0 0 1rem;
@@ -264,6 +273,11 @@ label,
   color: #f6f6f6;
 }
 
+.empty-heart:hover {
+  color: #2ab5cf;
+  -webkit-text-stroke: 2.5px #2ab5cf;
+}
+
 .liked-heart {
   color: #2ab5cf;
 }
@@ -274,19 +288,6 @@ label,
   position: absolute;
   top: -3.5rem;
   z-index: 5;
-}
-
-.modal-villager-info {
-  position: fixed;
-  width: 310px;
-  background-color: #fafafa;
-  border: 1px solid #afafaf;
-  border-radius: 15px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  z-index: 3;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .modal-heading {
@@ -328,16 +329,10 @@ label,
   color: #2ab5cf;
 }
 
-#left:hover,
-#right:hover,
-#cancel:hover,
+.arrow:hover,
+#exit-modal:hover,
 .pop-x:hover {
   color: #816f59;
-}
-
-.empty-heart:hover {
-  color: #2ab5cf;
-  -webkit-text-stroke: 2.5px #2ab5cf;
 }
 
 #hobby,
@@ -358,11 +353,6 @@ label,
   object-fit: cover;
   border-radius: 5px;
   margin: 0 1.5rem 0 1rem;
-}
-
-.column-one-half,
-.column-third {
-  flex-basis: 100%;
 }
 
 .add-edit {
@@ -465,6 +455,13 @@ input[type="checkbox"]:checked {
   text-align: right;
 }
 
+.button {
+  border: 0;
+  font-size: 1.125rem;
+  padding: 0 0.75rem;
+  margin: 1.5rem 1rem;
+}
+
 .save {
   background-color: #4dc3b9ad;
   color: #ffff;
@@ -482,13 +479,6 @@ input[type="checkbox"]:checked {
 
 .cancel:hover {
   color: #575757;
-}
-
-.button {
-  border: 0;
-  font-size: 1.125rem;
-  padding: 0 0.75rem;
-  margin: 1.5rem 1rem;
 }
 
 #villager-view > .container {
@@ -570,7 +560,7 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (max-width: 523px) {
-  .nav-home {
+  .nav-link-text {
     display: none;
   }
 }

@@ -12,8 +12,8 @@ var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
 var $favoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
 var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
-var $navHomeText = document.querySelector('.nav-home.home-page-link');
-var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
+var $navHomeText = document.querySelector('.nav-link-text.home-page-link');
+var $navFavoriteText = document.querySelector('.nav-link-text.favorites-page-link');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
 var $noFavoritesContainer = document.querySelector('.no-favorites-container');
@@ -238,7 +238,7 @@ function renderModalInfo(info) {
 
 $modalInformation.addEventListener('click', function () {
   var modalId = event.target.getAttribute('id');
-  if (modalId === 'cancel') {
+  if (modalId === 'exit-modal') {
     var $imageDelete = document.querySelector('.modal-villager-photo');
     $imageDelete.remove();
     countdown = 300;
@@ -306,21 +306,21 @@ function saveFavoriteVillager() {
 
 }
 
-var changeNavClassToFavorites = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-home favorites-page-link currently-island'],
-  [$homePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-home home-page-link']];
+var changeNavClassToFavorites = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
+  [$homePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
 
 var changeNavClassToHome = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$homePageIcon, 'fa solid fa-house nav-icon currently-island'],
-  [$navFavoriteText, 'nav-home favorites-page-link'], [$navHomeText, 'nav-home home-page-link currently-island']];
+  [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
 
 $navBar.addEventListener('click', changeNavIconAndPage);
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
-  if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-home favorites-page-link' || navCheck === 'favorites-page-link') {
+  if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-link-text favorites-page-link' || navCheck === 'favorites-page-link') {
     data.view = 'favorites-view';
     switchViews(data.view);
   }
 
-  if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-home home-page-link' || navCheck === 'home-page-link') {
+  if (navCheck === 'fa-solid fa-house nav-icon house-outline' || navCheck === 'nav-link-text home-page-link' || navCheck === 'home-page-link') {
     data.view = 'home-view';
     switchViews(data.view);
   }
