@@ -377,7 +377,7 @@ function createFavoritesList(favorite) {
 
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
 function changeScreenToAddEditForm(event) {
-  if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
+  if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin' || event.target.className === 'align-items') {
     data.view = 'add-info';
     switchViews(data.view);
     var $closestVillager = event.target.closest('li');
