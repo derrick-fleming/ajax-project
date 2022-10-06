@@ -304,6 +304,10 @@ label,
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
 }
 
+.hidden-text-box {
+  display: none;
+}
+
 .less-margin {
   margin: 0.4rem 0;
 }
@@ -313,7 +317,7 @@ label,
   color: #816f59a6;
 }
 
-#left-arrow,
+#left,
 .padding-left {
   padding-left: 0.5rem;
 }
@@ -322,8 +326,8 @@ label,
   color: #2ab5cf;
 }
 
-#left-arrow:hover,
-#right-arrow:hover,
+#left:hover,
+#right:hover,
 #cancel:hover,
 .pop-x:hover {
   color: #816f59;
@@ -337,10 +341,6 @@ label,
 #catchphrase,
 #saying {
   font-size: 1.23rem;
-}
-
-.hidden-text-box {
-  display: none;
 }
 
 .no-villagers-liked-text {
@@ -644,13 +644,13 @@ input[type="checkbox"]:checked {
     flex-basis: 85%;
   }
 
-  #left-arrow,
-  #right-arrow {
+  #left,
+  #right {
     display: none;
   }
 
   .hidden-text-box {
-    display: block;
+    display: flex;
   }
 
   .pop-info-container {
