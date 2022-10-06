@@ -195,18 +195,21 @@ label,
   transition: transform 0.3s ease-in;
 }
 
-.villager-icon:hover {
-  transform: scale3d(1.2, 1.2, 1.2);
-}
-
-.center {
-  text-align: center;
-}
-
 .villager-name {
   color: #816f59;
   font-weight: 300;
   margin-top: 0;
+}
+
+.column-one-third.center:hover .villager-name,
+.column-one-third.center:hover .villager-icon {
+  transform: scale3d(1.2, 1.2, 1.2);
+  color: #4dc3b9;
+  font-weight: 400;
+}
+
+.center {
+  text-align: center;
 }
 
 .species-list {

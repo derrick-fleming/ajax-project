@@ -120,9 +120,11 @@ function renderVillagersList() {
     var $villagerColumn =
     generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
       generateDomTree('a', {}, [
-        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName })
+        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName, 'data-id': 'click-villager' })
       ]),
-      generateDomTree('h4', { class: 'villager-name', textContent: villagerName })
+      generateDomTree('a', {}, [
+        generateDomTree('h4', { class: 'villager-name', textContent: villagerName, 'data-id': 'click-villager' })
+      ])
     ]);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
@@ -189,7 +191,7 @@ function aidDisappear(event) {
 
 $villagerView.addEventListener('click', openModalWindow);
 function openModalWindow(event) {
-  if (event.target.className !== 'villager-icon') {
+  if (event.target.getAttribute('data-id') !== 'click-villager') {
     return;
   }
   var $modalPopUp = event.target.closest('div');
