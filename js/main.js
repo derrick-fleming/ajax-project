@@ -47,6 +47,20 @@ function generateList(event) {
     data.view = 'error-message';
     switchViews(data.view);
   }
+
+  if (data.informationTracker === []) {
+    return;
+  }
+
+  var $instructionAids = $instructionsContainer.querySelectorAll('.column-quarter');
+  for (var i = 0; i < $instructionAids.length; i++) {
+    for (var x = 0; x < data.informationTracker.length; x++) {
+      if ($instructionAids[i].getAttribute('data-id') === data.informationTracker[x]) {
+        $instructionAids[i].className = 'hidden';
+      }
+    }
+  }
+
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
   return villagerList;
@@ -164,6 +178,8 @@ function aidDisappear(event) {
     var $hideElement = event.target.closest('.column-quarter');
     if ($hideElement !== null) {
       $hideElement.className = 'hidden';
+      var dataStorage = $hideElement.getAttribute('data-id');
+      data.informationTracker.push(dataStorage);
     } else {
       $hideElement = event.target.closest('.help');
       $hideElement.className = 'hidden';

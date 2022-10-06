@@ -5,7 +5,8 @@ var data = {
   favoritesList: [],
   editing: false,
   editingNumber: null,
-  nextFavorite: 0
+  nextFavorite: 0,
+  informationTracker: []
 };
 
 var previousData = localStorage.getItem('acnh-villager-favorites');
@@ -18,5 +19,8 @@ window.addEventListener('pagehide', storeToLocalStorage);
 
 function storeToLocalStorage(event) {
   var dataJSON = JSON.stringify(data);
+  if (data.view === 'add-info') {
+    data.view = 'favorites-view';
+  }
   localStorage.setItem('acnh-villager-favorites', dataJSON);
 }
