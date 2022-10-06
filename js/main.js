@@ -12,13 +12,13 @@ var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
 var $favoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
 var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
+var $navHomeText = document.querySelector('.nav-home.home-page-link');
+var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
 var $navBar = document.querySelector('nav');
 var $ul = document.querySelector('ul');
 var $noFavoritesContainer = document.querySelector('.no-favorites-container');
 var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
-var $navHomeText = document.querySelector('.nav-home.home-page-link');
-var $navFavoriteText = document.querySelector('.nav-home.favorites-page-link');
 var $placeholderImage = document.querySelector('#placeholder');
 
 var addedFavoritesTimer = null;
@@ -43,6 +43,13 @@ xhr.addEventListener('error', function () {
 });
 
 function generateList(event) {
+  if (xhr.status !== 200) {
+    data.view = 'error-message';
+    switchViews(data.view);
+  } else {
+    data.view = 'home-view';
+    switchViews(data.view);
+  }
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
   return villagerList;
@@ -90,7 +97,6 @@ function renderVillagersList() {
           generateDomTree('a', { class: 'top-page-link', href: '#home-view', textContent: 'Back to Top' })
         ])
       ]);
-
       $villagerView.appendChild($villagerSection);
       if (villagerSpecies === 'Alligator') {
         var removeLink = document.querySelector('.top-page-link');
@@ -120,14 +126,38 @@ function renderVillagersList() {
       $villagerSection.appendChild($villagerContainerSpeciesList);
       speciesNumber = 390;
     }
-
     if (villagerSpecies !== villagerList[i + 1].species || i === speciesNumber + 99) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
     }
-
   }
   speciesNumber += 100;
   return $villagerContainerSpeciesList;
+}
+
+var loadingIcon = document.querySelector('.lds-ring.hidden');
+document.addEventListener('readystatechange', loadingCursor);
+function loadingCursor(event) {
+  if (document.readyState === 'loading' || document.readyState === 'interactive') {
+    loadingIcon.className = 'lds-ring';
+  } else {
+    loadingIcon.className = 'lds-ring hidden';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
+function appendFavoriteVillagersToFavoritesPage(event) {
+  data.editing = false;
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var favorite = data.favoritesList[i];
+    createFavoritesList(favorite);
+    if (favorite.formValues !== null) {
+      addFavoritesInformationToDom(favorite);
+    }
+  }
+
+  if (data.favoritesList.length > 0) {
+    $noFavoritesContainer.className = 'hidden';
+  }
 }
 
 $containerPopSection.addEventListener('click', aidDisappear);
@@ -279,10 +309,8 @@ function saveFavoriteVillager() {
 var changeNavClassToFavorites = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-home favorites-page-link currently-island'],
   [$homePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-home home-page-link']];
 
-var changeNavClassToHome = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'],
-  [$homePageIcon, 'fa solid fa-house nav-icon currently-island'],
-  [$navFavoriteText, 'nav-home favorites-page-link'],
-  [$navHomeText, 'nav-home home-page-link currently-island']];
+var changeNavClassToHome = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$homePageIcon, 'fa solid fa-house nav-icon currently-island'],
+  [$navFavoriteText, 'nav-home favorites-page-link'], [$navHomeText, 'nav-home home-page-link currently-island']];
 
 $navBar.addEventListener('click', changeNavIconAndPage);
 function changeNavIconAndPage(event) {
@@ -347,32 +375,6 @@ function createFavoritesList(favorite) {
     ]
   );
   $ul.appendChild($li);
-}
-
-var loadingIcon = document.querySelector('.lds-ring.hidden');
-document.addEventListener('readystatechange', loadingCursor);
-function loadingCursor(event) {
-  if (document.readyState === 'loading' || document.readyState === 'interactive') {
-    loadingIcon.className = 'lds-ring';
-  } else {
-    loadingIcon.className = 'lds-ring hidden';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
-function appendFavoriteVillagersToFavoritesPage(event) {
-  data.editing = false;
-  for (var i = 0; i < data.favoritesList.length; i++) {
-    var favorite = data.favoritesList[i];
-    createFavoritesList(favorite);
-    if (favorite.formValues !== null) {
-      addFavoritesInformationToDom(favorite);
-    }
-  }
-
-  if (data.favoritesList.length > 0) {
-    $noFavoritesContainer.className = 'hidden';
-  }
 }
 
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
