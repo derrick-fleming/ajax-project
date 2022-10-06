@@ -1,9 +1,10 @@
 /* exported data */
 
 var data = {
-  view: 'villager-list',
+  view: 'home-view',
   favoritesList: [],
   editing: false,
+  editingNumber: null,
   nextFavorite: 0
 };
 

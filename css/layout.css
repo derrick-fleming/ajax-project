@@ -41,6 +41,11 @@
   flex-basis: 100%;
 }
 
+.column-one-half,
+.column-third {
+  flex-basis: 100%;
+}
+
 .align-items {
   display: flex;
   align-items: center;

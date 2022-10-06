@@ -55,7 +55,8 @@ li {
   margin-bottom: 3rem;
 }
 
-input {
+input,
+textarea {
   font-size: 1rem;
 }
 
@@ -66,7 +67,6 @@ textarea {
   line-height: 1.5rem;
   border: 1px solid #ced4da;
   border-radius: 5px;
-  font-size: 1rem;
 }
 
 p {
@@ -88,10 +88,6 @@ label,
   line-height: 1.5;
 }
 
-#villager-view {
-  position: relative;
-}
-
 .nav-container {
   margin: 0 auto;
 }
@@ -101,18 +97,18 @@ label,
   margin-right: 0.5rem;
 }
 
-.nav-home {
+.nav-link-text {
   font-size: 1rem;
   padding-left: 0.75rem;
   color: #4dc3b9ad;
 }
 
-.nav-header,
-.nav-home {
+.nav-title,
+.nav-link-text {
   font-family: Arvo, sans-serif;
 }
 
-.nav-header {
+.nav-title {
   color: #4dc3b9;
 }
 
@@ -139,7 +135,7 @@ label,
   font-size: 1.2rem;
 }
 
-.pop-info-container {
+.instructions-info-container {
   text-align: center;
   margin: 0 1rem 1rem;
   height: 97px;
@@ -149,23 +145,23 @@ label,
   box-shadow: 0 1px 2px 0 #00000040;
 }
 
-.pop-x {
+.instructions-x {
   color: #816f59a6;
   font-size: 1.25rem;
   padding-top: 0.3rem;
 }
 
-.pop-icon {
+.instructions-icon {
   width: 80px;
   margin: 0.5rem;
 }
 
-.pop-home-icon {
+.instructions-home-icon {
   width: 75px;
   margin: 1rem 0.5rem 0.5rem;
 }
 
-.margin-top {
+.padding-top {
   padding-top: 5rem;
 }
 
@@ -173,19 +169,19 @@ label,
   margin: 0;
 }
 
-.pop-text,
+.instructions-text,
 .top-page-link,
 .load-link {
   color: #575757;
   font-size: 1.125rem;
 }
 
-.pop-text {
+.instructions-text {
   line-height: 1.5;
   margin-top: 0.5rem;
 }
 
-.pop-top-margin,
+.instructions-top-margin,
 .modal-text-margin {
   margin-top: 1.5rem;
 }
@@ -213,16 +209,16 @@ label,
   margin-top: 0;
 }
 
-.top-page-link {
-  padding-top: 1.75rem;
-  line-height: 1.2;
-  color: #838383;
-}
-
 .species-list {
   border-bottom: 1px solid #c7c7c7;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+}
+
+.top-page-link {
+  padding-top: 1.75rem;
+  line-height: 1.2;
+  color: #838383;
 }
 
 .load-link {
@@ -247,19 +243,39 @@ label,
   z-index: 2;
 }
 
-#cancel {
+.modal-villager-container {
+  position: fixed;
+  width: 310px;
+  background-color: #fafafa;
+  border: 1px solid #afafaf;
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#exit-modal {
   font-size: 1.75rem;
   color: #b0b0b0;
   padding: 0.5rem 0 0 1rem;
 }
 
-#favorite-icon {
+.empty-heart,
+.liked-heart {
   font-size: 1.75rem;
   padding: 0.5rem 1rem 0 0;
 }
 
 .empty-heart {
-  color: #b0b0b0;
+  -webkit-text-stroke: 2.5px #b0b0b0;
+  color: #f6f6f6;
+}
+
+.empty-heart:hover {
+  color: #2ab5cf;
+  -webkit-text-stroke: 2.5px #2ab5cf;
 }
 
 .liked-heart {
@@ -272,19 +288,6 @@ label,
   position: absolute;
   top: -3.5rem;
   z-index: 5;
-}
-
-.modal-villager-info {
-  position: fixed;
-  width: 310px;
-  background-color: #fafafa;
-  border: 1px solid #afafaf;
-  border-radius: 15px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  z-index: 3;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .modal-heading {
@@ -304,6 +307,10 @@ label,
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
 }
 
+.hidden-text-box {
+  display: none;
+}
+
 .less-margin {
   margin: 0.4rem 0;
 }
@@ -313,7 +320,7 @@ label,
   color: #816f59a6;
 }
 
-#left-arrow,
+#left,
 .padding-left {
   padding-left: 0.5rem;
 }
@@ -322,25 +329,16 @@ label,
   color: #2ab5cf;
 }
 
-#left-arrow:hover,
-#right-arrow:hover,
-#cancel:hover,
-.pop-x:hover {
+.arrow:hover,
+#exit-modal:hover,
+.instructions-x:hover {
   color: #816f59;
-}
-
-#favorite-icon:hover {
-  color: #2ab5cf;
 }
 
 #hobby,
 #catchphrase,
 #saying {
   font-size: 1.23rem;
-}
-
-.hidden-text-box {
-  display: none;
 }
 
 .no-villagers-liked-text {
@@ -355,11 +353,6 @@ label,
   object-fit: cover;
   border-radius: 5px;
   margin: 0 1.5rem 0 1rem;
-}
-
-.column-one-half,
-.column-third {
-  flex-basis: 100%;
 }
 
 .add-edit {
@@ -445,10 +438,7 @@ input[type="checkbox"]:checked {
   font-size: 1.125rem;
 }
 
-.col-l {
-  line-height: 2.5;
-}
-
+.col-l,
 .col-r {
   line-height: 2.5;
 }
@@ -457,16 +447,19 @@ input[type="checkbox"]:checked {
   margin: 1rem 0 0.5rem;
 }
 
-.one-hundred-width {
-  width: 100%;
-}
-
 .margin-bottom {
   margin-bottom: 1rem;
 }
 
 .align-right {
   text-align: right;
+}
+
+.button {
+  border: 0;
+  font-size: 1.125rem;
+  padding: 0 0.75rem;
+  margin: 1.5rem 1rem;
 }
 
 .save {
@@ -486,13 +479,6 @@ input[type="checkbox"]:checked {
 
 .cancel:hover {
   color: #575757;
-}
-
-.button {
-  border: 0;
-  font-size: 1.125rem;
-  padding: 0 0.75rem;
-  margin: 1.5rem 1rem;
 }
 
 #villager-view > .container {
@@ -535,6 +521,22 @@ input[type="checkbox"]:checked {
   animation-delay: -0.15s;
 }
 
+#no-favorites-help:nth-child(odd) {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#no-favorites-help:nth-child(even) {
+  flex-basis: 50%;
+}
+
+.no-favorites-container {
+  max-width: 750px;
+  text-align: center;
+  margin: 0 auto;
+}
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
@@ -546,7 +548,7 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (min-width: 375px) {
-  .modal-villager-info {
+  .modal-villager-container {
     width: 350px;
   }
 
@@ -558,7 +560,7 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (max-width: 523px) {
-  .nav-home {
+  .nav-link-text {
     display: none;
   }
 }
@@ -598,15 +600,11 @@ input[type="checkbox"]:checked {
     max-width: 900px;
   }
 
-  .villager-icon {
-    width: 120px;
-  }
-
   .nav-container {
     max-width: 900px;
   }
 
-  .modal-villager-info {
+  .modal-villager-container {
     width: 650px;
     height: 598px;
   }
@@ -636,42 +634,42 @@ input[type="checkbox"]:checked {
     flex-basis: 85%;
   }
 
-  #left-arrow,
-  #right-arrow {
+  #left,
+  #right {
     display: none;
   }
 
   .hidden-text-box {
-    display: block;
+    display: flex;
   }
 
-  .pop-info-container {
+  .instructions-info-container {
     width: 216px;
     height: 186px;
     margin-bottom: 2rem;
   }
 
-  .pop-vertical {
+  .instructions-vertical {
     flex-direction: column;
     flex-wrap: nowrap;
   }
 
-  .pop-icon {
+  .instructions-icon {
     margin-top: -1rem;
     width: 100px;
   }
 
-  .pop-text {
+  .instructions-text {
     margin-top: -0.5rem;
   }
 
-  .pop-x {
+  .instructions-x {
     float: left;
     padding-left: 0.5rem;
     font-size: 1.75rem;
   }
 
-  .pop-home-icon {
+  .instructions-home-icon {
     width: 85px;
     margin: 0 0 1.5rem;
   }
