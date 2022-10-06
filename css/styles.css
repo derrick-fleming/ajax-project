@@ -51,7 +51,11 @@ ul {
 }
 
 li {
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
+  background-color: #ffff;
+  padding: 1rem 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 #00000040;
 }
 
 input,
@@ -291,7 +295,12 @@ label,
   position: absolute;
   top: -3.5rem;
   z-index: 5;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-out {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .modal-heading {
@@ -356,7 +365,7 @@ label,
   height: 238px;
   object-fit: cover;
   border-radius: 5px;
-  margin: 0 1.5rem 0 1rem;
+  margin: 0 1rem 1rem;
 }
 
 .add-edit {
@@ -541,6 +550,10 @@ input[type="checkbox"]:checked {
   margin: 0 auto;
 }
 
+#favorites > .container {
+  padding: 0.5rem;
+}
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
@@ -552,6 +565,14 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (min-width: 375px) {
+  li {
+    padding: 2rem;
+  }
+
+  #favorites > .container {
+    padding: 0 1.5rem;
+  }
+
   .modal-villager-container {
     width: 350px;
   }
@@ -725,22 +746,40 @@ input[type="checkbox"]:checked {
 
   #favorites-list > .container {
     padding: 0 3rem;
-    max-width: 900px;
+    max-width: 1200px;
   }
 }
 
-@media screen and (min-width: 860px) {
+@media screen and (min-width: 900px) {
   .column-two-third {
-    flex-basis: 60%;
+    flex-basis: 59%;
   }
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 900px) {
   .shrink-indicator > .column-one-half {
     flex-basis: 100%;
   }
 
   .minus-padding {
     padding-right: -2rem;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  li {
+    flex-basis: 45%;
+    margin: 1rem;
+  }
+
+  li > .column-third,
+  li > .column-two-third {
+    flex-basis: 100%;
   }
 }

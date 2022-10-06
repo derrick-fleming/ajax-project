@@ -9,7 +9,7 @@ var $rightArrow = document.querySelector('#right');
 var $modalTextContainer = document.querySelector('.modal-text-margin.column-ten-twelfths.center');
 var $modalTextRows = $modalTextContainer.querySelectorAll('.row');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
-var $addedFavorites = document.querySelector('.added-favorites.hidden');
+var $addedFavorites = document.querySelector('.added-favorites.fade-out');
 var $navFavoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
 var $navHomePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navHomeText = document.querySelector('.nav-link-text.home-page-link');
@@ -257,7 +257,7 @@ $modalContainer.addEventListener('click', function () {
     $overlay.className = 'hidden overlay';
     $modalContainer.className = 'hidden modal-villager-container';
     $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
-    $addedFavorites.className = 'added-favorites hidden';
+    $addedFavorites.className = 'added-favorites fade-out';
     modalId = 'left';
   }
 
@@ -292,7 +292,7 @@ $modalContainer.addEventListener('click', function () {
 });
 
 function displayAddedToFavoritesText() {
-  $addedFavorites.className = 'added-favorites hidden';
+  $addedFavorites.className = 'fade-out added-favorites';
   return $addedFavorites;
 }
 
