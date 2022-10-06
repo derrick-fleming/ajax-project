@@ -1,17 +1,17 @@
 var $villagerView = document.querySelector('#villager-view');
 var $loadMoreLink = document.querySelector('.load-link');
-var $containerPopSection = document.querySelector('.container.pop-section.row.justify-center');
-var $modalInformation = document.querySelector('.hidden.modal-villager-info');
+var $instructionsContainer = document.querySelector('.container.instructions-section.row.justify-center');
+var $modalContainer = document.querySelector('.hidden.modal-villager-container');
 var $overlay = document.querySelector('.hidden.overlay');
 var $modalPhotoContainer = document.querySelector('#modal-photo-container');
 var $leftArrow = document.querySelector('#left');
 var $rightArrow = document.querySelector('#right');
-var $modalTextBox = document.querySelector('.modal-text-margin.column-ten-twelfths.center');
-var $modalBoxes = $modalTextBox.querySelectorAll('.row');
+var $modalTextContainer = document.querySelector('.modal-text-margin.column-ten-twelfths.center');
+var $modalTextRows = $modalTextContainer.querySelectorAll('.row');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
 var $addedFavorites = document.querySelector('.added-favorites.hidden');
-var $favoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
-var $homePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
+var $navFavoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
+var $navHomePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navHomeText = document.querySelector('.nav-link-text.home-page-link');
 var $navFavoriteText = document.querySelector('.nav-link-text.favorites-page-link');
 var $navBar = document.querySelector('nav');
@@ -160,7 +160,7 @@ function appendFavoriteVillagersToFavoritesPage(event) {
   }
 }
 
-$containerPopSection.addEventListener('click', aidDisappear);
+$instructionsContainer.addEventListener('click', aidDisappear);
 $noFavoritesContainer.addEventListener('click', aidDisappear);
 function aidDisappear(event) {
   if (event.target.tagName === 'I') {
@@ -185,16 +185,16 @@ function openModalWindow(event) {
   renderModalInfo(addedModalInfo);
   checkFavoriteVillager(addedModalInfo);
 
-  for (var i = 0; i < $modalBoxes.length; i++) {
-    if ($modalBoxes[i].getAttribute('data-id') === 'left') {
-      $modalBoxes[i].className = 'row';
+  for (var i = 0; i < $modalTextRows.length; i++) {
+    if ($modalTextRows[i].getAttribute('data-id') === 'left') {
+      $modalTextRows[i].className = 'row';
     } else {
-      $modalBoxes[i].className = 'hidden-text-box';
+      $modalTextRows[i].className = 'hidden-text-box';
     }
   }
 
   $overlay.className = 'overlay';
-  $modalInformation.className = 'modal-villager-info';
+  $modalContainer.className = 'modal-villager-container';
   timerId = setInterval(loadingImageIcon, 0);
 }
 
@@ -236,14 +236,14 @@ function renderModalInfo(info) {
   }
 }
 
-$modalInformation.addEventListener('click', function () {
+$modalContainer.addEventListener('click', function () {
   var modalId = event.target.getAttribute('id');
   if (modalId === 'exit-modal') {
     var $imageDelete = document.querySelector('.modal-villager-photo');
     $imageDelete.remove();
     countdown = 300;
     $overlay.className = 'hidden overlay';
-    $modalInformation.className = 'hidden modal-villager-info';
+    $modalContainer.className = 'hidden modal-villager-container';
     $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
     clearInterval(addedFavoritesTimer);
     $addedFavorites.className = 'added-favorites hidden';
@@ -251,11 +251,11 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if ((modalId === 'left') || (modalId === 'right')) {
-    for (var i = 0; i < $modalBoxes.length; i++) {
-      if ($modalBoxes[i].getAttribute('data-id') === modalId) {
-        $modalBoxes[i].className = 'row';
+    for (var i = 0; i < $modalTextRows.length; i++) {
+      if ($modalTextRows[i].getAttribute('data-id') === modalId) {
+        $modalTextRows[i].className = 'row';
       } else {
-        $modalBoxes[i].className = 'hidden-text-box';
+        $modalTextRows[i].className = 'hidden-text-box';
       }
     }
   }
@@ -306,10 +306,10 @@ function saveFavoriteVillager() {
 
 }
 
-var changeNavClassToFavorites = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
-  [$homePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
+var changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
+  [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
 
-var changeNavClassToHome = [[$favoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$homePageIcon, 'fa solid fa-house nav-icon currently-island'],
+var changeNavClassToHome = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
   [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
 
 $navBar.addEventListener('click', changeNavIconAndPage);
