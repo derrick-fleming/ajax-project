@@ -244,7 +244,7 @@ $modalInformation.addEventListener('click', function () {
     countdown = 300;
     $overlay.className = 'hidden overlay';
     $modalInformation.className = 'hidden modal-villager-info';
-    $emptyHeartIcon.className = 'fa-regular fa-heart empty-heart';
+    $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
     clearInterval(addedFavoritesTimer);
     $addedFavorites.className = 'added-favorites hidden';
     modalId = 'left';
@@ -269,7 +269,7 @@ $modalInformation.addEventListener('click', function () {
   }
 
   if (modalId === 'favorite-icon') {
-    if ($emptyHeartIcon.className === 'fa-regular fa-heart empty-heart') {
+    if ($emptyHeartIcon.className === 'fa-solid fa-heart empty-heart') {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
       addedFavoritesTimer = setInterval(displayAddedToFavoritesText, 0);
       var favoriteInfo = saveFavoriteVillager();

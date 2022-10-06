@@ -253,13 +253,15 @@ label,
   padding: 0.5rem 0 0 1rem;
 }
 
-#favorite-icon {
+.empty-heart,
+.liked-heart {
   font-size: 1.75rem;
   padding: 0.5rem 1rem 0 0;
 }
 
 .empty-heart {
-  color: #b0b0b0;
+  -webkit-text-stroke: 2.5px #b0b0b0;
+  color: #f6f6f6;
 }
 
 .liked-heart {
@@ -333,8 +335,9 @@ label,
   color: #816f59;
 }
 
-#favorite-icon:hover {
+.empty-heart:hover {
   color: #2ab5cf;
+  -webkit-text-stroke: 2.5px #2ab5cf;
 }
 
 #hobby,
@@ -445,10 +448,7 @@ input[type="checkbox"]:checked {
   font-size: 1.125rem;
 }
 
-.col-l {
-  line-height: 2.5;
-}
-
+.col-l,
 .col-r {
   line-height: 2.5;
 }
