@@ -46,9 +46,6 @@ function generateList(event) {
   if (xhr.status !== 200) {
     data.view = 'error-message';
     switchViews(data.view);
-  } else {
-    data.view = 'home-view';
-    switchViews(data.view);
   }
   villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
@@ -342,6 +339,7 @@ if (data.view === 'home-view') {
     changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
   }
 } else if (data.view === 'add-info' || data.view === 'favorites-view') {
+  data.view = 'favorites-view';
   switchViews(data.view);
   for (var i = 0; i < changeNavClassToFavorites.length; i++) {
     changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
@@ -379,7 +377,7 @@ function createFavoritesList(favorite) {
 
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
 function changeScreenToAddEditForm(event) {
-  if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin') {
+  if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin' || event.target.className === 'align-items') {
     data.view = 'add-info';
     switchViews(data.view);
     var $closestVillager = event.target.closest('li');
