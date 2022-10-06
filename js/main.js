@@ -94,7 +94,7 @@ function renderVillagersList() {
         generateDomTree('div', { class: 'container row' }, [
           generateDomTree('div', { class: 'header-species-container' }, [
             generateDomTree('h1', { textContent: villagerSpecies })]),
-          generateDomTree('a', { class: 'top-page-link', href: '#home-view', textContent: 'Back to Top' })
+          generateDomTree('a', { class: 'top-page-link', href: '#villager-view', textContent: 'Back to Top' })
         ])
       ]);
       $villagerView.appendChild($villagerSection);
