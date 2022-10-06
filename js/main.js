@@ -21,8 +21,6 @@ var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $placeholderImage = document.querySelector('#placeholder');
 
-var addedFavoritesTimer = null;
-var countdown = 300;
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
@@ -256,11 +254,9 @@ $modalContainer.addEventListener('click', function () {
   if (modalId === 'exit-modal') {
     var $imageDelete = document.querySelector('.modal-villager-photo');
     $imageDelete.remove();
-    countdown = 300;
     $overlay.className = 'hidden overlay';
     $modalContainer.className = 'hidden modal-villager-container';
     $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
-    clearInterval(addedFavoritesTimer);
     $addedFavorites.className = 'added-favorites hidden';
     modalId = 'left';
   }
@@ -286,7 +282,8 @@ $modalContainer.addEventListener('click', function () {
   if (modalId === 'favorite-icon') {
     if ($emptyHeartIcon.className === 'fa-solid fa-heart empty-heart') {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      addedFavoritesTimer = setInterval(displayAddedToFavoritesText, 0);
+      $addedFavorites.className = 'added-favorites';
+      setTimeout(displayAddedToFavoritesText, 2000);
       var favoriteInfo = saveFavoriteVillager();
       createFavoritesList(favoriteInfo);
       $noFavoritesContainer.className = 'hidden';
@@ -295,12 +292,7 @@ $modalContainer.addEventListener('click', function () {
 });
 
 function displayAddedToFavoritesText() {
-  countdown--;
-  $addedFavorites.className = 'added-favorites';
-  if (countdown < 1) {
-    clearInterval(addedFavoritesTimer);
-    $addedFavorites.className = 'added-favorites hidden';
-  }
+  $addedFavorites.className = 'added-favorites hidden';
   return $addedFavorites;
 }
 
@@ -458,9 +450,9 @@ function addFavoritesInformationToDom(favorite) {
   }
 
   if (photoValue === true) {
-    boxClass = 'checked fa-solid fa-square-check';
+    boxClass = 'checked fa-solid fa-circle-check';
   } else {
-    boxClass = 'unchecked fa-regular fa-square';
+    boxClass = 'unchecked fa-regular fa-circle-xmark';
   }
 
   var $responseRow =

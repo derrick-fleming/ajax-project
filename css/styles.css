@@ -3,7 +3,6 @@ body {
   font-family: Montserrat, sans-serif;
   color: #575757;
   line-height: 1.6;
-  position: relative;
 }
 
 header {
@@ -288,9 +287,11 @@ label,
 .added-favorites {
   font-size: 1.5rem;
   color: #f6f6f6;
+  opacity: 1;
   position: absolute;
   top: -3.5rem;
   z-index: 5;
+  transition: opacity 1s ease-in-out;
 }
 
 .modal-heading {
