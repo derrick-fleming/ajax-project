@@ -294,6 +294,11 @@ label,
   color: #2ab5cf;
 }
 
+.favorited-heart {
+  margin-top: -1rem;
+  margin-top: -0.5rem;
+}
+
 .added-favorites {
   font-size: 1.5rem;
   color: #f6f6f6;
@@ -564,6 +569,10 @@ input[type="checkbox"]:checked {
   padding: 0.5rem;
 }
 
+li > .column-two-third {
+  padding: 0.5rem 1rem;
+}
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
@@ -575,10 +584,6 @@ input[type="checkbox"]:checked {
 }
 
 @media screen and (min-width: 375px) {
-  li {
-    padding: 2rem;
-  }
-
   #favorites > .container {
     padding: 0 1.5rem;
   }

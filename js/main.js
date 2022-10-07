@@ -379,7 +379,14 @@ function switchViews(view) {
 
 function createFavoritesList(favorite) {
   var $li = generateDomTree('li', { class: 'row align-start', id: favorite.villagerId },
-    [generateDomTree('div', { class: 'column-third row justify-center' }, [
+    [generateDomTree('div', { class: 'column-full' }, [
+      generateDomTree('div', { class: 'end' }, [
+        generateDomTree('a', {}, [
+          generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart empty-heart' }, [])
+        ])
+      ])
+    ]),
+    generateDomTree('div', { class: 'column-third row justify-center' }, [
       generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture, 'data-id': 'click-villager' }, [])]),
     generateDomTree('div', { class: 'column-two-third', id: favorite.villagerName }, [
       generateDomTree('h1', { class: 'no-top-margin', textContent: favorite.villagerName }),
