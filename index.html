@@ -56,16 +56,16 @@
       <div></div>
       <div></div>
     </div>
-    <div data-view="error-message" class="page">
+    <div data-view="error-message" class="hidden">
       <div class="container error-message-container padding-top">
         <h2 class="error-text">Sorry,there was an error connecting to the network! Please check your internet connection and
         try again!</h2>
       </div>
     </div>
-    <div data-view="home-view" class="page">
+    <div data-view="home-view" class="hidden">
       <div id="villager-view" class="padding-top">
         <div class="container instructions-section row justify-center">
-          <div class="column-quarter">
+          <div data-id="info-scroll" class="column-quarter">
             <div class="instructions-info-container instructions-vertical row" id="scroll-info">
               <a class="column-one-twelfth">
                 <i class="fa-solid fa-xmark instructions-x"></i>
@@ -78,7 +78,7 @@
               </div>
             </div>
           </div>
-          <div class="column-quarter">
+          <div data-id="info-click" class="column-quarter">
             <div class="instructions-info-container instructions-vertical row" id="view-info">
               <a class="column-one-twelfth">
                 <i class="fa-solid fa-xmark instructions-x"></i>
@@ -91,7 +91,7 @@
               </div>
             </div>
           </div>
-          <div class="column-quarter">
+          <div data-id="info-add" class="column-quarter">
             <div class="instructions-info-container instructions-vertical row" id="favorite-info">
               <a class="column-one-twelfth">
                 <i class="fa-solid fa-xmark instructions-x"></i>
@@ -111,15 +111,17 @@
         </div>
       </div>
     </div>
-    <div data-view="home-view" class="page">
+    <div data-view="home-view" class="hidden">
       <div id="villager-view-links" class="container">
         <a class="load-link"> Load More </a>
       </div>
     </div>
-    <div data-view="favorites-view" class="page">
+    <div data-view="favorites-view" class="hidden">
       <div id="favorites-list" class="padding-top">
         <div class="container">
-          <h1>Favorites</h1>
+          <div class="container">
+            <h1>Favorites</h1>
+          </div>
           <div class="no-favorites-container">
             <h3 class="no-villagers-liked-text">No villagers have been liked.</h3>
             <div id="no-favorites-help" class="container row justify-center">
@@ -182,7 +184,7 @@
         </div>
       </div>
     </div>
-    <div data-view="add-info" class="page">
+    <div data-view="add-info" class="hidden">
       <div id="add-information" class="container padding-top">
         <form id="add-edit-form">
           <div class="row wrap">
@@ -233,7 +235,7 @@
         <div class="row">
           <div class="column-full">
             <div class="end">
-              <h3 class="added-favorites hidden">Added to Favorites</h3>
+              <h3 class="added-favorites fade-out">Added to Favorites</h3>
             </div>
           </div>
           <div class="column-half">

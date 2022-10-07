@@ -9,7 +9,7 @@ var $rightArrow = document.querySelector('#right');
 var $modalTextContainer = document.querySelector('.modal-text-margin.column-ten-twelfths.center');
 var $modalTextRows = $modalTextContainer.querySelectorAll('.row');
 var $emptyHeartIcon = document.querySelector('#favorite-icon');
-var $addedFavorites = document.querySelector('.added-favorites.hidden');
+var $addedFavorites = document.querySelector('.added-favorites.fade-out');
 var $navFavoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
 var $navHomePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
 var $navHomeText = document.querySelector('.nav-link-text.home-page-link');
@@ -20,44 +20,75 @@ var $noFavoritesContainer = document.querySelector('.no-favorites-container');
 var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $placeholderImage = document.querySelector('#placeholder');
+var loadingIcon = document.querySelector('.lds-ring.hidden');
+var $addEditForm = document.querySelector('form');
+var $viewSwapping = document.querySelectorAll('.hidden');
 
-var addedFavoritesTimer = null;
-var countdown = 300;
+var changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
+  [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
+
+var changeNavClassToHome = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
+  [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
+
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
 var timerId = null;
 var modalVillagerNumber = null;
-var $viewSwapping = document.querySelectorAll('.page');
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
-xhr.responseType = 'json';
+getAnimalCrossingData('https://acnhapi.com/v1a/villagers');
+$loadMoreLink.addEventListener('click', renderMoreVillagersToHomePage);
+document.addEventListener('readystatechange', loadingCursor);
+document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
+$instructionsContainer.addEventListener('click', aidDisappear);
+$noFavoritesContainer.addEventListener('click', aidDisappear);
+$villagerView.addEventListener('click', openModalWindow);
+$ul.addEventListener('click', openModalWindow);
+$modalContainer.addEventListener('click', modalClickActions);
+$navBar.addEventListener('click', changeNavIconAndPage);
+$favoritesList.addEventListener('click', changeScreenToAddEditForm);
+$addEditForm.addEventListener('submit', saveInformation);
+$addInformationScreen.addEventListener('click', cancelEntries);
 
-xhr.addEventListener('load', generateList);
-xhr.send();
-
-xhr.addEventListener('error', function () {
-  data.view = 'error-message';
-  switchViews('error-message');
-});
-
-function generateList(event) {
-  if (xhr.status !== 200) {
-    data.view = 'error-message';
-    switchViews(data.view);
-  }
-  villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
-  renderVillagersList();
-  return villagerList;
+function getAnimalCrossingData(request) {
+  loadingIcon.className = 'lds-ring';
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', request);
+  xhr.responseType = 'json';
+  xhr.send();
+  xhr.addEventListener('error', displayErrorMessage);
+  xhr.addEventListener('load', generateList);
+  return xhr;
 }
 
-$loadMoreLink.addEventListener('click', function () {
+function displayErrorMessage(event) {
+  data.view = 'error-message';
+  switchViews('error-message');
+}
+
+function generateList(event) {
+  switchViews(data.view);
+  if (data.informationTracker.length > 0) {
+    var $instructionAids = $instructionsContainer.querySelectorAll('.column-quarter');
+    for (var i = 0; i < $instructionAids.length; i++) {
+      for (var x = 0; x < data.informationTracker.length; x++) {
+        if ($instructionAids[i].getAttribute('data-id') === data.informationTracker[x]) {
+          $instructionAids[i].className = 'hidden';
+        }
+      }
+    }
+  }
+  villagerList = event.target.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
+}
+
+function renderMoreVillagersToHomePage(event) {
+  renderVillagersList();
+  timerId = setInterval(loadingImageIcon, 0);
   if (speciesNumber > 300) {
     $loadMoreLink.className = 'load-link hidden';
   }
-});
+}
 
 function generateDomTree(tagName, attributes, children) {
   if (!children) {
@@ -106,9 +137,11 @@ function renderVillagersList() {
     var $villagerColumn =
     generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
       generateDomTree('a', {}, [
-        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName })
+        generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName, 'data-id': 'click-villager' })
       ]),
-      generateDomTree('h4', { class: 'villager-name', textContent: villagerName })
+      generateDomTree('a', {}, [
+        generateDomTree('h4', { class: 'villager-name', textContent: villagerName, 'data-id': 'click-villager' })
+      ])
     ]);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
@@ -122,6 +155,7 @@ function renderVillagersList() {
     if (i === 390) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
       speciesNumber = 390;
+      return $villagerContainerSpeciesList;
     }
     if (villagerSpecies !== villagerList[i + 1].species || i === speciesNumber + 99) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
@@ -131,8 +165,6 @@ function renderVillagersList() {
   return $villagerContainerSpeciesList;
 }
 
-var loadingIcon = document.querySelector('.lds-ring.hidden');
-document.addEventListener('readystatechange', loadingCursor);
 function loadingCursor(event) {
   if (document.readyState === 'loading' || document.readyState === 'interactive') {
     loadingIcon.className = 'lds-ring';
@@ -141,14 +173,17 @@ function loadingCursor(event) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
 function appendFavoriteVillagersToFavoritesPage(event) {
   data.editing = false;
   for (var i = 0; i < data.favoritesList.length; i++) {
     var favorite = data.favoritesList[i];
-    createFavoritesList(favorite);
+    var $listItem = createFavoritesList(favorite);
+    $ul.appendChild($listItem);
     if (favorite.formValues !== null) {
-      addFavoritesInformationToDom(favorite);
+      var $liUpdate = document.getElementById(favorite.villagerName);
+      var $row = addFavoritesInformationToDom(favorite);
+      $liUpdate.appendChild($row);
+
     }
   }
 
@@ -157,13 +192,13 @@ function appendFavoriteVillagersToFavoritesPage(event) {
   }
 }
 
-$instructionsContainer.addEventListener('click', aidDisappear);
-$noFavoritesContainer.addEventListener('click', aidDisappear);
 function aidDisappear(event) {
   if (event.target.tagName === 'I') {
     var $hideElement = event.target.closest('.column-quarter');
     if ($hideElement !== null) {
       $hideElement.className = 'hidden';
+      var dataStorage = $hideElement.getAttribute('data-id');
+      data.informationTracker.push(dataStorage);
     } else {
       $hideElement = event.target.closest('.help');
       $hideElement.className = 'hidden';
@@ -171,22 +206,37 @@ function aidDisappear(event) {
   }
 }
 
-$villagerView.addEventListener('click', openModalWindow);
 function openModalWindow(event) {
-  if (event.target.className !== 'villager-icon') {
+  if (event.target.getAttribute('data-id') !== 'click-villager') {
     return;
   }
-  var $modalPopUp = event.target.closest('div');
-  modalVillagerNumber = $modalPopUp.getAttribute('data-id');
+
+  var $modalPopUp = null;
+  if (data.view === 'home-view') {
+    $modalPopUp = event.target.closest('div');
+    modalVillagerNumber = $modalPopUp.getAttribute('data-id');
+
+  } else {
+    $modalPopUp = event.target.closest('li');
+    modalVillagerNumber = $modalPopUp.getAttribute('id');
+
+  }
+
   var addedModalInfo = villagerList[modalVillagerNumber];
   renderModalInfo(addedModalInfo);
-  checkFavoriteVillager(addedModalInfo);
 
-  for (var i = 0; i < $modalTextRows.length; i++) {
-    if ($modalTextRows[i].getAttribute('data-id') === 'left') {
-      $modalTextRows[i].className = 'row';
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var checkFavorite = data.favoritesList[i];
+    if (addedModalInfo.name['name-USen'] === checkFavorite.villagerName) {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+    }
+  }
+
+  for (var x = 0; x < $modalTextRows.length; x++) {
+    if ($modalTextRows[x].getAttribute('data-id') === 'left') {
+      $modalTextRows[x].className = 'row';
     } else {
-      $modalTextRows[i].className = 'hidden-text-box';
+      $modalTextRows[x].className = 'hidden-text-box';
     }
   }
 
@@ -197,22 +247,17 @@ function openModalWindow(event) {
 
 function loadingImageIcon() {
   var image = document.querySelector('.modal-villager-photo');
+  if (image === null) {
+    var lastSpecies = speciesList[speciesList.length - 1];
+    var $speciesList = document.querySelector('#' + lastSpecies);
+    image = $speciesList.querySelector('img');
+  }
   loadingIcon.className = 'lds-ring';
   if (image.complete === true) {
     loadingIcon.className = 'lds-ring hidden';
     clearInterval(timerId);
   }
   return timerId;
-}
-
-function checkFavoriteVillager(info) {
-  for (var i = 0; i < data.favoritesList.length; i++) {
-    var checkFavorite = data.favoritesList[i];
-    if (info.name['name-USen'] === checkFavorite.villagerName) {
-      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      return $emptyHeartIcon;
-    }
-  }
 }
 
 function renderModalInfo(info) {
@@ -233,17 +278,15 @@ function renderModalInfo(info) {
   }
 }
 
-$modalContainer.addEventListener('click', function () {
+function modalClickActions(event) {
   var modalId = event.target.getAttribute('id');
   if (modalId === 'exit-modal') {
     var $imageDelete = document.querySelector('.modal-villager-photo');
     $imageDelete.remove();
-    countdown = 300;
     $overlay.className = 'hidden overlay';
     $modalContainer.className = 'hidden modal-villager-container';
     $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
-    clearInterval(addedFavoritesTimer);
-    $addedFavorites.className = 'added-favorites hidden';
+    $addedFavorites.className = 'added-favorites fade-out';
     modalId = 'left';
   }
 
@@ -268,21 +311,18 @@ $modalContainer.addEventListener('click', function () {
   if (modalId === 'favorite-icon') {
     if ($emptyHeartIcon.className === 'fa-solid fa-heart empty-heart') {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      addedFavoritesTimer = setInterval(displayAddedToFavoritesText, 0);
+      $addedFavorites.className = 'added-favorites';
+      setTimeout(displayAddedToFavoritesText, 1500);
       var favoriteInfo = saveFavoriteVillager();
-      createFavoritesList(favoriteInfo);
+      var $listItem = createFavoritesList(favoriteInfo);
+      $ul.appendChild($listItem);
       $noFavoritesContainer.className = 'hidden';
     }
   }
-});
+}
 
 function displayAddedToFavoritesText() {
-  countdown--;
-  $addedFavorites.className = 'added-favorites';
-  if (countdown < 1) {
-    clearInterval(addedFavoritesTimer);
-    $addedFavorites.className = 'added-favorites hidden';
-  }
+  $addedFavorites.className = 'fade-out added-favorites';
   return $addedFavorites;
 }
 
@@ -303,13 +343,6 @@ function saveFavoriteVillager() {
 
 }
 
-var changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
-  [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
-
-var changeNavClassToHome = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
-  [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
-
-$navBar.addEventListener('click', changeNavIconAndPage);
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
   if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-link-text favorites-page-link' || navCheck === 'favorites-page-link') {
@@ -322,28 +355,6 @@ function changeNavIconAndPage(event) {
     switchViews(data.view);
   }
 
-  if (data.view === 'favorites-view') {
-    for (var i = 0; i < changeNavClassToFavorites.length; i++) {
-      changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
-    }
-  } else {
-    for (var x = 0; x < changeNavClassToHome.length; x++) {
-      changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
-    }
-  }
-}
-
-if (data.view === 'home-view') {
-  switchViews(data.view);
-  for (var x = 0; x < changeNavClassToHome.length; x++) {
-    changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
-  }
-} else if (data.view === 'add-info' || data.view === 'favorites-view') {
-  data.view = 'favorites-view';
-  switchViews(data.view);
-  for (var i = 0; i < changeNavClassToFavorites.length; i++) {
-    changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
-  }
 }
 
 function switchViews(view) {
@@ -354,12 +365,22 @@ function switchViews(view) {
       $viewSwapping[i].className = 'hidden';
     }
   }
+
+  if (data.view === 'favorites-view' || data.view === 'add-info') {
+    for (var y = 0; y < changeNavClassToFavorites.length; y++) {
+      changeNavClassToFavorites[y][0].className = changeNavClassToFavorites[y][1];
+    }
+  } else {
+    for (var x = 0; x < changeNavClassToHome.length; x++) {
+      changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
+    }
+  }
 }
 
 function createFavoritesList(favorite) {
-  var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId },
+  var $li = generateDomTree('li', { class: 'row align-start', id: favorite.villagerId },
     [generateDomTree('div', { class: 'column-third row justify-center' }, [
-      generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture }, [])]),
+      generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture, 'data-id': 'click-villager' }, [])]),
     generateDomTree('div', { class: 'column-two-third', id: favorite.villagerName }, [
       generateDomTree('h1', { class: 'no-top-margin', textContent: favorite.villagerName }),
       generateDomTree('div', { class: 'add-edit', 'data-view': 'add-info' }, [
@@ -372,10 +393,9 @@ function createFavoritesList(favorite) {
     ])
     ]
   );
-  $ul.appendChild($li);
+  return $li;
 }
 
-$favoritesList.addEventListener('click', changeScreenToAddEditForm);
 function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin' || event.target.className === 'align-items') {
     data.view = 'add-info';
@@ -400,27 +420,35 @@ function changeScreenToAddEditForm(event) {
   }
 }
 
-var $addEditForm = document.querySelector('form');
-$addEditForm.addEventListener('submit', saveInformation);
 function saveInformation(event) {
-  var villagerNumber = data.editingNumber;
   event.preventDefault();
+
+  var villagerNumber = data.editingNumber;
   var formInputValues = {
     islandStatus: $addEditForm.elements.island.value,
     photoCollected: $addEditForm.elements.photo.checked,
     notes: $addEditForm.elements.notes.value
   };
-
+  var favoriteVillager = data.favoritesList[villagerNumber];
   data.favoritesList[villagerNumber].formValues = formInputValues;
   $addEditForm.reset();
   data.view = 'favorites-view';
   switchViews(data.view);
-  addFavoritesInformationToDom(data.favoritesList[villagerNumber]);
+  var $row = addFavoritesInformationToDom(favoriteVillager);
+  var $liUpdate = document.getElementById(favoriteVillager.villagerName);
+
+  if (data.editing === false) {
+    $liUpdate.appendChild($row);
+    $addInformationScreen.className = 'hidden';
+    return;
+  }
+  data.editing = false;
+  var $replaceRow = document.querySelector('#id-' + favoriteVillager.favoriteOrder);
   $addInformationScreen.className = 'hidden';
+  $replaceRow.replaceWith($row);
 }
 
 function addFavoritesInformationToDom(favorite) {
-  var $liUpdate = document.getElementById(favorite.villagerName);
   var islandValue = favorite.formValues.islandStatus;
   var islandText = null;
   var islandClass = null;
@@ -440,9 +468,9 @@ function addFavoritesInformationToDom(favorite) {
   }
 
   if (photoValue === true) {
-    boxClass = 'checked fa-solid fa-square-check';
+    boxClass = 'checked fa-solid fa-circle-check';
   } else {
-    boxClass = 'unchecked fa-regular fa-square';
+    boxClass = 'unchecked fa-regular fa-circle-xmark';
   }
 
   var $responseRow =
@@ -455,17 +483,9 @@ function addFavoritesInformationToDom(favorite) {
       ]),
       generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
 
-  if (data.editing === true) {
-    data.editing = false;
-    var $replaceRow = document.querySelector('#id-' + favorite.favoriteOrder);
-    $replaceRow.replaceWith($responseRow);
-    return;
-  }
-
-  $liUpdate.appendChild($responseRow);
+  return $responseRow;
 }
 
-$addInformationScreen.addEventListener('click', cancelEntries);
 function cancelEntries(event) {
   if (event.target.tagName === 'A') {
     $addEditForm.reset();
