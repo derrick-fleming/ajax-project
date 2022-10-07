@@ -85,6 +85,7 @@ function generateList(event) {
 
 function renderMoreVillagersToHomePage(event) {
   renderVillagersList();
+  timerId = setInterval(loadingImageIcon, 0);
   if (speciesNumber > 300) {
     $loadMoreLink.className = 'load-link hidden';
   }
@@ -247,6 +248,11 @@ function openModalWindow(event) {
 
 function loadingImageIcon() {
   var image = document.querySelector('.modal-villager-photo');
+  if (image === null) {
+    var lastSpecies = speciesList[speciesList.length - 1];
+    var $speciesList = document.querySelector('#' + lastSpecies);
+    image = $speciesList.querySelector('img');
+  }
   loadingIcon.className = 'lds-ring';
   if (image.complete === true) {
     loadingIcon.className = 'lds-ring hidden';
