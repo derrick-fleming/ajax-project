@@ -36,8 +36,7 @@ var speciesNumber = 0;
 var timerId = null;
 var modalVillagerNumber = null;
 
-var xhrData = getAnimalCrossingData('https://acnhapi.com/v1a/villagers');
-xhrData.addEventListener('load', generateList);
+getAnimalCrossingData('https://acnhapi.com/v1a/villagers');
 $loadMoreLink.addEventListener('click', renderMoreVillagersToHomePage);
 document.addEventListener('readystatechange', loadingCursor);
 document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
@@ -50,7 +49,6 @@ $navBar.addEventListener('click', changeNavIconAndPage);
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
 $addEditForm.addEventListener('submit', saveInformation);
 $addInformationScreen.addEventListener('click', cancelEntries);
-xhrData.addEventListener('error', displayErrorMessage);
 
 function getAnimalCrossingData(request) {
   loadingIcon.className = 'lds-ring';
@@ -58,6 +56,8 @@ function getAnimalCrossingData(request) {
   xhr.open('GET', request);
   xhr.responseType = 'json';
   xhr.send();
+  xhr.addEventListener('error', displayErrorMessage);
+  xhr.addEventListener('load', generateList);
   return xhr;
 }
 
@@ -78,9 +78,8 @@ function generateList(event) {
       }
     }
   }
-  villagerList = xhrData.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
+  villagerList = event.target.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
-  return villagerList;
 }
 
 function renderMoreVillagersToHomePage(event) {
