@@ -382,7 +382,7 @@ function createFavoritesList(favorite) {
     [generateDomTree('div', { class: 'column-full' }, [
       generateDomTree('div', { class: 'end' }, [
         generateDomTree('a', {}, [
-          generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart empty-heart' }, [])
+          generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart favorited-heart' }, [])
         ])
       ])
     ]),
