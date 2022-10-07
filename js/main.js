@@ -20,56 +20,74 @@ var $noFavoritesContainer = document.querySelector('.no-favorites-container');
 var $favoritesList = document.querySelector('#favorites-list');
 var $addInformationScreen = document.querySelector('#add-information');
 var $placeholderImage = document.querySelector('#placeholder');
+var loadingIcon = document.querySelector('.lds-ring.hidden');
+var $addEditForm = document.querySelector('form');
+var $viewSwapping = document.querySelectorAll('.page');
+
+var changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
+  [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
+
+var changeNavClassToHome = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
+  [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
 
 var speciesList = [];
 var villagerList = null;
 var speciesNumber = 0;
 var timerId = null;
 var modalVillagerNumber = null;
-var $viewSwapping = document.querySelectorAll('.page');
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
-xhr.responseType = 'json';
+var xhrData = getAnimalCrossingData('https://acnhapi.com/v1a/villagers');
+xhrData.addEventListener('load', generateList);
+$loadMoreLink.addEventListener('click', renderMoreVillagersToHomePage);
+document.addEventListener('readystatechange', loadingCursor);
+document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
+$instructionsContainer.addEventListener('click', aidDisappear);
+$noFavoritesContainer.addEventListener('click', aidDisappear);
+$villagerView.addEventListener('click', openModalWindow);
+$modalContainer.addEventListener('click', modalClickActions);
+$navBar.addEventListener('click', changeNavIconAndPage);
+$favoritesList.addEventListener('click', changeScreenToAddEditForm);
+$addEditForm.addEventListener('submit', saveInformation);
+$addInformationScreen.addEventListener('click', cancelEntries);
+xhrData.addEventListener('error', displayErrorMessage);
 
-xhr.addEventListener('load', generateList);
-xhr.send();
+function getAnimalCrossingData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
+  xhr.responseType = 'json';
+  xhr.send();
+  return xhr;
+}
 
-xhr.addEventListener('error', function () {
+function displayErrorMessage(event) {
   data.view = 'error-message';
   switchViews('error-message');
-});
+}
 
 function generateList(event) {
-  if (xhr.status !== 200) {
-    data.view = 'error-message';
-    switchViews(data.view);
-  }
 
-  if (data.informationTracker === []) {
-    return;
-  }
-
-  var $instructionAids = $instructionsContainer.querySelectorAll('.column-quarter');
-  for (var i = 0; i < $instructionAids.length; i++) {
-    for (var x = 0; x < data.informationTracker.length; x++) {
-      if ($instructionAids[i].getAttribute('data-id') === data.informationTracker[x]) {
-        $instructionAids[i].className = 'hidden';
+  switchViews(data.view);
+  if (data.informationTracker.length > 0) {
+    var $instructionAids = $instructionsContainer.querySelectorAll('.column-quarter');
+    for (var i = 0; i < $instructionAids.length; i++) {
+      for (var x = 0; x < data.informationTracker.length; x++) {
+        if ($instructionAids[i].getAttribute('data-id') === data.informationTracker[x]) {
+          $instructionAids[i].className = 'hidden';
+        }
       }
     }
   }
-
-  villagerList = xhr.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
+  villagerList = xhrData.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
   return villagerList;
 }
 
-$loadMoreLink.addEventListener('click', function () {
+function renderMoreVillagersToHomePage(event) {
   renderVillagersList();
   if (speciesNumber > 300) {
     $loadMoreLink.className = 'load-link hidden';
   }
-});
+}
 
 function generateDomTree(tagName, attributes, children) {
   if (!children) {
@@ -145,8 +163,6 @@ function renderVillagersList() {
   return $villagerContainerSpeciesList;
 }
 
-var loadingIcon = document.querySelector('.lds-ring.hidden');
-document.addEventListener('readystatechange', loadingCursor);
 function loadingCursor(event) {
   if (document.readyState === 'loading' || document.readyState === 'interactive') {
     loadingIcon.className = 'lds-ring';
@@ -155,7 +171,6 @@ function loadingCursor(event) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
 function appendFavoriteVillagersToFavoritesPage(event) {
   data.editing = false;
   for (var i = 0; i < data.favoritesList.length; i++) {
@@ -171,8 +186,6 @@ function appendFavoriteVillagersToFavoritesPage(event) {
   }
 }
 
-$instructionsContainer.addEventListener('click', aidDisappear);
-$noFavoritesContainer.addEventListener('click', aidDisappear);
 function aidDisappear(event) {
   if (event.target.tagName === 'I') {
     var $hideElement = event.target.closest('.column-quarter');
@@ -187,7 +200,6 @@ function aidDisappear(event) {
   }
 }
 
-$villagerView.addEventListener('click', openModalWindow);
 function openModalWindow(event) {
   if (event.target.getAttribute('data-id') !== 'click-villager') {
     return;
@@ -249,7 +261,7 @@ function renderModalInfo(info) {
   }
 }
 
-$modalContainer.addEventListener('click', function () {
+function modalClickActions(event) {
   var modalId = event.target.getAttribute('id');
   if (modalId === 'exit-modal') {
     var $imageDelete = document.querySelector('.modal-villager-photo');
@@ -289,7 +301,7 @@ $modalContainer.addEventListener('click', function () {
       $noFavoritesContainer.className = 'hidden';
     }
   }
-});
+}
 
 function displayAddedToFavoritesText() {
   $addedFavorites.className = 'fade-out added-favorites';
@@ -313,13 +325,6 @@ function saveFavoriteVillager() {
 
 }
 
-var changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
-  [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
-
-var changeNavClassToHome = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
-  [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
-
-$navBar.addEventListener('click', changeNavIconAndPage);
 function changeNavIconAndPage(event) {
   var navCheck = event.target.className;
   if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-link-text favorites-page-link' || navCheck === 'favorites-page-link') {
@@ -385,7 +390,6 @@ function createFavoritesList(favorite) {
   $ul.appendChild($li);
 }
 
-$favoritesList.addEventListener('click', changeScreenToAddEditForm);
 function changeScreenToAddEditForm(event) {
   if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin' || event.target.className === 'align-items') {
     data.view = 'add-info';
@@ -410,8 +414,6 @@ function changeScreenToAddEditForm(event) {
   }
 }
 
-var $addEditForm = document.querySelector('form');
-$addEditForm.addEventListener('submit', saveInformation);
 function saveInformation(event) {
   var villagerNumber = data.editingNumber;
   event.preventDefault();
@@ -475,7 +477,6 @@ function addFavoritesInformationToDom(favorite) {
   $liUpdate.appendChild($responseRow);
 }
 
-$addInformationScreen.addEventListener('click', cancelEntries);
 function cancelEntries(event) {
   if (event.target.tagName === 'A') {
     $addEditForm.reset();
