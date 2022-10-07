@@ -208,8 +208,18 @@ function openModalWindow(event) {
   if (event.target.getAttribute('data-id') !== 'click-villager') {
     return;
   }
-  var $modalPopUp = event.target.closest('div');
-  modalVillagerNumber = $modalPopUp.getAttribute('data-id');
+
+  var $modalPopUp = null;
+  if (data.view === 'home-page') {
+    $modalPopUp = event.target.closest('div');
+    modalVillagerNumber = $modalPopUp.getAttribute('data-id');
+
+  } else {
+    $modalPopUp = event.target.closest('li');
+    modalVillagerNumber = $modalPopUp.getAttribute('id');
+
+  }
+
   var addedModalInfo = villagerList[modalVillagerNumber];
   renderModalInfo(addedModalInfo);
   checkFavoriteVillager(addedModalInfo);
@@ -367,7 +377,7 @@ function switchViews(view) {
 function createFavoritesList(favorite) {
   var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId },
     [generateDomTree('div', { class: 'column-third row justify-center' }, [
-      generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture }, [])]),
+      generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture, 'data-id': 'click-villager' }, [])]),
     generateDomTree('div', { class: 'column-two-third', id: favorite.villagerName }, [
       generateDomTree('h1', { class: 'no-top-margin', textContent: favorite.villagerName }),
       generateDomTree('div', { class: 'add-edit', 'data-view': 'add-info' }, [
@@ -483,3 +493,5 @@ function cancelEntries(event) {
     $placeholderImage.setAttribute('alt', 'Placeholder Image');
   }
 }
+
+$ul.addEventListener('click', openModalWindow);
