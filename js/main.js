@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavorites
 $instructionsContainer.addEventListener('click', aidDisappear);
 $noFavoritesContainer.addEventListener('click', aidDisappear);
 $villagerView.addEventListener('click', openModalWindow);
+$ul.addEventListener('click', openModalWindow);
 $modalContainer.addEventListener('click', modalClickActions);
 $navBar.addEventListener('click', changeNavIconAndPage);
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
@@ -222,13 +223,19 @@ function openModalWindow(event) {
 
   var addedModalInfo = villagerList[modalVillagerNumber];
   renderModalInfo(addedModalInfo);
-  checkFavoriteVillager(addedModalInfo);
 
-  for (var i = 0; i < $modalTextRows.length; i++) {
-    if ($modalTextRows[i].getAttribute('data-id') === 'left') {
-      $modalTextRows[i].className = 'row';
+  for (var i = 0; i < data.favoritesList.length; i++) {
+    var checkFavorite = data.favoritesList[i];
+    if (addedModalInfo.name['name-USen'] === checkFavorite.villagerName) {
+      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
+    }
+  }
+
+  for (var x = 0; x < $modalTextRows.length; x++) {
+    if ($modalTextRows[x].getAttribute('data-id') === 'left') {
+      $modalTextRows[x].className = 'row';
     } else {
-      $modalTextRows[i].className = 'hidden-text-box';
+      $modalTextRows[x].className = 'hidden-text-box';
     }
   }
 
@@ -245,16 +252,6 @@ function loadingImageIcon() {
     clearInterval(timerId);
   }
   return timerId;
-}
-
-function checkFavoriteVillager(info) {
-  for (var i = 0; i < data.favoritesList.length; i++) {
-    var checkFavorite = data.favoritesList[i];
-    if (info.name['name-USen'] === checkFavorite.villagerName) {
-      $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
-      return $emptyHeartIcon;
-    }
-  }
 }
 
 function renderModalInfo(info) {
@@ -493,5 +490,3 @@ function cancelEntries(event) {
     $placeholderImage.setAttribute('alt', 'Placeholder Image');
   }
 }
-
-$ul.addEventListener('click', openModalWindow);
