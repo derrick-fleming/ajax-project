@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavorites
 $instructionsContainer.addEventListener('click', aidDisappear);
 $noFavoritesContainer.addEventListener('click', aidDisappear);
 $villagerView.addEventListener('click', openModalWindow);
-$ul.addEventListener('click', openModalWindow);
+// $ul.addEventListener('click', openModalWindow);
 $modalContainer.addEventListener('click', modalClickActions);
 $navBar.addEventListener('click', changeNavIconAndPage);
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
@@ -500,5 +500,16 @@ function cancelEntries(event) {
     switchViews(data.view);
     $placeholderImage.setAttribute('src', 'images/placeholder-image-square-1.jpg');
     $placeholderImage.setAttribute('alt', 'Placeholder Image');
+  }
+}
+
+var $deleteModal = document.querySelector('.hidden.container.delete-modal');
+
+$ul.addEventListener('click', openDeleteModal);
+
+function openDeleteModal(event) {
+  if (event.target.getAttribute('id') === 'favorite-icon') {
+    $deleteModal.className = 'container delete-modal';
+    $overlay.className = 'overlay';
   }
 }
