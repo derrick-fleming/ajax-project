@@ -75,5 +75,4 @@
 .hidden {
   display: none;
   opacity: 0;
-  transition: opactiy 1s ease-in-out;
 }

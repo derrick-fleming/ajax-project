@@ -369,8 +369,9 @@ label,
 }
 
 .add-edit {
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
   color: #888;
+  display: inline-block;
 }
 
 .edit-icon {
