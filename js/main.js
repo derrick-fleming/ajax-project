@@ -22,7 +22,7 @@ var $addInformationScreen = document.querySelector('#add-information');
 var $placeholderImage = document.querySelector('#placeholder');
 var loadingIcon = document.querySelector('.lds-ring.hidden');
 var $addEditForm = document.querySelector('form');
-var $viewSwapping = document.querySelectorAll('.page');
+var $viewSwapping = document.querySelectorAll('.hidden');
 
 var changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
   [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
@@ -313,7 +313,7 @@ function modalClickActions(event) {
     if ($emptyHeartIcon.className === 'fa-solid fa-heart empty-heart') {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
       $addedFavorites.className = 'added-favorites';
-      setTimeout(displayAddedToFavoritesText, 2000);
+      setTimeout(displayAddedToFavoritesText, 1500);
       var favoriteInfo = saveFavoriteVillager();
       var $listItem = createFavoritesList(favoriteInfo);
       $ul.appendChild($listItem);

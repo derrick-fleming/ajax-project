@@ -203,6 +203,7 @@ label,
   color: #816f59;
   font-weight: 300;
   margin-top: 0;
+  transition: transform 0.3s ease-in;
 }
 
 .column-one-third.center:hover .villager-name,
@@ -226,6 +227,7 @@ label,
   padding-top: 1.75rem;
   line-height: 1.2;
   color: #838383;
+  transition: color 0.2s ease-in-out;
 }
 
 .load-link {
@@ -233,6 +235,7 @@ label,
   color: #838383;
   line-height: 2;
   margin-bottom: 1rem;
+  transition: color 0.2s ease-in-out;
 }
 
 .load-link:hover,
@@ -267,6 +270,7 @@ label,
   font-size: 1.75rem;
   color: #b0b0b0;
   padding: 0.5rem 0 0 1rem;
+  transition: color 0.2s ease-in-out;
 }
 
 .empty-heart,
@@ -278,6 +282,7 @@ label,
 .empty-heart {
   -webkit-text-stroke: 2.5px #b0b0b0;
   color: #f6f6f6;
+  transition: color 0.2s ease-in-out, -webkit-text-stroke 0.2s ease-in-out;
 }
 
 .empty-heart:hover {
@@ -296,12 +301,13 @@ label,
   position: absolute;
   top: -3.5rem;
   z-index: 5;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-in;
 }
 
 .fade-out {
   visibility: hidden;
   opacity: 0;
+  transition: 0.5s ease-in;
 }
 
 .modal-heading {
@@ -332,6 +338,7 @@ label,
 .arrow {
   font-size: 1.75rem;
   color: #816f59a6;
+  transition: color 0.2s ease-in-out;
 }
 
 #left,
@@ -372,6 +379,7 @@ label,
   margin-bottom: 0.5rem;
   color: #888;
   display: inline-block;
+  transition: color 0.2s ease-in-out;
 }
 
 .edit-icon {
@@ -385,6 +393,7 @@ label,
   background-color: #4dc3b95e;
   border-radius: 50%;
   margin-right: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .add-edit:hover .pencil-icon-container {
