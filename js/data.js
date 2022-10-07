@@ -21,6 +21,8 @@ function storeToLocalStorage(event) {
   var dataJSON = JSON.stringify(data);
   if (data.view === 'add-info') {
     data.view = 'favorites-view';
+  } if (data.view === 'error-message') {
+    data.view = 'home-view';
   }
   localStorage.setItem('acnh-villager-favorites', dataJSON);
 }

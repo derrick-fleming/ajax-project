@@ -414,8 +414,9 @@ function changeScreenToAddEditForm(event) {
 }
 
 function saveInformation(event) {
-  var villagerNumber = data.editingNumber;
   event.preventDefault();
+
+  var villagerNumber = data.editingNumber;
   var formInputValues = {
     islandStatus: $addEditForm.elements.island.value,
     photoCollected: $addEditForm.elements.photo.checked,
