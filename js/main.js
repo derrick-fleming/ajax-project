@@ -52,10 +52,10 @@ $addEditForm.addEventListener('submit', saveInformation);
 $addInformationScreen.addEventListener('click', cancelEntries);
 xhrData.addEventListener('error', displayErrorMessage);
 
-function getAnimalCrossingData() {
+function getAnimalCrossingData(request) {
   loadingIcon.className = 'lds-ring';
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
+  xhr.open('GET', request);
   xhr.responseType = 'json';
   xhr.send();
   return xhr;
@@ -372,7 +372,7 @@ function switchViews(view) {
 }
 
 function createFavoritesList(favorite) {
-  var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId },
+  var $li = generateDomTree('li', { class: 'row align-start', id: favorite.villagerId },
     [generateDomTree('div', { class: 'column-third row justify-center' }, [
       generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture, 'data-id': 'click-villager' }, [])]),
     generateDomTree('div', { class: 'column-two-third', id: favorite.villagerName }, [
@@ -431,16 +431,15 @@ function saveInformation(event) {
   var $row = addFavoritesInformationToDom(favoriteVillager);
   var $liUpdate = document.getElementById(favoriteVillager.villagerName);
 
-  if (data.editing === true) {
-    data.editing = false;
-    var $replaceRow = document.querySelector('#id-' + favoriteVillager.favoriteOrder);
+  if (data.editing === false) {
+    $liUpdate.appendChild($row);
     $addInformationScreen.className = 'hidden';
-    $replaceRow.replaceWith($row);
     return;
   }
-
-  $liUpdate.appendChild($row);
+  data.editing = false;
+  var $replaceRow = document.querySelector('#id-' + favoriteVillager.favoriteOrder);
   $addInformationScreen.className = 'hidden';
+  $replaceRow.replaceWith($row);
 }
 
 function addFavoritesInformationToDom(favorite) {

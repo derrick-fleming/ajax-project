@@ -366,7 +366,6 @@ label,
   height: 238px;
   object-fit: cover;
   border-radius: 5px;
-  margin: 0 1rem 1rem;
 }
 
 .add-edit {
@@ -731,11 +730,12 @@ input[type="checkbox"]:checked {
   }
 
   .column-two-third {
-    flex-basis: 40%;
+    flex-basis: 50%;
   }
 
   .favorite-image {
     height: 256px;
+    margin: 0 1rem 1rem;
   }
 
   .no-top-margin {
