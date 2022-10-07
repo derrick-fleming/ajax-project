@@ -513,3 +513,12 @@ function openDeleteModal(event) {
     $overlay.className = 'overlay';
   }
 }
+
+$deleteModal.addEventListener('click', deleteOrExitOutFavoriteVillager);
+
+function deleteOrExitOutFavoriteVillager(event) {
+  if (event.target.getAttribute('id') === 'go-back') {
+    $deleteModal.className = 'hidden container delete-modal';
+    $overlay.className = 'hidden overlay';
+  }
+}
