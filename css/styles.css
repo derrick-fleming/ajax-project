@@ -208,7 +208,7 @@ label,
 .column-one-third.center:hover .villager-name,
 .column-one-third.center:hover .villager-icon {
   transform: scale3d(1.2, 1.2, 1.2);
-  color: #4dc3b9;
+  color: #63533f;
   font-weight: 400;
 }
 

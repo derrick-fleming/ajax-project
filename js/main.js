@@ -210,7 +210,7 @@ function openModalWindow(event) {
   }
 
   var $modalPopUp = null;
-  if (data.view === 'home-page') {
+  if (data.view === 'home-view') {
     $modalPopUp = event.target.closest('div');
     modalVillagerNumber = $modalPopUp.getAttribute('data-id');
 
