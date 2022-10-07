@@ -177,7 +177,10 @@ function appendFavoriteVillagersToFavoritesPage(event) {
     var favorite = data.favoritesList[i];
     createFavoritesList(favorite);
     if (favorite.formValues !== null) {
-      addFavoritesInformationToDom(favorite);
+      var $liUpdate = document.getElementById(favorite.villagerName);
+      var $row = addFavoritesInformationToDom(favorite);
+      $liUpdate.appendChild($row);
+
     }
   }
 
@@ -337,15 +340,6 @@ function changeNavIconAndPage(event) {
     switchViews(data.view);
   }
 
-  if (data.view === 'favorites-view') {
-    for (var i = 0; i < changeNavClassToFavorites.length; i++) {
-      changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
-    }
-  } else {
-    for (var x = 0; x < changeNavClassToHome.length; x++) {
-      changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
-    }
-  }
 }
 
 function switchViews(view) {
@@ -357,15 +351,13 @@ function switchViews(view) {
     }
   }
 
-  if (data.view === 'home-view') {
+  if (data.view === 'favorites-view' || data.view === 'add-info') {
+    for (var y = 0; y < changeNavClassToFavorites.length; y++) {
+      changeNavClassToFavorites[y][0].className = changeNavClassToFavorites[y][1];
+    }
+  } else {
     for (var x = 0; x < changeNavClassToHome.length; x++) {
       changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
-    }
-  }
-
-  if (data.view === 'favorites-view') {
-    for (var y = 0; i < changeNavClassToFavorites.length; y++) {
-      changeNavClassToFavorites[y][0].className = changeNavClassToFavorites[y][1];
     }
   }
 }
@@ -422,17 +414,27 @@ function saveInformation(event) {
     photoCollected: $addEditForm.elements.photo.checked,
     notes: $addEditForm.elements.notes.value
   };
-
+  var favoriteVillager = data.favoritesList[villagerNumber];
   data.favoritesList[villagerNumber].formValues = formInputValues;
   $addEditForm.reset();
   data.view = 'favorites-view';
   switchViews(data.view);
-  addFavoritesInformationToDom(data.favoritesList[villagerNumber]);
+  var $row = addFavoritesInformationToDom(favoriteVillager);
+  var $liUpdate = document.getElementById(favoriteVillager.villagerName);
+
+  if (data.editing === true) {
+    data.editing = false;
+    var $replaceRow = document.querySelector('#id-' + favoriteVillager.favoriteOrder);
+    $addInformationScreen.className = 'hidden';
+    $replaceRow.replaceWith($row);
+    return;
+  }
+
+  $liUpdate.appendChild($row);
   $addInformationScreen.className = 'hidden';
 }
 
 function addFavoritesInformationToDom(favorite) {
-  var $liUpdate = document.getElementById(favorite.villagerName);
   var islandValue = favorite.formValues.islandStatus;
   var islandText = null;
   var islandClass = null;
@@ -467,14 +469,7 @@ function addFavoritesInformationToDom(favorite) {
       ]),
       generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
 
-  if (data.editing === true) {
-    data.editing = false;
-    var $replaceRow = document.querySelector('#id-' + favorite.favoriteOrder);
-    $replaceRow.replaceWith($responseRow);
-    return;
-  }
-
-  $liUpdate.appendChild($responseRow);
+  return $responseRow;
 }
 
 function cancelEntries(event) {
