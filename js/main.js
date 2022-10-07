@@ -155,6 +155,7 @@ function renderVillagersList() {
     if (i === 390) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
       speciesNumber = 390;
+      return $villagerContainerSpeciesList;
     }
     if (villagerSpecies !== villagerList[i + 1].species || i === speciesNumber + 99) {
       $villagerSection.appendChild($villagerContainerSpeciesList);
