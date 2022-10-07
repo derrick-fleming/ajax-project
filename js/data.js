@@ -6,7 +6,8 @@ var data = {
   editing: false,
   editingNumber: null,
   nextFavorite: 0,
-  informationTracker: []
+  informationTracker: [],
+  deleteFavorite: null
 };
 
 var previousData = localStorage.getItem('acnh-villager-favorites');

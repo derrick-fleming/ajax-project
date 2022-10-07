@@ -42,6 +42,10 @@ a,
   font-family: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 h2 {
   font-size: 1.375rem;
   color: #816f59;

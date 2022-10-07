@@ -378,7 +378,7 @@ function switchViews(view) {
 }
 
 function createFavoritesList(favorite) {
-  var $li = generateDomTree('li', { class: 'row align-start', id: favorite.villagerId },
+  var $li = generateDomTree('li', { class: 'row align-start', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId },
     [generateDomTree('div', { class: 'column-full' }, [
       generateDomTree('div', { class: 'end' }, [
         generateDomTree('a', {}, [
@@ -512,12 +512,27 @@ function openDeleteModal(event) {
     $deleteModal.className = 'container delete-modal';
     $overlay.className = 'overlay';
   }
+
+  var $modalPopUp = event.target.closest('li');
+  data.deleteFavorite = $modalPopUp.getAttribute('id');
 }
 
 $deleteModal.addEventListener('click', deleteOrExitOutFavoriteVillager);
 
 function deleteOrExitOutFavoriteVillager(event) {
   if (event.target.getAttribute('id') === 'go-back') {
+    $deleteModal.className = 'hidden container delete-modal';
+    $overlay.className = 'hidden overlay';
+  }
+  if (event.target.getAttribute('id') === 'delete') {
+    var $liDelete = $ul.querySelectorAll('li');
+    for (var index = 0; index < $liDelete.length; index++) {
+      if ($liDelete[index].getAttribute('id') === data.deleteFavorite) {
+        $liDelete[index].remove();
+        data.favoritesList.splice(index, 1);
+        break;
+      }
+    }
     $deleteModal.className = 'hidden container delete-modal';
     $overlay.className = 'hidden overlay';
   }
