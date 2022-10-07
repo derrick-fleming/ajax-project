@@ -52,6 +52,7 @@ $addInformationScreen.addEventListener('click', cancelEntries);
 xhrData.addEventListener('error', displayErrorMessage);
 
 function getAnimalCrossingData() {
+  loadingIcon.className = 'lds-ring';
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://acnhapi.com/v1a/villagers');
   xhr.responseType = 'json';
@@ -65,7 +66,6 @@ function displayErrorMessage(event) {
 }
 
 function generateList(event) {
-
   switchViews(data.view);
   if (data.informationTracker.length > 0) {
     var $instructionAids = $instructionsContainer.querySelectorAll('.column-quarter');
@@ -348,25 +348,24 @@ function changeNavIconAndPage(event) {
   }
 }
 
-if (data.view === 'home-view') {
-  switchViews(data.view);
-  for (var x = 0; x < changeNavClassToHome.length; x++) {
-    changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
-  }
-} else if (data.view === 'add-info' || data.view === 'favorites-view') {
-  data.view = 'favorites-view';
-  switchViews(data.view);
-  for (var i = 0; i < changeNavClassToFavorites.length; i++) {
-    changeNavClassToFavorites[i][0].className = changeNavClassToFavorites[i][1];
-  }
-}
-
 function switchViews(view) {
   for (var i = 0; i < $viewSwapping.length; i++) {
     if ($viewSwapping[i].getAttribute('data-view') === view) {
       $viewSwapping[i].className = 'page';
     } else {
       $viewSwapping[i].className = 'hidden';
+    }
+  }
+
+  if (data.view === 'home-view') {
+    for (var x = 0; x < changeNavClassToHome.length; x++) {
+      changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
+    }
+  }
+
+  if (data.view === 'favorites-view') {
+    for (var y = 0; i < changeNavClassToFavorites.length; y++) {
+      changeNavClassToFavorites[y][0].className = changeNavClassToFavorites[y][1];
     }
   }
 }
