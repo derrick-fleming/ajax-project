@@ -175,7 +175,8 @@ function appendFavoriteVillagersToFavoritesPage(event) {
   data.editing = false;
   for (var i = 0; i < data.favoritesList.length; i++) {
     var favorite = data.favoritesList[i];
-    createFavoritesList(favorite);
+    var $listItem = createFavoritesList(favorite);
+    $ul.appendChild($listItem);
     if (favorite.formValues !== null) {
       var $liUpdate = document.getElementById(favorite.villagerName);
       var $row = addFavoritesInformationToDom(favorite);
@@ -300,7 +301,8 @@ function modalClickActions(event) {
       $addedFavorites.className = 'added-favorites';
       setTimeout(displayAddedToFavoritesText, 2000);
       var favoriteInfo = saveFavoriteVillager();
-      createFavoritesList(favoriteInfo);
+      var $listItem = createFavoritesList(favoriteInfo);
+      $ul.appendChild($listItem);
       $noFavoritesContainer.className = 'hidden';
     }
   }
@@ -378,7 +380,7 @@ function createFavoritesList(favorite) {
     ])
     ]
   );
-  $ul.appendChild($li);
+  return $li;
 }
 
 function changeScreenToAddEditForm(event) {
