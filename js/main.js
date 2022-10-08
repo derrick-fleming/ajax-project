@@ -83,6 +83,7 @@ function generateList(event) {
   }
   villagerList = event.target.response.sort(function (a, b) { return a.species.localeCompare(b.species); });
   renderVillagersList();
+  timerId = setInterval(loadingImageIcon, 0);
 }
 
 function renderMoreVillagersToHomePage(event) {
