@@ -44,7 +44,6 @@ $loadMoreLink.addEventListener('click', renderMoreVillagersToHomePage);
 document.addEventListener('readystatechange', loadingCursor);
 document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavoritesPage);
 $instructionsContainer.addEventListener('click', aidDisappear);
-$noFavoritesContainer.addEventListener('click', aidDisappear);
 $villagerView.addEventListener('click', openModalWindow);
 $modalContainer.addEventListener('click', modalClickActions);
 $navBar.addEventListener('click', changeNavIconAndPage);
@@ -199,14 +198,9 @@ function appendFavoriteVillagersToFavoritesPage(event) {
 function aidDisappear(event) {
   if (event.target.tagName === 'I') {
     var $hideElement = event.target.closest('.column-quarter');
-    if ($hideElement !== null) {
-      $hideElement.className = 'hidden';
-      var dataStorage = $hideElement.getAttribute('data-id');
-      data.informationTracker.push(dataStorage);
-    } else {
-      $hideElement = event.target.closest('.help');
-      $hideElement.className = 'hidden';
-    }
+    $hideElement.className = 'hidden';
+    var dataStorage = $hideElement.getAttribute('data-id');
+    data.informationTracker.push(dataStorage);
   }
 }
 
