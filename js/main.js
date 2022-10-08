@@ -3,6 +3,7 @@ var $loadMoreLink = document.querySelector('.load-link');
 var $instructionsContainer = document.querySelector('.container.instructions-section.row.justify-center');
 var $modalContainer = document.querySelector('.hidden.modal-villager-container');
 var $overlay = document.querySelector('.hidden.overlay');
+var $overlayTwo = document.querySelector('.hidden.overlay-two');
 var $modalPhotoContainer = document.querySelector('#modal-photo-container');
 var $leftArrow = document.querySelector('#left');
 var $rightArrow = document.querySelector('#right');
@@ -23,6 +24,8 @@ var $placeholderImage = document.querySelector('#placeholder');
 var loadingIcon = document.querySelector('.lds-ring.hidden');
 var $addEditForm = document.querySelector('form');
 var $viewSwapping = document.querySelectorAll('.hidden');
+var $deleteModal = document.querySelector('.hidden.container.delete-modal');
+var $deletedFavorites = document.querySelector('.deleted-favorites.fade-out');
 
 var changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
   [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
@@ -49,6 +52,8 @@ $navBar.addEventListener('click', changeNavIconAndPage);
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
 $addEditForm.addEventListener('submit', saveInformation);
 $addInformationScreen.addEventListener('click', cancelEntries);
+$deleteModal.addEventListener('click', deleteOrExitOutFavoriteVillager);
+$ul.addEventListener('click', openDeleteModal);
 
 function getAnimalCrossingData(request) {
   loadingIcon.className = 'lds-ring';
@@ -286,7 +291,8 @@ function modalClickActions(event) {
     $overlay.className = 'hidden overlay';
     $modalContainer.className = 'hidden modal-villager-container';
     $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
-    $addedFavorites.className = 'added-favorites fade-out';
+    $addedFavorites.className = 'hidden added-favorites fade-out';
+    $deletedFavorites.className = 'hidden deleted-favorites fade-out-delete';
     modalId = 'left';
   }
 
@@ -317,6 +323,10 @@ function modalClickActions(event) {
       var $listItem = createFavoritesList(favoriteInfo);
       $ul.appendChild($listItem);
       $noFavoritesContainer.className = 'hidden';
+    } else {
+      data.deleteFavorite = modalVillagerNumber;
+      $deleteModal.className = 'container delete-modal';
+      $overlayTwo.className = 'overlay-two';
     }
   }
 }
@@ -503,30 +513,30 @@ function cancelEntries(event) {
   }
 }
 
-var $deleteModal = document.querySelector('.hidden.container.delete-modal');
-
-$ul.addEventListener('click', openDeleteModal);
-
 function openDeleteModal(event) {
   if (event.target.getAttribute('id') === 'favorite-icon') {
     $deleteModal.className = 'container delete-modal';
-    $overlay.className = 'overlay';
+    $overlayTwo.className = 'overlay';
   }
 
   var $modalPopUp = event.target.closest('li');
   data.deleteFavorite = $modalPopUp.getAttribute('id');
 }
 
-$deleteModal.addEventListener('click', deleteOrExitOutFavoriteVillager);
-
 function deleteOrExitOutFavoriteVillager(event) {
   if (event.target.getAttribute('id') === 'go-back') {
     $deleteModal.className = 'hidden container delete-modal';
-    $overlay.className = 'hidden overlay';
+    $overlayTwo.className = 'hidden overlay-two';
   }
   if (event.target.getAttribute('id') === 'delete') {
     var $liDelete = $ul.querySelectorAll('li');
     for (var index = 0; index < $liDelete.length; index++) {
+      if (data.view === 'home-view') {
+        $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
+        $deletedFavorites.className = 'deleted-favorites';
+        setTimeout(displayDeletedFavorites, 1500);
+      }
+
       if ($liDelete[index].getAttribute('id') === data.deleteFavorite) {
         $liDelete[index].remove();
         data.favoritesList.splice(index, 1);
@@ -534,6 +544,11 @@ function deleteOrExitOutFavoriteVillager(event) {
       }
     }
     $deleteModal.className = 'hidden container delete-modal';
-    $overlay.className = 'hidden overlay';
+    $overlayTwo.className = 'hidden overlay-two';
   }
+}
+
+function displayDeletedFavorites() {
+  $deletedFavorites.className = 'fade-out-delete deleted-favorites';
+  return $deletedFavorites;
 }
