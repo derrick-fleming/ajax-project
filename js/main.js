@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', appendFavoriteVillagersToFavorites
 $instructionsContainer.addEventListener('click', aidDisappear);
 $noFavoritesContainer.addEventListener('click', aidDisappear);
 $villagerView.addEventListener('click', openModalWindow);
-// $ul.addEventListener('click', openModalWindow);
 $modalContainer.addEventListener('click', modalClickActions);
 $navBar.addEventListener('click', changeNavIconAndPage);
 $favoritesList.addEventListener('click', changeScreenToAddEditForm);
@@ -216,16 +215,8 @@ function openModalWindow(event) {
     return;
   }
 
-  var $modalPopUp = null;
-  if (data.view === 'home-view') {
-    $modalPopUp = event.target.closest('div');
-    modalVillagerNumber = $modalPopUp.getAttribute('data-id');
-
-  } else {
-    $modalPopUp = event.target.closest('li');
-    modalVillagerNumber = $modalPopUp.getAttribute('id');
-
-  }
+  var $modalPopUp = event.target.closest('div');
+  modalVillagerNumber = $modalPopUp.getAttribute('data-id');
 
   var addedModalInfo = villagerList[modalVillagerNumber];
   renderModalInfo(addedModalInfo);
@@ -522,11 +513,18 @@ function openDeleteModal(event) {
   data.deleteFavorite = $modalPopUp.getAttribute('id');
 }
 
+function displayDeletedFavorites() {
+  $deletedFavorites.className = 'fade-out-delete deleted-favorites';
+  return $deletedFavorites;
+}
+
 function deleteOrExitOutFavoriteVillager(event) {
   if (event.target.getAttribute('id') === 'go-back') {
     $deleteModal.className = 'hidden container delete-modal';
     $overlayTwo.className = 'hidden overlay-two';
+    return;
   }
+
   if (event.target.getAttribute('id') === 'delete') {
     var $liDelete = $ul.querySelectorAll('li');
     for (var index = 0; index < $liDelete.length; index++) {
@@ -549,9 +547,4 @@ function deleteOrExitOutFavoriteVillager(event) {
   if (data.favoritesList.length === 0) {
     $noFavoritesContainer.className = 'no-favorites-container';
   }
-}
-
-function displayDeletedFavorites() {
-  $deletedFavorites.className = 'fade-out-delete deleted-favorites';
-  return $deletedFavorites;
 }
