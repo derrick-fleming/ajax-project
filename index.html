@@ -126,10 +126,7 @@
             <h3 class="no-villagers-liked-text">No villagers have been liked.</h3>
             <div id="no-favorites-help" class="container row justify-center">
               <div class="help">
-                <div class="instructions-info-container instructions-vertical row" id="home-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark instructions-x"></i>
-                  </a>
+                <div class="instructions-info-container instructions-vertical row justify-center" id="home-info">
                   <div class="column-quarter">
                     <img src="images/nh-houseicon.webp" alt="House icon" class="instructions-home-icon">
                   </div>
@@ -139,12 +136,9 @@
                 </div>
               </div>
               <div class="help">
-                <div class="instructions-info-container instructions-vertical row" id="scroll-fav-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark instructions-x"></i>
-                  </a>
+                <div class="instructions-info-container instructions-vertical row justify-center" id="scroll-fav-info">
                   <div class="column-quarter">
-                    <img src="images/nh-map-icon.webp" alt="Map icon" class="instructions-icon">
+                    <img src="images/nh-map-icon.webp" alt="Map icon" class="no-favorites-instructions-icon">
                   </div>
                   <div class="column-half">
                     <h2 class="instructions-text instructions-top-margin">Scroll to find <br>villagers</h2>
@@ -152,12 +146,9 @@
                 </div>
               </div>
               <div class="help">
-                <div class="instructions-info-container instructions-vertical row" id="view-fav-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark instructions-x"></i>
-                  </a>
+                <div class="instructions-info-container instructions-vertical row justify-center" id="view-fav-info">
                   <div class="column-quarter">
-                    <img src="images/nh-passport-photo.webp" alt="Information icon" class="instructions-icon">
+                    <img src="images/nh-passport-photo.webp" alt="Information icon" class="no-favorites-instructions-icon">
                   </div>
                   <div class="column-half">
                     <h2 class="instructions-text">Click a villager to view their information</h2>
@@ -165,12 +156,9 @@
                 </div>
               </div>
               <div class="help">
-                <div class="instructions-info-container instructions-vertical row" id="favorite-fav-info">
-                  <a class="column-one-twelfth">
-                    <i class="fa-solid fa-xmark instructions-x"></i>
-                  </a>
+                <div class="instructions-info-container instructions-vertical row justify-center" id="favorite-fav-info">
                   <div class="column-quarter">
-                    <img src="images/nh-best-friends.webp" alt="Favorite icon" class="instructions-icon">
+                    <img src="images/nh-best-friends.webp" alt="Favorite icon" class="no-favorites-instructions-icon">
                   </div>
                   <div class="column-half">
                     <h2 class="instructions-text instructions-top-margin">Add villagers to your favorites list</h2>
@@ -236,6 +224,7 @@
           <div class="column-full">
             <div class="end">
               <h3 class="added-favorites fade-out">Added to Favorites</h3>
+              <h3 class="deleted-favorites fade-out">Villager Removed</h3>
             </div>
           </div>
           <div class="column-half">
@@ -304,6 +293,23 @@
             <a>
               <i data-id="right" id="right" class="fa-solid fa-chevron-right arrow"></i>
             </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden overlay-two"></div>
+    <div class="hidden container delete-modal">
+      <div class="row">
+        <div class="column-full">
+          <h3 class="remove-villager-text">Are you sure you want to remove this villager from your favorites?</h3>
+          <p class="remove-villager-subtext">Saved data will be lost.</p>
+        </div>
+        <div class="flex-row">
+          <div class="column-half">
+            <button id="delete" class="delete modal-button">Yes</button>
+          </div>
+          <div class="column-half">
+            <button id="go-back" class="exit-out modal-button">No</button>
           </div>
         </div>
       </div>

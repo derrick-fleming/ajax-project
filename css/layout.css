@@ -3,6 +3,14 @@
   padding: 0 1.5rem;
 }
 
+#villager-view > .container {
+  max-width: 640px;
+}
+
+#favorites > .container {
+  padding: 0.5rem;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -79,4 +87,9 @@
 
 .align-start {
   align-content: flex-start;
+}
+
+.flex-row {
+  display: flex;
+  margin: 0 auto;
 }
