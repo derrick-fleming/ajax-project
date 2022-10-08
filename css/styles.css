@@ -764,7 +764,6 @@ li > .column-two-third {
   }
 
   .instructions-icon {
-    margin-top: -1rem;
     width: 100px;
   }
 
@@ -780,7 +779,7 @@ li > .column-two-third {
 
   .instructions-home-icon {
     width: 85px;
-    margin: 0 0 1.5rem;
+    margin: 2rem 1.5rem 1rem;
   }
 
   form {
