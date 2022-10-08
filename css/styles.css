@@ -609,6 +609,8 @@ li > .column-two-third {
 
 .remove-villager-text {
   font-size: 1.25rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .modal-button {
@@ -617,22 +619,19 @@ li > .column-two-third {
   padding: 0 0.75rem;
   margin: 0.5rem 1rem 2rem;
   border-radius: 8px;
-  font-family: "Varela Round", sans-serif;
-}
-
-.exit-out,
-.delete {
   color: #ffff;
   line-height: 2;
-  transition: background-color 0.2s ease-in-out;
+  font-family: "Varela Round", sans-serif;
 }
 
 .exit-out {
   background-color: #e57373;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .delete {
   background-color: #4dc3b9;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .exit-out:hover {
@@ -837,6 +836,10 @@ li > .column-two-third {
 
   .delete-modal {
     width: 438px;
+  }
+
+  .remove-villager-text {
+    padding: 0.5rem 1.5rem;
   }
 }
 
