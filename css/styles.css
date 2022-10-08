@@ -82,6 +82,7 @@ p {
   margin-bottom: 0;
   margin-top: 0;
   font-weight: 300;
+  line-height: 1.8;
 }
 
 form {
@@ -461,16 +462,8 @@ label,
   color: #7d83bb;
 }
 
-.text-response {
-  margin-top: 0.25rem;
-}
-
 .inline-block {
   display: inline-block;
-}
-
-.less-padding {
-  padding: 0 1rem;
 }
 
 textarea:focus {
@@ -530,11 +523,6 @@ input[type="checkbox"]:checked {
   color: #575757;
 }
 
-#villager-view > .container {
-  padding: 1rem 0;
-  max-width: 640px;
-}
-
 .lds-ring {
   position: fixed;
   width: 80px;
@@ -570,24 +558,10 @@ input[type="checkbox"]:checked {
   animation-delay: -0.15s;
 }
 
-#no-favorites-help:nth-child(odd) {
-  flex-basis: 50%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-#no-favorites-help:nth-child(even) {
-  flex-basis: 50%;
-}
-
 .no-favorites-container {
   max-width: 750px;
   text-align: center;
   margin: 0 auto;
-}
-
-#favorites > .container {
-  padding: 0.5rem;
 }
 
 li > .column-two-third {

@@ -483,7 +483,7 @@ function addFavoritesInformationToDom(favorite) {
         generateDomTree('p', { class: 'photo-response inline-block', textContent: 'Photo Collected: ' }),
         generateDomTree('i', { class: boxClass })
       ]),
-      generateDomTree('p', { class: 'text-response', textContent: notesValue })]);
+      generateDomTree('p', { textContent: notesValue })]);
 
   return $responseRow;
 }
