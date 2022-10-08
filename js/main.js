@@ -291,8 +291,8 @@ function modalClickActions(event) {
     $overlay.className = 'hidden overlay';
     $modalContainer.className = 'hidden modal-villager-container';
     $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
-    $addedFavorites.className = 'hidden added-favorites fade-out';
-    $deletedFavorites.className = 'hidden deleted-favorites fade-out-delete';
+    $addedFavorites.className = 'added-favorites fade-out';
+    $deletedFavorites.className = 'deleted-favorites fade-out-delete';
     modalId = 'left';
   }
 
@@ -346,7 +346,6 @@ function saveFavoriteVillager() {
     villagerName: villagerData.name['name-USen'],
     formValues: null
   };
-  modalVillagerNumber = 0;
   data.nextFavorite++;
   data.favoritesList.push(favoriteVillagerInformation);
   return favoriteVillagerInformation;
@@ -531,20 +530,24 @@ function deleteOrExitOutFavoriteVillager(event) {
   if (event.target.getAttribute('id') === 'delete') {
     var $liDelete = $ul.querySelectorAll('li');
     for (var index = 0; index < $liDelete.length; index++) {
-      if (data.view === 'home-view') {
-        $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
-        $deletedFavorites.className = 'deleted-favorites';
-        setTimeout(displayDeletedFavorites, 1500);
-      }
 
       if ($liDelete[index].getAttribute('id') === data.deleteFavorite) {
         $liDelete[index].remove();
         data.favoritesList.splice(index, 1);
+        if (data.view === 'home-view') {
+          $emptyHeartIcon.className = 'fa-solid fa-heart empty-heart';
+          $deletedFavorites.className = 'deleted-favorites';
+          setTimeout(displayDeletedFavorites, 1500);
+        }
         break;
       }
     }
     $deleteModal.className = 'hidden container delete-modal';
     $overlayTwo.className = 'hidden overlay-two';
+  }
+
+  if (data.favoritesList.length === 0) {
+    $noFavoritesContainer.className = 'no-favorites-container';
   }
 }
 
