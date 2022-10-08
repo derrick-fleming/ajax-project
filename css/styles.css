@@ -620,16 +620,27 @@ li > .column-two-third {
   font-family: "Varela Round", sans-serif;
 }
 
-.exit-out {
-  background-color: #e57373;
+.exit-out,
+.delete {
   color: #ffff;
   line-height: 2;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.exit-out {
+  background-color: #e57373;
 }
 
 .delete {
   background-color: #4dc3b9;
-  color: #ffff;
-  line-height: 2;
+}
+
+.exit-out:hover {
+  background-color: #db5656;
+}
+
+.delete:hover {
+  background-color: #24b7ab;
 }
 
 @keyframes lds-ring {
