@@ -1,5 +1,5 @@
 .container {
-  margin: 0 auto;
+  margin: auto;
   padding: 0 1.5rem;
 }
 
@@ -87,9 +87,4 @@
 
 .align-start {
   align-content: flex-start;
-}
-
-.flex-row {
-  display: flex;
-  margin: 0 auto;
 }
