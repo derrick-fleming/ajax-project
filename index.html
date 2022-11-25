@@ -24,27 +24,35 @@
 </head>
 <body>
   <header>
-    <nav class="align-items nav-container space-end">
-      <div class="align-items">
-        <img src="images/leaf-icon.webp" alt="Leaf Icon" class="leaf-icon">
-        <h3 class="nav-title">MyVillagers</h3>
-      </div>
-      <div class="column-quarter end">
-        <div data-view="favorites-view" class="column-quarter end nav-link">
-          <a href="#favorites-list" class="favorites-page-link">
-            <i class="fa-solid fa-heart nav-icon house-outline"></i>
-          </a>
-          <a href="#favorites-list" class="favorites-page-link">
-            <h3 data-view="favorites-view" class="nav-link-text favorites-page-link"> Favorites </h3>
-          </a>
+    <nav class="flex-align-center nav-container space-between">
+      <div>
+        <div class="flex-align-center">
+          <img src="images/leaf-icon.webp" alt="Leaf Icon" class="leaf-icon">
+          <h3 class="nav-title">MyVillagers</h3>
         </div>
-        <div data-view="home-view" class="padding-left column-quarter end nav-link">
-          <a href="#villager-view" class="home-page-link">
-            <i class="fa-solid fa-house nav-icon"></i>
-          </a>
-          <a href="#villager-view" class="home-page-link">
-            <h3 class="nav-link-text home-page-link"> Home </h3>
-          </a>
+      </div>
+      <div>
+        <div class="end">
+          <div class="column-half">
+            <div data-view="favorites-view" class="row nav-link">
+              <a href="#favorites-list" class="favorites-page-link">
+                <i class="fa-solid fa-heart nav-icon house-outline"></i>
+              </a>
+              <a href="#favorites-list" class="favorites-page-link">
+                <h3 data-view="favorites-view" class="nav-link-text favorites-page-link"> Favorites </h3>
+              </a>
+            </div>
+          </div>
+          <div class="column-half">
+            <div data-view="home-view" class="padding-left end nav-link">
+              <a href="#villager-view" class="home-page-link">
+                <i class="fa-solid fa-house nav-icon"></i>
+              </a>
+              <a href="#villager-view" class="home-page-link">
+                <h3 class="nav-link-text home-page-link"> Home </h3>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -100,7 +108,7 @@
                 <img src="images/nh-best-friends.webp" alt="Favorite icon" class="instructions-icon">
               </div>
               <div class="column-half">
-                <div class="align-items">
+                <div class="flex-align-center">
                   <div class="column-full">
                     <h2 class="instructions-text instructions-top-margin">Add villagers to your favorites list</h2>
                   </div>
@@ -182,7 +190,7 @@
             <div class="column-third row justify-center">
               <img src="images/placeholder-image-square-1.jpg" alt="placeholder" id="placeholder" class="favorite-image margin-bottom">
             </div>
-            <div class="column-one-half align-items">
+            <div class="column-one-half flex-align-center">
               <div>
                 <label for="photo-collect" class="photo-collect">Photo Collected:</label>
                 <input id="photo-collect" name="photo" type="checkbox" class="photo-option" value="yes">
@@ -207,10 +215,10 @@
               <label for="notes-section">Notes</label>
               <textarea required id="notes-section" name="notes" rows="4"></textarea>
             </div>
-            <div data-view="favorites-view" class="column-half align-items">
+            <div data-view="favorites-view" class="column-half flex-align-center">
               <a class="cancel button">CANCEL</a>
             </div>
-            <div data-view="favorites-list" class="column-half align-right">
+            <div data-view="favorites-list" class="column-half text-right">
               <input type="submit" class="save button" value="SAVE">
             </div>
           </div>
@@ -232,12 +240,10 @@
               <i id="exit-modal" class="fa-solid fa-xmark"></i>
             </a>
           </div>
-          <div class="column-half">
-            <div class="end">
-              <a>
-                <i id="favorite-icon" class="fa-solid fa-heart empty-heart"></i>
-              </a>
-            </div>
+          <div class="column-half text-right">
+            <a>
+              <i id="favorite-icon" class="fa-solid fa-heart empty-heart"></i>
+            </a>
           </div>
         </div>
         <div class="row image-card-container">
@@ -252,7 +258,7 @@
           </div>
         </div>
         <div class="row space-evenly modal-info-text-box">
-          <div class="column-one-twelfth align-items">
+          <div class="column-one-twelfth flex-align-center">
             <a>
               <i data-id="left" id="left" class="hidden"></i>
             </a>
@@ -289,7 +295,7 @@
               </div>
             </div>
           </div>
-          <div class="column-one-twelfth align-items">
+          <div class="column-one-twelfth flex-align-center">
             <a>
               <i data-id="right" id="right" class="fa-solid fa-chevron-right arrow"></i>
             </a>

@@ -374,11 +374,9 @@ function switchViews(view) {
 
 function createFavoritesList(favorite) {
   var $li = generateDomTree('li', { class: 'row align-start', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId },
-    [generateDomTree('div', { class: 'column-full' }, [
-      generateDomTree('div', { class: 'end' }, [
-        generateDomTree('a', {}, [
-          generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart favorited-heart' }, [])
-        ])
+    [generateDomTree('div', { class: 'column-full text-right' }, [
+      generateDomTree('a', {}, [
+        generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart favorited-heart' }, [])
       ])
     ]),
     generateDomTree('div', { class: 'column-third row justify-center' }, [
