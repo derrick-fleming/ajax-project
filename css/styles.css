@@ -127,6 +127,14 @@ label,
   margin-top: 0.5rem;
 }
 
+.nav-link a,
+.nav-link i,
+.nav-link h3 {
+  transition:
+    color 0.2s ease-in-out,
+    fill 0.2s ease-in-out;
+}
+
 .nav-link:hover a,
 .nav-link:hover i,
 .nav-link:hover h3 {
@@ -510,6 +518,7 @@ input[type="checkbox"]:checked {
   background-color: #4dc3b9ad;
   color: #ffff;
   line-height: 1.7;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .save:hover {
@@ -518,6 +527,7 @@ input[type="checkbox"]:checked {
 
 .cancel {
   color: #575757b8;
+  transition: color 0.2s ease-in-out;
 }
 
 .cancel:hover {
