@@ -373,21 +373,21 @@ function switchViews(view) {
 }
 
 function createFavoritesList(favorite) {
-  var $li = generateDomTree('li', { class: 'row align-start', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId },
-    [generateDomTree('div', { class: 'column-full' }, [
-      generateDomTree('div', { class: 'end' }, [
-        generateDomTree('a', {}, [
-          generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart favorited-heart' }, [])
-        ])
+  var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId },
+    [generateDomTree('div', { class: 'column-full text-right' }, [
+      generateDomTree('a', {}, [
+        generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart favorited-heart' }, [])
       ])
     ]),
-    generateDomTree('div', { class: 'column-third row justify-center' }, [
-      generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture, 'data-id': 'click-villager' }, [])]),
+    generateDomTree('div', { class: 'column-third' }, [
+      generateDomTree('div', { class: 'row justify-center' }, [
+        generateDomTree('img', { class: 'favorite-image', alt: favorite.villagerName + ' Photo', src: favorite.villagerPicture, 'data-id': 'click-villager' }, [])])
+    ]),
     generateDomTree('div', { class: 'column-two-third', id: favorite.villagerName }, [
       generateDomTree('h1', { class: 'no-top-margin', textContent: favorite.villagerName }),
       generateDomTree('div', { class: 'add-edit', 'data-view': 'add-info' }, [
-        generateDomTree('a', { class: 'align-items' }, [
-          generateDomTree('div', { class: 'pencil-icon-container align-items justify-center nav-link' }, [
+        generateDomTree('a', { class: 'flex-align-center' }, [
+          generateDomTree('div', { class: 'pencil-icon-container flex-align-center justify-center nav-link' }, [
             generateDomTree('img', { class: 'edit-icon', src: 'images/pencil-icon.webp', alt: 'Edit Icon' })]),
           generateDomTree('p', { class: 'light-weight no-margin', textContent: 'Add/Edit Information' })
         ])
@@ -399,7 +399,7 @@ function createFavoritesList(favorite) {
 }
 
 function changeScreenToAddEditForm(event) {
-  if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin' || event.target.className === 'align-items') {
+  if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin' || event.target.className === 'flex-align-center') {
     data.view = 'add-info';
     switchViews(data.view);
     var $closestVillager = event.target.closest('li');

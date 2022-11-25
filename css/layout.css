@@ -1,5 +1,5 @@
 .container {
-  margin: 0 auto;
+  margin: auto;
   padding: 0 1.5rem;
 }
 
@@ -54,7 +54,7 @@
   flex-basis: 100%;
 }
 
-.align-items {
+.flex-align-center {
   display: flex;
   align-items: center;
 }
@@ -64,7 +64,7 @@
   justify-content: flex-end;
 }
 
-.space-end {
+.space-between {
   justify-content: space-between;
 }
 
@@ -87,9 +87,4 @@
 
 .align-start {
   align-content: flex-start;
-}
-
-.flex-row {
-  display: flex;
-  margin: 0 auto;
 }
