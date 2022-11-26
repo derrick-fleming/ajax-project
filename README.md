@@ -44,9 +44,6 @@ Try the application live at [http://derrick-fleming.github.io/my-villagers/](htt
 
 ## Development
 
-### System Requirements
-- Node.js 10 or higher
-
 ### Getting Started
 1. Clone the repository.
     ```shell
@@ -54,4 +51,4 @@ Try the application live at [http://derrick-fleming.github.io/my-villagers/](htt
     cd my-villagers
     ```
 
-3. Start the project. Once downloaded, you can view the application by opening http://localhost:5500 in your browser.
+2. Start the project.
