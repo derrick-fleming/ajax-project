@@ -1,8 +1,8 @@
 {
-  "name": "ajax-project",
+  "name": "myvillagers",
   "version": "1.0.0",
   "private": true,
-  "description": "A dynamic HTML, CSS, and JavaScript solo project.",
+  "description": "A web application for Animal Crossing fans who want to see and keep notes on their favorite villagers.",
   "main": "index.js",
   "scripts": {
     "prepare": "husky install"
