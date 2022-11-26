@@ -8,7 +8,7 @@ Having enjoyed playing Animal Crossing New Horizons throughout the pandemic, I a
 
 ## Live Demo
 
-Try the application live at: [MyVillagers](http://derrick-fleming.github.io/my-villagers/)
+Try the application live at: [http://derrick-fleming.github.io/my-villagers/](http://derrick-fleming.github.io/my-villagers/)
 
 ## Technologies Used
 
@@ -37,7 +37,7 @@ Try the application live at: [MyVillagers](http://derrick-fleming.github.io/my-v
 
 [information]: /images/user-can-add-information.gif "Users an add extra information"
 
-### Stretch Features to Implement
+## Stretch Features to Implement
 - Users can search for their favorite villagers.
 - Users can upload images of their favorite villagers from their Nintendo Switch.
 - Users can view a gallery of their uploaded images.
