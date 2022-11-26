@@ -4,18 +4,18 @@ A web application for Animal Crossing fans who want to see and keep notes on the
 
 ## Why I built this
 
-Having enjoyed playing Animal Crossing New Horizons throughout the pandemic, I always wanted a tool where I could easily track which villagers I've had and which ones I've collected their photo. It was challenging for me to remember, especially if it had been several weeks between playing the game. This application was inspired by my desire to easily track and collect that information.
+Having enjoyed playing Animal Crossing New Horizons throughout the pandemic, I always wanted a tool where I could easily track which villagers I've had and which ones I've collected a photo from. It was challenging for me to remember, especially if it had been several weeks between playing the game. This application was inspired by my desire to easily collect that information.
 
 ## Live Demo
 
-Try the application live at: [http://derrick-fleming.github.io/my-villagers/](http://derrick-fleming.github.io/my-villagers/)
+Try the application live at [http://derrick-fleming.github.io/my-villagers/](http://derrick-fleming.github.io/my-villagers/)
 
 ## Technologies Used
 
 - JavaScript
 - HTML5
 - CSS3
-- Animal Crossing New Horizons API: [ACNH API](https://acnhapi.com/)
+- Animal Crossing New Horizons [API](https://acnhapi.com/)
 
 ## Features
 - Users can view a list of their villagers.
@@ -54,4 +54,4 @@ Try the application live at: [http://derrick-fleming.github.io/my-villagers/](ht
     cd my-villagers
     ```
 
-3. Start the project. Once downloaded you can view the application by opening http://localhost:5500 in your browser.
+3. Start the project. Once downloaded, you can view the application by opening http://localhost:5500 in your browser.
