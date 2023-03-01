@@ -1,36 +1,36 @@
-const $villagerView = document.querySelector('#villager-view');
-const $loadMoreLink = document.querySelector('.load-link');
-const $instructionsContainer = document.querySelector('.container.instructions-section.row.justify-center');
-const $modalContainer = document.querySelector('.hidden.modal-villager-container');
-const $overlay = document.querySelector('.hidden.overlay');
-const $overlayTwo = document.querySelector('.hidden.overlay-two');
-const $modalPhotoContainer = document.querySelector('#modal-photo-container');
-const $leftArrow = document.querySelector('#left');
-const $rightArrow = document.querySelector('#right');
-const $modalTextContainer = document.querySelector('.modal-text-margin.column-ten-twelfths.center');
-const $modalTextRows = $modalTextContainer.querySelectorAll('.row');
-const $emptyHeartIcon = document.querySelector('#favorite-icon');
-const $addedFavorites = document.querySelector('.added-favorites.fade-out');
-const $navFavoritesPageIcon = document.querySelector('.fa-solid.fa-heart.nav-icon');
-const $navHomePageIcon = document.querySelector('.fa-solid.fa-house.nav-icon');
-const $navHomeText = document.querySelector('.nav-link-text.home-page-link');
-const $navFavoriteText = document.querySelector('.nav-link-text.favorites-page-link');
-const $navBar = document.querySelector('nav');
-const $ul = document.querySelector('ul');
-const $noFavoritesContainer = document.querySelector('.no-favorites-container');
-const $favoritesList = document.querySelector('#favorites-list');
-const $addInformationScreen = document.querySelector('#add-information');
-const $placeholderImage = document.querySelector('#placeholder');
-const loadingIcon = document.querySelector('.lds-ring.hidden');
+const $villagerView: HTMLDivElement = document.querySelector('#villager-view');
+const $loadMoreLink: HTMLAnchorElement = document.querySelector('.load-link');
+const $instructionsContainer: HTMLDivElement = document.querySelector('.container.instructions-section.row.justify-center');
+const $modalContainer: HTMLDivElement = document.querySelector('.hidden.modal-villager-container');
+const $overlay: HTMLDivElement = document.querySelector('.hidden.overlay');
+const $overlayTwo: HTMLDivElement = document.querySelector('.hidden.overlay-two');
+const $modalPhotoContainer: HTMLDivElement = document.querySelector('#modal-photo-container');
+const $leftArrow: HTMLButtonElement = document.querySelector('#left');
+const $rightArrow: HTMLButtonElement = document.querySelector('#right');
+const $modalTextContainer: HTMLDivElement = document.querySelector('.modal-text-margin.column-ten-twelfths.center');
+const $modalTextRows: NodeListOf<HTMLDivElement> = $modalTextContainer.querySelectorAll('.row');
+const $emptyHeartIcon: HTMLButtonElement = document.querySelector('#favorite-icon');
+const $addedFavorites: HTMLParagraphElement = document.querySelector('.added-favorites.fade-out');
+const $navFavoritesPageIcon: HTMLAnchorElement = document.querySelector('.fa-solid.fa-heart.nav-icon');
+const $navHomePageIcon: HTMLAnchorElement = document.querySelector('.fa-solid.fa-house.nav-icon');
+const $navHomeText: HTMLAnchorElement = document.querySelector('.nav-link-text.home-page-link');
+const $navFavoriteText: HTMLAnchorElement = document.querySelector('.nav-link-text.favorites-page-link');
+const $navBar: HTMLElement = document.querySelector('nav');
+const $ul: HTMLUListElement = document.querySelector('ul');
+const $noFavoritesContainer: HTMLDivElement = document.querySelector('.no-favorites-container');
+const $favoritesList: HTMLDivElement = document.querySelector('#favorites-list');
+const $addInformationScreen: HTMLDivElement = document.querySelector('#add-information');
+const $placeholderImage: HTMLImageElement = document.querySelector('#placeholder');
+const loadingIcon: HTMLDivElement = document.querySelector('.lds-ring.hidden');
 const $addEditForm: any = document.querySelector('form');
-const $viewSwapping = document.querySelectorAll('.hidden');
-const $deleteModal = document.querySelector('.hidden.container.delete-modal');
-const $deletedFavorites = document.querySelector('.deleted-favorites.fade-out');
+const $viewSwapping: NodeListOf<HTMLDivElement> = document.querySelectorAll('.hidden');
+const $deleteModal: HTMLDivElement = document.querySelector('.hidden.container.delete-modal');
+const $deletedFavorites: HTMLHeadingElement = document.querySelector('.deleted-favorites.fade-out');
 
-const changeNavClassToFavorites: any = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
+const changeNavClassToFavorites: [HTMLAnchorElement, string][] = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
   [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
 
-const changeNavClassToHome: any = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
+const changeNavClassToHome: [HTMLAnchorElement, string][] = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
   [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
 
 let speciesList = [];
@@ -86,19 +86,17 @@ function displayErrorMessage(event: Event) {
   switchViews('error-message');
 }
 
-function generateList(event: any) {
+function generateList(event: ProgressEvent) {
   switchViews(data.view);
   if (data.informationTracker.length > 0) {
     const $instructionAids = $instructionsContainer.querySelectorAll('.column-quarter');
     for (let i = 0; i < $instructionAids.length; i++) {
-      for (let x = 0; x < data.informationTracker.length; x++) {
-        if ($instructionAids[i].getAttribute('data-id') === data.informationTracker[x]) {
+        if (data.informationTracker.includes($instructionAids[i].getAttribute('data-id'))) {
           $instructionAids[i].className = 'hidden';
         }
       }
     }
-  }
-  villagerList = event.target.response.sort(function (a: {species: string}, b: {species: string}) { return a.species.localeCompare(b.species); });
+  villagerList = (event.target as XMLHttpRequest).response.sort(function (a: {species: string}, b: {species: string}) { return a.species.localeCompare(b.species); });
   renderVillagersList();
   timerId = setInterval(loadingImageIcon, 0);
 }
