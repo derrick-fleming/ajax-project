@@ -359,60 +359,59 @@ function createFavoritesList(favorite) {
     return $li;
 }
 function changeScreenToAddEditForm(event) {
-    if (event.target.className === 'edit-icon' || event.target.className === 'light-weight no-margin' || event.target.className === 'flex-align-center') {
+    console.log(data.favoritesList);
+    const screenEvent = event.target;
+    if (screenEvent.className === 'edit-icon' || screenEvent.className === 'light-weight no-margin' || screenEvent.className === 'flex-align-center') {
         data.view = 'add-info';
         switchViews(data.view);
-        var $closestVillager = event.target.closest('li');
-        var $villagerID = $closestVillager.getAttribute('id');
-        for (var i = 0; i < data.favoritesList.length; i++) {
-            if ($villagerID === data.favoritesList[i].villagerId) {
-                var $villagerGet = data.favoritesList[i];
-                data.editingNumber = i;
-                $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
-                $placeholderImage.setAttribute('alt', $villagerGet.villagerName + "'s Photo.");
-                if ($villagerGet.formValues !== null) {
-                    data.editing = true;
-                    $addEditForm.elements.island.value = $villagerGet.formValues.islandStatus;
-                    $addEditForm.elements.photo.checked = $villagerGet.formValues.photoCollected;
-                    $addEditForm.elements.notes.value = $villagerGet.formValues.notes;
-                }
-            }
+        const $closestVillager = screenEvent.closest('li');
+        const $villagerId = $closestVillager.getAttribute('id');
+        const index = data.favoritesList.findIndex(element => element.villagerId === $villagerId);
+        const $villagerGet = data.favoritesList[index];
+        data.editingNumber = index;
+        $placeholderImage.setAttribute('src', $villagerGet.villagerPicture);
+        $placeholderImage.setAttribute('alt', $villagerGet.villagerName + "'s Photo.");
+        if ($villagerGet.formValues !== null) {
+            data.editing = true;
+            $addEditForm.elements.island.value = $villagerGet.formValues.islandStatus;
+            $addEditForm.elements.photo.checked = $villagerGet.formValues.photoCollected;
+            $addEditForm.elements.notes.value = $villagerGet.formValues.notes;
         }
         $addInformationScreen.className = 'container padding-top';
     }
 }
 function saveInformation(event) {
     event.preventDefault();
-    var villagerNumber = data.editingNumber;
-    var formInputValues = {
+    const villagerNumber = data.editingNumber;
+    const formInputValues = {
         islandStatus: $addEditForm.elements.island.value,
         photoCollected: $addEditForm.elements.photo.checked,
         notes: $addEditForm.elements.notes.value
     };
-    var favoriteVillager = data.favoritesList[villagerNumber];
+    const favoriteVillager = data.favoritesList[villagerNumber];
     data.favoritesList[villagerNumber].formValues = formInputValues;
     $addEditForm.reset();
     data.view = 'favorites-view';
     switchViews(data.view);
-    var $row = addFavoritesInformationToDom(favoriteVillager);
-    var $liUpdate = document.getElementById(favoriteVillager.villagerName);
+    const $row = addFavoritesInformationToDom(favoriteVillager);
+    const $liUpdate = document.getElementById(favoriteVillager.villagerName);
     if (data.editing === false) {
         $liUpdate.appendChild($row);
         $addInformationScreen.className = 'hidden';
         return;
     }
     data.editing = false;
-    var $replaceRow = document.querySelector('#id-' + favoriteVillager.favoriteOrder);
+    const $replaceRow = document.querySelector('#id-' + favoriteVillager.favoriteOrder);
     $addInformationScreen.className = 'hidden';
     $replaceRow.replaceWith($row);
 }
 function addFavoritesInformationToDom(favorite) {
-    var islandValue = favorite.formValues.islandStatus;
-    var islandText = null;
-    var islandClass = null;
-    var photoValue = favorite.formValues.photoCollected;
-    var notesValue = favorite.formValues.notes;
-    var boxClass = null;
+    const islandValue = favorite.formValues.islandStatus;
+    let islandText;
+    let islandClass;
+    const photoValue = favorite.formValues.photoCollected;
+    const notesValue = favorite.formValues.notes;
+    let boxClass;
     if (islandValue === 'formerly') {
         islandClass = 'formerly-island';
         islandText = 'Formerly on island';
@@ -431,7 +430,7 @@ function addFavoritesInformationToDom(favorite) {
     else {
         boxClass = 'unchecked fa-regular fa-circle-xmark';
     }
-    var $responseRow = generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
+    const $responseRow = generateDomTree('div', { id: 'id-' + favorite.favoriteOrder, class: 'row shrink-indicator' }, [
         generateDomTree('div', { class: 'column-one-half' }, [
             generateDomTree('p', { class: islandClass, textContent: islandText })
         ]),
@@ -457,7 +456,7 @@ function openDeleteModal(event) {
         $deleteModal.className = 'container delete-modal';
         $overlayTwo.className = 'overlay';
     }
-    var $modalPopUp = event.target.closest('li');
+    const $modalPopUp = event.target.closest('li');
     data.deleteFavorite = $modalPopUp.getAttribute('id');
 }
 function displayDeletedFavorites() {
@@ -471,8 +470,8 @@ function deleteOrExitOutFavoriteVillager(event) {
         return;
     }
     if (event.target.getAttribute('id') === 'delete') {
-        var $liDelete = $ul.querySelectorAll('li');
-        for (var index = 0; index < $liDelete.length; index++) {
+        const $liDelete = $ul.querySelectorAll('li');
+        for (let index = 0; index < $liDelete.length; index++) {
             if ($liDelete[index].getAttribute('id') === data.deleteFavorite) {
                 $liDelete[index].remove();
                 data.favoritesList.splice(index, 1);
