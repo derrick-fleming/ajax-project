@@ -33,11 +33,11 @@ const changeNavClassToFavorites: [HTMLAnchorElement, string][] = [[$navFavorites
 const changeNavClassToHome: [HTMLAnchorElement, string][] = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon house-outline'], [$navHomePageIcon, 'fa solid fa-house nav-icon currently-island'],
   [$navFavoriteText, 'nav-link-text favorites-page-link'], [$navHomeText, 'nav-link-text home-page-link currently-island']];
 
-let speciesList = [];
-let villagerList = null;
+let speciesList: string[] = [];
+let villagerList: null | villagerList[] = null;
 let speciesNumber = 0;
 let timerId = null;
-let modalVillagerNumber = null;
+let modalVillagerNumber: string | null = null;
 
 type DomAttributes = {
   class?: string,
@@ -48,6 +48,31 @@ type DomAttributes = {
   'data-view' ?: string,
   src ?: string,
   alt ?: string
+}
+
+type villagerList = {
+  birthday: string,
+  'birthday-string': string,
+  'catch-phrase': string,
+  gender: string,
+  hobby: string,
+  'icon_uri': string,
+  id: number,
+  'image_uri': string,
+  name: {
+    'name-USen': string
+  },
+  personality: string,
+  saying: string,
+  species: string
+}
+
+type favoriteVillager = {
+  favoriteOrder: number,
+  villagerId: string,
+  villagerPicture: string,
+  villagerName: string,
+  formValues: any,
 }
 
 interface AnimalForm extends HTMLFormElement {
@@ -81,7 +106,7 @@ function getAnimalCrossingData(request: string) {
   return xhr;
 }
 
-function displayErrorMessage(event: Event) {
+function displayErrorMessage() {
   data.view = 'error-message';
   switchViews('error-message');
 }
@@ -101,7 +126,7 @@ function generateList(event: ProgressEvent) {
   timerId = setInterval(loadingImageIcon, 0);
 }
 
-function renderMoreVillagersToHomePage(event: MouseEvent) {
+function renderMoreVillagersToHomePage() {
   renderVillagersList();
   timerId = setInterval(loadingImageIcon, 0);
   if (speciesNumber > 300) {
@@ -109,7 +134,7 @@ function renderMoreVillagersToHomePage(event: MouseEvent) {
   }
 }
 
-function generateDomTree(tagName: string, attributes: DomAttributes, children?: any[]) {
+function generateDomTree(tagName: string, attributes: DomAttributes, children?: any[]): HTMLElement {
   if (!children) {
     children = [];
   }
@@ -167,7 +192,7 @@ function renderVillagersList(): HTMLElement {
     ]);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
-      const $villagerSectionUpdate = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
+      const $villagerSectionUpdate: HTMLDivElement = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
       $villagerSectionUpdate.appendChild($villagerColumn);
       continue;
     }
@@ -187,7 +212,7 @@ function renderVillagersList(): HTMLElement {
   return $villagerContainerSpeciesList;
 }
 
-function loadingCursor(event: Event) {
+function loadingCursor() {
   if (document.readyState === 'loading' || document.readyState === 'interactive') {
     loadingIcon.className = 'lds-ring';
   } else {
@@ -195,7 +220,7 @@ function loadingCursor(event: Event) {
   }
 }
 
-function appendFavoriteVillagersToFavoritesPage(event: Event) {
+function appendFavoriteVillagersToFavoritesPage() {
   data.editing = false;
   for (let i = 0; i < data.favoritesList.length; i++) {
     const favorite = data.favoritesList[i];
@@ -229,18 +254,19 @@ function openModalWindow(event: MouseEvent) {
 
   const $modalPopUp = (event.target as HTMLElement).closest('div');
   modalVillagerNumber = $modalPopUp.getAttribute('data-id');
+  console.log(typeof modalVillagerNumber)
 
-  const addedModalInfo = villagerList[modalVillagerNumber];
+  const addedModalInfo: villagerList = villagerList[modalVillagerNumber];
   renderModalInfo(addedModalInfo);
 
-  for (var i = 0; i < data.favoritesList.length; i++) {
-    var checkFavorite = data.favoritesList[i];
+  for (let i = 0; i < data.favoritesList.length; i++) {
+    const checkFavorite = data.favoritesList[i];
     if (addedModalInfo.name['name-USen'] === checkFavorite.villagerName) {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
     }
   }
 
-  for (var x = 0; x < $modalTextRows.length; x++) {
+  for (let x = 0; x < $modalTextRows.length; x++) {
     if ($modalTextRows[x].getAttribute('data-id') === 'left') {
       $modalTextRows[x].className = 'row';
     } else {
@@ -254,10 +280,10 @@ function openModalWindow(event: MouseEvent) {
 }
 
 function loadingImageIcon() {
-  var image: HTMLImageElement = document.querySelector('.modal-villager-photo');
+  let image: HTMLImageElement = document.querySelector('.modal-villager-photo');
   if (image === null) {
-    var lastSpecies = speciesList[speciesList.length - 1];
-    var $speciesList = document.querySelector('#' + lastSpecies);
+    const lastSpecies = speciesList[speciesList.length - 1];
+    const $speciesList = document.querySelector('#' + lastSpecies);
     image = $speciesList.querySelector('img');
   }
   loadingIcon.className = 'lds-ring';
@@ -268,28 +294,27 @@ function loadingImageIcon() {
   return timerId;
 }
 
-function renderModalInfo(info: any) {
-  var $villagerInfoPhoto = generateDomTree('img', { src: info.image_uri, alt: 'Image of ' + info.name['name-USen'], class: 'modal-villager-photo' }, []);
+function renderModalInfo(info: villagerList) {
+  const $villagerInfoPhoto = generateDomTree('img', { src: info.image_uri, alt: 'Image of ' + info.name['name-USen'], class: 'modal-villager-photo' }, []);
   $modalPhotoContainer.appendChild($villagerInfoPhoto);
 
-  var birthday = info.birthday.split('/');
-  birthday = birthday.reverse();
+  const birthday = info.birthday.split('/').reverse();
 
-  var capitalizeCatch = info['catch-phrase'];
-  var firstLetter = capitalizeCatch[0].toUpperCase();
-  var wordOutput = firstLetter + capitalizeCatch.slice(1);
-  var $span = document.querySelectorAll('span');
+  const capitalizeCatch = info['catch-phrase'];
+  const firstLetter = capitalizeCatch[0].toUpperCase();
+  const wordOutput = firstLetter + capitalizeCatch.slice(1);
+  const $span = document.querySelectorAll('span');
 
-  var infoCardArray = [info.name['name-USen'], info.species, info.gender, info.personality, birthday.join('/'), info.hobby, '"' + wordOutput + '"', '"' + info.saying + '"'];
-  for (var i = 0; i < infoCardArray.length; i++) {
+  const infoCardArray = [info.name['name-USen'], info.species, info.gender, info.personality, birthday.join('/'), info.hobby, '"' + wordOutput + '"', '"' + info.saying + '"'];
+  for (let i = 0; i < infoCardArray.length; i++) {
     $span[i].textContent = infoCardArray[i];
   }
 }
 
-function modalClickActions(event: any) {
-  var modalId = event.target.getAttribute('id');
+function modalClickActions(event: MouseEvent) {
+  let modalId = (event.target as HTMLElement).getAttribute('id');
   if (modalId === 'exit-modal') {
-    var $imageDelete = document.querySelector('.modal-villager-photo');
+    const $imageDelete = document.querySelector('.modal-villager-photo');
     $imageDelete.remove();
     $overlay.className = 'hidden overlay';
     $modalContainer.className = 'hidden modal-villager-container';
@@ -300,7 +325,7 @@ function modalClickActions(event: any) {
   }
 
   if ((modalId === 'left') || (modalId === 'right')) {
-    for (var i = 0; i < $modalTextRows.length; i++) {
+    for (let i = 0; i < $modalTextRows.length; i++) {
       if ($modalTextRows[i].getAttribute('data-id') === modalId) {
         $modalTextRows[i].className = 'row';
       } else {
@@ -322,8 +347,8 @@ function modalClickActions(event: any) {
       $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
       $addedFavorites.className = 'added-favorites';
       setTimeout(displayAddedToFavoritesText, 1500);
-      var favoriteInfo = saveFavoriteVillager();
-      var $listItem = createFavoritesList(favoriteInfo);
+      const favoriteInfo = saveFavoriteVillager();
+      const $listItem = createFavoritesList(favoriteInfo);
       $ul.appendChild($listItem);
       $noFavoritesContainer.className = 'hidden';
     } else {
@@ -340,9 +365,9 @@ function displayAddedToFavoritesText() {
 }
 
 function saveFavoriteVillager() {
-  var villagerData = villagerList[modalVillagerNumber];
+  const villagerData: villagerList = villagerList[modalVillagerNumber];
 
-  var favoriteVillagerInformation = {
+  const favoriteVillagerInformation = {
     favoriteOrder: data.nextFavorite,
     villagerId: modalVillagerNumber,
     villagerPicture: villagerData.image_uri,
@@ -355,8 +380,8 @@ function saveFavoriteVillager() {
 
 }
 
-function changeNavIconAndPage(event: any) {
-  var navCheck = event.target.className;
+function changeNavIconAndPage(event: MouseEvent) {
+  const navCheck = (event.target as HTMLElement).className;
   if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-link-text favorites-page-link' || navCheck === 'favorites-page-link') {
     data.view = 'favorites-view';
     switchViews(data.view);
@@ -369,28 +394,28 @@ function changeNavIconAndPage(event: any) {
 
 }
 
-function switchViews(view: any) {
-  for (var i = 0; i < $viewSwapping.length; i++) {
-    if ($viewSwapping[i].getAttribute('data-view') === view) {
-      $viewSwapping[i].className = 'page';
+function switchViews(view: string) {
+  $viewSwapping.forEach(element => {
+    if (element.getAttribute('data-view') === view) {
+      element.className = 'page'
     } else {
-      $viewSwapping[i].className = 'hidden';
+      element.className = 'hidden';
     }
-  }
+  })
 
   if (data.view === 'favorites-view' || data.view === 'add-info') {
-    for (var y = 0; y < changeNavClassToFavorites.length; y++) {
+    for (let y = 0; y < changeNavClassToFavorites.length; y++) {
       changeNavClassToFavorites[y][0].className = changeNavClassToFavorites[y][1];
     }
   } else {
-    for (var x = 0; x < changeNavClassToHome.length; x++) {
+    for (let x = 0; x < changeNavClassToHome.length; x++) {
       changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
     }
   }
 }
 
-function createFavoritesList(favorite: any) {
-  var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId },
+function createFavoritesList(favorite: favoriteVillager) {
+  const $li = generateDomTree('li', { class: 'row', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId },
     [generateDomTree('div', { class: 'column-full text-right' }, [
       generateDomTree('a', {}, [
         generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart favorited-heart' }, [])

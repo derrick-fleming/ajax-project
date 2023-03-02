@@ -58,7 +58,7 @@ function getAnimalCrossingData(request) {
     xhr.addEventListener('load', generateList);
     return xhr;
 }
-function displayErrorMessage(event) {
+function displayErrorMessage() {
     data.view = 'error-message';
     switchViews('error-message');
 }
@@ -76,7 +76,7 @@ function generateList(event) {
     renderVillagersList();
     timerId = setInterval(loadingImageIcon, 0);
 }
-function renderMoreVillagersToHomePage(event) {
+function renderMoreVillagersToHomePage() {
     renderVillagersList();
     timerId = setInterval(loadingImageIcon, 0);
     if (speciesNumber > 300) {
@@ -102,28 +102,31 @@ function generateDomTree(tagName, attributes, children) {
     return $element;
 }
 function renderVillagersList() {
-    for (var i = speciesNumber; i < speciesNumber + 100; i++) {
-        var villagerSpecies = villagerList[i].species;
-        var villagerIcon = villagerList[i].icon_uri;
-        var villagerName = villagerList[i].name['name-USen'];
+    let $villagerContainerSpeciesList;
+    let $villagerSection;
+    for (let i = speciesNumber; i < speciesNumber + 100; i++) {
+        const villagerSpecies = villagerList[i].species;
+        const villagerIcon = villagerList[i].icon_uri;
+        const villagerName = villagerList[i].name['name-USen'];
         if (!speciesList.includes(villagerSpecies)) {
             speciesList.push(villagerSpecies);
-            var $villagerSection = generateDomTree('div', { class: 'species-list', id: villagerSpecies }, [
-                generateDomTree('div', { class: 'container row' }, [
-                    generateDomTree('div', { class: 'header-species-container' }, [
-                        generateDomTree('h1', { textContent: villagerSpecies })
-                    ]),
-                    generateDomTree('a', { class: 'top-page-link', href: '#villager-view', textContent: 'Back to Top' })
-                ])
-            ]);
+            $villagerSection =
+                generateDomTree('div', { class: 'species-list', id: villagerSpecies }, [
+                    generateDomTree('div', { class: 'container row' }, [
+                        generateDomTree('div', { class: 'header-species-container' }, [
+                            generateDomTree('h1', { textContent: villagerSpecies })
+                        ]),
+                        generateDomTree('a', { class: 'top-page-link', href: '#villager-view', textContent: 'Back to Top' })
+                    ])
+                ]);
             $villagerView.appendChild($villagerSection);
             if (villagerSpecies === 'Alligator') {
-                var removeLink = document.querySelector('.top-page-link');
+                const removeLink = document.querySelector('.top-page-link');
                 removeLink.remove();
             }
-            var $villagerContainerSpeciesList = generateDomTree('div', { class: 'container row', id: 'section-' + villagerSpecies.toLowerCase() });
+            $villagerContainerSpeciesList = generateDomTree('div', { class: 'container row', id: 'section-' + villagerSpecies.toLowerCase() });
         }
-        var $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
+        const $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
             generateDomTree('a', {}, [
                 generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName, 'data-id': 'click-villager' })
             ]),
@@ -132,7 +135,7 @@ function renderVillagersList() {
             ])
         ]);
         if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
-            var $villagerSectionUpdate = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
+            const $villagerSectionUpdate = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
             $villagerSectionUpdate.appendChild($villagerColumn);
             continue;
         }
@@ -149,7 +152,7 @@ function renderVillagersList() {
     speciesNumber += 100;
     return $villagerContainerSpeciesList;
 }
-function loadingCursor(event) {
+function loadingCursor() {
     if (document.readyState === 'loading' || document.readyState === 'interactive') {
         loadingIcon.className = 'lds-ring';
     }
@@ -157,15 +160,15 @@ function loadingCursor(event) {
         loadingIcon.className = 'lds-ring hidden';
     }
 }
-function appendFavoriteVillagersToFavoritesPage(event) {
+function appendFavoriteVillagersToFavoritesPage() {
     data.editing = false;
-    for (var i = 0; i < data.favoritesList.length; i++) {
-        var favorite = data.favoritesList[i];
-        var $listItem = createFavoritesList(favorite);
+    for (let i = 0; i < data.favoritesList.length; i++) {
+        const favorite = data.favoritesList[i];
+        const $listItem = createFavoritesList(favorite);
         $ul.appendChild($listItem);
         if (favorite.formValues !== null) {
-            var $liUpdate = document.getElementById(favorite.villagerName);
-            var $row = addFavoritesInformationToDom(favorite);
+            const $liUpdate = document.getElementById(favorite.villagerName);
+            const $row = addFavoritesInformationToDom(favorite);
             $liUpdate.appendChild($row);
         }
     }
@@ -175,9 +178,9 @@ function appendFavoriteVillagersToFavoritesPage(event) {
 }
 function aidDisappear(event) {
     if (event.target.tagName === 'I') {
-        var $hideElement = event.target.closest('.column-quarter');
+        const $hideElement = event.target.closest('.column-quarter');
         $hideElement.className = 'hidden';
-        var dataStorage = $hideElement.getAttribute('data-id');
+        const dataStorage = $hideElement.getAttribute('data-id');
         data.informationTracker.push(dataStorage);
     }
 }
@@ -185,17 +188,18 @@ function openModalWindow(event) {
     if (event.target.getAttribute('data-id') !== 'click-villager') {
         return;
     }
-    var $modalPopUp = event.target.closest('div');
+    const $modalPopUp = event.target.closest('div');
     modalVillagerNumber = $modalPopUp.getAttribute('data-id');
-    var addedModalInfo = villagerList[modalVillagerNumber];
+    console.log(typeof modalVillagerNumber);
+    const addedModalInfo = villagerList[modalVillagerNumber];
     renderModalInfo(addedModalInfo);
-    for (var i = 0; i < data.favoritesList.length; i++) {
-        var checkFavorite = data.favoritesList[i];
+    for (let i = 0; i < data.favoritesList.length; i++) {
+        const checkFavorite = data.favoritesList[i];
         if (addedModalInfo.name['name-USen'] === checkFavorite.villagerName) {
             $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
         }
     }
-    for (var x = 0; x < $modalTextRows.length; x++) {
+    for (let x = 0; x < $modalTextRows.length; x++) {
         if ($modalTextRows[x].getAttribute('data-id') === 'left') {
             $modalTextRows[x].className = 'row';
         }
@@ -208,10 +212,10 @@ function openModalWindow(event) {
     timerId = setInterval(loadingImageIcon, 0);
 }
 function loadingImageIcon() {
-    var image = document.querySelector('.modal-villager-photo');
+    let image = document.querySelector('.modal-villager-photo');
     if (image === null) {
-        var lastSpecies = speciesList[speciesList.length - 1];
-        var $speciesList = document.querySelector('#' + lastSpecies);
+        const lastSpecies = speciesList[speciesList.length - 1];
+        const $speciesList = document.querySelector('#' + lastSpecies);
         image = $speciesList.querySelector('img');
     }
     loadingIcon.className = 'lds-ring';
@@ -222,23 +226,22 @@ function loadingImageIcon() {
     return timerId;
 }
 function renderModalInfo(info) {
-    var $villagerInfoPhoto = generateDomTree('img', { src: info.image_uri, alt: 'Image of ' + info.name['name-USen'], class: 'modal-villager-photo' }, []);
+    const $villagerInfoPhoto = generateDomTree('img', { src: info.image_uri, alt: 'Image of ' + info.name['name-USen'], class: 'modal-villager-photo' }, []);
     $modalPhotoContainer.appendChild($villagerInfoPhoto);
-    var birthday = info.birthday.split('/');
-    birthday = birthday.reverse();
-    var capitalizeCatch = info['catch-phrase'];
-    var firstLetter = capitalizeCatch[0].toUpperCase();
-    var wordOutput = firstLetter + capitalizeCatch.slice(1);
-    var $span = document.querySelectorAll('span');
-    var infoCardArray = [info.name['name-USen'], info.species, info.gender, info.personality, birthday.join('/'), info.hobby, '"' + wordOutput + '"', '"' + info.saying + '"'];
-    for (var i = 0; i < infoCardArray.length; i++) {
+    const birthday = info.birthday.split('/').reverse();
+    const capitalizeCatch = info['catch-phrase'];
+    const firstLetter = capitalizeCatch[0].toUpperCase();
+    const wordOutput = firstLetter + capitalizeCatch.slice(1);
+    const $span = document.querySelectorAll('span');
+    const infoCardArray = [info.name['name-USen'], info.species, info.gender, info.personality, birthday.join('/'), info.hobby, '"' + wordOutput + '"', '"' + info.saying + '"'];
+    for (let i = 0; i < infoCardArray.length; i++) {
         $span[i].textContent = infoCardArray[i];
     }
 }
 function modalClickActions(event) {
-    var modalId = event.target.getAttribute('id');
+    let modalId = event.target.getAttribute('id');
     if (modalId === 'exit-modal') {
-        var $imageDelete = document.querySelector('.modal-villager-photo');
+        const $imageDelete = document.querySelector('.modal-villager-photo');
         $imageDelete.remove();
         $overlay.className = 'hidden overlay';
         $modalContainer.className = 'hidden modal-villager-container';
@@ -248,7 +251,7 @@ function modalClickActions(event) {
         modalId = 'left';
     }
     if ((modalId === 'left') || (modalId === 'right')) {
-        for (var i = 0; i < $modalTextRows.length; i++) {
+        for (let i = 0; i < $modalTextRows.length; i++) {
             if ($modalTextRows[i].getAttribute('data-id') === modalId) {
                 $modalTextRows[i].className = 'row';
             }
@@ -270,8 +273,8 @@ function modalClickActions(event) {
             $emptyHeartIcon.className = 'fa-solid fa-heart liked-heart';
             $addedFavorites.className = 'added-favorites';
             setTimeout(displayAddedToFavoritesText, 1500);
-            var favoriteInfo = saveFavoriteVillager();
-            var $listItem = createFavoritesList(favoriteInfo);
+            const favoriteInfo = saveFavoriteVillager();
+            const $listItem = createFavoritesList(favoriteInfo);
             $ul.appendChild($listItem);
             $noFavoritesContainer.className = 'hidden';
         }
@@ -287,8 +290,8 @@ function displayAddedToFavoritesText() {
     return $addedFavorites;
 }
 function saveFavoriteVillager() {
-    var villagerData = villagerList[modalVillagerNumber];
-    var favoriteVillagerInformation = {
+    const villagerData = villagerList[modalVillagerNumber];
+    const favoriteVillagerInformation = {
         favoriteOrder: data.nextFavorite,
         villagerId: modalVillagerNumber,
         villagerPicture: villagerData.image_uri,
@@ -300,7 +303,7 @@ function saveFavoriteVillager() {
     return favoriteVillagerInformation;
 }
 function changeNavIconAndPage(event) {
-    var navCheck = event.target.className;
+    const navCheck = event.target.className;
     if (navCheck === 'fa-solid fa-heart nav-icon house-outline' || navCheck === 'nav-link-text favorites-page-link' || navCheck === 'favorites-page-link') {
         data.view = 'favorites-view';
         switchViews(data.view);
@@ -311,27 +314,27 @@ function changeNavIconAndPage(event) {
     }
 }
 function switchViews(view) {
-    for (var i = 0; i < $viewSwapping.length; i++) {
-        if ($viewSwapping[i].getAttribute('data-view') === view) {
-            $viewSwapping[i].className = 'page';
+    $viewSwapping.forEach(element => {
+        if (element.getAttribute('data-view') === view) {
+            element.className = 'page';
         }
         else {
-            $viewSwapping[i].className = 'hidden';
+            element.className = 'hidden';
         }
-    }
+    });
     if (data.view === 'favorites-view' || data.view === 'add-info') {
-        for (var y = 0; y < changeNavClassToFavorites.length; y++) {
+        for (let y = 0; y < changeNavClassToFavorites.length; y++) {
             changeNavClassToFavorites[y][0].className = changeNavClassToFavorites[y][1];
         }
     }
     else {
-        for (var x = 0; x < changeNavClassToHome.length; x++) {
+        for (let x = 0; x < changeNavClassToHome.length; x++) {
             changeNavClassToHome[x][0].className = changeNavClassToHome[x][1];
         }
     }
 }
 function createFavoritesList(favorite) {
-    var $li = generateDomTree('li', { class: 'row', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId }, [generateDomTree('div', { class: 'column-full text-right' }, [
+    const $li = generateDomTree('li', { class: 'row', id: favorite.villagerId, 'data-id': 'id-' + favorite.villagerId }, [generateDomTree('div', { class: 'column-full text-right' }, [
             generateDomTree('a', {}, [
                 generateDomTree('i', { id: 'favorite-icon', class: 'fa-solid fa-heart favorited-heart' }, [])
             ])
