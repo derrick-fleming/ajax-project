@@ -101,7 +101,7 @@ function generateList(event: ProgressEvent) {
   timerId = setInterval(loadingImageIcon, 0);
 }
 
-function renderMoreVillagersToHomePage(event: Event) {
+function renderMoreVillagersToHomePage(event: MouseEvent) {
   renderVillagersList();
   timerId = setInterval(loadingImageIcon, 0);
   if (speciesNumber > 300) {
@@ -114,8 +114,8 @@ function generateDomTree(tagName: string, attributes: DomAttributes, children?: 
     children = [];
   }
 
-  var $element = document.createElement(tagName);
-  for (var key in attributes) {
+  const $element: HTMLElement = document.createElement(tagName);
+  for (let key in attributes) {
     if (key === 'textContent') {
       $element.textContent = attributes.textContent;
     } else {
@@ -123,20 +123,23 @@ function generateDomTree(tagName: string, attributes: DomAttributes, children?: 
     }
   }
 
-  for (var i = 0; i < children.length; i++) {
+  for (let i = 0; i < children.length; i++) {
     $element.append(children[i]);
   }
   return $element;
 }
 
-function renderVillagersList() {
-  for (var i = speciesNumber; i < speciesNumber + 100; i++) {
-    var villagerSpecies = villagerList[i].species;
-    var villagerIcon = villagerList[i].icon_uri;
-    var villagerName = villagerList[i].name['name-USen'];
+function renderVillagersList(): HTMLElement {
+  let $villagerContainerSpeciesList: HTMLElement;
+  let $villagerSection: HTMLElement;
+
+  for (let i = speciesNumber; i < speciesNumber + 100; i++) {
+    const villagerSpecies = villagerList[i].species;
+    const villagerIcon = villagerList[i].icon_uri;
+    const villagerName = villagerList[i].name['name-USen'];
     if (!speciesList.includes(villagerSpecies)) {
       speciesList.push(villagerSpecies);
-      var $villagerSection =
+      $villagerSection =
       generateDomTree('div', { class: 'species-list', id: villagerSpecies }, [
         generateDomTree('div', { class: 'container row' }, [
           generateDomTree('div', { class: 'header-species-container' }, [
@@ -146,14 +149,14 @@ function renderVillagersList() {
       ]);
       $villagerView.appendChild($villagerSection);
       if (villagerSpecies === 'Alligator') {
-        var removeLink = document.querySelector('.top-page-link');
+        const removeLink = document.querySelector('.top-page-link');
         removeLink.remove();
       }
 
-      var $villagerContainerSpeciesList = generateDomTree('div', { class: 'container row', id: 'section-' + villagerSpecies.toLowerCase() });
+      $villagerContainerSpeciesList = generateDomTree('div', { class: 'container row', id: 'section-' + villagerSpecies.toLowerCase() });
     }
 
-    var $villagerColumn =
+    const $villagerColumn =
     generateDomTree('div', { class: 'column-one-third center', 'data-id': i }, [
       generateDomTree('a', {}, [
         generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName, 'data-id': 'click-villager' })
@@ -164,7 +167,7 @@ function renderVillagersList() {
     ]);
 
     if (speciesNumber > 100 && villagerList[speciesNumber - 1].species === villagerSpecies) {
-      var $villagerSectionUpdate = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
+      const $villagerSectionUpdate = document.querySelector('#' + 'section-' + villagerSpecies.toLowerCase());
       $villagerSectionUpdate.appendChild($villagerColumn);
       continue;
     }
@@ -184,7 +187,7 @@ function renderVillagersList() {
   return $villagerContainerSpeciesList;
 }
 
-function loadingCursor(event: any) {
+function loadingCursor(event: Event) {
   if (document.readyState === 'loading' || document.readyState === 'interactive') {
     loadingIcon.className = 'lds-ring';
   } else {
@@ -192,17 +195,16 @@ function loadingCursor(event: any) {
   }
 }
 
-function appendFavoriteVillagersToFavoritesPage(event: any) {
+function appendFavoriteVillagersToFavoritesPage(event: Event) {
   data.editing = false;
-  for (var i = 0; i < data.favoritesList.length; i++) {
-    var favorite = data.favoritesList[i];
-    var $listItem = createFavoritesList(favorite);
+  for (let i = 0; i < data.favoritesList.length; i++) {
+    const favorite = data.favoritesList[i];
+    const $listItem = createFavoritesList(favorite);
     $ul.appendChild($listItem);
     if (favorite.formValues !== null) {
-      var $liUpdate = document.getElementById(favorite.villagerName);
-      var $row = addFavoritesInformationToDom(favorite);
+      const $liUpdate = document.getElementById(favorite.villagerName);
+      const $row = addFavoritesInformationToDom(favorite);
       $liUpdate.appendChild($row);
-
     }
   }
 
@@ -211,24 +213,24 @@ function appendFavoriteVillagersToFavoritesPage(event: any) {
   }
 }
 
-function aidDisappear(event: any) {
-  if (event.target.tagName === 'I') {
-    var $hideElement = event.target.closest('.column-quarter');
+function aidDisappear(event: MouseEvent) {
+  if ((event.target as HTMLElement).tagName === 'I') {
+    const $hideElement = (event.target as HTMLElement).closest('.column-quarter');
     $hideElement.className = 'hidden';
-    var dataStorage = $hideElement.getAttribute('data-id');
+    const dataStorage = $hideElement.getAttribute('data-id');
     data.informationTracker.push(dataStorage);
   }
 }
 
-function openModalWindow(event: any) {
-  if (event.target.getAttribute('data-id') !== 'click-villager') {
+function openModalWindow(event: MouseEvent) {
+  if ((event.target as HTMLElement).getAttribute('data-id') !== 'click-villager') {
     return;
   }
 
-  var $modalPopUp = event.target.closest('div');
+  const $modalPopUp = (event.target as HTMLElement).closest('div');
   modalVillagerNumber = $modalPopUp.getAttribute('data-id');
 
-  var addedModalInfo = villagerList[modalVillagerNumber];
+  const addedModalInfo = villagerList[modalVillagerNumber];
   renderModalInfo(addedModalInfo);
 
   for (var i = 0; i < data.favoritesList.length; i++) {

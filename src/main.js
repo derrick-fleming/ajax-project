@@ -87,8 +87,8 @@ function generateDomTree(tagName, attributes, children) {
     if (!children) {
         children = [];
     }
-    var $element = document.createElement(tagName);
-    for (var key in attributes) {
+    const $element = document.createElement(tagName);
+    for (let key in attributes) {
         if (key === 'textContent') {
             $element.textContent = attributes.textContent;
         }
@@ -96,7 +96,7 @@ function generateDomTree(tagName, attributes, children) {
             $element.setAttribute(key, attributes[key]);
         }
     }
-    for (var i = 0; i < children.length; i++) {
+    for (let i = 0; i < children.length; i++) {
         $element.append(children[i]);
     }
     return $element;
