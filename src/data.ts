@@ -8,10 +8,12 @@ let data = {
     informationTracker: [],
     deleteFavorite: null
 };
+
 const previousData = localStorage.getItem('acnh-villager-favorites');
 if (previousData !== null) {
     data = JSON.parse(previousData);
 }
+
 window.addEventListener('beforeunload', storeToLocalStorage);
 window.addEventListener('pagehide', storeToLocalStorage);
 function storeToLocalStorage() {
