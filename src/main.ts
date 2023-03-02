@@ -138,7 +138,7 @@ function renderMoreVillagersToHomePage() {
   }
 }
 
-function generateDomTree(tagName: string, attributes: DomAttributes, children?: any[]): HTMLElement {
+function generateDomTree(tagName: string, attributes: DomAttributes, children?: HTMLElement[]): HTMLElement {
   if (!children) {
     children = [];
   }
