@@ -22,7 +22,7 @@ const $favoritesList: HTMLDivElement = document.querySelector('#favorites-list')
 const $addInformationScreen: HTMLDivElement = document.querySelector('#add-information');
 const $placeholderImage: HTMLImageElement = document.querySelector('#placeholder');
 const loadingIcon: HTMLDivElement = document.querySelector('.lds-ring.hidden');
-const $addEditForm: any = document.querySelector('form');
+const $addEditForm: HTMLFormElement = document.querySelector('form');
 const $viewSwapping: NodeListOf<HTMLDivElement> = document.querySelectorAll('.hidden');
 const $deleteModal: HTMLDivElement = document.querySelector('.hidden.container.delete-modal');
 const $deletedFavorites: HTMLHeadingElement = document.querySelector('.deleted-favorites.fade-out');
@@ -79,7 +79,7 @@ type favoriteVillager = {
   },
 }
 
-interface AnimalForm extends HTMLFormElement {
+interface AnimalForm extends HTMLFormControlsCollection {
   island: HTMLInputElement,
   photo: HTMLInputElement,
   notes: HTMLInputElement
@@ -258,7 +258,6 @@ function openModalWindow(event: MouseEvent) {
 
   const $modalPopUp = (event.target as HTMLElement).closest('div');
   modalVillagerNumber = $modalPopUp.getAttribute('data-id');
-  console.log(typeof modalVillagerNumber)
 
   const addedModalInfo: villagerList = villagerList[modalVillagerNumber];
   renderModalInfo(addedModalInfo);
@@ -445,7 +444,6 @@ function createFavoritesList(favorite: favoriteVillager) {
 }
 
 function changeScreenToAddEditForm(event: MouseEvent) {
-  console.log(data.favoritesList)
 
   const screenEvent = event.target as HTMLElement;
   if (screenEvent.className === 'edit-icon' || screenEvent.className === 'light-weight no-margin' || screenEvent.className === 'flex-align-center') {
@@ -460,9 +458,9 @@ function changeScreenToAddEditForm(event: MouseEvent) {
     $placeholderImage.setAttribute('alt', $villagerGet.villagerName + "'s Photo.");
     if ($villagerGet.formValues !== null) {
       data.editing = true;
-      $addEditForm.elements.island.value = $villagerGet.formValues.islandStatus;
-      $addEditForm.elements.photo.checked = $villagerGet.formValues.photoCollected;
-      $addEditForm.elements.notes.value = $villagerGet.formValues.notes;
+      ($addEditForm.elements as AnimalForm).island.value = $villagerGet.formValues.islandStatus;
+      ($addEditForm.elements as AnimalForm).photo.checked = $villagerGet.formValues.photoCollected;
+      ($addEditForm.elements as AnimalForm).notes.value = $villagerGet.formValues.notes;
     }
 
     $addInformationScreen.className = 'container padding-top';
@@ -474,9 +472,9 @@ function saveInformation(event: SubmitEvent) {
 
   const villagerNumber: number = data.editingNumber;
   const formInputValues = {
-    islandStatus: $addEditForm.elements.island.value as string,
-    photoCollected: $addEditForm.elements.photo.checked as boolean,
-    notes: $addEditForm.elements.notes.value as string
+    islandStatus: ($addEditForm.elements as AnimalForm).island.value as string,
+    photoCollected: ($addEditForm.elements as AnimalForm).photo.checked as boolean,
+    notes: ($addEditForm.elements as AnimalForm).notes.value as string
   };
   const favoriteVillager: favoriteVillager = data.favoritesList[villagerNumber];
   data.favoritesList[villagerNumber].formValues = formInputValues;

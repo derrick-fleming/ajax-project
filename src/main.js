@@ -190,7 +190,6 @@ function openModalWindow(event) {
     }
     const $modalPopUp = event.target.closest('div');
     modalVillagerNumber = $modalPopUp.getAttribute('data-id');
-    console.log(typeof modalVillagerNumber);
     const addedModalInfo = villagerList[modalVillagerNumber];
     renderModalInfo(addedModalInfo);
     for (let i = 0; i < data.favoritesList.length; i++) {
@@ -359,7 +358,6 @@ function createFavoritesList(favorite) {
     return $li;
 }
 function changeScreenToAddEditForm(event) {
-    console.log(data.favoritesList);
     const screenEvent = event.target;
     if (screenEvent.className === 'edit-icon' || screenEvent.className === 'light-weight no-margin' || screenEvent.className === 'flex-align-center') {
         data.view = 'add-info';
