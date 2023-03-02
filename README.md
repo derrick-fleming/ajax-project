@@ -13,6 +13,7 @@ Try the application live at [http://derrick-fleming.github.io/my-villagers/](htt
 ## Technologies Used
 
 - JavaScript
+- TypeScript
 - HTML5
 - CSS3
 - Animal Crossing New Horizons [API](https://acnhapi.com/)
