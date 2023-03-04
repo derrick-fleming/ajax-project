@@ -284,6 +284,17 @@ label,
   display: none;
 }
 
+.clear-results {
+  text-align: right;
+}
+
+.clear-results > button {
+  border: none;
+  background-color: transparent;
+  font-family: "Varela Round", sans-serif;
+  color: #24b7ab;
+}
+
 .load-link {
   float: right;
   color: #838383;

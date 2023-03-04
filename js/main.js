@@ -22,9 +22,12 @@ const $favoritesList = document.querySelector('#favorites-list');
 const $addInformationScreen = document.querySelector('#add-information');
 const $placeholderImage = document.querySelector('#placeholder');
 const loadingIcon = document.querySelector('.lds-ring.hidden');
-const $addEditForm = document.querySelector('form');
+const $addEditForm = document.querySelector('#add-edit-form');
 const $viewSwapping = document.querySelectorAll('.hidden');
 const $deleteModal = document.querySelector('.hidden.container.delete-modal');
+const $villagerSearch = document.querySelector('#villager-search');
+const $villagerTitle = document.querySelector('.villager-title');
+const $clearResultsContainer = document.querySelector('.clear-results.container.hidden');
 const $deletedFavorites = document.querySelector('.deleted-favorites.fade-out');
 const changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
     [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
@@ -48,6 +51,8 @@ $addEditForm.addEventListener('submit', saveInformation);
 $addInformationScreen.addEventListener('click', cancelEntries);
 $deleteModal.addEventListener('click', deleteOrExitOutFavoriteVillager);
 $ul.addEventListener('click', openDeleteModal);
+$villagerSearch.addEventListener('submit', searchVillager);
+$clearResultsContainer.addEventListener('click', clearResults);
 function getAnimalCrossingData(request) {
     loadingIcon.className = 'lds-ring';
     const xhr = new XMLHttpRequest();
@@ -487,4 +492,21 @@ function deleteOrExitOutFavoriteVillager(event) {
     if (data.favoritesList.length === 0) {
         $noFavoritesContainer.className = 'no-favorites-container';
     }
+}
+function searchVillager(event) {
+    event.preventDefault();
+    if ($villagerSearch.elements.search.value === '') {
+        return;
+    }
+    const $speciesContainerList = document.querySelectorAll('.species-list');
+    $speciesContainerList.forEach(element => element.className = 'hidden');
+    $loadMoreLink.className = 'hidden';
+    $clearResultsContainer.className = 'clear-results container';
+    $villagerTitle.textContent = 'Search Results';
+}
+function clearResults(event) {
+    if (event.target.tagName !== 'BUTTON') {
+        return;
+    }
+    console.log('yay!');
 }
