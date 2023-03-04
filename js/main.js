@@ -495,7 +495,8 @@ function deleteOrExitOutFavoriteVillager(event) {
 }
 function searchVillager(event) {
     event.preventDefault();
-    if ($villagerSearch.elements.search.value === '') {
+    const searchTerm = $villagerSearch.elements.search.value.toLowerCase();
+    if (searchTerm === '') {
         return;
     }
     const $speciesContainerList = document.querySelectorAll('.species-list');
@@ -503,6 +504,24 @@ function searchVillager(event) {
     $loadMoreLink.className = 'hidden';
     $clearResultsContainer.className = 'clear-results container';
     $villagerTitle.textContent = 'Search Results';
+    const $villagerResultsContainer = generateDomTree('div', { class: 'container row', id: 'search-results' });
+    villagerList.forEach((villager, index) => {
+        if (!villager.name["name-USen"].toLowerCase().includes(searchTerm)) {
+            return;
+        }
+        const villagerIcon = villager.icon_uri;
+        const villagerName = villager.name['name-USen'];
+        const $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': index }, [
+            generateDomTree('a', {}, [
+                generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName, 'data-id': 'click-villager' })
+            ]),
+            generateDomTree('a', {}, [
+                generateDomTree('h4', { class: 'villager-name', textContent: villagerName, 'data-id': 'click-villager' })
+            ])
+        ]);
+        $villagerResultsContainer.appendChild($villagerColumn);
+    });
+    $villagerView.appendChild($villagerResultsContainer);
 }
 function clearResults(event) {
     if (event.target.tagName !== 'BUTTON') {
