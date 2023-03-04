@@ -52,6 +52,7 @@ $addInformationScreen.addEventListener('click', cancelEntries);
 $deleteModal.addEventListener('click', deleteOrExitOutFavoriteVillager);
 $ul.addEventListener('click', openDeleteModal);
 $villagerSearch.addEventListener('submit', searchVillager);
+$villagerSearch.addEventListener('input', searchVillager);
 $clearResultsContainer.addEventListener('click', clearResults);
 function getAnimalCrossingData(request) {
     loadingIcon.className = 'lds-ring';
@@ -494,9 +495,19 @@ function deleteOrExitOutFavoriteVillager(event) {
     }
 }
 function searchVillager(event) {
-    event.preventDefault();
-    const searchTerm = $villagerSearch.elements.search.value.toLowerCase();
+    if (event.type === 'submit')
+        event.preventDefault();
+    const searchTerm = event.type === 'submit'
+        ? $villagerSearch.elements.search.value.toLowerCase()
+        : event.target.value;
     if (searchTerm === '') {
+        const $previousSearchContainer = document.querySelector('#search-results');
+        $previousSearchContainer.remove();
+        const $speciesContainerList = document.querySelectorAll('.species-list.hidden');
+        $speciesContainerList.forEach(element => element.className = 'species-list');
+        $loadMoreLink.className = 'load-link';
+        $clearResultsContainer.className = 'clear-results container hidden';
+        $villagerTitle.textContent = 'Villager List';
         return;
     }
     const $previousSearchContainer = document.querySelector('#search-results');
@@ -537,5 +548,5 @@ function clearResults(event) {
     $speciesContainerList.forEach(element => element.className = 'species-list');
     $loadMoreLink.className = 'load-link';
     $clearResultsContainer.className = 'clear-results container hidden';
-    console.log('yay!');
+    $villagerTitle.textContent = 'Villager List';
 }
