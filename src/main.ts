@@ -605,8 +605,14 @@ function searchVillager(event: SubmitEvent) {
   if (searchTerm === '') {
     return;
   }
+
+  const $previousSearchContainer = document.querySelector('#search-results');
+  if($previousSearchContainer) {
+    $previousSearchContainer.remove();
+  }
+
   const $speciesContainerList = document.querySelectorAll('.species-list');
-  $speciesContainerList.forEach(element => element.className = 'hidden');
+  $speciesContainerList.forEach(element => element.className = 'species-list hidden');
   $loadMoreLink.className = 'hidden';
   $clearResultsContainer.className = 'clear-results container';
 
@@ -640,5 +646,13 @@ function clearResults(event: MouseEvent) {
   if ((event.target as HTMLElement).tagName !== 'BUTTON') {
     return;
   }
+  const $previousSearchContainer = document.querySelector('#search-results');
+  $previousSearchContainer.remove();
+
+  const $speciesContainerList = document.querySelectorAll('.species-list.hidden');
+  $speciesContainerList.forEach(element => element.className = 'species-list');
+  $loadMoreLink.className = 'load-link';
+  $clearResultsContainer.className = 'clear-results container hidden';
+
   console.log('yay!');
 }

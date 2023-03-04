@@ -280,8 +280,9 @@ label,
   outline: 2px solid #24b7ab;
 }
 
-.search-button > span {
+.search-button > em {
   display: none;
+  font-style: normal;
 }
 
 .clear-results {
@@ -728,7 +729,7 @@ li > .column-two-third {
     padding-left: 2rem;
   }
 
-  .search-button > span {
+  .search-button > em {
     display: inline;
   }
 }
