@@ -254,11 +254,6 @@ label,
   background-color: #fff;
 }
 
-.search-bar-container {
-  display: inline-block;
-  background-color: #fff;
-}
-
 #search {
   line-height: 2.5;
   font-family: "Varela Round", sans-serif;
@@ -266,6 +261,7 @@ label,
   border-radius: 4px 0 0 4px;
   padding-left: 0.5rem;
   margin: 0;
+  width: 74%;
 }
 
 .search-button {
@@ -277,6 +273,7 @@ label,
   background-color: #24b7ab;
   color: #fff;
   padding: 0 0.75rem;
+  width: 24%;
 }
 
 #search:focus {
@@ -719,6 +716,10 @@ li > .column-two-third {
   .padding-left {
     padding-left: 2rem;
   }
+
+  .search-button > span {
+    display: inline;
+  }
 }
 
 @media screen and (min-width: 620px) {
@@ -774,6 +775,14 @@ li > .column-two-third {
 
   .column-ten-twelfths {
     flex-basis: 85%;
+  }
+
+  .search-button {
+    width: 15%;
+  }
+
+  #search {
+    width: 84%;
   }
 
   #left,
