@@ -117,17 +117,20 @@
             </div>
           </div>
         </div>
-        <div class="villager-search">
-          <div class="row container">
-            <div class="col">
+        <div class="villager-search container">
+          <div class="row">
+            <div class="column-full">
               <form id="villager-search">
-                <label for="search"></label>
-                <input type="text" id="search" placeholder="Search Villagers">
-                <button type="submit">Search</button>
+                <div class="search-bar-container">
+                  <label for="search" class="search-label"></label>
+                  <input type="search" id="search" placeholder="Search Villagers">
+                  <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass"></i><span> Search</span></button>
+                </div>
               </form>
             </div>
           </div>
         </div>
+        <h1 class="villager-title">Villager List</h1>
       </div>
     </div>
     <div data-view="home-view" class="hidden">
