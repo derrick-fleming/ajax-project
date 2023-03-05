@@ -244,6 +244,68 @@ label,
   transition: color 0.2s ease-in-out;
 }
 
+.villager-title {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 2rem;
+}
+
+.search-label {
+  background-color: #fff;
+}
+
+#villager-search {
+  background-color: #24b7ab;
+  border-radius: 5px;
+}
+
+#villager-search:focus-within {
+  outline: 2px solid #24b7ab;
+}
+
+#search {
+  line-height: 2.5;
+  font-family: "Varela Round", sans-serif;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  padding: 0.25rem 0.5rem;
+  margin: 0;
+  width: 74%;
+}
+
+.search-button {
+  font-family: "Varela Round", sans-serif;
+  line-height: 2.6;
+  font-size: 1rem;
+  border: none;
+  margin: 0;
+  border-radius: 0 4px 4px 0;
+  background-color: #24b7ab;
+  color: #fff;
+  padding: 0 0.75rem;
+  width: 24%;
+}
+
+#search:focus {
+  outline: 2px solid #24b7ab;
+}
+
+.search-button > em {
+  display: none;
+  font-style: normal;
+}
+
+.clear-results {
+  text-align: right;
+}
+
+.clear-results > button {
+  border: none;
+  background-color: transparent;
+  font-family: "Varela Round", sans-serif;
+  color: #24b7ab;
+}
+
 .load-link {
   float: right;
   color: #838383;
@@ -676,6 +738,10 @@ li > .column-two-third {
   .padding-left {
     padding-left: 2rem;
   }
+
+  .search-button > em {
+    display: inline;
+  }
 }
 
 @media screen and (min-width: 620px) {
@@ -731,6 +797,14 @@ li > .column-two-third {
 
   .column-ten-twelfths {
     flex-basis: 85%;
+  }
+
+  .search-button {
+    width: 15%;
+  }
+
+  #search {
+    width: 84%;
   }
 
   #left,

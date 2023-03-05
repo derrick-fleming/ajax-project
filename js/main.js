@@ -22,9 +22,12 @@ const $favoritesList = document.querySelector('#favorites-list');
 const $addInformationScreen = document.querySelector('#add-information');
 const $placeholderImage = document.querySelector('#placeholder');
 const loadingIcon = document.querySelector('.lds-ring.hidden');
-const $addEditForm = document.querySelector('form');
+const $addEditForm = document.querySelector('#add-edit-form');
 const $viewSwapping = document.querySelectorAll('.hidden');
 const $deleteModal = document.querySelector('.hidden.container.delete-modal');
+const $villagerSearch = document.querySelector('#villager-search');
+const $villagerTitle = document.querySelector('.villager-title');
+const $clearResultsContainer = document.querySelector('.clear-results.container.hidden');
 const $deletedFavorites = document.querySelector('.deleted-favorites.fade-out');
 const changeNavClassToFavorites = [[$navFavoritesPageIcon, 'fa-solid fa-heart nav-icon currently-island'], [$navFavoriteText, 'nav-link-text favorites-page-link currently-island'],
     [$navHomePageIcon, 'fa-solid fa-house nav-icon house-outline'], [$navHomeText, 'nav-link-text home-page-link']];
@@ -48,6 +51,9 @@ $addEditForm.addEventListener('submit', saveInformation);
 $addInformationScreen.addEventListener('click', cancelEntries);
 $deleteModal.addEventListener('click', deleteOrExitOutFavoriteVillager);
 $ul.addEventListener('click', openDeleteModal);
+$villagerSearch.addEventListener('submit', searchVillager);
+$villagerSearch.addEventListener('input', searchVillager);
+$clearResultsContainer.addEventListener('click', clearResults);
 function getAnimalCrossingData(request) {
     loadingIcon.className = 'lds-ring';
     const xhr = new XMLHttpRequest();
@@ -487,4 +493,60 @@ function deleteOrExitOutFavoriteVillager(event) {
     if (data.favoritesList.length === 0) {
         $noFavoritesContainer.className = 'no-favorites-container';
     }
+}
+function searchVillager(event) {
+    if (event.type === 'submit')
+        event.preventDefault();
+    const searchTerm = event.type === 'submit'
+        ? $villagerSearch.elements.search.value.toLowerCase()
+        : event.target.value;
+    if (searchTerm === '') {
+        const $previousSearchContainer = document.querySelector('#search-results');
+        $previousSearchContainer.remove();
+        const $speciesContainerList = document.querySelectorAll('.species-list.hidden');
+        $speciesContainerList.forEach(element => element.className = 'species-list');
+        $loadMoreLink.className = 'load-link';
+        $clearResultsContainer.className = 'clear-results container hidden';
+        $villagerTitle.textContent = 'Villager List';
+        return;
+    }
+    const $previousSearchContainer = document.querySelector('#search-results');
+    if ($previousSearchContainer) {
+        $previousSearchContainer.remove();
+    }
+    const $speciesContainerList = document.querySelectorAll('.species-list');
+    $speciesContainerList.forEach(element => element.className = 'species-list hidden');
+    $loadMoreLink.className = 'hidden';
+    $clearResultsContainer.className = 'clear-results container';
+    $villagerTitle.textContent = 'Search Results';
+    const $villagerResultsContainer = generateDomTree('div', { class: 'container row', id: 'search-results' });
+    villagerList.forEach((villager, index) => {
+        if (!villager.name["name-USen"].toLowerCase().includes(searchTerm)) {
+            return;
+        }
+        const villagerIcon = villager.icon_uri;
+        const villagerName = villager.name['name-USen'];
+        const $villagerColumn = generateDomTree('div', { class: 'column-one-third center', 'data-id': index }, [
+            generateDomTree('a', {}, [
+                generateDomTree('img', { src: villagerIcon, class: 'villager-icon', alt: villagerName, 'data-id': 'click-villager' })
+            ]),
+            generateDomTree('a', {}, [
+                generateDomTree('h4', { class: 'villager-name', textContent: villagerName, 'data-id': 'click-villager' })
+            ])
+        ]);
+        $villagerResultsContainer.appendChild($villagerColumn);
+    });
+    $villagerView.appendChild($villagerResultsContainer);
+}
+function clearResults(event) {
+    if (event.target.tagName !== 'BUTTON') {
+        return;
+    }
+    const $previousSearchContainer = document.querySelector('#search-results');
+    $previousSearchContainer.remove();
+    const $speciesContainerList = document.querySelectorAll('.species-list.hidden');
+    $speciesContainerList.forEach(element => element.className = 'species-list');
+    $loadMoreLink.className = 'load-link';
+    $clearResultsContainer.className = 'clear-results container hidden';
+    $villagerTitle.textContent = 'Villager List';
 }
